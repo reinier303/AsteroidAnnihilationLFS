@@ -95,9 +95,15 @@ namespace AsteroidAnnihilation
             UpdateUnits();
             UpdateHealth();
 
-            //TODO::Make area text appear with new mission system
             currentMission = missionManager.GetCurrentMission();
-            InitializeAreaUI();
+            InitializeMissionUI();
+            InitializeObjectiveMenu();
+        }
+
+        public void UpdateMissionUI()
+        {
+            currentMission = missionManager.GetCurrentMission();
+            InitializeMissionUI();
             InitializeObjectiveMenu();
         }
 
@@ -157,6 +163,10 @@ namespace AsteroidAnnihilation
 
         public void InitializeObjectiveMenu()
         {
+            for(int i = 0; i < ObjectivesPanel.childCount; i++)
+            {
+                Destroy(ObjectivesPanel.GetChild(i).gameObject);
+            }
             AreaText.text = currentMission.AreaName;
 
             ObjectiveTexts = new List<TMP_Text>();
@@ -168,7 +178,7 @@ namespace AsteroidAnnihilation
             }
         }
 
-        public void InitializeAreaUI()
+        public void InitializeMissionUI()
         {
             StartCoroutine(ShowWaveText(currentMission.AreaName, currentMission.AreaTextColor, currentMission.AreaTextMaterial));
         }

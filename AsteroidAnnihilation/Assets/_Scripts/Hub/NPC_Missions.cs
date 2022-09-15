@@ -6,13 +6,11 @@ namespace AsteroidAnnihilation
 {
     public class NPC_Missions : NPCBase
     {
-        private InputManager inputManager;
         private MissionManager missionManager;
         // Start is called before the first frame update
         protected override void Start()
         {
             base.Start();
-            inputManager = InputManager.Instance;
             missionManager = MissionManager.Instance;
         }
 

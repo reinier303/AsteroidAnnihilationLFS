@@ -29,7 +29,6 @@ namespace AsteroidAnnihilation
         public float GetValue(CompletionRewardStats completionStats)
         {
             float value = GetBaseValue() + completionStats.GetRewardedStat(StatName, WeaponType.ToString());
-            Debug.Log(GetBaseValue() + StatName + value);
             return value;
         }
     }

@@ -9,6 +9,12 @@ namespace AsteroidAnnihilation
     {
         public static MissionManager Instance;
 
+        private GameManager gameManager;
+        private UIManager uiManager;
+        private InputManager inputManager;
+
+
+        [SerializeField] private SpawnManager spawnManager;
         private AreaGenerationSettings generationSettingsT1;
         private AreaGenerationSettings generationSettingsT2;
 
@@ -20,6 +26,8 @@ namespace AsteroidAnnihilation
 
         [SerializeField] private Transform missionCardHolder;
         [SerializeField] private GameObject missionCard;
+
+        [SerializeField] private GameObject gameElements, hubElements;
 
         private void Awake()
         {
@@ -33,6 +41,11 @@ namespace AsteroidAnnihilation
         private void Start()
         {
             LoadMissions();
+            gameManager = GameManager.Instance;
+            uiManager = UIManager.Instance;
+            inputManager = InputManager.Instance;
+            gameManager.onEndGame += SaveMissions;
+
         }
 
         public void ShowMissionCards()
@@ -50,10 +63,23 @@ namespace AsteroidAnnihilation
             }
         }
 
-        public void MoveToMissionArea(int missionIndex)
+        public IEnumerator MoveToMissionArea(int missionIndex)
         {
+            Debug.Log(missionIndex);
             currentMissionIndex = missionIndex;
-            StartCoroutine(SceneHelpers.LoadSceneIENumerator(2, UIManager.Instance.LoadingScreen));
+            uiManager.LoadingScreen.SetActive(true);
+            inputManager.InputEnabled = false;
+            yield return new WaitForSeconds(1f);
+            gameElements.SetActive(true);
+            hubElements.SetActive(false);
+            yield return new WaitForSeconds(3f);
+            spawnManager.gameObject.SetActive(true);
+            spawnManager.Initialize();
+            uiManager.UpdateMissionUI();
+            yield return new WaitForSeconds(1f);
+            StartCoroutine(uiManager.LoadingScreen.GetComponent<LoadingScreen>().FadeOutLoadingScreen());
+            inputManager.InputEnabled = true;
+
         }
 
         public Mission GetCurrentMission()
@@ -73,6 +99,11 @@ namespace AsteroidAnnihilation
             {
                 currentMissions = ES3.Load<List<Mission>>("currentMissions");
             }
+        }
+
+        private void SaveMissions()
+        {
+            ES3.Save("currentMissions", currentMissions);
         }
 
         private void GenerateMissions(int amount)
@@ -169,7 +200,7 @@ namespace AsteroidAnnihilation
         {
             //mission.AreaCompleted = true;
             //CompletionRewardStats.Instance.AddRewardedStat(area.CompletionRewards);
-            //PlayerStats
+            gameManager.RPlayer.RPlayerStats.AddToUnits(mission.UnitsReward);
         }
 
         public void AddToObjective(Mission mission, int objectiveIndex)

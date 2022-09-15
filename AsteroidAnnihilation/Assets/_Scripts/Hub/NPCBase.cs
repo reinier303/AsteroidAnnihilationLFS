@@ -6,7 +6,8 @@ namespace AsteroidAnnihilation
 {
     public class NPCBase : MonoBehaviour
     {
-        private InputManager inputManager;
+        protected InputManager inputManager;
+        protected UIManager uiManager;
 
         [SerializeField] protected GameObject menuToOpen;
         [SerializeField] protected GameObject outline;
@@ -16,6 +17,7 @@ namespace AsteroidAnnihilation
         protected virtual void Start()
         {
             inputManager = InputManager.Instance;
+            uiManager = UIManager.Instance;
             startPosition = transform.position;
         }
 
@@ -35,7 +37,7 @@ namespace AsteroidAnnihilation
                 outline.SetActive(false);
                 if (menuToOpen != null) 
                 {
-                    inputManager.InputEnabled = true;
+                    if (!uiManager.LoadingScreen.activeSelf) { inputManager.InputEnabled = true; }
                     menuToOpen.SetActive(false); 
                 }
                 inRange = false;

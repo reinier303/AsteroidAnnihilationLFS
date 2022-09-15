@@ -48,26 +48,33 @@ namespace AsteroidAnnihilation
         private void Start()
         {
             gameManager = GameManager.Instance;
-            InputEnabled = true;
             playerAttack = gameManager.RPlayer.RPlayerAttack;
             boost = 1;
         }
 
-        private void Update()
+        private void OnEnable()
         {
-            
-            PauseInput();
+            InputEnabled = true;
+        }
+
+        public void EnableInput()
+        {
+            InputEnabled = true;
+        }
+
+        private void Update()
+        {      
             if (!InputEnabled)
             {
                 Attacking = false;
                 return;
             }
+            PauseInput();
             if (gameManager.isPaused)
             {
                 Attacking = false;
                 return;
             }
-
             //Pause dependent input
             WeaponInput();
         }
@@ -94,6 +101,7 @@ namespace AsteroidAnnihilation
                 Attacking = true;
             }
             else { Attacking = false; }
+
             if (Input.GetKeyDown(Weapon1))
             {
                 ChangeToWeapon(0);
@@ -134,6 +142,8 @@ namespace AsteroidAnnihilation
 
         public float GetAxisSmoothHorizontal(float speed, float acceleration, float deceleration, float boostSpeed)
         {
+            if (!InputEnabled) { return 0; }
+
             boost = Boost(boostSpeed);
 
             //Right button input
@@ -169,6 +179,8 @@ namespace AsteroidAnnihilation
 
         public float GetAxisSmoothVertical(float speed, float acceleration, float deceleration, float boostSpeed)
         {
+            if (!InputEnabled) { return 0; }
+
             boost = Boost(boostSpeed);
 
             //Right button input
@@ -204,7 +216,9 @@ namespace AsteroidAnnihilation
 
         public float Boost(float boostSpeed)
         {
-            if(boost <= boostSpeed && Input.GetKey(BoostButton) || Input.GetKey(BoostButton2))
+            if (!InputEnabled) { return 0; }
+
+            if (boost <= boostSpeed && Input.GetKey(BoostButton) || Input.GetKey(BoostButton2))
             {
                 boosting = true;
             }

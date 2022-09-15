@@ -17,7 +17,6 @@ namespace AsteroidAnnihilation
         [SerializeField] private float currentSpawnTime;
 
         //General Data
-        public int EnemiesAlive;
         public bool Spawning;
 
         //Background Renderer: info for spawn location
@@ -28,19 +27,28 @@ namespace AsteroidAnnihilation
 
         //Spawn variables
         [SerializeField] private float spawnDistance = 100;
+        private List<GameObject> enemiesAlive;
 
-        private void Start()
+        public void Initialize()
         {
             RObjectPooler = ObjectPooler.Instance;
             gameManager = GameManager.Instance;
             missionManager = MissionManager.Instance;
+            enemiesAlive = new List<GameObject>();
 
             SetMission();
 
             currentSpawnTime = currentMission.StartSpawnRate;
             player = gameManager.RPlayer.transform;
+
             StartCoroutine(StartSpawning());
             StartCoroutine(RampSpawnRate());
+        }
+
+        private void OnDisable()
+        {
+            StopAllCoroutines();
+            DisableAllEnemies();
         }
 
         public void SetMission()
@@ -62,10 +70,9 @@ namespace AsteroidAnnihilation
         {
             if (Spawning)
             {
-                EnemiesAlive++;
                 Vector2 spawnPosition = GenerateSpawnPosition();
                 string enemy = enemyNames[Random.Range(0, enemyNames.Count)];
-                RObjectPooler.SpawnFromPool(enemy, spawnPosition, Quaternion.identity);
+                enemiesAlive.Add(RObjectPooler.SpawnFromPool(enemy, spawnPosition, Quaternion.identity));
             }
         }
 
@@ -103,6 +110,14 @@ namespace AsteroidAnnihilation
                 {
                     enemyNames.Add(currentMission.Enemies[i].EnemyType.ToString());
                 }
+            }
+        }
+
+        public void DisableAllEnemies()
+        {
+            foreach(GameObject gameObject in enemiesAlive)
+            {
+                gameObject.SetActive(false);
             }
         }
     }

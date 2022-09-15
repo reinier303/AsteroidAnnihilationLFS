@@ -25,7 +25,7 @@ namespace AsteroidAnnihilation
         public void OnButtonPressed()
         {
             //We take the Rank bar into account by subtracting 1.
-            MissionManager.Instance.MoveToMissionArea(transform.GetSiblingIndex() - 1);
+            MissionManager.Instance.StartCoroutine(MissionManager.Instance.MoveToMissionArea(transform.GetSiblingIndex() - 1));
         }
     }
 }

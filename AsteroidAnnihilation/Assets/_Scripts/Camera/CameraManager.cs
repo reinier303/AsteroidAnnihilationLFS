@@ -18,6 +18,11 @@ namespace AsteroidAnnihilation
             cinemachineAnimator = GetComponent<Animator>();
         }
 
+        private void Start()
+        {
+            cvCam.Follow = Player.Instance.transform;
+        }
+
         public IEnumerator Shake(float duration, float magnitude)
         {
             NoiseAmplitude.m_AmplitudeGain = magnitude;

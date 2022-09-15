@@ -6,6 +6,7 @@ namespace AsteroidAnnihilation
 {
     public class Player : MonoBehaviour
     {
+        public static Player Instance;
         //Player script references
         public PlayerAttack RPlayerAttack;
         public PlayerMovement RPlayerMovement;
@@ -20,6 +21,9 @@ namespace AsteroidAnnihilation
 
         private void Awake()
         {
+            if (Instance != null) { Destroy(gameObject); } else { Instance = this; }
+            DontDestroyOnLoad(gameObject);
+
             GetSaveData();
 
             RPlayerAttack = GetComponent<PlayerAttack>();

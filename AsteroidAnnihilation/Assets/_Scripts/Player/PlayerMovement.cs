@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using Cinemachine;
 
 namespace AsteroidAnnihilation
@@ -47,12 +47,13 @@ namespace AsteroidAnnihilation
 
         private void Awake()
         {
-            cam = Camera.main;
             backGroundSize = BackgroundCollider.transform.localScale * 14.5f;
         }
 
         private void Start()
         {
+            cam = Camera.main;
+            SceneManager.sceneLoaded += OnSceneLoaded;
             gameManager = GameManager.Instance;
             player = gameManager.RPlayer;
             playerStats = GetComponent<PlayerStats>();
@@ -62,6 +63,12 @@ namespace AsteroidAnnihilation
             //GetCameraDistance();
 
             screenRatio = (float)Screen.height / (float)Screen.width;
+        }
+
+        // called second
+        void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+        {
+            cam = Camera.main;
         }
 
         private void GetCameraDistance()

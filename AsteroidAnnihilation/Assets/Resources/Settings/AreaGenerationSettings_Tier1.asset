@@ -116,7 +116,7 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: AsteroidAnnihilation.EnemyAreaData, Assembly-CSharp
-    - Name: AsteroidType
+    - Name: EnemyType
       Entry: 3
       Data: 0
     - Name: MaxAmount
@@ -131,7 +131,7 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: AsteroidAnnihilation.EnemyAreaData, Assembly-CSharp
-    - Name: AsteroidType
+    - Name: EnemyType
       Entry: 3
       Data: 1
     - Name: MaxAmount
@@ -146,7 +146,7 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: AsteroidAnnihilation.EnemyAreaData, Assembly-CSharp
-    - Name: AsteroidType
+    - Name: EnemyType
       Entry: 3
       Data: 2
     - Name: MaxAmount
@@ -174,7 +174,7 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: AsteroidAnnihilation.EnemyAreaData, Assembly-CSharp
-    - Name: AsteroidType
+    - Name: EnemyType
       Entry: 3
       Data: 3
     - Name: MaxAmount
@@ -189,7 +189,7 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: AsteroidAnnihilation.EnemyAreaData, Assembly-CSharp
-    - Name: AsteroidType
+    - Name: EnemyType
       Entry: 3
       Data: 6
     - Name: MaxAmount
@@ -228,10 +228,10 @@ MonoBehaviour:
       Data: UnityEngine.Vector2Int, UnityEngine.CoreModule
     - Name: 
       Entry: 3
-      Data: 50
+      Data: 40
     - Name: 
       Entry: 3
-      Data: 70
+      Data: 50
     - Name: 
       Entry: 8
       Data: 
@@ -288,10 +288,10 @@ MonoBehaviour:
       Data: UnityEngine.Vector2, UnityEngine.CoreModule
     - Name: 
       Entry: 4
-      Data: 100
+      Data: 200
     - Name: 
       Entry: 4
-      Data: 150
+      Data: 250
     - Name: 
       Entry: 8
       Data: 
@@ -437,7 +437,7 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: AsteroidAnnihilation.EnemyAreaData, Assembly-CSharp
-    - Name: AsteroidType
+    - Name: EnemyType
       Entry: 3
       Data: 0
     - Name: MaxAmount
@@ -452,7 +452,7 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: AsteroidAnnihilation.EnemyAreaData, Assembly-CSharp
-    - Name: AsteroidType
+    - Name: EnemyType
       Entry: 3
       Data: 1
     - Name: MaxAmount
@@ -467,7 +467,7 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: AsteroidAnnihilation.EnemyAreaData, Assembly-CSharp
-    - Name: AsteroidType
+    - Name: EnemyType
       Entry: 3
       Data: 2
     - Name: MaxAmount
@@ -495,9 +495,9 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: AsteroidAnnihilation.EnemyAreaData, Assembly-CSharp
-    - Name: AsteroidType
+    - Name: EnemyType
       Entry: 3
-      Data: 4
+      Data: 5
     - Name: MaxAmount
       Entry: 3
       Data: 200
@@ -510,9 +510,9 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: AsteroidAnnihilation.EnemyAreaData, Assembly-CSharp
-    - Name: AsteroidType
+    - Name: EnemyType
       Entry: 3
-      Data: 5
+      Data: 4
     - Name: MaxAmount
       Entry: 3
       Data: 200
@@ -549,10 +549,10 @@ MonoBehaviour:
       Data: UnityEngine.Vector2Int, UnityEngine.CoreModule
     - Name: 
       Entry: 3
-      Data: 50
+      Data: 40
     - Name: 
       Entry: 3
-      Data: 70
+      Data: 50
     - Name: 
       Entry: 8
       Data: 
@@ -609,10 +609,10 @@ MonoBehaviour:
       Data: UnityEngine.Vector2, UnityEngine.CoreModule
     - Name: 
       Entry: 4
-      Data: 100
+      Data: 200
     - Name: 
       Entry: 4
-      Data: 150
+      Data: 250
     - Name: 
       Entry: 8
       Data: 
@@ -1008,17 +1008,17 @@ MonoBehaviour:
       Weight: 1
     EnemyTypeAmount: 1
     AlwaysPresentEnemies:
-    - AsteroidType: 0
+    - EnemyType: 0
       MaxAmount: 200
       Priority: 150
-    - AsteroidType: 1
+    - EnemyType: 0
       MaxAmount: 150
       Priority: 50
-    - AsteroidType: 2
+    - EnemyType: 0
       MaxAmount: 100
       Priority: 1
     RandomisedEnemies:
-    - AsteroidType: 3
+    - EnemyType: 0
       MaxAmount: 150
       Priority: 30
     NumberOfObjectives: 1

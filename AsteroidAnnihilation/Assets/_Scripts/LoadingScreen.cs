@@ -16,15 +16,23 @@ namespace AsteroidAnnihilation
 
         private void OnEnable()
         {
-            FadeLoadingScren();
+            FadeInLoadingScren();
         }
 
-        private void FadeLoadingScren()
+        private void FadeInLoadingScren()
         {
             canvasGroup.alpha = 0;
-            GameManager.Instance.RPlayer.GetComponent<InputManager>().InputEnabled = false;
             //Fade music volume maybe?
             canvasGroup.LeanAlpha(1, FadeTime);
+        }
+
+        public IEnumerator FadeOutLoadingScreen()
+        {
+            canvasGroup.alpha = 1;
+            //Fade music volume maybe?
+            canvasGroup.LeanAlpha(0, FadeTime);
+            yield return new WaitForSeconds(FadeTime);
+            gameObject.SetActive(false);
         }
 
     }

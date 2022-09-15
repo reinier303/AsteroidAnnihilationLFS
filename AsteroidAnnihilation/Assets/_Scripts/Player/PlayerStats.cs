@@ -90,6 +90,11 @@ namespace AsteroidAnnihilation
             SaveLoad.Save(playerData, "PlayerData");
         }
 
+        public void AddToUnits(float value)
+        {
+            Stats["Units"].Value += Mathf.Clamp(value, 0, Mathf.Infinity);
+        }
+
         public bool TryPlayerBuy(float cost)
         {
             if(Stats["Units"].GetBaseValue() >= cost)
