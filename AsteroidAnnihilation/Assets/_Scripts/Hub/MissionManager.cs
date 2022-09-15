@@ -1,0 +1,207 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using System.Linq;
+
+namespace AsteroidAnnihilation
+{
+    public class MissionManager : MonoBehaviour
+    {
+        public static MissionManager Instance;
+
+        private AreaGenerationSettings generationSettingsT1;
+        private AreaGenerationSettings generationSettingsT2;
+
+        private List<Mission> currentMissions;
+        private int currentMissionIndex;
+
+        //TODO::Save this in playerdata as a stat
+        public int maxMissions = 3;
+
+        [SerializeField] private Transform missionCardHolder;
+        [SerializeField] private GameObject missionCard;
+
+        private void Awake()
+        {
+            if(Instance != null) { Destroy(gameObject);} else { Instance = this; }
+            DontDestroyOnLoad(gameObject);
+
+            generationSettingsT1 = (AreaGenerationSettings)Resources.Load("Settings/AreaGenerationSettings_Tier1");
+            generationSettingsT2 = (AreaGenerationSettings)Resources.Load("Settings/AreaGenerationSettings_Tier2");
+        }
+
+        private void Start()
+        {
+            LoadMissions();
+        }
+
+        public void ShowMissionCards()
+        {
+            Debug.Log(currentMissions.Count);
+
+            //We're taking into account the RankProgressBar and checking if the mission cards have already been generated
+            if (missionCardHolder.childCount - 1 != maxMissions)
+            {
+                foreach(Mission mission in currentMissions)
+                {
+                    MissionCard card = Instantiate(missionCard, missionCardHolder).GetComponent<MissionCard>();
+                    card.InitializeCard(mission);
+                }
+            }
+        }
+
+        public void MoveToMissionArea(int missionIndex)
+        {
+            currentMissionIndex = missionIndex;
+            StartCoroutine(SceneHelpers.LoadSceneIENumerator(2, UIManager.Instance.LoadingScreen));
+        }
+
+        public Mission GetCurrentMission()
+        {
+            return currentMissions[currentMissionIndex];
+        }
+
+        private void LoadMissions()
+        {
+            if (!ES3.KeyExists("currentMissions"))
+            {
+                currentMissions = new List<Mission>();
+                GenerateMissions(maxMissions);
+                ES3.Save("currentMissions", currentMissions);
+            }
+            else
+            {
+                currentMissions = ES3.Load<List<Mission>>("currentMissions");
+            }
+        }
+
+        private void GenerateMissions(int amount)
+        {
+            for (int i = 0; i < amount; i++)
+            {
+                currentMissions.Add(GenerateMission());
+            }
+        }
+
+        private Mission GenerateMission(int tier = 0, List<EnumCollections.EnemyFactions> enemyFactions = null)
+        {
+            Mission mission = new Mission();
+
+            if (tier == 0) { mission.Tier = 1; }
+            else { mission.Tier = tier; }
+            AreaGenerationSettings settings = GetGenerationSettings(tier);
+
+            int factionCount = EnumCollections.EnemyFactions.GetNames(typeof(EnumCollections.EnemyFactions)).Length;
+            if (enemyFactions == null) { mission.Faction = settings.Factions.ElementAt(Random.Range(0, settings.Factions.Count)).Key;}
+            else { mission.Faction = enemyFactions[Random.Range(0, enemyFactions.Count)];}
+
+            mission.AreaName = settings.Factions[mission.Faction].GetAreaName();
+            mission.AreaTextColor = settings.Factions[mission.Faction].AreaTextColor;
+            mission.AreaTextMaterial = settings.Factions[mission.Faction].AreaTextMaterial;
+
+            mission.Enemies = settings.Factions[mission.Faction].GetEnemies();
+            mission.Objectives = settings.Factions[mission.Faction].GetObjectives();
+            Vector2 rewards = settings.Factions[mission.Faction].GetRewards();
+            mission.UnitsReward = rewards.x;
+            mission.ExperienceReward = rewards.y;
+
+            mission.StartSpawnRate = settings.Factions[mission.Faction].GetStartSpawnRate();
+            mission.SpawnRateRampPerSecond = settings.Factions[mission.Faction].SpawnRateRampPerSecond;
+            mission.MaxSpawnRate = settings.Factions[mission.Faction].GetMaxSpawnRate();
+
+            mission.Backgrounds = settings.Factions[mission.Faction].GetBackgrounds();
+
+            return mission;
+        }
+
+        private AreaGenerationSettings GetGenerationSettings(int tier)
+        {
+            switch (tier)
+            {
+                case 1: return generationSettingsT1;
+                case 2: return generationSettingsT2;
+                default: return generationSettingsT1;
+            }
+        }
+
+        #region Objectives
+
+        public void AddObjectiveProgress(MissionObjectiveType type)
+        {
+            Mission mission = GetCurrentMission();
+            for (int i = 0; i < mission.Objectives.Count; i++)
+            {
+                if (mission.Objectives[i].ObjectiveType == type && !mission.Objectives[i].ObjectiveDone)
+                {
+                    AddToObjective(mission, i);
+                    UIManager.Instance.UpdateObjectives();
+                    if (CheckObjectiveDone(mission, i)) { return; }
+                    return;
+                }
+            }
+        }
+
+        private bool CheckObjectiveDone(Mission mission, int objectiveIndex)
+        {
+            if (mission.Objectives[objectiveIndex].ObjectiveProgress >= mission.Objectives[objectiveIndex].ObjectiveAmount)
+            {
+                mission.Objectives[objectiveIndex].ObjectiveDone = true;
+
+                //Check if all objectives area done for area completion
+                int objectivesDone = 0;
+                for (int i = 0; i < mission.Objectives.Count; i++)
+                {
+                    if (mission.Objectives[i].ObjectiveDone) { objectivesDone++; }
+                }
+                if (objectivesDone == mission.Objectives.Count)
+                {
+                    MissionCompleted(mission);
+                }
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        private void MissionCompleted(Mission mission)
+        {
+            //mission.AreaCompleted = true;
+            //CompletionRewardStats.Instance.AddRewardedStat(area.CompletionRewards);
+            //PlayerStats
+        }
+
+        public void AddToObjective(Mission mission, int objectiveIndex)
+        {
+            mission.Objectives[objectiveIndex].ObjectiveProgress++;
+        }
+
+        #endregion
+    }
+
+    public class Mission
+    {
+        public int Tier;
+
+        public EnumCollections.EnemyFactions Faction;
+        public string AreaName;
+        public Color AreaTextColor;
+        public Material AreaTextMaterial;
+
+        public List<EnemyAreaData> Enemies;
+
+        public List<AreaObjective> Objectives;
+
+        public float UnitsReward;
+        public float ExperienceReward;
+
+        public float StartSpawnRate;
+        public float SpawnRateRampPerSecond;
+        public float MaxSpawnRate;
+
+        //public List<StatCompletionReward> StatCompletionRewards;
+
+        public List<EnumCollections.Backgrounds> Backgrounds;
+    }
+}

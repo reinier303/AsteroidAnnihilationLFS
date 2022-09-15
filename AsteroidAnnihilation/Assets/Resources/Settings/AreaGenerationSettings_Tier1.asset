@@ -1,0 +1,1039 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 640b26642eb18d84999bd4322d6f54f4, type: 3}
+  m_Name: AreaGenerationSettings_Tier1
+  m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects:
+    - {fileID: 2100000, guid: 631c9d9775de3a949a2ddaa93f4cd904, type: 2}
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes:
+    - Name: Factions
+      Entry: 7
+      Data: 0|System.Collections.Generic.Dictionary`2[[AsteroidAnnihilation.EnumCollections+EnemyFactions,
+        Assembly-CSharp],[AsteroidAnnihilation.TierSettings, Assembly-CSharp]], mscorlib
+    - Name: comparer
+      Entry: 7
+      Data: 1|System.Collections.Generic.EnumEqualityComparer`1[[AsteroidAnnihilation.EnumCollections+EnemyFactions,
+        Assembly-CSharp]], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 0
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 12
+      Data: 2
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 3
+      Data: 0
+    - Name: $v
+      Entry: 7
+      Data: 2|AsteroidAnnihilation.TierSettings, Assembly-CSharp
+    - Name: BaseAreaName
+      Entry: 7
+      Data: 3|System.String[], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 1
+    - Name: 
+      Entry: 1
+      Data: 'Swarm Infested Cluster '
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: RandomNameAddition
+      Entry: 5
+      Data: true
+    - Name: AreaTextColor
+      Entry: 7
+      Data: UnityEngine.Color, UnityEngine.CoreModule
+    - Name: 
+      Entry: 4
+      Data: 0.6095679
+    - Name: 
+      Entry: 4
+      Data: 1
+    - Name: 
+      Entry: 4
+      Data: 0.3537736
+    - Name: 
+      Entry: 4
+      Data: 1
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: AreaTextMaterial
+      Entry: 10
+      Data: 0
+    - Name: CompletionRewardPool
+      Entry: 7
+      Data: 4|System.Collections.Generic.List`1[[AsteroidAnnihilation.StatCompletionReward,
+        Assembly-CSharp]], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 0
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: EnemyTypeAmount
+      Entry: 3
+      Data: 1
+    - Name: AlwaysPresentEnemies
+      Entry: 7
+      Data: 5|System.Collections.Generic.List`1[[AsteroidAnnihilation.EnemyAreaData,
+        Assembly-CSharp]], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 3
+    - Name: 
+      Entry: 7
+      Data: AsteroidAnnihilation.EnemyAreaData, Assembly-CSharp
+    - Name: AsteroidType
+      Entry: 3
+      Data: 0
+    - Name: MaxAmount
+      Entry: 3
+      Data: 200
+    - Name: Priority
+      Entry: 3
+      Data: 150
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: AsteroidAnnihilation.EnemyAreaData, Assembly-CSharp
+    - Name: AsteroidType
+      Entry: 3
+      Data: 1
+    - Name: MaxAmount
+      Entry: 3
+      Data: 150
+    - Name: Priority
+      Entry: 3
+      Data: 100
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: AsteroidAnnihilation.EnemyAreaData, Assembly-CSharp
+    - Name: AsteroidType
+      Entry: 3
+      Data: 2
+    - Name: MaxAmount
+      Entry: 3
+      Data: 100
+    - Name: Priority
+      Entry: 3
+      Data: 1
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: RandomisedEnemies
+      Entry: 7
+      Data: 6|System.Collections.Generic.List`1[[AsteroidAnnihilation.EnemyAreaData,
+        Assembly-CSharp]], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 2
+    - Name: 
+      Entry: 7
+      Data: AsteroidAnnihilation.EnemyAreaData, Assembly-CSharp
+    - Name: AsteroidType
+      Entry: 3
+      Data: 3
+    - Name: MaxAmount
+      Entry: 3
+      Data: 200
+    - Name: Priority
+      Entry: 3
+      Data: 200
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: AsteroidAnnihilation.EnemyAreaData, Assembly-CSharp
+    - Name: AsteroidType
+      Entry: 3
+      Data: 6
+    - Name: MaxAmount
+      Entry: 3
+      Data: 200
+    - Name: Priority
+      Entry: 3
+      Data: 200
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: NumberOfObjectives
+      Entry: 3
+      Data: 1
+    - Name: Objectives
+      Entry: 7
+      Data: 7|System.Collections.Generic.List`1[[AsteroidAnnihilation.AreaObjective,
+        Assembly-CSharp]], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 2
+    - Name: 
+      Entry: 7
+      Data: 8|AsteroidAnnihilation.AreaObjective, Assembly-CSharp
+    - Name: ObjectiveType
+      Entry: 3
+      Data: 0
+    - Name: ObjectiveAmountRange
+      Entry: 7
+      Data: UnityEngine.Vector2Int, UnityEngine.CoreModule
+    - Name: 
+      Entry: 3
+      Data: 50
+    - Name: 
+      Entry: 3
+      Data: 70
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: ObjectiveAmount
+      Entry: 3
+      Data: 0
+    - Name: ObjectiveProgress
+      Entry: 3
+      Data: 0
+    - Name: ObjectiveDone
+      Entry: 5
+      Data: false
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 9|AsteroidAnnihilation.AreaObjective, Assembly-CSharp
+    - Name: ObjectiveType
+      Entry: 3
+      Data: 2
+    - Name: ObjectiveAmountRange
+      Entry: 7
+      Data: UnityEngine.Vector2Int, UnityEngine.CoreModule
+    - Name: 
+      Entry: 3
+      Data: 200
+    - Name: 
+      Entry: 3
+      Data: 300
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: ObjectiveAmount
+      Entry: 3
+      Data: 0
+    - Name: ObjectiveProgress
+      Entry: 3
+      Data: 0
+    - Name: ObjectiveDone
+      Entry: 5
+      Data: false
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: UnitsRewardMinMax
+      Entry: 7
+      Data: UnityEngine.Vector2, UnityEngine.CoreModule
+    - Name: 
+      Entry: 4
+      Data: 100
+    - Name: 
+      Entry: 4
+      Data: 150
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: ExperienceRewardMinMax
+      Entry: 7
+      Data: UnityEngine.Vector2, UnityEngine.CoreModule
+    - Name: 
+      Entry: 4
+      Data: 100
+    - Name: 
+      Entry: 4
+      Data: 150
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: Backgrounds
+      Entry: 7
+      Data: 10|System.Collections.Generic.List`1[[AsteroidAnnihilation.AreaBackgrounds,
+        Assembly-CSharp]], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 1
+    - Name: 
+      Entry: 7
+      Data: AsteroidAnnihilation.AreaBackgrounds, Assembly-CSharp
+    - Name: Backgrounds
+      Entry: 7
+      Data: 11|System.Collections.Generic.List`1[[AsteroidAnnihilation.EnumCollections+Backgrounds,
+        Assembly-CSharp]], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 1
+    - Name: 
+      Entry: 3
+      Data: 1
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: StartSpawnRateMin
+      Entry: 4
+      Data: 1
+    - Name: StartSpawnRateMax
+      Entry: 4
+      Data: 0.75
+    - Name: SpawnRateRampPerSecond
+      Entry: 4
+      Data: -0.002
+    - Name: MaxSpawnRateMin
+      Entry: 4
+      Data: 0.1
+    - Name: MaxSpawnRateMax
+      Entry: 4
+      Data: 0.2
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 3
+      Data: 1
+    - Name: $v
+      Entry: 7
+      Data: 12|AsteroidAnnihilation.TierSettings, Assembly-CSharp
+    - Name: BaseAreaName
+      Entry: 7
+      Data: 13|System.String[], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 1
+    - Name: 
+      Entry: 1
+      Data: 'Outlaw Area '
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: RandomNameAddition
+      Entry: 5
+      Data: true
+    - Name: AreaTextColor
+      Entry: 7
+      Data: UnityEngine.Color, UnityEngine.CoreModule
+    - Name: 
+      Entry: 4
+      Data: 0.509434
+    - Name: 
+      Entry: 4
+      Data: 0.107581608
+    - Name: 
+      Entry: 4
+      Data: 0.07929869
+    - Name: 
+      Entry: 4
+      Data: 1
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: AreaTextMaterial
+      Entry: 10
+      Data: 0
+    - Name: CompletionRewardPool
+      Entry: 7
+      Data: 14|System.Collections.Generic.List`1[[AsteroidAnnihilation.StatCompletionReward,
+        Assembly-CSharp]], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 0
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: EnemyTypeAmount
+      Entry: 3
+      Data: 1
+    - Name: AlwaysPresentEnemies
+      Entry: 7
+      Data: 15|System.Collections.Generic.List`1[[AsteroidAnnihilation.EnemyAreaData,
+        Assembly-CSharp]], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 3
+    - Name: 
+      Entry: 7
+      Data: AsteroidAnnihilation.EnemyAreaData, Assembly-CSharp
+    - Name: AsteroidType
+      Entry: 3
+      Data: 0
+    - Name: MaxAmount
+      Entry: 3
+      Data: 200
+    - Name: Priority
+      Entry: 3
+      Data: 150
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: AsteroidAnnihilation.EnemyAreaData, Assembly-CSharp
+    - Name: AsteroidType
+      Entry: 3
+      Data: 1
+    - Name: MaxAmount
+      Entry: 3
+      Data: 150
+    - Name: Priority
+      Entry: 3
+      Data: 100
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: AsteroidAnnihilation.EnemyAreaData, Assembly-CSharp
+    - Name: AsteroidType
+      Entry: 3
+      Data: 2
+    - Name: MaxAmount
+      Entry: 3
+      Data: 100
+    - Name: Priority
+      Entry: 3
+      Data: 1
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: RandomisedEnemies
+      Entry: 7
+      Data: 16|System.Collections.Generic.List`1[[AsteroidAnnihilation.EnemyAreaData,
+        Assembly-CSharp]], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 2
+    - Name: 
+      Entry: 7
+      Data: AsteroidAnnihilation.EnemyAreaData, Assembly-CSharp
+    - Name: AsteroidType
+      Entry: 3
+      Data: 4
+    - Name: MaxAmount
+      Entry: 3
+      Data: 200
+    - Name: Priority
+      Entry: 3
+      Data: 200
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: AsteroidAnnihilation.EnemyAreaData, Assembly-CSharp
+    - Name: AsteroidType
+      Entry: 3
+      Data: 5
+    - Name: MaxAmount
+      Entry: 3
+      Data: 200
+    - Name: Priority
+      Entry: 3
+      Data: 200
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: NumberOfObjectives
+      Entry: 3
+      Data: 1
+    - Name: Objectives
+      Entry: 7
+      Data: 17|System.Collections.Generic.List`1[[AsteroidAnnihilation.AreaObjective,
+        Assembly-CSharp]], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 2
+    - Name: 
+      Entry: 7
+      Data: 18|AsteroidAnnihilation.AreaObjective, Assembly-CSharp
+    - Name: ObjectiveType
+      Entry: 3
+      Data: 0
+    - Name: ObjectiveAmountRange
+      Entry: 7
+      Data: UnityEngine.Vector2Int, UnityEngine.CoreModule
+    - Name: 
+      Entry: 3
+      Data: 50
+    - Name: 
+      Entry: 3
+      Data: 70
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: ObjectiveAmount
+      Entry: 3
+      Data: 0
+    - Name: ObjectiveProgress
+      Entry: 3
+      Data: 0
+    - Name: ObjectiveDone
+      Entry: 5
+      Data: false
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 19|AsteroidAnnihilation.AreaObjective, Assembly-CSharp
+    - Name: ObjectiveType
+      Entry: 3
+      Data: 2
+    - Name: ObjectiveAmountRange
+      Entry: 7
+      Data: UnityEngine.Vector2Int, UnityEngine.CoreModule
+    - Name: 
+      Entry: 3
+      Data: 200
+    - Name: 
+      Entry: 3
+      Data: 300
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: ObjectiveAmount
+      Entry: 3
+      Data: 0
+    - Name: ObjectiveProgress
+      Entry: 3
+      Data: 0
+    - Name: ObjectiveDone
+      Entry: 5
+      Data: false
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: UnitsRewardMinMax
+      Entry: 7
+      Data: UnityEngine.Vector2, UnityEngine.CoreModule
+    - Name: 
+      Entry: 4
+      Data: 100
+    - Name: 
+      Entry: 4
+      Data: 150
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: ExperienceRewardMinMax
+      Entry: 7
+      Data: UnityEngine.Vector2, UnityEngine.CoreModule
+    - Name: 
+      Entry: 4
+      Data: 100
+    - Name: 
+      Entry: 4
+      Data: 150
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: Backgrounds
+      Entry: 7
+      Data: 20|System.Collections.Generic.List`1[[AsteroidAnnihilation.AreaBackgrounds,
+        Assembly-CSharp]], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 1
+    - Name: 
+      Entry: 7
+      Data: AsteroidAnnihilation.AreaBackgrounds, Assembly-CSharp
+    - Name: Backgrounds
+      Entry: 7
+      Data: 21|System.Collections.Generic.List`1[[AsteroidAnnihilation.EnumCollections+Backgrounds,
+        Assembly-CSharp]], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 2
+    - Name: 
+      Entry: 3
+      Data: 0
+    - Name: 
+      Entry: 3
+      Data: 4
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: StartSpawnRateMin
+      Entry: 4
+      Data: 1
+    - Name: StartSpawnRateMax
+      Entry: 4
+      Data: 0.75
+    - Name: SpawnRateRampPerSecond
+      Entry: 4
+      Data: -0.002
+    - Name: MaxSpawnRateMin
+      Entry: 4
+      Data: 0.1
+    - Name: MaxSpawnRateMax
+      Entry: 4
+      Data: 0.2
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+  StartArea:
+    BaseAreaName:
+    - Asteroid Ring Training Section
+    RandomNameAddition: 0
+    AreaTextColor: {r: 0.21484515, g: 0.39876634, b: 0.6415094, a: 1}
+    AreaTextMaterial: {fileID: 0}
+    CompletionRewardPool:
+    - IsWeapon: 1
+      WeaponType: 2
+      WeaponStatType: 0
+      PlayerStatType: 0
+      RewardAmount: 0.2
+      Weight: 4
+    - IsWeapon: 1
+      WeaponType: 2
+      WeaponStatType: 0
+      PlayerStatType: 0
+      RewardAmount: 0.2
+      Weight: 4
+    - IsWeapon: 1
+      WeaponType: 2
+      WeaponStatType: 0
+      PlayerStatType: 0
+      RewardAmount: 0.2
+      Weight: 4
+    - IsWeapon: 1
+      WeaponType: 2
+      WeaponStatType: 0
+      PlayerStatType: 0
+      RewardAmount: 0.2
+      Weight: 4
+    - IsWeapon: 1
+      WeaponType: 2
+      WeaponStatType: 2
+      PlayerStatType: 0
+      RewardAmount: 0.1
+      Weight: 4
+    - IsWeapon: 1
+      WeaponType: 2
+      WeaponStatType: 2
+      PlayerStatType: 0
+      RewardAmount: 0.1
+      Weight: 4
+    - IsWeapon: 1
+      WeaponType: 2
+      WeaponStatType: 2
+      PlayerStatType: 0
+      RewardAmount: 0.1
+      Weight: 4
+    - IsWeapon: 1
+      WeaponType: 2
+      WeaponStatType: 2
+      PlayerStatType: 0
+      RewardAmount: 0.1
+      Weight: 4
+    - IsWeapon: 1
+      WeaponType: 2
+      WeaponStatType: 5
+      PlayerStatType: 0
+      RewardAmount: 3
+      Weight: 4
+    - IsWeapon: 1
+      WeaponType: 2
+      WeaponStatType: 5
+      PlayerStatType: 0
+      RewardAmount: 3
+      Weight: 4
+    - IsWeapon: 1
+      WeaponType: 2
+      WeaponStatType: 5
+      PlayerStatType: 0
+      RewardAmount: 3
+      Weight: 4
+    - IsWeapon: 1
+      WeaponType: 2
+      WeaponStatType: 5
+      PlayerStatType: 0
+      RewardAmount: 3
+      Weight: 4
+    - IsWeapon: 1
+      WeaponType: 2
+      WeaponStatType: 3
+      PlayerStatType: 0
+      RewardAmount: 2
+      Weight: 4
+    - IsWeapon: 1
+      WeaponType: 2
+      WeaponStatType: 3
+      PlayerStatType: 0
+      RewardAmount: 2
+      Weight: 4
+    - IsWeapon: 1
+      WeaponType: 2
+      WeaponStatType: 3
+      PlayerStatType: 0
+      RewardAmount: 2
+      Weight: 4
+    - IsWeapon: 1
+      WeaponType: 2
+      WeaponStatType: 3
+      PlayerStatType: 0
+      RewardAmount: 2
+      Weight: 4
+    - IsWeapon: 1
+      WeaponType: 3
+      WeaponStatType: 0
+      PlayerStatType: 0
+      RewardAmount: 5
+      Weight: 4
+    - IsWeapon: 1
+      WeaponType: 3
+      WeaponStatType: 0
+      PlayerStatType: 0
+      RewardAmount: 5
+      Weight: 4
+    - IsWeapon: 1
+      WeaponType: 3
+      WeaponStatType: 0
+      PlayerStatType: 0
+      RewardAmount: 5
+      Weight: 4
+    - IsWeapon: 1
+      WeaponType: 3
+      WeaponStatType: 0
+      PlayerStatType: 0
+      RewardAmount: 5
+      Weight: 4
+    - IsWeapon: 1
+      WeaponType: 3
+      WeaponStatType: 2
+      PlayerStatType: 0
+      RewardAmount: 0.1
+      Weight: 4
+    - IsWeapon: 1
+      WeaponType: 3
+      WeaponStatType: 2
+      PlayerStatType: 0
+      RewardAmount: 0.1
+      Weight: 4
+    - IsWeapon: 1
+      WeaponType: 3
+      WeaponStatType: 2
+      PlayerStatType: 0
+      RewardAmount: 0.1
+      Weight: 4
+    - IsWeapon: 1
+      WeaponType: 3
+      WeaponStatType: 2
+      PlayerStatType: 0
+      RewardAmount: 0.1
+      Weight: 4
+    - IsWeapon: 1
+      WeaponType: 3
+      WeaponStatType: 1
+      PlayerStatType: 0
+      RewardAmount: 2
+      Weight: 3
+    - IsWeapon: 1
+      WeaponType: 3
+      WeaponStatType: 1
+      PlayerStatType: 0
+      RewardAmount: 2
+      Weight: 3
+    - IsWeapon: 1
+      WeaponType: 3
+      WeaponStatType: 1
+      PlayerStatType: 0
+      RewardAmount: 2
+      Weight: 3
+    - IsWeapon: 1
+      WeaponType: 3
+      WeaponStatType: 4
+      PlayerStatType: 0
+      RewardAmount: 0.04
+      Weight: 2
+    - IsWeapon: 1
+      WeaponType: 3
+      WeaponStatType: 4
+      PlayerStatType: 0
+      RewardAmount: 0.04
+      Weight: 2
+    - IsWeapon: 1
+      WeaponType: 1
+      WeaponStatType: 0
+      PlayerStatType: 0
+      RewardAmount: 2
+      Weight: 4
+    - IsWeapon: 1
+      WeaponType: 1
+      WeaponStatType: 0
+      PlayerStatType: 0
+      RewardAmount: 2
+      Weight: 4
+    - IsWeapon: 1
+      WeaponType: 1
+      WeaponStatType: 0
+      PlayerStatType: 0
+      RewardAmount: 2
+      Weight: 4
+    - IsWeapon: 1
+      WeaponType: 1
+      WeaponStatType: 0
+      PlayerStatType: 0
+      RewardAmount: 2
+      Weight: 4
+    - IsWeapon: 1
+      WeaponType: 1
+      WeaponStatType: 2
+      PlayerStatType: 0
+      RewardAmount: 0.15
+      Weight: 4
+    - IsWeapon: 1
+      WeaponType: 1
+      WeaponStatType: 2
+      PlayerStatType: 0
+      RewardAmount: 0.15
+      Weight: 4
+    - IsWeapon: 1
+      WeaponType: 1
+      WeaponStatType: 2
+      PlayerStatType: 0
+      RewardAmount: 0.15
+      Weight: 4
+    - IsWeapon: 1
+      WeaponType: 1
+      WeaponStatType: 2
+      PlayerStatType: 0
+      RewardAmount: 0.15
+      Weight: 4
+    - IsWeapon: 1
+      WeaponType: 1
+      WeaponStatType: 1
+      PlayerStatType: 0
+      RewardAmount: 0.1
+      Weight: 3
+    - IsWeapon: 1
+      WeaponType: 1
+      WeaponStatType: 1
+      PlayerStatType: 0
+      RewardAmount: 0.1
+      Weight: 3
+    - IsWeapon: 1
+      WeaponType: 1
+      WeaponStatType: 1
+      PlayerStatType: 0
+      RewardAmount: 0.1
+      Weight: 3
+    - IsWeapon: 1
+      WeaponType: 1
+      WeaponStatType: 5
+      PlayerStatType: 0
+      RewardAmount: 0.2
+      Weight: 1
+    - IsWeapon: 1
+      WeaponType: 1
+      WeaponStatType: 3
+      PlayerStatType: 0
+      RewardAmount: 0.3
+      Weight: 3
+    - IsWeapon: 1
+      WeaponType: 1
+      WeaponStatType: 3
+      PlayerStatType: 0
+      RewardAmount: 0.3
+      Weight: 3
+    - IsWeapon: 1
+      WeaponType: 1
+      WeaponStatType: 3
+      PlayerStatType: 0
+      RewardAmount: 0.3
+      Weight: 3
+    - IsWeapon: 0
+      WeaponType: 0
+      WeaponStatType: 0
+      PlayerStatType: 0
+      RewardAmount: 0.1
+      Weight: 1
+    - IsWeapon: 0
+      WeaponType: 0
+      WeaponStatType: 0
+      PlayerStatType: 1
+      RewardAmount: 0.1
+      Weight: 1
+    - IsWeapon: 0
+      WeaponType: 0
+      WeaponStatType: 0
+      PlayerStatType: 2
+      RewardAmount: 0.1
+      Weight: 1
+    - IsWeapon: 0
+      WeaponType: 0
+      WeaponStatType: 0
+      PlayerStatType: 3
+      RewardAmount: 0.1
+      Weight: 1
+    - IsWeapon: 0
+      WeaponType: 0
+      WeaponStatType: 0
+      PlayerStatType: 4
+      RewardAmount: 0.1
+      Weight: 1
+    - IsWeapon: 0
+      WeaponType: 0
+      WeaponStatType: 0
+      PlayerStatType: 5
+      RewardAmount: 0.1
+      Weight: 1
+    - IsWeapon: 0
+      WeaponType: 0
+      WeaponStatType: 0
+      PlayerStatType: 6
+      RewardAmount: 0.1
+      Weight: 1
+    EnemyTypeAmount: 1
+    AlwaysPresentEnemies:
+    - AsteroidType: 0
+      MaxAmount: 200
+      Priority: 150
+    - AsteroidType: 1
+      MaxAmount: 150
+      Priority: 50
+    - AsteroidType: 2
+      MaxAmount: 100
+      Priority: 1
+    RandomisedEnemies:
+    - AsteroidType: 3
+      MaxAmount: 150
+      Priority: 30
+    NumberOfObjectives: 1
+    Objectives:
+    - ObjectiveType: 0
+      ObjectiveAmountRange: {x: 10, y: 10}
+      ObjectiveAmount: 1
+      ObjectiveProgress: 0
+      ObjectiveDone: 0
+    UnitsRewardMinMax: {x: 0, y: 0}
+    ExperienceRewardMinMax: {x: 0, y: 0}
+    Backgrounds:
+    - Backgrounds: 00000000
+    StartSpawnRateMin: 0.75
+    StartSpawnRateMax: 1
+    SpawnRateRampPerSecond: -0.002
+    MaxSpawnRateMin: 0.2
+    MaxSpawnRateMax: 0.3

@@ -1,0 +1,74 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b19ba3b8849db94f8644019c5cf1096, type: 3}
+  m_Name: ShotgunWeapon
+  m_EditorClassIdentifier: 
+  ID: 2
+  WeaponName: Plasma Shotgun
+  ProjectileName: ShotgunBullet
+  Unlocked: 0
+  WeaponStartValues:
+  - StatName: Damage
+    Value: 2
+    Multiplier: 1
+    IsWeapon: 0
+    Level: 0
+    Unlocked: 1
+    HasNegative: 0
+    Upgradable: 1
+    WeaponType: 2
+  - StatName: FireRate
+    Value: 0.75
+    Multiplier: 1
+    IsWeapon: 0
+    Level: 0
+    Unlocked: 1
+    HasNegative: 0
+    Upgradable: 1
+    WeaponType: 2
+  - StatName: ProjectileCount
+    Value: 15
+    Multiplier: 1
+    IsWeapon: 0
+    Level: 0
+    Unlocked: 1
+    HasNegative: 0
+    Upgradable: 1
+    WeaponType: 2
+  - StatName: ProjectileSpeed
+    Value: 23
+    Multiplier: 1
+    IsWeapon: 0
+    Level: 0
+    Unlocked: 1
+    HasNegative: 0
+    Upgradable: 1
+    WeaponType: 2
+  - StatName: ProjectileSpread
+    Value: 70
+    Multiplier: 1
+    IsWeapon: 0
+    Level: 0
+    Unlocked: 0
+    HasNegative: 0
+    Upgradable: 1
+    WeaponType: 2
+  - StatName: LifeTime
+    Value: 0.2
+    Multiplier: 1
+    IsWeapon: 0
+    Level: 0
+    Unlocked: 1
+    HasNegative: 0
+    Upgradable: 0
+    WeaponType: 2
+  WeaponIndex: 2

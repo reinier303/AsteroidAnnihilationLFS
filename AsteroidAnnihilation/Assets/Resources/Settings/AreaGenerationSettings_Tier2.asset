@@ -1,0 +1,404 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 640b26642eb18d84999bd4322d6f54f4, type: 3}
+  m_Name: AreaGenerationSettings_Tier2
+  m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes: []
+  StartArea:
+    Faction: 0
+    Tier: 1
+    BaseAreaName:
+    - Asteroid Ring Training Section
+    RandomNameAddition: 0
+    AreaTextColor: {r: 0.21484515, g: 0.39876634, b: 0.6415094, a: 1}
+    AreaTextMaterial: {fileID: 0}
+    CompletionRewardPool:
+    - IsWeapon: 1
+      WeaponType: 2
+      WeaponStatType: 0
+      PlayerStatType: 0
+      RewardAmount: 0.2
+      Weight: 4
+    - IsWeapon: 1
+      WeaponType: 2
+      WeaponStatType: 0
+      PlayerStatType: 0
+      RewardAmount: 0.2
+      Weight: 4
+    - IsWeapon: 1
+      WeaponType: 2
+      WeaponStatType: 0
+      PlayerStatType: 0
+      RewardAmount: 0.2
+      Weight: 4
+    - IsWeapon: 1
+      WeaponType: 2
+      WeaponStatType: 0
+      PlayerStatType: 0
+      RewardAmount: 0.2
+      Weight: 4
+    - IsWeapon: 1
+      WeaponType: 2
+      WeaponStatType: 2
+      PlayerStatType: 0
+      RewardAmount: 0.1
+      Weight: 4
+    - IsWeapon: 1
+      WeaponType: 2
+      WeaponStatType: 2
+      PlayerStatType: 0
+      RewardAmount: 0.1
+      Weight: 4
+    - IsWeapon: 1
+      WeaponType: 2
+      WeaponStatType: 2
+      PlayerStatType: 0
+      RewardAmount: 0.1
+      Weight: 4
+    - IsWeapon: 1
+      WeaponType: 2
+      WeaponStatType: 2
+      PlayerStatType: 0
+      RewardAmount: 0.1
+      Weight: 4
+    - IsWeapon: 1
+      WeaponType: 2
+      WeaponStatType: 5
+      PlayerStatType: 0
+      RewardAmount: 3
+      Weight: 4
+    - IsWeapon: 1
+      WeaponType: 2
+      WeaponStatType: 5
+      PlayerStatType: 0
+      RewardAmount: 3
+      Weight: 4
+    - IsWeapon: 1
+      WeaponType: 2
+      WeaponStatType: 5
+      PlayerStatType: 0
+      RewardAmount: 3
+      Weight: 4
+    - IsWeapon: 1
+      WeaponType: 2
+      WeaponStatType: 5
+      PlayerStatType: 0
+      RewardAmount: 3
+      Weight: 4
+    - IsWeapon: 1
+      WeaponType: 2
+      WeaponStatType: 3
+      PlayerStatType: 0
+      RewardAmount: 2
+      Weight: 4
+    - IsWeapon: 1
+      WeaponType: 2
+      WeaponStatType: 3
+      PlayerStatType: 0
+      RewardAmount: 2
+      Weight: 4
+    - IsWeapon: 1
+      WeaponType: 2
+      WeaponStatType: 3
+      PlayerStatType: 0
+      RewardAmount: 2
+      Weight: 4
+    - IsWeapon: 1
+      WeaponType: 2
+      WeaponStatType: 3
+      PlayerStatType: 0
+      RewardAmount: 2
+      Weight: 4
+    - IsWeapon: 1
+      WeaponType: 3
+      WeaponStatType: 0
+      PlayerStatType: 0
+      RewardAmount: 5
+      Weight: 4
+    - IsWeapon: 1
+      WeaponType: 3
+      WeaponStatType: 0
+      PlayerStatType: 0
+      RewardAmount: 5
+      Weight: 4
+    - IsWeapon: 1
+      WeaponType: 3
+      WeaponStatType: 0
+      PlayerStatType: 0
+      RewardAmount: 5
+      Weight: 4
+    - IsWeapon: 1
+      WeaponType: 3
+      WeaponStatType: 0
+      PlayerStatType: 0
+      RewardAmount: 5
+      Weight: 4
+    - IsWeapon: 1
+      WeaponType: 3
+      WeaponStatType: 2
+      PlayerStatType: 0
+      RewardAmount: 0.1
+      Weight: 4
+    - IsWeapon: 1
+      WeaponType: 3
+      WeaponStatType: 2
+      PlayerStatType: 0
+      RewardAmount: 0.1
+      Weight: 4
+    - IsWeapon: 1
+      WeaponType: 3
+      WeaponStatType: 2
+      PlayerStatType: 0
+      RewardAmount: 0.1
+      Weight: 4
+    - IsWeapon: 1
+      WeaponType: 3
+      WeaponStatType: 2
+      PlayerStatType: 0
+      RewardAmount: 0.1
+      Weight: 4
+    - IsWeapon: 1
+      WeaponType: 3
+      WeaponStatType: 1
+      PlayerStatType: 0
+      RewardAmount: 2
+      Weight: 3
+    - IsWeapon: 1
+      WeaponType: 3
+      WeaponStatType: 1
+      PlayerStatType: 0
+      RewardAmount: 2
+      Weight: 3
+    - IsWeapon: 1
+      WeaponType: 3
+      WeaponStatType: 1
+      PlayerStatType: 0
+      RewardAmount: 2
+      Weight: 3
+    - IsWeapon: 1
+      WeaponType: 3
+      WeaponStatType: 4
+      PlayerStatType: 0
+      RewardAmount: 0.04
+      Weight: 2
+    - IsWeapon: 1
+      WeaponType: 3
+      WeaponStatType: 4
+      PlayerStatType: 0
+      RewardAmount: 0.04
+      Weight: 2
+    - IsWeapon: 1
+      WeaponType: 1
+      WeaponStatType: 0
+      PlayerStatType: 0
+      RewardAmount: 2
+      Weight: 4
+    - IsWeapon: 1
+      WeaponType: 1
+      WeaponStatType: 0
+      PlayerStatType: 0
+      RewardAmount: 2
+      Weight: 4
+    - IsWeapon: 1
+      WeaponType: 1
+      WeaponStatType: 0
+      PlayerStatType: 0
+      RewardAmount: 2
+      Weight: 4
+    - IsWeapon: 1
+      WeaponType: 1
+      WeaponStatType: 0
+      PlayerStatType: 0
+      RewardAmount: 2
+      Weight: 4
+    - IsWeapon: 1
+      WeaponType: 1
+      WeaponStatType: 2
+      PlayerStatType: 0
+      RewardAmount: 0.15
+      Weight: 4
+    - IsWeapon: 1
+      WeaponType: 1
+      WeaponStatType: 2
+      PlayerStatType: 0
+      RewardAmount: 0.15
+      Weight: 4
+    - IsWeapon: 1
+      WeaponType: 1
+      WeaponStatType: 2
+      PlayerStatType: 0
+      RewardAmount: 0.15
+      Weight: 4
+    - IsWeapon: 1
+      WeaponType: 1
+      WeaponStatType: 2
+      PlayerStatType: 0
+      RewardAmount: 0.15
+      Weight: 4
+    - IsWeapon: 1
+      WeaponType: 1
+      WeaponStatType: 1
+      PlayerStatType: 0
+      RewardAmount: 0.1
+      Weight: 3
+    - IsWeapon: 1
+      WeaponType: 1
+      WeaponStatType: 1
+      PlayerStatType: 0
+      RewardAmount: 0.1
+      Weight: 3
+    - IsWeapon: 1
+      WeaponType: 1
+      WeaponStatType: 1
+      PlayerStatType: 0
+      RewardAmount: 0.1
+      Weight: 3
+    - IsWeapon: 1
+      WeaponType: 1
+      WeaponStatType: 5
+      PlayerStatType: 0
+      RewardAmount: 0.2
+      Weight: 1
+    - IsWeapon: 1
+      WeaponType: 1
+      WeaponStatType: 3
+      PlayerStatType: 0
+      RewardAmount: 0.3
+      Weight: 3
+    - IsWeapon: 1
+      WeaponType: 1
+      WeaponStatType: 3
+      PlayerStatType: 0
+      RewardAmount: 0.3
+      Weight: 3
+    - IsWeapon: 1
+      WeaponType: 1
+      WeaponStatType: 3
+      PlayerStatType: 0
+      RewardAmount: 0.3
+      Weight: 3
+    - IsWeapon: 0
+      WeaponType: 0
+      WeaponStatType: 0
+      PlayerStatType: 0
+      RewardAmount: 0.1
+      Weight: 1
+    - IsWeapon: 0
+      WeaponType: 0
+      WeaponStatType: 0
+      PlayerStatType: 1
+      RewardAmount: 0.1
+      Weight: 1
+    - IsWeapon: 0
+      WeaponType: 0
+      WeaponStatType: 0
+      PlayerStatType: 2
+      RewardAmount: 0.1
+      Weight: 1
+    - IsWeapon: 0
+      WeaponType: 0
+      WeaponStatType: 0
+      PlayerStatType: 3
+      RewardAmount: 0.1
+      Weight: 1
+    - IsWeapon: 0
+      WeaponType: 0
+      WeaponStatType: 0
+      PlayerStatType: 4
+      RewardAmount: 0.1
+      Weight: 1
+    - IsWeapon: 0
+      WeaponType: 0
+      WeaponStatType: 0
+      PlayerStatType: 5
+      RewardAmount: 0.1
+      Weight: 1
+    - IsWeapon: 0
+      WeaponType: 0
+      WeaponStatType: 0
+      PlayerStatType: 6
+      RewardAmount: 0.1
+      Weight: 1
+    EnemyTypeAmount: 1
+    AlwaysPresentEnemies:
+    - AsteroidType: 0
+      MaxAmount: 200
+      Priority: 150
+    - AsteroidType: 1
+      MaxAmount: 150
+      Priority: 50
+    - AsteroidType: 2
+      MaxAmount: 100
+      Priority: 1
+    RandomisedEnemies:
+    - AsteroidType: 3
+      MaxAmount: 150
+      Priority: 30
+    NumberOfObjectives: 1
+    Objectives:
+    - ObjectiveType: 0
+      ObjectiveAmountRange: {x: 10, y: 10}
+      ObjectiveAmount: 1
+      ObjectiveProgress: 0
+      ObjectiveDone: 0
+    Backgrounds:
+    - Backgrounds: 00000000
+    StartSpawnRateMin: 0.75
+    StartSpawnRateMax: 1
+    SpawnRateRampPerSecond: -0.002
+    MaxSpawnRateMin: 0.2
+    MaxSpawnRateMax: 0.3
+  Factions:
+  - Faction: 0
+    Tier: 0
+    BaseAreaName: []
+    RandomNameAddition: 0
+    AreaTextColor: {r: 0, g: 0, b: 0, a: 0}
+    AreaTextMaterial: {fileID: 0}
+    CompletionRewardPool: []
+    EnemyTypeAmount: 0
+    AlwaysPresentEnemies: []
+    RandomisedEnemies: []
+    NumberOfObjectives: 0
+    Objectives: []
+    Backgrounds: []
+    StartSpawnRateMin: 0
+    StartSpawnRateMax: 1
+    SpawnRateRampPerSecond: -0.01
+    MaxSpawnRateMin: 0
+    MaxSpawnRateMax: 0.5
+  - Faction: 2
+    Tier: 0
+    BaseAreaName: []
+    RandomNameAddition: 0
+    AreaTextColor: {r: 0, g: 0, b: 0, a: 0}
+    AreaTextMaterial: {fileID: 0}
+    CompletionRewardPool: []
+    EnemyTypeAmount: 0
+    AlwaysPresentEnemies: []
+    RandomisedEnemies: []
+    NumberOfObjectives: 0
+    Objectives: []
+    Backgrounds: []
+    StartSpawnRateMin: 0
+    StartSpawnRateMax: 1
+    SpawnRateRampPerSecond: -0.01
+    MaxSpawnRateMin: 0
+    MaxSpawnRateMax: 0.5

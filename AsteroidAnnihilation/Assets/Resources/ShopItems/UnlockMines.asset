@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b62c91b710ff20d48bf981c14d25bf98, type: 3}
+  m_Name: UnlockMines
+  m_EditorClassIdentifier: 
+  ItemName: Unlock Energy Mines
+  Cost: 125
+  Description: 
+  sprite: {fileID: 21300000, guid: 024d338ee1a28fa4c9bc94fbbc3e5b28, type: 3}
+  UnlockAfterBuying: []
+  UnlockedOnStart: 1
+  WeaponName: Energy Mines
