@@ -93,6 +93,7 @@ namespace AsteroidAnnihilation
         public void AddToUnits(float value)
         {
             Stats["Units"].Value += Mathf.Clamp(value, 0, Mathf.Infinity);
+            uIManager.UpdateUnits();
         }
 
         public bool TryPlayerBuy(float cost)

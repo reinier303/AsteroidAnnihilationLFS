@@ -96,7 +96,6 @@ namespace AsteroidAnnihilation
             {
                 objectPooler.SpawnFromPool("CoinPickupEffect", transform.position, Quaternion.identity);
                 playerStats.AddToUnits(Value);
-                uIManager.UpdateUnits();
                 gameObject.SetActive(false);
             }
         }

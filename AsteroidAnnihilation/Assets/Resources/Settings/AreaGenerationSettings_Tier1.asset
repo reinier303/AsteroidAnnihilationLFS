@@ -182,7 +182,7 @@ MonoBehaviour:
       Data: 200
     - Name: Priority
       Entry: 3
-      Data: 200
+      Data: 75
     - Name: 
       Entry: 8
       Data: 
@@ -216,7 +216,7 @@ MonoBehaviour:
         Assembly-CSharp]], mscorlib
     - Name: 
       Entry: 12
-      Data: 2
+      Data: 1
     - Name: 
       Entry: 7
       Data: 8|AsteroidAnnihilation.AreaObjective, Assembly-CSharp
@@ -232,36 +232,6 @@ MonoBehaviour:
     - Name: 
       Entry: 3
       Data: 50
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: ObjectiveAmount
-      Entry: 3
-      Data: 0
-    - Name: ObjectiveProgress
-      Entry: 3
-      Data: 0
-    - Name: ObjectiveDone
-      Entry: 5
-      Data: false
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: 9|AsteroidAnnihilation.AreaObjective, Assembly-CSharp
-    - Name: ObjectiveType
-      Entry: 3
-      Data: 2
-    - Name: ObjectiveAmountRange
-      Entry: 7
-      Data: UnityEngine.Vector2Int, UnityEngine.CoreModule
-    - Name: 
-      Entry: 3
-      Data: 200
-    - Name: 
-      Entry: 3
-      Data: 300
     - Name: 
       Entry: 8
       Data: 
@@ -309,7 +279,7 @@ MonoBehaviour:
       Data: 
     - Name: Backgrounds
       Entry: 7
-      Data: 10|System.Collections.Generic.List`1[[AsteroidAnnihilation.AreaBackgrounds,
+      Data: 9|System.Collections.Generic.List`1[[AsteroidAnnihilation.AreaBackgrounds,
         Assembly-CSharp]], mscorlib
     - Name: 
       Entry: 12
@@ -319,7 +289,7 @@ MonoBehaviour:
       Data: AsteroidAnnihilation.AreaBackgrounds, Assembly-CSharp
     - Name: Backgrounds
       Entry: 7
-      Data: 11|System.Collections.Generic.List`1[[AsteroidAnnihilation.EnumCollections+Backgrounds,
+      Data: 10|System.Collections.Generic.List`1[[AsteroidAnnihilation.EnumCollections+Backgrounds,
         Assembly-CSharp]], mscorlib
     - Name: 
       Entry: 12
@@ -371,10 +341,10 @@ MonoBehaviour:
       Data: 1
     - Name: $v
       Entry: 7
-      Data: 12|AsteroidAnnihilation.TierSettings, Assembly-CSharp
+      Data: 11|AsteroidAnnihilation.TierSettings, Assembly-CSharp
     - Name: BaseAreaName
       Entry: 7
-      Data: 13|System.String[], mscorlib
+      Data: 12|System.String[], mscorlib
     - Name: 
       Entry: 12
       Data: 1
@@ -413,7 +383,7 @@ MonoBehaviour:
       Data: 0
     - Name: CompletionRewardPool
       Entry: 7
-      Data: 14|System.Collections.Generic.List`1[[AsteroidAnnihilation.StatCompletionReward,
+      Data: 13|System.Collections.Generic.List`1[[AsteroidAnnihilation.StatCompletionReward,
         Assembly-CSharp]], mscorlib
     - Name: 
       Entry: 12
@@ -429,7 +399,7 @@ MonoBehaviour:
       Data: 1
     - Name: AlwaysPresentEnemies
       Entry: 7
-      Data: 15|System.Collections.Generic.List`1[[AsteroidAnnihilation.EnemyAreaData,
+      Data: 14|System.Collections.Generic.List`1[[AsteroidAnnihilation.EnemyAreaData,
         Assembly-CSharp]], mscorlib
     - Name: 
       Entry: 12
@@ -487,7 +457,7 @@ MonoBehaviour:
       Data: 
     - Name: RandomisedEnemies
       Entry: 7
-      Data: 16|System.Collections.Generic.List`1[[AsteroidAnnihilation.EnemyAreaData,
+      Data: 15|System.Collections.Generic.List`1[[AsteroidAnnihilation.EnemyAreaData,
         Assembly-CSharp]], mscorlib
     - Name: 
       Entry: 12
@@ -533,14 +503,14 @@ MonoBehaviour:
       Data: 1
     - Name: Objectives
       Entry: 7
-      Data: 17|System.Collections.Generic.List`1[[AsteroidAnnihilation.AreaObjective,
+      Data: 16|System.Collections.Generic.List`1[[AsteroidAnnihilation.AreaObjective,
         Assembly-CSharp]], mscorlib
     - Name: 
       Entry: 12
-      Data: 2
+      Data: 1
     - Name: 
       Entry: 7
-      Data: 18|AsteroidAnnihilation.AreaObjective, Assembly-CSharp
+      Data: 17|AsteroidAnnihilation.AreaObjective, Assembly-CSharp
     - Name: ObjectiveType
       Entry: 3
       Data: 0
@@ -553,36 +523,6 @@ MonoBehaviour:
     - Name: 
       Entry: 3
       Data: 50
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: ObjectiveAmount
-      Entry: 3
-      Data: 0
-    - Name: ObjectiveProgress
-      Entry: 3
-      Data: 0
-    - Name: ObjectiveDone
-      Entry: 5
-      Data: false
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: 19|AsteroidAnnihilation.AreaObjective, Assembly-CSharp
-    - Name: ObjectiveType
-      Entry: 3
-      Data: 2
-    - Name: ObjectiveAmountRange
-      Entry: 7
-      Data: UnityEngine.Vector2Int, UnityEngine.CoreModule
-    - Name: 
-      Entry: 3
-      Data: 200
-    - Name: 
-      Entry: 3
-      Data: 300
     - Name: 
       Entry: 8
       Data: 
@@ -630,7 +570,7 @@ MonoBehaviour:
       Data: 
     - Name: Backgrounds
       Entry: 7
-      Data: 20|System.Collections.Generic.List`1[[AsteroidAnnihilation.AreaBackgrounds,
+      Data: 18|System.Collections.Generic.List`1[[AsteroidAnnihilation.AreaBackgrounds,
         Assembly-CSharp]], mscorlib
     - Name: 
       Entry: 12
@@ -640,7 +580,7 @@ MonoBehaviour:
       Data: AsteroidAnnihilation.AreaBackgrounds, Assembly-CSharp
     - Name: Backgrounds
       Entry: 7
-      Data: 21|System.Collections.Generic.List`1[[AsteroidAnnihilation.EnumCollections+Backgrounds,
+      Data: 19|System.Collections.Generic.List`1[[AsteroidAnnihilation.EnumCollections+Backgrounds,
         Assembly-CSharp]], mscorlib
     - Name: 
       Entry: 12
