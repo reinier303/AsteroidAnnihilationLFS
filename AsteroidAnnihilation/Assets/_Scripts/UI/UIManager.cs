@@ -12,14 +12,17 @@ namespace AsteroidAnnihilation
 
         public GameObject LoadingScreen;
 
-        [Header("\nUI Components\n")]
+        [Header("UI Components")]
         public TMP_Text LivesText;
         public TMP_Text UnitsText;
         public TMP_Text PlayerLevelText;
         public TMP_Text WeaponLevelText;
         public TMP_Text WaveEnterText;
         public TMP_Text BossEnterText;
+
+        [Header("Missions")]
         public TMP_Text MissionAreaText;
+        [SerializeField] private GameObject MissionComplete;
 
         public TMP_Text AreaText;
 
@@ -90,6 +93,7 @@ namespace AsteroidAnnihilation
 
             waveEnterCanvasGroup = WaveEnterText.GetComponent<CanvasGroup>();
         }
+
         private void Start()
         {
             UpdateUnits();
@@ -105,6 +109,11 @@ namespace AsteroidAnnihilation
             currentMission = missionManager.GetCurrentMission();
             InitializeMissionUI();
             InitializeObjectiveMenu();
+        }
+
+        public void OnMissionComplete()
+        {
+            MissionComplete.SetActive(true);
         }
 
         public void UpdateHealth()

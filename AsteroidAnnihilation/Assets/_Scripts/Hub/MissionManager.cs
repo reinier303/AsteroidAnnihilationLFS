@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using System.Linq;
 
 namespace AsteroidAnnihilation
@@ -29,6 +30,8 @@ namespace AsteroidAnnihilation
 
         [SerializeField] private GameObject gameElements, hubElements;
 
+        private bool newMissionGenerated, canGainProgress;
+
         private void Awake()
         {
             if(Instance != null) { Destroy(gameObject);} else { Instance = this; }
@@ -40,6 +43,7 @@ namespace AsteroidAnnihilation
 
         private void Start()
         {
+            newMissionGenerated = false;
             LoadMissions();
             gameManager = GameManager.Instance;
             uiManager = UIManager.Instance;
@@ -50,12 +54,19 @@ namespace AsteroidAnnihilation
 
         public void ShowMissionCards()
         {
-            Debug.Log(currentMissions.Count);
-
             //We're taking into account the RankProgressBar and checking if the mission cards have already been generated
-            if (missionCardHolder.childCount - 1 != maxMissions)
+            if (missionCardHolder.childCount - 1 != maxMissions || newMissionGenerated)
             {
-                foreach(Mission mission in currentMissions)
+                for(int i = 0; i < missionCardHolder.childCount; i++)
+                {
+                    Transform child = missionCardHolder.GetChild(i);
+                    if (child.GetComponent<LayoutElement>() == null)
+                    {
+                        Destroy(child.gameObject);
+                    }
+                }
+                newMissionGenerated = false;
+                foreach (Mission mission in currentMissions)
                 {
                     MissionCard card = Instantiate(missionCard, missionCardHolder).GetComponent<MissionCard>();
                     card.InitializeCard(mission);
@@ -65,18 +76,34 @@ namespace AsteroidAnnihilation
 
         public IEnumerator MoveToMissionArea(int missionIndex)
         {
-            Debug.Log(missionIndex);
             currentMissionIndex = missionIndex;
             uiManager.LoadingScreen.SetActive(true);
             inputManager.InputEnabled = false;
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSecondsRealtime(1f);
             gameElements.SetActive(true);
             hubElements.SetActive(false);
-            yield return new WaitForSeconds(3f);
+            yield return new WaitForSecondsRealtime(3f);
             spawnManager.gameObject.SetActive(true);
             spawnManager.Initialize();
             uiManager.UpdateMissionUI();
-            yield return new WaitForSeconds(1f);
+            canGainProgress = true;
+            yield return new WaitForSecondsRealtime(1f);
+            StartCoroutine(uiManager.LoadingScreen.GetComponent<LoadingScreen>().FadeOutLoadingScreen());
+            inputManager.InputEnabled = true;
+        }
+
+        public IEnumerator MoveToHub()
+        {
+            uiManager.LoadingScreen.SetActive(true);
+            inputManager.InputEnabled = false;
+            Time.timeScale = 0;
+            yield return new WaitForSecondsRealtime(1.1f);
+            Player.Instance.transform.position = Vector3.zero;
+            spawnManager.gameObject.SetActive(false);
+            gameElements.SetActive(false);
+            hubElements.SetActive(true);
+            Time.timeScale = 1;
+            yield return new WaitForSecondsRealtime(2.25f);
             StartCoroutine(uiManager.LoadingScreen.GetComponent<LoadingScreen>().FadeOutLoadingScreen());
             inputManager.InputEnabled = true;
 
@@ -159,6 +186,7 @@ namespace AsteroidAnnihilation
 
         public void AddObjectiveProgress(MissionObjectiveType type)
         {
+            if (!canGainProgress) { return; }
             Mission mission = GetCurrentMission();
             for (int i = 0; i < mission.Objectives.Count; i++)
             {
@@ -201,6 +229,11 @@ namespace AsteroidAnnihilation
             //mission.AreaCompleted = true;
             //CompletionRewardStats.Instance.AddRewardedStat(area.CompletionRewards);
             gameManager.RPlayer.RPlayerStats.AddToUnits(mission.UnitsReward);
+            uiManager.OnMissionComplete();
+            currentMissions.RemoveAt(currentMissionIndex);
+            currentMissions.Insert(currentMissionIndex, GenerateMission());
+            newMissionGenerated = true;
+            canGainProgress = false;
         }
 
         public void AddToObjective(Mission mission, int objectiveIndex)

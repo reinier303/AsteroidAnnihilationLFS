@@ -23,15 +23,15 @@ namespace AsteroidAnnihilation
         {
             canvasGroup.alpha = 0;
             //Fade music volume maybe?
-            canvasGroup.LeanAlpha(1, FadeTime);
+            canvasGroup.LeanAlpha(1, FadeTime).setIgnoreTimeScale(true);
         }
 
         public IEnumerator FadeOutLoadingScreen()
         {
             canvasGroup.alpha = 1;
             //Fade music volume maybe?
-            canvasGroup.LeanAlpha(0, FadeTime);
-            yield return new WaitForSeconds(FadeTime);
+            canvasGroup.LeanAlpha(0, FadeTime).setIgnoreTimeScale(true);
+            yield return new WaitForSecondsRealtime(FadeTime);
             gameObject.SetActive(false);
         }
 

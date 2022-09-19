@@ -1,0 +1,336 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 87d782bb33cbd694ba8fe21a71cb7587, type: 3}
+  m_Name: PlayerLevelSettings
+  m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes:
+    - Name: PlayerLevels
+      Entry: 7
+      Data: 0|System.Collections.Generic.List`1[[AsteroidAnnihilation.PlayerLevel,
+        Assembly-CSharp]], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 20
+    - Name: 
+      Entry: 7
+      Data: AsteroidAnnihilation.PlayerLevel, Assembly-CSharp
+    - Name: Level
+      Entry: 3
+      Data: 1
+    - Name: TotalExp
+      Entry: 4
+      Data: 200
+    - Name: Unlocks
+      Entry: 6
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: AsteroidAnnihilation.PlayerLevel, Assembly-CSharp
+    - Name: Level
+      Entry: 3
+      Data: 2
+    - Name: TotalExp
+      Entry: 4
+      Data: 450
+    - Name: Unlocks
+      Entry: 6
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: AsteroidAnnihilation.PlayerLevel, Assembly-CSharp
+    - Name: Level
+      Entry: 3
+      Data: 3
+    - Name: TotalExp
+      Entry: 4
+      Data: 900
+    - Name: Unlocks
+      Entry: 6
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: AsteroidAnnihilation.PlayerLevel, Assembly-CSharp
+    - Name: Level
+      Entry: 3
+      Data: 4
+    - Name: TotalExp
+      Entry: 4
+      Data: 1700
+    - Name: Unlocks
+      Entry: 6
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: AsteroidAnnihilation.PlayerLevel, Assembly-CSharp
+    - Name: Level
+      Entry: 3
+      Data: 5
+    - Name: TotalExp
+      Entry: 4
+      Data: 2800
+    - Name: Unlocks
+      Entry: 6
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: AsteroidAnnihilation.PlayerLevel, Assembly-CSharp
+    - Name: Level
+      Entry: 3
+      Data: 6
+    - Name: TotalExp
+      Entry: 4
+      Data: 5000
+    - Name: Unlocks
+      Entry: 6
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: AsteroidAnnihilation.PlayerLevel, Assembly-CSharp
+    - Name: Level
+      Entry: 3
+      Data: 7
+    - Name: TotalExp
+      Entry: 4
+      Data: 7000
+    - Name: Unlocks
+      Entry: 6
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: AsteroidAnnihilation.PlayerLevel, Assembly-CSharp
+    - Name: Level
+      Entry: 3
+      Data: 8
+    - Name: TotalExp
+      Entry: 4
+      Data: 10000
+    - Name: Unlocks
+      Entry: 6
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: AsteroidAnnihilation.PlayerLevel, Assembly-CSharp
+    - Name: Level
+      Entry: 3
+      Data: 9
+    - Name: TotalExp
+      Entry: 4
+      Data: 14000
+    - Name: Unlocks
+      Entry: 6
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: AsteroidAnnihilation.PlayerLevel, Assembly-CSharp
+    - Name: Level
+      Entry: 3
+      Data: 10
+    - Name: TotalExp
+      Entry: 4
+      Data: 19000
+    - Name: Unlocks
+      Entry: 6
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: AsteroidAnnihilation.PlayerLevel, Assembly-CSharp
+    - Name: Level
+      Entry: 3
+      Data: 11
+    - Name: TotalExp
+      Entry: 4
+      Data: 24000
+    - Name: Unlocks
+      Entry: 6
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: AsteroidAnnihilation.PlayerLevel, Assembly-CSharp
+    - Name: Level
+      Entry: 3
+      Data: 12
+    - Name: TotalExp
+      Entry: 4
+      Data: 30000
+    - Name: Unlocks
+      Entry: 6
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: AsteroidAnnihilation.PlayerLevel, Assembly-CSharp
+    - Name: Level
+      Entry: 3
+      Data: 13
+    - Name: TotalExp
+      Entry: 4
+      Data: 38000
+    - Name: Unlocks
+      Entry: 6
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: AsteroidAnnihilation.PlayerLevel, Assembly-CSharp
+    - Name: Level
+      Entry: 3
+      Data: 14
+    - Name: TotalExp
+      Entry: 4
+      Data: 48000
+    - Name: Unlocks
+      Entry: 6
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: AsteroidAnnihilation.PlayerLevel, Assembly-CSharp
+    - Name: Level
+      Entry: 3
+      Data: 15
+    - Name: TotalExp
+      Entry: 4
+      Data: 60000
+    - Name: Unlocks
+      Entry: 6
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: AsteroidAnnihilation.PlayerLevel, Assembly-CSharp
+    - Name: Level
+      Entry: 3
+      Data: 16
+    - Name: TotalExp
+      Entry: 4
+      Data: 72000
+    - Name: Unlocks
+      Entry: 6
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: AsteroidAnnihilation.PlayerLevel, Assembly-CSharp
+    - Name: Level
+      Entry: 3
+      Data: 17
+    - Name: TotalExp
+      Entry: 4
+      Data: 88000
+    - Name: Unlocks
+      Entry: 6
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: AsteroidAnnihilation.PlayerLevel, Assembly-CSharp
+    - Name: Level
+      Entry: 3
+      Data: 18
+    - Name: TotalExp
+      Entry: 4
+      Data: 105000
+    - Name: Unlocks
+      Entry: 6
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: AsteroidAnnihilation.PlayerLevel, Assembly-CSharp
+    - Name: Level
+      Entry: 3
+      Data: 19
+    - Name: TotalExp
+      Entry: 4
+      Data: 125000
+    - Name: Unlocks
+      Entry: 6
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: AsteroidAnnihilation.PlayerLevel, Assembly-CSharp
+    - Name: Level
+      Entry: 3
+      Data: 20
+    - Name: TotalExp
+      Entry: 4
+      Data: 150000
+    - Name: Unlocks
+      Entry: 6
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 

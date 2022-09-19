@@ -12,6 +12,8 @@ namespace AsteroidAnnihilation
 
         [SerializeField] private PlayerData playerData;
 
+        private PlayerLevelSettings playerLevelSettings;
+
         private void Awake()
         {
             //Debug.Log("Why are we out of the if statement!!?!??");
@@ -25,7 +27,8 @@ namespace AsteroidAnnihilation
                 Stats = GetStatDictionaryFromList(SaveLoad.Load<PlayerData>("PlayerData").StatList);
             }
 
-
+            playerLevelSettings = (PlayerLevelSettings)Resources.Load("Settings/PlayerLevelSettings");
+            
         }
 
         private void Start()
@@ -47,12 +50,14 @@ namespace AsteroidAnnihilation
             string powerupChance = EnumCollections.PlayerStats.PowerUpChance.ToString();
 
             //Player Stats
+            playerData.PlayerLevel = 1;
             Stats.Add(health, new UpgradableStat(health, true, true, 100, 1));
             Stats.Add(movementSpeed, new UpgradableStat(movementSpeed, true, true, 3.5f , 1f));
             Stats.Add(magnetRadius, new UpgradableStat(magnetRadius, false, true, 3, 1));
             Stats.Add(critRate, new UpgradableStat(critRate, false, true, 5.0f, 1));
             Stats.Add(critMultiplier, new UpgradableStat(critMultiplier, false, true, 2.0f, 1));
             Stats.Add("Units", new UpgradableStat("Units", false, false, 0));
+            Stats.Add("Experience", new UpgradableStat("Experience", false, false, 0));
             Stats.Add(powerupChance, new UpgradableStat(powerupChance, false, false, 0));
 
             //Save to file
@@ -96,6 +101,23 @@ namespace AsteroidAnnihilation
             uIManager.UpdateUnits();
         }
 
+        public void GainExperience(float value)
+        {
+            //TODO::Fix overlevel exp
+            Stats["Experience"].Value += Mathf.Clamp(value, 0, Mathf.Infinity);
+            //Make UI Experience update
+            //uIManager.UpdateExperience();
+            CheckLevelUp(value);
+        }
+
+        private void CheckLevelUp(float restExp)
+        {
+            if(Stats["Experience"].Value > playerLevelSettings.PlayerLevels[playerData.PlayerLevel - 1].TotalExp)
+            {
+                playerData.PlayerLevel++;
+            }
+        }
+
         public bool TryPlayerBuy(float cost)
         {
             if(Stats["Units"].GetBaseValue() >= cost)
@@ -114,6 +136,7 @@ namespace AsteroidAnnihilation
     [System.Serializable]
     public struct PlayerData
     {
+        public int PlayerLevel;
         public List<UpgradableStat> StatList;
     }
 

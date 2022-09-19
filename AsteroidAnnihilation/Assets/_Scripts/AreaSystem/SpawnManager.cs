@@ -82,7 +82,7 @@ namespace AsteroidAnnihilation
             currentSpawnTime += currentMission.SpawnRateRampPerSecond;
             if (currentSpawnTime >= currentMission.MaxSpawnRate)
             {
-                StopCoroutine(RampSpawnRate());
+                StartCoroutine(RampSpawnRate());
             }
         }
 
@@ -92,7 +92,7 @@ namespace AsteroidAnnihilation
             Vector2 spawnPosition = new Vector2(Random.Range(playerPos.x - spawnDistance, playerPos.x + spawnDistance), Random.Range(playerPos.y - spawnDistance, playerPos.y + spawnDistance));
             Vector2 viewPos = Camera.main.WorldToViewportPoint(spawnPosition);
 
-            while (viewPos.x > -0.1f && viewPos.x < 1.1f && viewPos.y > -0.1f && viewPos.y < 1.1f)
+            while (viewPos.x > -0.2f && viewPos.x < 1.2f && viewPos.y > -0.2f && viewPos.y < 1.2f)
             {
                 spawnPosition = new Vector2(Random.Range(playerPos.x - spawnDistance, playerPos.x + spawnDistance), Random.Range(playerPos.y - spawnDistance, playerPos.y + spawnDistance));
                 viewPos = Camera.main.WorldToViewportPoint(spawnPosition);

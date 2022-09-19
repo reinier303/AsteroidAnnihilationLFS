@@ -16,9 +16,14 @@ namespace AsteroidAnnihilation
             yield return new WaitForSecondsRealtime(3f);
 
             sceneLoadOperation = SceneManager.LoadSceneAsync(scene);
+            sceneLoadOperation.allowSceneActivation = false;
 
             while (!sceneLoadOperation.isDone)
             {
+                if(sceneLoadOperation.progress > 0.95f)
+                {
+                    sceneLoadOperation.allowSceneActivation = true;
+                }
                 yield return null;
             }
         }

@@ -22,7 +22,11 @@ namespace AsteroidAnnihilation
             HardAsteroid,
             OrbitingAsteroid,
             AsteroidGroup3Random,
-            AsteroidGroup_3Alligned
+            AsteroidGroup_3Alligned,
+            SwarmPod,
+            SwarmDrone,
+            OutlawGrunt,
+            OutlawMarauderMK1
         }
 
         public enum Backgrounds
