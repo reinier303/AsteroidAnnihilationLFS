@@ -13,6 +13,7 @@ namespace AsteroidAnnihilation
         public Stat ContactDamage;
         public Stat RotationSpeed;
         public Stat DroppedUnits;
+        public Stat ExperienceGained;
 
         protected override void Start()
         {
@@ -62,6 +63,7 @@ namespace AsteroidAnnihilation
         protected override void Die()
         {
             DropUnits(DroppedUnits.GetBaseValue());
+            gameManager.RPlayer.RPlayerStats.AddToExperience(ExperienceGained.Value);
             base.Die();
         }
 

@@ -15,8 +15,7 @@ namespace AsteroidAnnihilation
         [Header("UI Components")]
         public TMP_Text LivesText;
         public TMP_Text UnitsText;
-        public TMP_Text PlayerLevelText;
-        public TMP_Text WeaponLevelText;
+        [SerializeField] private TMP_Text playerLevelText;
         public TMP_Text WaveEnterText;
         public TMP_Text BossEnterText;
 
@@ -33,6 +32,7 @@ namespace AsteroidAnnihilation
 
         //Powerup
         public Slider PowerUpTimer;
+        public Slider ExperienceBar;
         public TMP_Text PowerUpText;
         public Slider BossBar;
         private int currentID;
@@ -71,6 +71,7 @@ namespace AsteroidAnnihilation
         private GameManager gameManager;
         private MissionManager missionManager;
         private PlayerEntity RPlayerEntity;
+        private PlayerStats playerStats;
         private Player RPlayer;
 
         public delegate void OnPauseMenuOpen();
@@ -90,6 +91,7 @@ namespace AsteroidAnnihilation
             missionManager = MissionManager.Instance;
             RPlayer = gameManager.RPlayer;
             RPlayerEntity = RPlayer.RPlayerEntity;
+            playerStats = RPlayer.RPlayerStats;
 
             waveEnterCanvasGroup = WaveEnterText.GetComponent<CanvasGroup>();
         }
@@ -98,6 +100,7 @@ namespace AsteroidAnnihilation
         {
             UpdateUnits();
             UpdateHealth();
+            UpdateLevel();
 
             currentMission = missionManager.GetCurrentMission();
             InitializeMissionUI();
@@ -127,9 +130,22 @@ namespace AsteroidAnnihilation
 
         public void UpdateUnits()
         {
-            UnitsText.text = "Units:" + RPlayer.RPlayerStats.Stats["Units"].GetBaseValue();
+            UnitsText.text = "Units:" + playerStats.Stats["Units"].GetBaseValue();
             StopCoroutine(BounceSizeTween(UnitsText.gameObject));
             StartCoroutine(BounceSizeTween(UnitsText.gameObject));
+        }
+
+        public void UpdateExperience()
+        {
+            ExperienceBar.value = playerStats.GetExperienceLevelProgress();
+        }
+
+        public void UpdateLevel()
+        {
+            Debug.Log(playerStats.GetPlayerLevel());
+            playerLevelText.text = "" + playerStats.GetPlayerLevel();
+            ExperienceBar.maxValue = playerStats.GetExperienceDifference();
+            UpdateExperience();
         }
 
         #region Powerups

@@ -229,6 +229,7 @@ namespace AsteroidAnnihilation
             //mission.AreaCompleted = true;
             //CompletionRewardStats.Instance.AddRewardedStat(area.CompletionRewards);
             gameManager.RPlayer.RPlayerStats.AddToUnits(mission.UnitsReward);
+            gameManager.RPlayer.RPlayerStats.AddToExperience(mission.ExperienceReward);
             uiManager.OnMissionComplete();
             currentMissions.RemoveAt(currentMissionIndex);
             currentMissions.Insert(currentMissionIndex, GenerateMission());

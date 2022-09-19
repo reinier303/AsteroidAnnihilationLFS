@@ -43,11 +43,14 @@ namespace AsteroidAnnihilation
 
         public float offsetMultiplier = 1f;
 
-        public Vector3 MovementInput;
+        public Vector2 MovementInput;
+
+        [SerializeField]private List<Vector3> lastInputs;
 
         private void Awake()
         {
             backGroundSize = BackgroundCollider.transform.localScale * 14.5f;
+            lastInputs = new List<Vector3>();
         }
 
         private void Start()
@@ -107,8 +110,16 @@ namespace AsteroidAnnihilation
             {
                 return;
             }
+            bool driftCheck = MovementInput.x <= 0.01f && MovementInput.y <= 0.01f && MovementInput.x >= -0.01f && MovementInput.y >= -0.01f ? true : false;
+            if (inputManager.Attacking)
+            {
+                RotateToMouse();
+            } else if (!inputManager.MovementInputZero()) { RotateToMoveDirection();}
+            //fix drift
+            if (driftCheck) { MovementInput = Vector3.zero; }
             Move();
-            Rotate();
+
+            
         }
 
         private void Move()
@@ -118,11 +129,11 @@ namespace AsteroidAnnihilation
 
             MovementInput = new Vector3(axisX, axisY, 0) * currentSpeed * Time.deltaTime;
 
-            transform.position += MovementInput;
+            transform.position += (Vector3)MovementInput;
 
         }
         
-        private void Rotate()
+        private void RotateToMouse()
         {
             Ray ray = cam.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
@@ -134,6 +145,28 @@ namespace AsteroidAnnihilation
             var angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
             transform.rotation = Quaternion.AngleAxis(angle - 90, Vector3.forward);
 
+        }
+
+        private void RotateToMoveDirection()
+        {
+            /*if (MovementInput.x <= 0.01f && MovementInput.y <= 0.01f && MovementInput.x >= -0.01f && MovementInput.y >= -0.01f && lastInputs.Count > 9)
+            {
+                Debug.Log(lastInputs[10]);
+                target = transform.position + lastInputs[10] + (Vector3)CameraOffset.Instance.Offset * offsetMultiplier;
+            }
+            else {
+                if (lastInputs.Count < 10) {lastInputs.Add(MovementInput); }
+                else 
+                { 
+                    lastInputs.RemoveAt(0);
+                    lastInputs.Add(MovementInput);
+                }*/
+                target = transform.position + (Vector3)MovementInput + (Vector3)CameraOffset.Instance.Offset * offsetMultiplier; 
+            //}
+
+            var dir = target - transform.position;
+            var angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+            transform.rotation = Quaternion.AngleAxis(angle - 90, Vector3.forward);
         }
     }
 }

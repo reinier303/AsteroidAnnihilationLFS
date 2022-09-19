@@ -12,7 +12,7 @@ namespace AsteroidAnnihilation
 
         [SerializeField] private PlayerData playerData;
 
-        private PlayerLevelSettings playerLevelSettings;
+        public PlayerLevelSettings playerLevelSettings;
 
         private void Awake()
         {
@@ -41,6 +41,7 @@ namespace AsteroidAnnihilation
 
         private void NewSave()
         {
+            Debug.Log("New Save");
             Stats = new Dictionary<string, UpgradableStat>();
             string health = EnumCollections.PlayerStats.Health.ToString();
             string movementSpeed = EnumCollections.PlayerStats.MovementSpeed.ToString();
@@ -51,6 +52,8 @@ namespace AsteroidAnnihilation
 
             //Player Stats
             playerData.PlayerLevel = 1;
+            Debug.Log(playerData.PlayerLevel = 1);
+
             Stats.Add(health, new UpgradableStat(health, true, true, 100, 1));
             Stats.Add(movementSpeed, new UpgradableStat(movementSpeed, true, true, 3.5f , 1f));
             Stats.Add(magnetRadius, new UpgradableStat(magnetRadius, false, true, 3, 1));
@@ -101,13 +104,59 @@ namespace AsteroidAnnihilation
             uIManager.UpdateUnits();
         }
 
-        public void GainExperience(float value)
+        public void AddToExperience(float value)
         {
             //TODO::Fix overlevel exp
             Stats["Experience"].Value += Mathf.Clamp(value, 0, Mathf.Infinity);
             //Make UI Experience update
             //uIManager.UpdateExperience();
             CheckLevelUp(value);
+            uIManager.UpdateExperience();
+        }
+
+        public int GetPlayerLevel()
+        {
+            return playerData.PlayerLevel;
+        }
+
+        /// <summary>
+        /// Returns experience needed from current level to next level.
+        /// </summary>
+        /// <returns></returns>
+        public float GetExperienceDifference()
+        {
+            if(GetPlayerLevel() <= 1)
+            {
+                return playerLevelSettings.PlayerLevels[GetPlayerLevel()].TotalExp;
+            }
+            return playerLevelSettings.PlayerLevels[GetPlayerLevel()].TotalExp - playerLevelSettings.PlayerLevels[GetPlayerLevel() - 1].TotalExp;
+        }
+        
+        /// <summary>
+        /// Returns experience progress towards next level. Used in expBar currentValue
+        /// </summary>
+        /// <returns></returns>
+        public float GetExperienceLevelProgress()
+        {
+            return Stats["Experience"].Value - playerLevelSettings.PlayerLevels[GetPlayerLevel()].TotalExp;
+        }
+
+        /// <summary>
+        /// Return experience needed for next level.
+        /// </summary>
+        /// <returns></returns>
+        public float GetExperienceToLevel()
+        {
+            return playerLevelSettings.PlayerLevels[GetPlayerLevel()].TotalExp - Stats["Experience"].Value;
+        }
+
+        /// <summary>
+        /// Returns total experience needed for next level.
+        /// </summary>
+        /// <returns></returns>
+        public float GetTotalExpNeeded()
+        {
+            return playerLevelSettings.PlayerLevels[GetPlayerLevel()].TotalExp;
         }
 
         private void CheckLevelUp(float restExp)
@@ -115,6 +164,7 @@ namespace AsteroidAnnihilation
             if(Stats["Experience"].Value > playerLevelSettings.PlayerLevels[playerData.PlayerLevel - 1].TotalExp)
             {
                 playerData.PlayerLevel++;
+                uIManager.UpdateLevel();
             }
         }
 

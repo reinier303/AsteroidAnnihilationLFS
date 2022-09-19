@@ -31,15 +31,12 @@ namespace AsteroidAnnihilation
             }
             else if(idleMoveRoutine == null)
             {
-                Debug.Log("aggro");
-
                 idleMoveRoutine = StartCoroutine(IdleMove());
             }
         }
 
         protected virtual IEnumerator IdleMove()
         {
-            Debug.Log("moving");
             Vector3 randomPos = transform.position + new Vector3(Random.Range(-2, 2), Random.Range(-2, 2), transform.position.z);
             LeanTween.move(gameObject, randomPos , idleMoveTime);
             yield return new WaitForSeconds(idleWaitTime);
@@ -48,7 +45,6 @@ namespace AsteroidAnnihilation
 
         protected virtual void AggroMove()
         {
-            Debug.Log("aggro");
             transform.position = Vector2.MoveTowards(transform.position, Player.position, Time.deltaTime * aggroMove);
 
         }

@@ -37,6 +37,7 @@ namespace AsteroidAnnihilation
         protected CameraManager cameraManager;
         protected PowerupManager powerupManager;
         protected MissionManager missionManager;
+        protected PlayerStats playerStats;
 
         protected Material onHitMaterial;
         protected Material baseMaterial;
@@ -71,6 +72,7 @@ namespace AsteroidAnnihilation
             objectPooler = ObjectPooler.Instance;
             powerupManager = PowerupManager.Instance;
             missionManager = MissionManager.Instance;
+            playerStats = gameManager.RPlayer.RPlayerStats;
         }
 
         protected virtual void OnEnable()

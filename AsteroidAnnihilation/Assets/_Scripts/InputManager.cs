@@ -139,6 +139,18 @@ namespace AsteroidAnnihilation
             }
         }
 
+        public bool MovementInputZero()
+        {
+            return !Input.GetKey(RightButton) &&
+                !Input.GetKey(RightButton2) &&
+                !Input.GetKey(LeftButton) &&
+                !Input.GetKey(LeftButton2) &&
+                !Input.GetKey(UpButton) &&
+                !Input.GetKey(UpButton2) &&
+                !Input.GetKey(DownButton) &&
+                !Input.GetKey(DownButton2);
+        }
+
 
         public float GetAxisSmoothHorizontal(float speed, float acceleration, float deceleration, float boostSpeed)
         {
