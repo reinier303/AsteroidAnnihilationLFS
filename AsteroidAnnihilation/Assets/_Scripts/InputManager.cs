@@ -69,6 +69,7 @@ namespace AsteroidAnnihilation
                 Attacking = false;
                 return;
             }
+            GetAxisNormalized();
             PauseInput();
             if (gameManager.isPaused)
             {
@@ -102,6 +103,7 @@ namespace AsteroidAnnihilation
             }
             else { Attacking = false; }
 
+            /*
             if (Input.GetKeyDown(Weapon1))
             {
                 ChangeToWeapon(0);
@@ -122,8 +124,11 @@ namespace AsteroidAnnihilation
             {
                 ChangeToWeapon(4);
             }
+            */
         }
 
+        //Old ChangeWeapon() might use/recycle later
+        /*
         public void ChangeToWeapon(int weapon)
         {
             if(playerAttack.ChangeWeapon(weapon))
@@ -138,6 +143,7 @@ namespace AsteroidAnnihilation
                 //TODO::Play cant switch sound cue
             }
         }
+        */
 
         public bool MovementInputZero()
         {
@@ -151,6 +157,30 @@ namespace AsteroidAnnihilation
                 !Input.GetKey(DownButton2);
         }
 
+        private Vector2 GetAxisNormalized()
+        {
+            float x = 0;
+            float y = 0;
+            if(Input.GetKey(RightButton) || Input.GetKey(RightButton2))
+            {
+                x = 1;
+            }
+            //Left button input
+            else if (Input.GetKey(LeftButton) || Input.GetKey(LeftButton2))
+            {
+                x = -1;
+            }
+            if (Input.GetKey(UpButton) || Input.GetKey(UpButton2))
+            {
+                y = 1;
+            }
+            if (Input.GetKey(DownButton) || Input.GetKey(DownButton2))
+            {
+                y = -1;
+            }
+            Vector2 axises = new Vector2(x, y).normalized;
+            return  axises;
+        }
 
         public float GetAxisSmoothHorizontal(float speed, float acceleration, float deceleration, float boostSpeed)
         {
@@ -161,7 +191,7 @@ namespace AsteroidAnnihilation
             //Right button input
             if (Input.GetKey(RightButton) || Input.GetKey(RightButton2))
             {
-                axisX += acceleration * boost * Time.deltaTime;
+                axisX += acceleration * boost * Time.deltaTime * GetAxisNormalized().x;
                 if (axisX > speed * boost)
                 {
                     axisX = speed * boost;
@@ -175,7 +205,7 @@ namespace AsteroidAnnihilation
             //Left button input
             if (Input.GetKey(LeftButton) || Input.GetKey(LeftButton2))
             {
-                axisX -= acceleration * boost * Time.deltaTime;
+                axisX -= acceleration * boost * Time.deltaTime * -GetAxisNormalized().x;
                 if (axisX < -speed * boost)
                 {
                     axisX = -speed * boost;
@@ -198,7 +228,7 @@ namespace AsteroidAnnihilation
             //Right button input
             if (Input.GetKey(UpButton) || Input.GetKey(UpButton2))
             {
-                axisY += acceleration * boost * Time.deltaTime;
+                axisY += acceleration * boost * Time.deltaTime * GetAxisNormalized().y;
                 if (axisY > speed * boost)
                 {
                     axisY = speed * boost;
@@ -212,7 +242,7 @@ namespace AsteroidAnnihilation
             //Left button input
             if (Input.GetKey(DownButton) || Input.GetKey(DownButton2))
             {
-                axisY -= acceleration * boost * Time.deltaTime;
+                axisY -= acceleration * boost * Time.deltaTime * -GetAxisNormalized().y;
                 if (axisY < -speed * boost)
                 {
                     axisY = -speed * boost;

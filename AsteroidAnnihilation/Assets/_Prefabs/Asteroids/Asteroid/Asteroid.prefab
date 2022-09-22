@@ -9799,11 +9799,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f0c2ad6d7cbeec4e8ebb6269c8d2196, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxHealth:
-    StatName: Max Health
-    Value: 30
-    Multiplier: 1
-    IsWeapon: 0
+  MaxHealth: 30
   currentHealth: 30
   ShakeMagnitude: 6.5
   ShakeDuration: 0.5
@@ -9821,21 +9817,10 @@ MonoBehaviour:
   isInitialized: 0
   KilledByIndex: 0
   Player: {fileID: 0}
-  ContactDamage:
-    StatName: ContactDamage
-    Value: 10
-    Multiplier: 1
-    IsWeapon: 0
-  RotationSpeed:
-    StatName: 
-    Value: 0
-    Multiplier: 0
-    IsWeapon: 0
-  DroppedUnits:
-    StatName: DroppedUnits
-    Value: 20
-    Multiplier: 1
-    IsWeapon: 0
+  ContactDamage: 10
+  RotationSpeed: 0
+  DroppedUnits: 10
+  ExperienceGained: 1
   MaxRotationSpeed: 750
   MinForce: 80
   MaxForce: 650

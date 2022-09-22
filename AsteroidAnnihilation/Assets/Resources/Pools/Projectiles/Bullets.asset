@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81ef996067970074d8dd88ba76874a9d, type: 3}
   m_Name: Bullets
   m_EditorClassIdentifier: 
-  Tag: Bullet
+  Tag: PlasmaBullet
   Prefab: {fileID: 7296814962085735418, guid: d990d8eff7b97654085466b7ac9145ba, type: 3}
   Amount: 1000

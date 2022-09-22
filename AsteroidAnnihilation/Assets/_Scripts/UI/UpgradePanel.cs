@@ -9,6 +9,8 @@ namespace AsteroidAnnihilation
 {
     public class UpgradePanel : MonoBehaviour
     {
+        //Old stuff might recycle/use later
+        /*
         public static UpgradePanel Instance;
 
         //References
@@ -42,11 +44,11 @@ namespace AsteroidAnnihilation
             SetupUpgradeUI();
         }
 
-        public void UpgradeStat(string name)
+        public void UpgradeStat(EnumCollections.WeaponStats stat)
         {
-            currentWeaponStats[name].Level++;
-            int level = currentWeaponStats[name].Level;
-            currentWeaponStats[name].Value = weaponDatabank.LookUpStat(lastWeaponName, name).Values[level];
+            currentWeaponStats[stat].Level++;
+            int level = currentWeaponStats[stat].Level;
+            currentWeaponStats[stat].Value = weaponDatabank.LookUpStat(lastWeaponName, stat).Values[level];
             playerAttack.SetCurrentWeaponStats(currentWeaponStats);
         }
 
@@ -88,7 +90,7 @@ namespace AsteroidAnnihilation
                 GameObject statUI = Instantiate(statUIObject, statPanel);
                 statUI.GetComponent<StatUIScript>().SetupStatUI(this, gameManager.RPlayer.RPlayerStats, weaponDatabank , lastWeaponName ,stat);
             }
-        }
+        }*/
     }
 }
 

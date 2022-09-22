@@ -6,25 +6,29 @@ namespace AsteroidAnnihilation
 {
     public class PlayerStats : MonoBehaviour
     {
-        [System.NonSerialized] public Dictionary<string, UpgradableStat> Stats;
-
         private UIManager uIManager;
 
-        [SerializeField] private PlayerData playerData;
-
+        private int PlayerLevel;
+        private Dictionary<EnumCollections.PlayerStats, float> Stats;
+        private Dictionary<string, float> statMultipliers;
         public PlayerLevelSettings playerLevelSettings;
 
         private void Awake()
         {
-            //Debug.Log("Why are we out of the if statement!!?!??");
-            if (!SaveLoad.SaveExists("PlayerData"))
+            if (!ES3.KeyExists("playerData"))
             {
                 Debug.Log("NewSave");
                 NewSave();
             }
             else
             {
-                Stats = GetStatDictionaryFromList(SaveLoad.Load<PlayerData>("PlayerData").StatList);
+                // Lookie here for solution
+                //
+                //Change Upgradable Stat to struct since classes cant be saved with es3
+                //
+                //
+                Stats = ES3.Load<Dictionary<EnumCollections.PlayerStats, float>>("playerData");
+                PlayerLevel = ES3.Load<int>("playerLevel");
             }
 
             playerLevelSettings = (PlayerLevelSettings)Resources.Load("Settings/PlayerLevelSettings");
@@ -41,40 +45,22 @@ namespace AsteroidAnnihilation
 
         private void NewSave()
         {
-            Debug.Log("New Save");
-            Stats = new Dictionary<string, UpgradableStat>();
-            string health = EnumCollections.PlayerStats.Health.ToString();
-            string movementSpeed = EnumCollections.PlayerStats.MovementSpeed.ToString();
-            string magnetRadius = EnumCollections.PlayerStats.MagnetRadius.ToString();
-            string critRate = EnumCollections.PlayerStats.CritRate.ToString();
-            string critMultiplier = EnumCollections.PlayerStats.CritMultiplier.ToString();
-            string powerupChance = EnumCollections.PlayerStats.PowerUpChance.ToString();
+            Stats = new Dictionary<EnumCollections.PlayerStats, float>();
 
             //Player Stats
-            playerData.PlayerLevel = 1;
-            Debug.Log(playerData.PlayerLevel = 1);
+            PlayerLevel = 1;
 
-            Stats.Add(health, new UpgradableStat(health, true, true, 100, 1));
-            Stats.Add(movementSpeed, new UpgradableStat(movementSpeed, true, true, 3.5f , 1f));
-            Stats.Add(magnetRadius, new UpgradableStat(magnetRadius, false, true, 3, 1));
-            Stats.Add(critRate, new UpgradableStat(critRate, false, true, 5.0f, 1));
-            Stats.Add(critMultiplier, new UpgradableStat(critMultiplier, false, true, 2.0f, 1));
-            Stats.Add("Units", new UpgradableStat("Units", false, false, 0));
-            Stats.Add("Experience", new UpgradableStat("Experience", false, false, 0));
-            Stats.Add(powerupChance, new UpgradableStat(powerupChance, false, false, 0));
+            Stats.Add(EnumCollections.PlayerStats.Health, 100);
+            Stats.Add(EnumCollections.PlayerStats.MovementSpeed, 4.0f);
+            Stats.Add(EnumCollections.PlayerStats.MagnetRadius, 3);
+            Stats.Add(EnumCollections.PlayerStats.CritRate, 5.0f);
+            Stats.Add(EnumCollections.PlayerStats.CritMultiplier, 2.0f);
+            Stats.Add(EnumCollections.PlayerStats.CurrentUnits, 0);
+            Stats.Add(EnumCollections.PlayerStats.CurrentExperience, 0);
+            Stats.Add(EnumCollections.PlayerStats.PowerUpChance, 0);
 
             //Save to file
             SavePlayerStats();
-        }
-
-        public void SaveStatDictionaryToList()
-        {
-            playerData.StatList = new List<UpgradableStat>();
-
-            foreach (UpgradableStat stat in Stats.Values)
-            {
-                playerData.StatList.Add(stat);
-            }
         }
 
         public Dictionary<string, UpgradableStat> GetStatDictionaryFromList(List<UpgradableStat> statList)
@@ -92,31 +78,42 @@ namespace AsteroidAnnihilation
         public void SavePlayerStats()
         {
             //Add dictionary data to serializable struct for saving
-            SaveStatDictionaryToList();
+            //SaveStatDictionaryToList();
 
             //Save file with data on computer
-            SaveLoad.Save(playerData, "PlayerData");
+            //SaveLoad.Save(playerData, "PlayerData");
+            ES3.Save("playerData", Stats);
+            ES3.Save("playerLevel", PlayerLevel);
+
         }
 
         public void AddToUnits(float value)
         {
-            Stats["Units"].Value += Mathf.Clamp(value, 0, Mathf.Infinity);
+            Stats[EnumCollections.PlayerStats.CurrentUnits] += Mathf.Clamp(value, 0, Mathf.Infinity);
+
             uIManager.UpdateUnits();
         }
 
         public void AddToExperience(float value)
         {
             //TODO::Fix overlevel exp
-            Stats["Experience"].Value += Mathf.Clamp(value, 0, Mathf.Infinity);
-            //Make UI Experience update
-            //uIManager.UpdateExperience();
+            Stats[EnumCollections.PlayerStats.CurrentExperience] += Mathf.Clamp(value, 0, Mathf.Infinity);
             CheckLevelUp(value);
             uIManager.UpdateExperience();
         }
 
+        private void CheckLevelUp(float restExp)
+        {
+            if (Stats[EnumCollections.PlayerStats.CurrentExperience] > GetTotalExpNeeded())
+            {
+                PlayerLevel++;
+                uIManager.UpdateLevel();
+            }
+        }
+
         public int GetPlayerLevel()
         {
-            return playerData.PlayerLevel;
+            return PlayerLevel;
         }
 
         /// <summary>
@@ -138,7 +135,9 @@ namespace AsteroidAnnihilation
         /// <returns></returns>
         public float GetExperienceLevelProgress()
         {
-            return Stats["Experience"].Value - playerLevelSettings.PlayerLevels[GetPlayerLevel()].TotalExp;
+            if(GetPlayerLevel() <= 1) { return Stats[EnumCollections.PlayerStats.CurrentExperience]; }
+            else { return Stats[EnumCollections.PlayerStats.CurrentExperience] - playerLevelSettings.PlayerLevels[GetPlayerLevel() - 1].TotalExp; }
+            
         }
 
         /// <summary>
@@ -147,7 +146,7 @@ namespace AsteroidAnnihilation
         /// <returns></returns>
         public float GetExperienceToLevel()
         {
-            return playerLevelSettings.PlayerLevels[GetPlayerLevel()].TotalExp - Stats["Experience"].Value;
+            return playerLevelSettings.PlayerLevels[GetPlayerLevel()].TotalExp - Stats[EnumCollections.PlayerStats.CurrentExperience];
         }
 
         /// <summary>
@@ -159,20 +158,11 @@ namespace AsteroidAnnihilation
             return playerLevelSettings.PlayerLevels[GetPlayerLevel()].TotalExp;
         }
 
-        private void CheckLevelUp(float restExp)
-        {
-            if(Stats["Experience"].Value > playerLevelSettings.PlayerLevels[playerData.PlayerLevel - 1].TotalExp)
-            {
-                playerData.PlayerLevel++;
-                uIManager.UpdateLevel();
-            }
-        }
-
         public bool TryPlayerBuy(float cost)
         {
-            if(Stats["Units"].GetBaseValue() >= cost)
+            if(Stats[EnumCollections.PlayerStats.CurrentUnits] >= cost)
             {
-                Stats["Units"].Value -= cost;
+                Stats[EnumCollections.PlayerStats.CurrentUnits] -= cost;
                 uIManager.UpdateUnits();
                 return true;
             }
@@ -181,13 +171,42 @@ namespace AsteroidAnnihilation
                 return false;
             }
         }
-    }
 
-    [System.Serializable]
-    public struct PlayerData
-    {
-        public int PlayerLevel;
-        public List<UpgradableStat> StatList;
-    }
+        public bool HasStat(EnumCollections.PlayerStats stat)
+        {
+            return Stats.ContainsKey(stat);
+        }
 
+        public float GetStatValue(EnumCollections.PlayerStats stat)
+        {
+            if (Stats.ContainsKey(stat)) { return Stats[stat]; }
+            else 
+            {
+                Debug.LogWarning("Stat " + stat.ToString() + " was not found");
+                return 0; 
+            }           
+        }
+
+        /// <summary>
+        /// Add value to stat
+        /// </summary>
+        /// <param name="stat"></param>
+        /// <param name="value"></param>
+        public void AddToStat(EnumCollections.PlayerStats stat, float value)
+        {
+            if (Stats.ContainsKey(stat)) { Stats[stat] += value; }
+            else { Debug.LogWarning("Stat not found"); }
+        }
+
+        /// <summary>
+        /// Add stat to stat dictionary
+        /// </summary>
+        /// <param name="stat"></param>
+        /// <param name="startValue"></param>
+        public void AddStat(EnumCollections.PlayerStats stat, float startValue)
+        {
+            if (!Stats.ContainsKey(stat)) { Stats.Add(stat, startValue); }
+            else { Debug.LogWarning("Stat not found"); }
+        }
+    }
 }

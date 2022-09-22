@@ -6,7 +6,7 @@ namespace AsteroidAnnihilation
     public class BaseEntity : MonoBehaviour
     {
         [Header("Stats")]
-        public Stat MaxHealth;
+        public float MaxHealth;
         public float currentHealth;
 
         [Header("Screen Shake")]
@@ -70,7 +70,6 @@ namespace AsteroidAnnihilation
             cameraManager = GameManager.Instance.RCameraManager;
             gameManager = GameManager.Instance;
             objectPooler = ObjectPooler.Instance;
-            powerupManager = PowerupManager.Instance;
             missionManager = MissionManager.Instance;
             playerStats = gameManager.RPlayer.RPlayerStats;
         }
@@ -79,7 +78,7 @@ namespace AsteroidAnnihilation
         {
             gameManager = GameManager.Instance;
             isDead = false;
-            currentHealth = MaxHealth.GetBaseValue();
+            currentHealth = MaxHealth;
             isInitialized = true;
             spriteRenderer.material = baseMaterial;
         }
@@ -127,7 +126,6 @@ namespace AsteroidAnnihilation
             SpawnSegments();
             SpawnParticleEffect();
             DropPickUps();
-            DropPowerUps();
             missionManager.AddObjectiveProgress(MissionObjectiveType.Elimination);
             cameraManager.StartCoroutine(cameraManager.Shake(ShakeDuration, ShakeMagnitude));
             gameObject.SetActive(false);
@@ -161,6 +159,8 @@ namespace AsteroidAnnihilation
             }
         }
 
+        //Old DropPowerUps() method, might use/recycle later
+        /*
         protected virtual void DropPowerUps()
         {
             string powerupName = powerupManager.RandomPowerup();
@@ -169,6 +169,7 @@ namespace AsteroidAnnihilation
                 objectPooler.SpawnFromPool(powerupName, transform.position, Quaternion.identity);
             }
         }
+        */
     }
 
 

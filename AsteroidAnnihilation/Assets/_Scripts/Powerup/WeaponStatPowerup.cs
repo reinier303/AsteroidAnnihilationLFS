@@ -6,6 +6,7 @@ namespace AsteroidAnnihilation
 {
     public class WeaponStatPowerup : Powerup
     {
+        /*
         public float Multiplier;
         public float Duration;
 
@@ -105,5 +106,6 @@ namespace AsteroidAnnihilation
         {
             playerAttack.GetCurrentWeapon().WeaponStatDictionary[statName].Multiplier = startValue;
         }
+        */
     }
 }

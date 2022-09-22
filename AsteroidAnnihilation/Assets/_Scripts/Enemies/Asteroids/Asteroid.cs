@@ -90,7 +90,7 @@ namespace AsteroidAnnihilation
 
             if (player != null)
             {
-                player.OnTakeDamage?.Invoke(ContactDamage.GetBaseValue(), false);
+                player.OnTakeDamage?.Invoke(ContactDamage, false);
                 //Die();
             }
         }

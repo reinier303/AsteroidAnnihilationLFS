@@ -14,8 +14,8 @@ namespace AsteroidAnnihilation
         protected override void Awake()
         {
             base.Awake();
-            MaxHealth = GetComponent<PlayerStats>().Stats["Health"];
-            currentHealth = MaxHealth.GetBaseValue();
+            MaxHealth = GetComponent<PlayerStats>().GetStatValue(EnumCollections.PlayerStats.Health);
+            currentHealth = MaxHealth;
         }
 
         protected override void Start()

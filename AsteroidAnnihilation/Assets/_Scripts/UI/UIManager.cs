@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using Sirenix.OdinInspector;
 
 namespace AsteroidAnnihilation
 {
@@ -12,27 +13,30 @@ namespace AsteroidAnnihilation
 
         public GameObject LoadingScreen;
 
-        [Header("UI Components")]
-        public TMP_Text LivesText;
-        public TMP_Text UnitsText;
-        [SerializeField] private TMP_Text playerLevelText;
-        public TMP_Text WaveEnterText;
-        public TMP_Text BossEnterText;
+        [FoldoutGroup("GUI Components")] public TMP_Text LivesText;
+        [FoldoutGroup("GUI Components")] public TMP_Text UnitsText;
+        [FoldoutGroup("GUI Components")][SerializeField] private TMP_Text playerLevelText;
+        [FoldoutGroup("GUI Components")] public TMP_Text WaveEnterText;
+        [FoldoutGroup("GUI Components")] public TMP_Text BossEnterText;
+        [FoldoutGroup("GUI Components")] public HealthBar PlayerHealthBar;
+        [FoldoutGroup("GUI Components")] public Slider ExperienceBar;
 
-        [Header("Missions")]
-        public TMP_Text MissionAreaText;
-        [SerializeField] private GameObject MissionComplete;
+        [FoldoutGroup("Missions")] public TMP_Text MissionAreaText;
+        [FoldoutGroup("Missions")][SerializeField] private GameObject MissionComplete;
+        //TODO:: Make this work as mission complete panel
+        [FoldoutGroup("Missions")] public PostGamePanel PostGamePanelScript;
+
+        [FoldoutGroup("Equipment")][SerializeField] private GameObject equipmentScreen;
+        [FoldoutGroup("Equipment")][SerializeField] private EquipmentTooltip equipmentTooltip;
+
 
         public TMP_Text AreaText;
 
         private CanvasGroup waveEnterCanvasGroup;
         private CanvasGroup bossEnterCanvasGroup;
 
-        public HealthBar PlayerHealthBar;
-
         //Powerup
         public Slider PowerUpTimer;
-        public Slider ExperienceBar;
         public TMP_Text PowerUpText;
         public Slider BossBar;
         private int currentID;
@@ -40,34 +44,27 @@ namespace AsteroidAnnihilation
         public GameObject PostGamePanel;
         public GameObject PauseMenu;
 
-        [Header("Objectives")]
-        public GameObject ObjectiveMenu;
-        public Transform ObjectivesPanel;
-        [SerializeField] private GameObject ObjectiveUI;
-        private List<TMP_Text> ObjectiveTexts;
-
-        public Image HitVignette;
+        [FoldoutGroup("Objectives")] public GameObject ObjectiveMenu;
+        [FoldoutGroup("Objectives")] public Transform ObjectivesPanel;
+        [FoldoutGroup("Objectives")][SerializeField] private GameObject ObjectiveUI;
+        [FoldoutGroup("Objectives")] private List<TMP_Text> ObjectiveTexts;
+     
         public Image BossIcon;
 
-        [Header("BounceTweenValues")]
-        public float BounceTime;
-        public float BounceSize;
-        public LeanTweenType BounceType;
+        [FoldoutGroup("BounceTweenValues")] public float BounceTime;
+        [FoldoutGroup("BounceTweenValues")] public float BounceSize;
+        [FoldoutGroup("BounceTweenValues")] public LeanTweenType BounceType;
 
-        [Header("On Hit Vignette Values")]
-        public float VignetteDuration;
-        public float AlphaTo;
-        public LeanTweenType EaseType;
+        [FoldoutGroup("On Hit Vignette")] public Image HitVignette;
+        [FoldoutGroup("On Hit Vignette")] public float VignetteDuration;
+        [FoldoutGroup("On Hit Vignette")] public float AlphaTo;
+        [FoldoutGroup("On Hit Vignette")] public LeanTweenType EaseType;
 
-        [Header("Wave Text Values")]
-        public float WaveTextDuration;
-        public float AlphaToWave;
-        public LeanTweenType EaseTypeWave;
+        [FoldoutGroup("Wave Text Values")] public float WaveTextDuration;
+        [FoldoutGroup("Wave Text Values")] public float AlphaToWave;
+        [FoldoutGroup("Wave Text Values")] public LeanTweenType EaseTypeWave;
 
-        [Header("Script References")]
-
-        public PostGamePanel PostGamePanelScript;
-
+        //Script References
         private GameManager gameManager;
         private MissionManager missionManager;
         private PlayerEntity RPlayerEntity;
@@ -122,7 +119,7 @@ namespace AsteroidAnnihilation
         public void UpdateHealth()
         {
             float currentHealth = RPlayerEntity.currentHealth;
-            float maxHealth = RPlayerEntity.MaxHealth.GetBaseValue();
+            float maxHealth = RPlayerEntity.MaxHealth;
 
             LivesText.text = currentHealth + "/" + maxHealth;
             PlayerHealthBar.UpdateHealth(currentHealth, maxHealth);
@@ -130,7 +127,7 @@ namespace AsteroidAnnihilation
 
         public void UpdateUnits()
         {
-            UnitsText.text = "Units:" + playerStats.Stats["Units"].GetBaseValue();
+            UnitsText.text = "Units:" + playerStats.GetStatValue(EnumCollections.PlayerStats.CurrentUnits);
             StopCoroutine(BounceSizeTween(UnitsText.gameObject));
             StartCoroutine(BounceSizeTween(UnitsText.gameObject));
         }
@@ -142,10 +139,18 @@ namespace AsteroidAnnihilation
 
         public void UpdateLevel()
         {
-            Debug.Log(playerStats.GetPlayerLevel());
             playerLevelText.text = "" + playerStats.GetPlayerLevel();
             ExperienceBar.maxValue = playerStats.GetExperienceDifference();
             UpdateExperience();
+        }
+
+        public void ShowEquipmentTooltip(EquipmentData equipment)
+        {
+            equipmentTooltip.ShowTooltip(equipment);
+        }
+        public void ShowEquipmentTooltip(WeaponData equipment)
+        {
+            equipmentTooltip.ShowTooltip(equipment);
         }
 
         #region Powerups

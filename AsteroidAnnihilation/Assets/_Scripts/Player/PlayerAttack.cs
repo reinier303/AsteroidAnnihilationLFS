@@ -10,15 +10,15 @@ namespace AsteroidAnnihilation
     {
         private InputManager inputManager;
         private ObjectPooler RObjectPooler;
+        EquipmentManager equipmentManager;
         private Player rPlayer;
         private CompletionRewardStats completionRewardStats;
 
         private bool canFire;
         public float fireCooldown;
 
-        public List<Weapon> Weapons;
-
-        [SerializeField] private Weapon currentWeapon;
+        private WeaponData currentWeaponData;
+        private Weapon currentWeapon;
 
         [SerializeField] private GameObject muzzleFlash;
 
@@ -35,48 +35,27 @@ namespace AsteroidAnnihilation
 
         private void Start()
         {
-            InitializeWeaponsFromResources();
-
-            Initialize();
-
+            equipmentManager = EquipmentManager.Instance;
+            currentWeaponData = equipmentManager.GenerateWeapon();
             RObjectPooler = ObjectPooler.Instance;
             inputManager = InputManager.Instance;
             completionRewardStats = CompletionRewardStats.Instance;
+
+            Initialize();
+
         }
 
         private void Initialize()
         {
             canFire = true;
-            currentWeapon = Weapons[0];
+            currentWeapon = equipmentManager.GetWeapon(currentWeaponData.WeaponType);
+            currentWeapon.Initialize(rPlayer.RPlayerStats, currentWeaponData.EquipmentData.EquipmentStats, currentWeaponData.EquipmentData.RarityStats);
+            UIManager.Instance.ShowEquipmentTooltip(currentWeaponData);
         }
 
-        public Weapon GetCurrentWeapon()
-        {
-            return currentWeapon;
-        }
 
-        public void SetCurrentWeapon(Weapon weapon)
-        {
-            currentWeapon = weapon;
-        }
-
-        public void SetCurrentWeaponStats(Dictionary<string, UpgradableStat> weaponStats)
-        {
-            currentWeapon.WeaponStatDictionary = weaponStats;
-        }
-
-        public void UnlockWeapon(string weaponName)
-        {
-            foreach(Weapon weapon in Weapons)
-            {
-                if(weapon.WeaponName == weaponName)
-                {
-                    weapon.Unlocked = true;
-                }
-            }
-            SortWeapons();
-        }
-
+        //Old ChangeWeapon() might use/recycle later 
+        /*
         public bool ChangeWeapon(int index)
         {
             if(index + 1 > Weapons.Count)
@@ -94,21 +73,14 @@ namespace AsteroidAnnihilation
                 return false;
             }
         }
+        */
 
-        private void InitializeWeaponsFromResources()
-        {
-            Object[] ResourceWeapons = Resources.LoadAll("Weapons", typeof(Weapon));
-            foreach (Weapon weapon in ResourceWeapons)
-            {
-                weapon.Initialize(rPlayer.RPlayerStats);
-                Weapons.Add(weapon);
-            }
 
-            SortWeapons();
-        }
-
+        //Old SortWeapons() might use/recycle later
+        /*
         public void SortWeapons()
         {
+
             //Sort by ID for weapon swapping
             Weapons = Weapons.OrderBy(weapon => weapon.WeaponIndex).ToList();
 
@@ -126,8 +98,9 @@ namespace AsteroidAnnihilation
             {
                 Debug.Log(weapon.WeaponName + Weapons.IndexOf(weapon));
             }
-            */
+            
         }
+        */    
 
         // Update is called once per frame
         private void Update()
@@ -153,6 +126,7 @@ namespace AsteroidAnnihilation
 
                 if(mouseButton == 0)
                 {
+                    Debug.Log(currentWeapon);
                     currentWeapon.Fire(RObjectPooler, transform, rPlayer.RPlayerMovement.MovementInput * playerVelocityMultiplier);
                     canFire = false;
                     StartCoroutine(FireCooldownTimer(mouseButton));
@@ -165,7 +139,7 @@ namespace AsteroidAnnihilation
         {
             if(mouseButton == 0)
             {
-                yield return new WaitForSeconds(1 / currentWeapon.WeaponStatDictionary["FireRate"].GetValue(completionRewardStats));
+                yield return new WaitForSeconds(1 / currentWeapon.GetEquipmentStat(EnumCollections.WeaponStats.FireRate));
             }
             canFire = true;
         }

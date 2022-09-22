@@ -7,7 +7,8 @@ namespace AsteroidAnnihilation
     [CreateAssetMenu(menuName = "Shop/Player Unlock", order = 999)]
     public class ShopItemSO_PlayerUnlock : ShopItemSO
     {
-        public string UnlockName;
+        public EnumCollections.PlayerStats UnlockedStat;
+        public float StartValue;
 
         private PlayerStats playerStats;
 
@@ -23,7 +24,7 @@ namespace AsteroidAnnihilation
             {
                 GetPlayerStats();
             }
-            playerStats.Stats[UnlockName].Unlocked = true;
+            playerStats.AddStat(UnlockedStat, StartValue);
         }
     }
 

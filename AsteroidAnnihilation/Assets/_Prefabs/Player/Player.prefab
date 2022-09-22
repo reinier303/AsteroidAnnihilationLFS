@@ -15407,6 +15407,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cac871632dc4195498d1576ffe9e3991, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  InputEnabled: 0
   PauseButton: 27
   PauseButton2: 112
   BoostButton: 32
@@ -15424,6 +15425,7 @@ MonoBehaviour:
   Weapon3: 51
   Weapon4: 52
   Weapon5: 53
+  Attacking: 0
 --- !u!114 &8673757631920845123
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15440,8 +15442,6 @@ MonoBehaviour:
   RPlayerMovement: {fileID: 8673757631920845183}
   RPlayerEntity: {fileID: 8673757631920845182}
   RPlayerStats: {fileID: 8673757631920845127}
-  Data:
-    StatList: []
 --- !u!114 &8673757631920845122
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15455,8 +15455,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fireCooldown: 1
-  Weapons: []
-  currentWeapon: {fileID: 11400000, guid: 84fd4c5273b4f4d418e8f0c9fa3be5ca, type: 2}
   muzzleFlash: {fileID: 7408418787555770853}
   playerVelocityMultiplier: 0
 --- !u!114 &8673757631920845183
@@ -15471,8 +15469,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a18fb3f00eedfb40a10ceba3f7d7041, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AccelerationMultiplier: 1.35
-  DecelerationMultiplier: 1.5
+  AccelerationMultiplier: 1.55
+  DecelerationMultiplier: 1.4
   BoostSpeed: 1.25
   BaseSpeed: 3
   Fuel: 0
@@ -15482,7 +15480,8 @@ MonoBehaviour:
   BackgroundCollider: {fileID: 0}
   circle: {fileID: 0}
   offsetMultiplier: 1.315
-  MovementInput: {x: 0, y: 0, z: 0}
+  MovementInput: {x: 0, y: 0}
+  lastInputs: []
 --- !u!114 &8673757631920845182
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15495,11 +15494,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 652c9c29f4c3b3e449ab8342462453f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxHealth:
-    StatName: MaxHealth
-    Value: 50
-    Multiplier: 1
-    IsWeapon: 0
+  MaxHealth: 0
   currentHealth: 50
   ShakeMagnitude: 10
   ShakeDuration: 0.5
@@ -15535,8 +15530,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2196ddafcf9fa7e47ba712564a3535e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerData:
-    StatList: []
+  playerLevelSettings: {fileID: 0}
 --- !u!114 &8673757631920845126
 MonoBehaviour:
   m_ObjectHideFlags: 0

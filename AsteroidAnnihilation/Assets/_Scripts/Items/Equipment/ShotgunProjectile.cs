@@ -13,11 +13,12 @@ namespace AsteroidAnnihilation
             baseScale = transform.localScale;
         }
 
-        public override void Initialize()
+        public override void Initialize(float size)
         {
+            base.Initialize(size);
             float sizeMultiplier = Random.Range(0.6f, 1.15f);
 
-            transform.localScale = baseScale * sizeMultiplier;
+            transform.localScale = baseScale * sizeMultiplier * size;
             StartCoroutine(ShrinkOverTime(transform.localScale.x));
         }
 

@@ -7,7 +7,7 @@ namespace AsteroidAnnihilation
     [CreateAssetMenu(menuName = "Shop/Upgrade Player Stat", order = 999)]
     public class ShopItemSO_PlayerStat : ShopItemSO
     {
-        public string StatName;
+        public EnumCollections.PlayerStats Stat;
 
         public float UpgradeAmount;
 
@@ -25,7 +25,7 @@ namespace AsteroidAnnihilation
             {
                 GetPlayerStats();
             }
-            playerStats.Stats[StatName].Value += UpgradeAmount;
+            playerStats.AddToStat(Stat, UpgradeAmount);
         }
     }
 }

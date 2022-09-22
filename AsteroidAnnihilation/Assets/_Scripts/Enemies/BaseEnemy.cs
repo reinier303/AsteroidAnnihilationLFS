@@ -10,10 +10,10 @@ namespace AsteroidAnnihilation
         public Transform Player;
 
         //Stats
-        public Stat ContactDamage;
-        public Stat RotationSpeed;
-        public Stat DroppedUnits;
-        public Stat ExperienceGained;
+        public float ContactDamage;
+        public float RotationSpeed;
+        public float DroppedUnits;
+        public float ExperienceGained;
 
         protected override void Start()
         {
@@ -27,7 +27,7 @@ namespace AsteroidAnnihilation
 
             if (player != null)
             {
-                player.OnTakeDamage?.Invoke(ContactDamage.GetBaseValue(), false);
+                player.OnTakeDamage?.Invoke(ContactDamage, false);
             }
         }
 
@@ -43,7 +43,7 @@ namespace AsteroidAnnihilation
             Vector3 difference = Player.position - transform.position;
             float rotationZ = Mathf.Atan2(difference.y, difference.x) * Mathf.Rad2Deg;
             Quaternion desiredRotation = Quaternion.Euler(0.0f, 0.0f, rotationZ - 90f);
-            transform.rotation = Quaternion.Slerp(transform.rotation, desiredRotation, RotationSpeed.GetBaseValue() * Time.deltaTime);
+            transform.rotation = Quaternion.Slerp(transform.rotation, desiredRotation, RotationSpeed * Time.deltaTime);
             if (!gameManager.PlayerAlive)
             {
                 transform.rotation = Quaternion.Euler(0.0f, 0.0f, rotationZ + 90f);
@@ -62,8 +62,8 @@ namespace AsteroidAnnihilation
 
         protected override void Die()
         {
-            DropUnits(DroppedUnits.GetBaseValue());
-            gameManager.RPlayer.RPlayerStats.AddToExperience(ExperienceGained.Value);
+            DropUnits(DroppedUnits);
+            gameManager.RPlayer.RPlayerStats.AddToExperience(ExperienceGained);
             base.Die();
         }
 

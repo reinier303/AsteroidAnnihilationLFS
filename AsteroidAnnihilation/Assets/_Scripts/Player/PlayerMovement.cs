@@ -34,7 +34,7 @@ namespace AsteroidAnnihilation
         private PlayerStats playerStats;
         private InputManager inputManager;
 
-        public ParticleSystem EngineFire;
+        public List<ParticleSystem> Engines;
 
         public PolygonCollider2D BackgroundCollider;
         private Vector2 backGroundSize;
@@ -64,7 +64,11 @@ namespace AsteroidAnnihilation
             GetMovementVariables();
             GetBoostVariables();
             //GetCameraDistance();
-
+            Engines = new List<ParticleSystem>();
+            foreach (ParticleSystem ps in player.Equipment.GetComponentsInChildren<ParticleSystem>())
+            {
+                Engines.Add(ps);
+            }
             screenRatio = (float)Screen.height / (float)Screen.width;
         }
 
@@ -85,21 +89,21 @@ namespace AsteroidAnnihilation
 
         private void GetMovementVariables()
         {
-            if (playerStats.Stats.ContainsKey("MovementSpeed"))
+            if (playerStats.HasStat(EnumCollections.PlayerStats.MovementSpeed))
             {
-                currentSpeed = playerStats.Stats["MovementSpeed"].GetBaseValue();
-                Acceleration = playerStats.Stats["MovementSpeed"].GetBaseValue() * AccelerationMultiplier;
-                Deceleration = playerStats.Stats["MovementSpeed"].GetBaseValue() * DecelerationMultiplier;
+                currentSpeed = playerStats.GetStatValue(EnumCollections.PlayerStats.MovementSpeed);
+                Acceleration = playerStats.GetStatValue(EnumCollections.PlayerStats.MovementSpeed) * AccelerationMultiplier;
+                Deceleration = playerStats.GetStatValue(EnumCollections.PlayerStats.MovementSpeed) * DecelerationMultiplier;
             }
         }
 
         private void GetBoostVariables()
         {
-            if (playerStats.Stats.ContainsKey("BoostSpeed"))
+            if (playerStats.HasStat(EnumCollections.PlayerStats.BoostSpeed))
             {
-                BoostSpeed = playerStats.Stats["BoostSpeed"].GetBaseValue();
-                BoostRegen = playerStats.Stats["BoostRegen"].GetBaseValue();
-                Fuel = playerStats.Stats["Fuel"].GetBaseValue();
+                BoostSpeed = playerStats.GetStatValue(EnumCollections.PlayerStats.BoostSpeed);
+                BoostRegen = playerStats.GetStatValue(EnumCollections.PlayerStats.BoostRegen);
+                Fuel = playerStats.GetStatValue(EnumCollections.PlayerStats.BoostFuel);
             }
         }
 
@@ -115,22 +119,47 @@ namespace AsteroidAnnihilation
             {
                 RotateToMouse();
             } else if (!inputManager.MovementInputZero()) { RotateToMoveDirection();}
-            //fix drift
-            if (driftCheck) { MovementInput = Vector3.zero; }
-            Move();
-
             
+            CheckEnginePS(inputManager.MovementInputZero());
+
+            //fix drift
+            if (driftCheck) 
+            { 
+                MovementInput = Vector2.zero;
+            }
+            Move();         
         }
 
         private void Move()
         {
             float axisX = inputManager.GetAxisSmoothHorizontal(currentSpeed, Acceleration, Deceleration, BoostSpeed);
             float axisY = inputManager.GetAxisSmoothVertical(currentSpeed, Acceleration, Deceleration, BoostSpeed);
+            
+            Vector2 input = new Vector2(axisX, axisY);
 
-            MovementInput = new Vector3(axisX, axisY, 0) * currentSpeed * Time.deltaTime;
+            //Debug.Log("Regular: " + new Vector2(axisX,axisY) + "Normalized: " + new Vector2(axisX, axisY).normalized);
+            MovementInput = input * currentSpeed * Time.deltaTime;
 
+            //MovementInput = new Vector2(axisX, axisY) * currentSpeed * Time.deltaTime;
             transform.position += (Vector3)MovementInput;
 
+        }
+        private void CheckEnginePS(bool input)
+        {
+            if(input)
+            {
+                foreach (ParticleSystem ps in Engines)
+                {
+                    if (!ps.isStopped) { ps.Stop(); }
+                }
+            }
+            else
+            {
+                foreach (ParticleSystem ps in Engines)
+                {
+                    if (!ps.isEmitting) { ps.Play(); }
+                }
+            }
         }
         
         private void RotateToMouse()
@@ -161,7 +190,7 @@ namespace AsteroidAnnihilation
                     lastInputs.RemoveAt(0);
                     lastInputs.Add(MovementInput);
                 }*/
-                target = transform.position + (Vector3)MovementInput + (Vector3)CameraOffset.Instance.Offset * offsetMultiplier; 
+                target = transform.position + ((Vector3)MovementInput * 0.5f) + (Vector3)CameraOffset.Instance.Offset * offsetMultiplier; 
             //}
 
             var dir = target - transform.position;

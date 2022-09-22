@@ -6,8 +6,9 @@ using UnityEngine.EventSystems;
 
 namespace AsteroidAnnihilation
 {
-    public class StatUIScript : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+    public class StatUIScript : MonoBehaviour/*, IPointerEnterHandler, IPointerExitHandler*/
     {
+        /*
         private UpgradePanel upgradePanel;
         private PlayerStats playerStats;
 
@@ -108,5 +109,6 @@ namespace AsteroidAnnihilation
         {
             tooltip.SetActive(false);
         }
+        */
     }
 }

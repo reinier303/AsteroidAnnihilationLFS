@@ -6,12 +6,9 @@ namespace AsteroidAnnihilation
 {
     public class MineProjectile : PlayerProjectile
     {
-        public float Size = 1;
-
-        public override void Initialize()
+        public override void Initialize(float size)
         {
-            float value = Size;
-            transform.localScale = new Vector2(value, value);
+            base.Initialize(size);
         }
 
         protected override void Move()

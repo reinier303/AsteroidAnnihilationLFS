@@ -13,6 +13,7 @@ namespace AsteroidAnnihilation
 
         public float Damage, ProjectileSpeed, LifeTime = 0;
         public bool IsCrit;
+        public float Size = 1;
 
         public Vector2 PlayerVelocity;
 
@@ -22,9 +23,10 @@ namespace AsteroidAnnihilation
             gameManager = GameManager.Instance;
         }
 
-        public virtual void Initialize()
+        public virtual void Initialize(float size)
         {
-            //This method is meant to be overridden...
+            Size = size;
+            transform.localScale = new Vector2(transform.localScale.x, transform.localScale.y) * Size;
         }
 
         protected virtual void Update()
@@ -60,7 +62,7 @@ namespace AsteroidAnnihilation
         public void SetCrit()
         {
             IsCrit = true;
-            Damage *= gameManager.RPlayer.RPlayerStats.Stats["CritMultiplier"].GetBaseValue();
+            Damage *= gameManager.RPlayer.RPlayerStats.GetStatValue(EnumCollections.PlayerStats.CritMultiplier);
         }
     }
 }

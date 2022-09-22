@@ -59,21 +59,27 @@ namespace AsteroidAnnihilation
             Size,
             ProjectileCount,
             LaunchVelocity,
-            ProjectileSpread
+            ProjectileSpread,
+            EnergyPerShot
         }
 
         public enum PlayerStats
         {
+            CurrentUnits,
+            CurrentExperience,
             Health,
             UnitMultiplier,
             AsteroidMultiplier,
             MovementSpeed,
             BoostSpeed,
             BoostFuel,
+            BoostRegen,
             MagnetRadius,
             CritRate,
             CritMultiplier,
-            PowerUpChance
+            PowerUpChance,
+            EnergyCapacity,
+            EnergyRegen
         }
 
         public enum Unlocks
@@ -81,6 +87,35 @@ namespace AsteroidAnnihilation
             UnlockBoost,
             UnlockPlasmaShotgun,
             UnlockEnergyMines
+        }
+
+        public enum PlayerProjectiles
+        {
+            PlasmaBullet,
+            EnergyMine,
+            ShotgunBullet
+        }
+
+        public enum Rarities
+        {
+            Common,
+            Augmented,
+            Rare,
+            Epic,
+            Legendary,
+            Mythic,
+            Godly,
+            Chaos
+        }
+
+        public enum ItemType
+        {
+            Material,
+            Hull,
+            EnergyCore,
+            Engine,
+            Weapon,
+            Consumable
         }
     }
 }

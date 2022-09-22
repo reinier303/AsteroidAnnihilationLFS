@@ -12,12 +12,10 @@ namespace AsteroidAnnihilation
         public PlayerMovement RPlayerMovement;
         public PlayerEntity RPlayerEntity;
         public PlayerStats RPlayerStats;
+        public GameObject Equipment;
 
         //Script references
         private UIManager RUIManager;
-
-        //Saving and loading
-        public PlayerData Data;
 
         private void Awake()
         {

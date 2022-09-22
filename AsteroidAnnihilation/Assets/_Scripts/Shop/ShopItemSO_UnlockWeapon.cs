@@ -7,6 +7,7 @@ namespace AsteroidAnnihilation
     [CreateAssetMenu(menuName = "Shop/Unlock Weapon", order = 999)]
     public class ShopItemSO_UnlockWeapon : ShopItemSO
     {
+        /*
         public string WeaponName;
 
         private PlayerAttack playerAttack;
@@ -25,6 +26,7 @@ namespace AsteroidAnnihilation
             }
             playerAttack.UnlockWeapon(WeaponName);
         }
+        */
     }
 
 }

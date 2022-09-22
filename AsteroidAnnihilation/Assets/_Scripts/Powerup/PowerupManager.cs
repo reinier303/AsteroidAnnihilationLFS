@@ -7,6 +7,7 @@ namespace AsteroidAnnihilation
 {
     public class PowerupManager : SerializedMonoBehaviour
     {
+        /*
         public static PowerupManager Instance;
 
         public List<WeightedPowerup> Powerups;
@@ -54,7 +55,7 @@ namespace AsteroidAnnihilation
             StopCoroutine(currentPowerup);
             currentPowerup = StartCoroutine(weaponStatPowerup.ApplyPowerup());
         }
-        */
+        
 
         public void AddWeaponPowerup(WeaponStatPowerup powerUp)
         {
@@ -81,6 +82,7 @@ namespace AsteroidAnnihilation
                 powerUp.ReturnToBaseValue();
             }
         }
+        */
     }
 
     [System.Serializable]
@@ -89,5 +91,6 @@ namespace AsteroidAnnihilation
         public string Name;
         public int Weight;
     }
+
 }
 
