@@ -9,10 +9,16 @@ namespace AsteroidAnnihilation
     public class GeneralItemSettings : SerializedScriptableObject
     {
         public Dictionary<EnumCollections.Rarities, Vector2Int> RarityModAmountRange;
+        public Dictionary<EnumCollections.Rarities, Material> RarityMaterials;
 
         public int GetModAmount(EnumCollections.Rarities rarity)
         {
             return Random.Range(RarityModAmountRange[rarity].x, RarityModAmountRange[rarity].y);
+        }
+
+        public Material GetRarityMaterial(EnumCollections.Rarities rarity)
+        {
+            return RarityMaterials[rarity];
         }
     }
 }

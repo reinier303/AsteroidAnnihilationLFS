@@ -10,6 +10,8 @@ namespace AsteroidAnnihilation
 
         private GameManager gameManager;
         private PlayerAttack playerAttack;
+        private UIManager uiManager;
+
         [Header("General")]
         public bool InputEnabled;
         public KeyCode PauseButton;
@@ -33,6 +35,8 @@ namespace AsteroidAnnihilation
         public KeyCode Weapon4;
         public KeyCode Weapon5;
 
+        public KeyCode Inventory;
+
         private float axisX;
         private float axisY;
 
@@ -48,6 +52,7 @@ namespace AsteroidAnnihilation
         private void Start()
         {
             gameManager = GameManager.Instance;
+            uiManager = UIManager.Instance;
             playerAttack = gameManager.RPlayer.RPlayerAttack;
             boost = 1;
         }
@@ -77,6 +82,10 @@ namespace AsteroidAnnihilation
                 return;
             }
             //Pause dependent input
+            if (Input.GetKeyDown(Inventory))
+            {
+                uiManager.OpenInventory();
+            }
             WeaponInput();
         }
 

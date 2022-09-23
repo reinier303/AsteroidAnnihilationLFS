@@ -23,7 +23,6 @@ namespace AsteroidAnnihilation
                 {
                     finalRarity = rarity;
                 }
-                Debug.Log(finalRarity);
             }
             return finalRarity;
         }

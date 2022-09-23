@@ -18,8 +18,8 @@ TagManager:
   - PostProcessing
   - PlayerProjectiles
   - Player
-  - 
-  - 
+  - Pickups
+  - PlayerCollider
   - 
   - 
   - 

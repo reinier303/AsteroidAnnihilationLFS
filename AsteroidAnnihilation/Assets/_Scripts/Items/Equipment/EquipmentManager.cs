@@ -9,11 +9,13 @@ namespace AsteroidAnnihilation
     {
         public static EquipmentManager Instance { get; private set; }
 
+        private PlayerAttack playerAttack;
+
         private Dictionary<EnumCollections.Weapons, Weapon> weaponTypesT1;
 
         private List<WeaponData> equipedWeapons;
 
-        private GeneralItemSettings generalItemSettings;
+        public GeneralItemSettings generalItemSettings;
 
         private void Awake()
         {
@@ -22,6 +24,7 @@ namespace AsteroidAnnihilation
             weaponTypesT1 = new Dictionary<EnumCollections.Weapons, Weapon>();
 
             generalItemSettings = (GeneralItemSettings)Resources.Load("Settings/GeneralItemSettings");
+            equipedWeapons = new List<WeaponData>();
 
             Object[] weapons = Resources.LoadAll("Weapons/WeaponsT1", typeof(Weapon));
             foreach (Weapon weapon in weapons)
@@ -29,6 +32,11 @@ namespace AsteroidAnnihilation
                 if(weapon.EquipmentStatRanges == null) {Debug.LogWarning("WeaponStatRanges of " + weapon.name + " are not filled in"); return; }
                 weaponTypesT1.Add(weapon.WeaponType, weapon);
             }
+        }
+
+        private void Start()
+        {
+            playerAttack = Player.Instance.RPlayerAttack;
         }
 
         public WeaponData GenerateWeapon(List<EnumCollections.Weapons> forcedWeaponTypes = null)
@@ -81,6 +89,13 @@ namespace AsteroidAnnihilation
         public List<WeaponData> GetAllEquipedWeapons()
         {
             return equipedWeapons;
+        }
+
+        public void ChangeWeapon(int index, WeaponData weapon)
+        {
+            if (equipedWeapons.Count != 0 && equipedWeapons.Count >= index) { equipedWeapons[index] = weapon; }
+            else { equipedWeapons.Add(weapon); }
+            playerAttack.WeaponChanged();
         }
     }
 

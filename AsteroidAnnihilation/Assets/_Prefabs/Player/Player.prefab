@@ -1,5 +1,83 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &551528400
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 551528401}
+  - component: {fileID: 551528402}
+  m_Layer: 14
+  m_Name: Collider
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &551528401
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 551528400}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8673757631920845176}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!60 &551528402
+PolygonCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 551528400}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: 0.43811452, y: 2.2291303}
+      - {x: 0.30831587, y: 2.7613335}
+      - {x: 0, y: 2.9500136}
+      - {x: -0.27214646, y: 2.760471}
+      - {x: -0.41852137, y: 2.2214603}
+      - {x: -0.69462895, y: 1.604147}
+      - {x: -1.9385415, y: 0.52789074}
+      - {x: -1.8880765, y: 0.05576843}
+      - {x: -2.1763577, y: -0.17836979}
+      - {x: -2.1203427, y: -1.9239101}
+      - {x: -1.4576423, y: -2.110622}
+      - {x: -1.3838588, y: -1.4288399}
+      - {x: -0.790384, y: -0.6823927}
+      - {x: 0.66375995, y: -0.70771754}
+      - {x: 1.2665454, y: -1.2530547}
+      - {x: 1.5016842, y: -2.0945635}
+      - {x: 2.116151, y: -1.9328754}
+      - {x: 2.2235973, y: -0.42342198}
+      - {x: 1.9653563, y: 0.05927846}
+      - {x: 1.9910537, y: 0.59566766}
+      - {x: 0.7484577, y: 1.4992855}
 --- !u!1 &1316378329
 GameObject:
   m_ObjectHideFlags: 0
@@ -15365,9 +15443,9 @@ GameObject:
   - component: {fileID: 8673757631920845182}
   - component: {fileID: 8673757631920845127}
   - component: {fileID: 8673757631920845126}
-  - component: {fileID: 8673757631920845181}
   - component: {fileID: 8673757631920845180}
   - component: {fileID: 8673757631920845125}
+  - component: {fileID: 692017895}
   m_Layer: 12
   m_Name: Player
   m_TagString: Player
@@ -15392,6 +15470,7 @@ Transform:
   - {fileID: 3310822021241424360}
   - {fileID: 8673757632089654825}
   - {fileID: 8673757631764637666}
+  - {fileID: 551528401}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -15425,6 +15504,7 @@ MonoBehaviour:
   Weapon3: 51
   Weapon4: 52
   Weapon5: 53
+  Inventory: 105
   Attacking: 0
 --- !u!114 &8673757631920845123
 MonoBehaviour:
@@ -15442,6 +15522,7 @@ MonoBehaviour:
   RPlayerMovement: {fileID: 8673757631920845183}
   RPlayerEntity: {fileID: 8673757631920845182}
   RPlayerStats: {fileID: 8673757631920845127}
+  Equipment: {fileID: 8673757631764637667}
 --- !u!114 &8673757631920845122
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15469,14 +15550,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a18fb3f00eedfb40a10ceba3f7d7041, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AccelerationMultiplier: 1.55
-  DecelerationMultiplier: 1.4
+  AccelerationMultiplier: 1.85
+  DecelerationMultiplier: 1.35
   BoostSpeed: 1.25
   BaseSpeed: 3
   Fuel: 0
   BoostRegen: 0
   confiner: {fileID: 0}
-  EngineFire: {fileID: 3310822021256677660}
+  Engines: []
   BackgroundCollider: {fileID: 0}
   circle: {fileID: 0}
   offsetMultiplier: 1.315
@@ -15543,32 +15624,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 04839e82133064a4c96a0a33e3d9e126, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!61 &8673757631920845181
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8673757631920845178}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.4}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 20.48, y: 20.48}
-    newSize: {x: 2.15, y: 2.98}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 0.3, y: 0.3}
-  m_EdgeRadius: 0
 --- !u!50 &8673757631920845180
 Rigidbody2D:
   serializedVersion: 4
@@ -15602,6 +15657,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d01d86705f374c84ebacb4333b65ca85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!58 &692017895
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8673757631920845178}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.5
 --- !u!1 &8673757632089654826
 GameObject:
   m_ObjectHideFlags: 0
@@ -15968,12 +16039,6 @@ MonoBehaviour:
   m_ShadowLayerMask: 1
   m_LightCookieSize: {x: 1, y: 1}
   m_LightCookieOffset: {x: 0, y: 0}
---- !u!198 &3310822021256677660 stripped
-ParticleSystem:
-  m_CorrespondingSourceObject: {fileID: 6173598954521256200, guid: 5074791293a74b844b9de7ecb8fb7c6c,
-    type: 3}
-  m_PrefabInstance: {fileID: 8673757630578944020}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &8673757630820571357
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -16014,12 +16079,12 @@ PrefabInstance:
     - target: {fileID: 6173598954502955516, guid: 5074791293a74b844b9de7ecb8fb7c6c,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 2.5
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 6173598954502955516, guid: 5074791293a74b844b9de7ecb8fb7c6c,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 2.5
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 6173598954502955516, guid: 5074791293a74b844b9de7ecb8fb7c6c,
         type: 3}
@@ -16361,12 +16426,12 @@ PrefabInstance:
     - target: {fileID: 6173598954502955516, guid: 5074791293a74b844b9de7ecb8fb7c6c,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 2.5
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 6173598954502955516, guid: 5074791293a74b844b9de7ecb8fb7c6c,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 2.5
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 6173598954502955516, guid: 5074791293a74b844b9de7ecb8fb7c6c,
         type: 3}
@@ -16582,12 +16647,12 @@ PrefabInstance:
     - target: {fileID: 6173598954502955516, guid: 5074791293a74b844b9de7ecb8fb7c6c,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 2.5
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 6173598954502955516, guid: 5074791293a74b844b9de7ecb8fb7c6c,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 2.5
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 6173598954502955516, guid: 5074791293a74b844b9de7ecb8fb7c6c,
         type: 3}
@@ -16803,12 +16868,12 @@ PrefabInstance:
     - target: {fileID: 6173598954502955516, guid: 5074791293a74b844b9de7ecb8fb7c6c,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 2.5
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 6173598954502955516, guid: 5074791293a74b844b9de7ecb8fb7c6c,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 2.5
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 6173598954502955516, guid: 5074791293a74b844b9de7ecb8fb7c6c,
         type: 3}

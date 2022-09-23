@@ -40,7 +40,7 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 12
-      Data: 3
+      Data: 5
     - Name: 
       Entry: 7
       Data: 
@@ -61,7 +61,7 @@ MonoBehaviour:
       Data: 1
     - Name: $v
       Entry: 4
-      Data: 75
+      Data: 90
     - Name: 
       Entry: 8
       Data: 
@@ -73,7 +73,31 @@ MonoBehaviour:
       Data: 2
     - Name: $v
       Entry: 4
-      Data: 50
+      Data: 80
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 3
+      Data: 3
+    - Name: $v
+      Entry: 4
+      Data: 70
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 3
+      Data: 4
+    - Name: $v
+      Entry: 4
+      Data: 60
     - Name: 
       Entry: 8
       Data: 
@@ -475,7 +499,11 @@ MonoBehaviour:
   BaseEquipmentName: Plasma Gun
   Tier: 1
   Icons:
-  - {fileID: 21300000, guid: 3dc57d6d132ca7348b1218210400cb67, type: 3}
+  - {fileID: 21300000, guid: 7302ba4e8b8cd95489ace5fc913acc18, type: 3}
+  - {fileID: 21300000, guid: 608d00f938e2d0f409ebab6c39df3f90, type: 3}
+  - {fileID: 21300000, guid: 8bcd0a39b4c2bb14c8de59ac41a2d7fe, type: 3}
+  - {fileID: 21300000, guid: 9a35b741f0c816d49ace01b157f27fad, type: 3}
+  - {fileID: 21300000, guid: 8bcd0a39b4c2bb14c8de59ac41a2d7fe, type: 3}
   Type: 4
   WeaponType: 1
   ProjectileType: 0

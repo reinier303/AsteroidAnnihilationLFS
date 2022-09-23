@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 
 namespace AsteroidAnnihilation
 {
@@ -39,6 +40,12 @@ namespace AsteroidAnnihilation
 
         private void SetStats(EquipmentData equipmentData)
         {
+            //TODO::Make this use ObjectPooler
+            for(int i = 0; i < transform.childCount; i++)
+            {
+                Transform child = transform.GetChild(i);
+                if (child.GetComponent<LayoutElement>() == null) { Destroy(child.gameObject); }
+            }
             Dictionary<EnumCollections.WeaponStats, float> stats = equipmentData.EquipmentStats;
             foreach (EnumCollections.WeaponStats stat in stats.Keys)
             {

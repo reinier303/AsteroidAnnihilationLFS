@@ -26,9 +26,9 @@ namespace AsteroidAnnihilation
         //TODO:: Make this work as mission complete panel
         [FoldoutGroup("Missions")] public PostGamePanel PostGamePanelScript;
 
-        [FoldoutGroup("Equipment")][SerializeField] private GameObject equipmentScreen;
-        [FoldoutGroup("Equipment")][SerializeField] private EquipmentTooltip equipmentTooltip;
-
+        [FoldoutGroup("Inventory")][SerializeField] private GameObject inventoryScreen;
+        [FoldoutGroup("Inventory")][SerializeField] private EquipmentTooltip inventoryTooltip;
+        [FoldoutGroup("Inventory")][SerializeField] private Transform inventoryPanel;
 
         public TMP_Text AreaText;
 
@@ -67,6 +67,7 @@ namespace AsteroidAnnihilation
         //Script References
         private GameManager gameManager;
         private MissionManager missionManager;
+        private InventoryManager inventoryManager;
         private PlayerEntity RPlayerEntity;
         private PlayerStats playerStats;
         private Player RPlayer;
@@ -86,6 +87,7 @@ namespace AsteroidAnnihilation
             Instance = this;
             gameManager = GameManager.Instance;
             missionManager = MissionManager.Instance;
+            inventoryManager = InventoryManager.Instance;
             RPlayer = gameManager.RPlayer;
             RPlayerEntity = RPlayer.RPlayerEntity;
             playerStats = RPlayer.RPlayerStats;
@@ -144,13 +146,31 @@ namespace AsteroidAnnihilation
             UpdateExperience();
         }
 
-        public void ShowEquipmentTooltip(EquipmentData equipment)
+        public void OpenInventory()
         {
-            equipmentTooltip.ShowTooltip(equipment);
+            inventoryScreen.SetActive(!inventoryScreen.activeSelf);
+            if(inventoryScreen.activeSelf) { inventoryManager.OpenInventory(inventoryPanel); }
         }
-        public void ShowEquipmentTooltip(WeaponData equipment)
+
+        public void ShowItemTooltip(ItemData item)
         {
-            equipmentTooltip.ShowTooltip(equipment);
+            inventoryTooltip.gameObject.SetActive(true);
+            inventoryTooltip.ShowTooltip(item);
+        }
+        public void ShowItemTooltip(EquipmentData equipment)
+        {
+            inventoryTooltip.gameObject.SetActive(true);
+            inventoryTooltip.ShowTooltip(equipment);
+        }
+        public void ShowItemTooltip(WeaponData equipment)
+        {
+            inventoryTooltip.gameObject.SetActive(true);
+            inventoryTooltip.ShowTooltip(equipment);
+        }
+
+        public void HideItemTooltip()
+        {
+            inventoryTooltip.gameObject.SetActive(false);
         }
 
         #region Powerups

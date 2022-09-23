@@ -17,8 +17,8 @@ namespace AsteroidAnnihilation
         private bool canFire;
         public float fireCooldown;
 
-        private WeaponData currentWeaponData;
-        private Weapon currentWeapon;
+        private List<WeaponData> currentWeaponDatas;
+        private List<Weapon> currentWeapons;
 
         [SerializeField] private GameObject muzzleFlash;
 
@@ -31,12 +31,13 @@ namespace AsteroidAnnihilation
             rPlayer = GetComponent<Player>();
 
             eventSystem = EventSystem.current;
+
+            currentWeapons = new List<Weapon>();
         }
 
         private void Start()
         {
             equipmentManager = EquipmentManager.Instance;
-            currentWeaponData = equipmentManager.GenerateWeapon();
             RObjectPooler = ObjectPooler.Instance;
             inputManager = InputManager.Instance;
             completionRewardStats = CompletionRewardStats.Instance;
@@ -48,33 +49,18 @@ namespace AsteroidAnnihilation
         private void Initialize()
         {
             canFire = true;
-            currentWeapon = equipmentManager.GetWeapon(currentWeaponData.WeaponType);
-            currentWeapon.Initialize(rPlayer.RPlayerStats, currentWeaponData.EquipmentData.EquipmentStats, currentWeaponData.EquipmentData.RarityStats);
-            UIManager.Instance.ShowEquipmentTooltip(currentWeaponData);
+            //UIManager.Instance.ShowEquipmentTooltip(currentWeaponData);
         }
 
-
-        //Old ChangeWeapon() might use/recycle later 
-        /*
-        public bool ChangeWeapon(int index)
+        public void WeaponChanged()
         {
-            if(index + 1 > Weapons.Count)
+            currentWeaponDatas = equipmentManager.GetAllEquipedWeapons();
+            currentWeapons.Clear();
+            foreach (WeaponData wData in currentWeaponDatas)
             {
-                Debug.Log("Weapon with index:" + index + " not set");
-                return false;
-            }
-            if(Weapons[index].Unlocked)
-            {
-                SetCurrentWeapon(Weapons[index]);
-                return true;
-            }
-            else
-            {
-                return false;
+                currentWeapons.Add(equipmentManager.GetWeapon(wData.WeaponType));
             }
         }
-        */
-
 
         //Old SortWeapons() might use/recycle later
         /*
@@ -126,8 +112,9 @@ namespace AsteroidAnnihilation
 
                 if(mouseButton == 0)
                 {
-                    Debug.Log(currentWeapon);
-                    currentWeapon.Fire(RObjectPooler, transform, rPlayer.RPlayerMovement.MovementInput * playerVelocityMultiplier);
+                    //TODO::Make this work for multiple
+                    Debug.Log(currentWeapons[0]);
+                    currentWeapons[0].Fire(RObjectPooler, transform, rPlayer.RPlayerMovement.MovementInput * playerVelocityMultiplier);
                     canFire = false;
                     StartCoroutine(FireCooldownTimer(mouseButton));
                 }
@@ -139,7 +126,7 @@ namespace AsteroidAnnihilation
         {
             if(mouseButton == 0)
             {
-                yield return new WaitForSeconds(1 / currentWeapon.GetEquipmentStat(EnumCollections.WeaponStats.FireRate));
+                yield return new WaitForSeconds(1 / currentWeapons[0].GetEquipmentStat(EnumCollections.WeaponStats.FireRate));
             }
             canFire = true;
         }
