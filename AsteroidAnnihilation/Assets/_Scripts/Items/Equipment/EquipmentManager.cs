@@ -24,7 +24,6 @@ namespace AsteroidAnnihilation
 
             weaponTypesT1 = new Dictionary<EnumCollections.Weapons, Weapon>();
 
-            generalItemSettings = (GeneralItemSettings)Resources.Load("Settings/GeneralItemSettings");
             equipedWeapons = new List<WeaponData>();
 
             Object[] weapons = Resources.LoadAll("Weapons/WeaponsT1", typeof(Weapon));
@@ -37,6 +36,7 @@ namespace AsteroidAnnihilation
 
         private void Start()
         {
+            generalItemSettings = SettingsManager.Instance.generalItemSettings;
             playerAttack = Player.Instance.RPlayerAttack;
             LoadEquipment();
             playerAttack.WeaponChanged();
@@ -59,7 +59,7 @@ namespace AsteroidAnnihilation
             }
             else
             {
-                equipedWeapons = (List<WeaponData>)ES3.Load("equipedGear");
+                equipedWeapons = (List<WeaponData>)ES3.Load("equipedWeapons");
                 equipedGear = (Dictionary<EnumCollections.ItemType, EquipmentData>)ES3.Load("equipedGear");
             }
         }

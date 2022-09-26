@@ -29,6 +29,9 @@ namespace AsteroidAnnihilation
         [FoldoutGroup("Inventory")][SerializeField] private GameObject inventoryScreen;
         [FoldoutGroup("Inventory")][SerializeField] private EquipmentTooltip inventoryTooltip;
         [FoldoutGroup("Inventory")][SerializeField] private Transform inventoryPanel;
+        [FoldoutGroup("Inventory")][SerializeField] private Transform weaponSlotParent;
+        [FoldoutGroup("Inventory")][SerializeField] private Transform gearSlotParent;
+        [FoldoutGroup("Inventory")][SerializeField] private Transform componentSlotParent;
 
         public TMP_Text AreaText;
 
@@ -149,7 +152,7 @@ namespace AsteroidAnnihilation
         public void OpenInventory()
         {
             inventoryScreen.SetActive(!inventoryScreen.activeSelf);
-            if(inventoryScreen.activeSelf) { inventoryManager.OpenInventory(inventoryPanel); }
+            if(inventoryScreen.activeSelf) { inventoryManager.OpenInventory(inventoryPanel, weaponSlotParent, gearSlotParent, componentSlotParent); }
         }
 
         public void ShowItemTooltip(ItemData item)

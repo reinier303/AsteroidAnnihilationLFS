@@ -61,9 +61,17 @@ namespace AsteroidAnnihilation
             ItemSlots = new List<ItemSlot>();
         }
 
-        public void OpenInventory(Transform inventoryPanel)
+        public void OpenInventory(Transform inventoryPanel, Transform weaponSlotParent, Transform gearSlotParent, Transform componentSlotParent)
         {
-            if(ItemSlots.Count != InventorySlots)
+            InitializeInventoryItems(inventoryPanel);
+
+            //TODO::Initialize Components/Trinkets
+            InitializeEquipment(weaponSlotParent, gearSlotParent, componentSlotParent);
+        }
+
+        private void InitializeInventoryItems(Transform inventoryPanel)
+        {
+            if (ItemSlots.Count != InventorySlots)
             {
                 for (int i = 0; i < InventorySlots; i++)
                 {
@@ -73,7 +81,7 @@ namespace AsteroidAnnihilation
                 }
             }
             int currentSlot = 0;
-            for(int i = 0; i < InventoryWeapons.Count; i++)
+            for (int i = 0; i < InventoryWeapons.Count; i++)
             {
                 ItemSlot itemSlot = ItemSlots[currentSlot];
                 itemSlot.InitializeSlot(InventoryWeapons[i]);
@@ -90,6 +98,14 @@ namespace AsteroidAnnihilation
                 ItemSlot itemSlot = ItemSlots[currentSlot];
                 itemSlot.InitializeSlot(InventoryItems[i]);
                 currentSlot++;
+            }
+        }
+
+        private void InitializeEquipment(Transform weaponSlotParent, Transform gearSlotParent, Transform componentSlotParent)
+        {
+            for(int i = 0; i < weaponSlotParent.childCount; i++)
+            {
+                weaponSlotParent.gameObject.SetActive(true);
             }
         }
 

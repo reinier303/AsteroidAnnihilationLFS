@@ -36,13 +36,14 @@ namespace AsteroidAnnihilation
         {
             if(Instance != null) { Destroy(gameObject);} else { Instance = this; }
             DontDestroyOnLoad(gameObject);
-
-            generationSettingsT1 = (AreaGenerationSettings)Resources.Load("Settings/AreaGenerationSettings_Tier1");
-            generationSettingsT2 = (AreaGenerationSettings)Resources.Load("Settings/AreaGenerationSettings_Tier2");
         }
 
         private void Start()
         {
+            SettingsManager settingsManager = SettingsManager.Instance;
+            generationSettingsT1 = settingsManager.generationSettingsT1;
+            generationSettingsT2 = settingsManager.generationSettingsT2;
+
             newMissionGenerated = false;
             LoadMissions();
             gameManager = GameManager.Instance;
