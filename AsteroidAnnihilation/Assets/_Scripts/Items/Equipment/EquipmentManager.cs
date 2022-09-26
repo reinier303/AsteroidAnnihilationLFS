@@ -116,6 +116,12 @@ namespace AsteroidAnnihilation
             return equipedWeapons;
         }
 
+        public EquipmentData GetGear(EnumCollections.ItemType gearType)
+        {
+            return equipedGear[gearType];
+        }
+
+
         public void ChangeWeapon(int index, WeaponData weapon)
         {
             if (equipedWeapons.Count != 0 && equipedWeapons.Count >= index) { equipedWeapons[index] = weapon; }

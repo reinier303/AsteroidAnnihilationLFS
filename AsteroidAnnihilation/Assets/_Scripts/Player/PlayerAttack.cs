@@ -37,12 +37,13 @@ namespace AsteroidAnnihilation
             currentWeapons = new List<Weapon>();
 
             //TODO::Make this work for multiple ship types when starting work on that
-            weaponPositions = playerShipSettings.GetWeaponPositions(EnumCollections.ShipType.Fighter);
         }
 
         private void Start()
         {
             playerShipSettings = SettingsManager.Instance.playerShipSettings;
+            weaponPositions = playerShipSettings.GetWeaponPositions(EnumCollections.ShipType.Fighter);
+
             equipmentManager = EquipmentManager.Instance;
             RObjectPooler = ObjectPooler.Instance;
             inputManager = InputManager.Instance;

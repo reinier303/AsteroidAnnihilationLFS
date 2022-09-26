@@ -10,6 +10,7 @@ namespace AsteroidAnnihilation
 
         private GameManager gameManager;
         private EquipmentManager equipmentManager;
+        private SettingsManager settingsManager;
 
         public int InventorySlots;
         List<ItemSlot> ItemSlots;
@@ -28,6 +29,8 @@ namespace AsteroidAnnihilation
 
         private void Start()
         {
+            settingsManager = SettingsManager.Instance;
+            equipmentManager = EquipmentManager.Instance;
             gameManager = GameManager.Instance;
             gameManager.onEndGame += SaveInventory;
             LoadInventory();
@@ -63,10 +66,12 @@ namespace AsteroidAnnihilation
 
         public void OpenInventory(Transform inventoryPanel, Transform weaponSlotParent, Transform gearSlotParent, Transform componentSlotParent)
         {
+            if (this.inventoryPanel == null) { this.inventoryPanel = inventoryPanel; }
             InitializeInventoryItems(inventoryPanel);
 
             //TODO::Initialize Components/Trinkets
-            InitializeEquipment(weaponSlotParent, gearSlotParent, componentSlotParent);
+            InitializeWeapons(weaponSlotParent, componentSlotParent);
+            InitializeGear(gearSlotParent);
         }
 
         private void InitializeInventoryItems(Transform inventoryPanel)
@@ -101,19 +106,38 @@ namespace AsteroidAnnihilation
             }
         }
 
-        private void InitializeEquipment(Transform weaponSlotParent, Transform gearSlotParent, Transform componentSlotParent)
+        private void InitializeWeapons(Transform weaponSlotParent, Transform componentSlotParent)
         {
-            for(int i = 0; i < weaponSlotParent.childCount; i++)
+            int weaponSlots = settingsManager.playerShipSettings.WeaponPositions[EnumCollections.ShipType.Fighter].Count;
+            for (int i = 0; i < weaponSlotParent.childCount; i++)
             {
-                weaponSlotParent.gameObject.SetActive(true);
+                GameObject weaponSlot = weaponSlotParent.GetChild(i).gameObject;
+                if (i < weaponSlots)
+                {
+                    weaponSlot.SetActive(true);
+                    List<WeaponData> weapons = equipmentManager.GetAllEquipedWeapons();
+                    if (weapons.Count > i) { weaponSlot.GetComponent<ItemSlot>().InitializeSlot(weapons[i]); }
+                }
+            }
+        }
+
+        private void InitializeGear(Transform gearSlotParent)
+        {
+            for (int i = 0; i < gearSlotParent.childCount; i++)
+            {
+                GameObject gearSlot = gearSlotParent.GetChild(i).gameObject;
+                ItemSlot slot = gearSlot.GetComponent<ItemSlot>();
+
+                slot.InitializeSlot(equipmentManager.GetGear(slot.ItemType));
             }
         }
 
         public bool AddItem(ItemData item)
         {
-            if(GetItemCount() < InventorySlots)
+            if (GetItemCount() < InventorySlots)
             {
                 InventoryItems.Add(item);
+                InitializeInventoryItems(inventoryPanel);
                 return true;
             } else { return false; }
         }
@@ -123,6 +147,7 @@ namespace AsteroidAnnihilation
             if (GetItemCount() < InventorySlots)
             {
                 InventoryEquipment.Add(equipment);
+                InitializeInventoryItems(inventoryPanel);
                 return true;
             }
             else { return false; }
@@ -133,6 +158,7 @@ namespace AsteroidAnnihilation
             if (GetItemCount() < InventorySlots)
             {
                 InventoryWeapons.Add(weapon);
+                InitializeInventoryItems(inventoryPanel);
                 return true;
             }
             else { return false; }

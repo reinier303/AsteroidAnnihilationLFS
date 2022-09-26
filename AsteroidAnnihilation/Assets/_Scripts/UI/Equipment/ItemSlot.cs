@@ -16,6 +16,7 @@ namespace AsteroidAnnihilation
         private WeaponData weapon;
         [SerializeField] private Image icon;
 
+        public EnumCollections.ItemType ItemType;
         private enum SlotDataType {None, Item, Equipment, Weapon}
         SlotDataType slotDataType;
 

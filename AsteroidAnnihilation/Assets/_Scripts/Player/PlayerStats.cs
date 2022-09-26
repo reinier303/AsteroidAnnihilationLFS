@@ -31,11 +31,11 @@ namespace AsteroidAnnihilation
                 PlayerLevel = ES3.Load<int>("playerLevel");
             }
 
-            playerLevelSettings = SettingsManager.Instance.playerLevelSettings;      
         }
 
         private void Start()
         {
+            playerLevelSettings = SettingsManager.Instance.playerLevelSettings;
             uIManager = UIManager.Instance;
             GameManager.Instance.onEndGame += SavePlayerStats;
             GameManager.Instance.onChangeScene += SavePlayerStats;
