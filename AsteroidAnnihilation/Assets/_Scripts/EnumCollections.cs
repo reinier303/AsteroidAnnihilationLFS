@@ -132,5 +132,14 @@ namespace AsteroidAnnihilation
             Consumable,
             /* Accesory */ShipComponent,
         }
+
+        public enum ShipType
+        {
+            Fighter,//Standard ship
+            Warship,//Slower more weapon slots
+            Buster,//Single very strong weapon slot
+            Ghost,//Very Fast and agile ship... Don't know implementation yet
+            Carrier//Drone ship
+        }
     }
 }

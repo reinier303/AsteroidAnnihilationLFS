@@ -22,9 +22,6 @@ namespace AsteroidAnnihilation
             playerStats = pStats;
             EquipmentStats = weaponStats;
             RarityStats = rarityStats;
-            //TODO::Save Weapons
-            //GameManager.Instance.onEndGame += SaveWeapon;
-            //completionRewardStats = CompletionRewardStats.Instance;
         }
 
         public float GetEquipmentStat(EnumCollections.EquipmentStats stat)

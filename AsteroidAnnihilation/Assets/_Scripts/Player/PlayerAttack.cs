@@ -13,10 +13,12 @@ namespace AsteroidAnnihilation
         EquipmentManager equipmentManager;
         private Player rPlayer;
         private CompletionRewardStats completionRewardStats;
+        private PlayerShipSettings playerShipSettings;
 
         private bool canFire;
         public float fireCooldown;
 
+        private List<Vector2> weaponPositions;
         private List<WeaponData> currentWeaponDatas;
         private List<Weapon> currentWeapons;
 
@@ -33,6 +35,10 @@ namespace AsteroidAnnihilation
             eventSystem = EventSystem.current;
 
             currentWeapons = new List<Weapon>();
+
+            playerShipSettings = (PlayerShipSettings)Resources.Load("Settings/PlayerShipSettings");
+            //TODO::Make this work for multiple ship types when starting work on that
+            weaponPositions = playerShipSettings.GetWeaponPositions(EnumCollections.ShipType.Fighter);
         }
 
         private void Start()
@@ -49,7 +55,7 @@ namespace AsteroidAnnihilation
         private void Initialize()
         {
             canFire = true;
-            //UIManager.Instance.ShowEquipmentTooltip(currentWeaponData);
+            WeaponChanged();
         }
 
         public void WeaponChanged()
@@ -118,8 +124,7 @@ namespace AsteroidAnnihilation
                 if(mouseButton == 0)
                 {
                     //TODO::Make this work for multiple
-                    Debug.Log(currentWeapons[0]);
-                    currentWeapons[0].Fire(RObjectPooler, transform, rPlayer.RPlayerMovement.MovementInput * playerVelocityMultiplier);
+                    currentWeapons[0].Fire(RObjectPooler, transform, rPlayer.RPlayerMovement.MovementInput * playerVelocityMultiplier, weaponPositions[0]);
                     canFire = false;
                     StartCoroutine(FireCooldownTimer(mouseButton));
                 }

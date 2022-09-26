@@ -88,7 +88,6 @@ namespace AsteroidAnnihilation
             sleeping = false;
         }
 
-        //TODO:Loading screen and helper loadscene method instead of here
         public void LoadSceneAsync(int scene)
         {
             onChangeScene.Invoke();

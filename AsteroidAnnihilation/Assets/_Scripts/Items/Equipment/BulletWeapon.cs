@@ -14,7 +14,7 @@ namespace AsteroidAnnihilation
             base.Initialize(pStats, weaponStats, rarityStats);
         }
 
-        public override void Fire(ObjectPooler objectPooler, Transform player, Vector2 velocity)
+        public override void Fire(ObjectPooler objectPooler, Transform player, Vector2 velocity, Vector2 weaponPosition)
         {
             float spread = GetEquipmentStat(EnumCollections.EquipmentStats.ProjectileSpread);
             //Use ceil to int for powerUp to apply effects of 1.5 upward

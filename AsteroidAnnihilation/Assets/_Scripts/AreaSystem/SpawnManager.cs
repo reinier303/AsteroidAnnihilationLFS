@@ -53,7 +53,6 @@ namespace AsteroidAnnihilation
 
         public void SetMission()
         {
-            //TODO::Change this to be the current area from save instead of always startarea
             currentMission = missionManager.GetCurrentMission(); 
 
             GenerateRandomEnemyList();

@@ -33,8 +33,13 @@ namespace AsteroidAnnihilation
                 if(weapon.EquipmentStatRanges == null) {Debug.LogWarning("WeaponStatRanges of " + weapon.name + " are not filled in"); return; }
                 weaponTypesT1.Add(weapon.WeaponType, weapon);
             }
+        }
 
+        private void Start()
+        {
+            playerAttack = Player.Instance.RPlayerAttack;
             LoadEquipment();
+            playerAttack.WeaponChanged();
         }
 
         private void SaveEquipment()
@@ -57,11 +62,6 @@ namespace AsteroidAnnihilation
                 equipedWeapons = (List<WeaponData>)ES3.Load("equipedGear");
                 equipedGear = (Dictionary<EnumCollections.ItemType, EquipmentData>)ES3.Load("equipedGear");
             }
-        }
-
-        private void Start()
-        {
-            playerAttack = Player.Instance.RPlayerAttack;
         }
 
         public WeaponData GenerateWeapon(List<EnumCollections.Weapons> forcedWeaponTypes = null)

@@ -119,7 +119,6 @@ namespace AsteroidAnnihilation
             start.SpawnRateRampPerSecond = generationSettings.StartArea.SpawnRateRampPerSecond;
             start.MaxSpawnRate = generationSettings.StartArea.GetMaxSpawnRate();
 
-            //TODO::FORCE unlock boost here
             start.CompletionRewards = generationSettings.StartArea.GetCompletionRewards(1);
 
             start.Backgrounds = generationSettings.StartArea.GetBackgrounds();
