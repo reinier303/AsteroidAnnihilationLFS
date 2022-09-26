@@ -56,10 +56,15 @@ namespace AsteroidAnnihilation
         {
             currentWeaponDatas = equipmentManager.GetAllEquipedWeapons();
             currentWeapons.Clear();
+            int weaponCount = 0;
             foreach (WeaponData wData in currentWeaponDatas)
             {
                 currentWeapons.Add(equipmentManager.GetWeapon(wData.WeaponType));
+                currentWeapons[weaponCount].Initialize(rPlayer.RPlayerStats, wData.EquipmentData.EquipmentStats, wData.EquipmentData.RarityStats);
+                weaponCount++;
             }
+            Debug.Log(currentWeapons.Count);
+
         }
 
         //Old SortWeapons() might use/recycle later
@@ -86,7 +91,7 @@ namespace AsteroidAnnihilation
             }
             
         }
-        */    
+        */
 
         // Update is called once per frame
         private void Update()
@@ -126,7 +131,7 @@ namespace AsteroidAnnihilation
         {
             if(mouseButton == 0)
             {
-                yield return new WaitForSeconds(1 / currentWeapons[0].GetEquipmentStat(EnumCollections.WeaponStats.FireRate));
+                yield return new WaitForSeconds(1 / currentWeapons[0].GetEquipmentStat(EnumCollections.EquipmentStats.FireRate));
             }
             canFire = true;
         }

@@ -8,15 +8,15 @@ namespace AsteroidAnnihilation
     [CreateAssetMenu(menuName = "WeaponSystem/Weapons/ShotgunWeapon", order = 997)]
     public class ShotgunWeapon : Weapon
     {
-        public override void Initialize(PlayerStats pStats, Dictionary<EnumCollections.WeaponStats, float> weaponStats, Dictionary<EnumCollections.WeaponStats, float> rarityStats)
+        public override void Initialize(PlayerStats pStats, Dictionary<EnumCollections.EquipmentStats, float> weaponStats, Dictionary<EnumCollections.EquipmentStats, float> rarityStats)
         {
             base.Initialize(pStats, weaponStats, rarityStats);
         }
 
         public override void Fire(ObjectPooler objectPooler, Transform player, Vector2 velocity)
         {
-            float spread = GetEquipmentStat(EnumCollections.WeaponStats.ProjectileSpread);
-            float count = (int)GetEquipmentStat(EnumCollections.WeaponStats.ProjectileCount);
+            float spread = GetEquipmentStat(EnumCollections.EquipmentStats.ProjectileSpread);
+            float count = (int)GetEquipmentStat(EnumCollections.EquipmentStats.ProjectileCount);
 
             float angleIncrease;
 
@@ -42,18 +42,18 @@ namespace AsteroidAnnihilation
 
                 //Initialize projectile
                 PlayerProjectile projectile = projectileObject.GetComponent<PlayerProjectile>();
-                projectile.Initialize(GetEquipmentStat(EnumCollections.WeaponStats.Size));
+                projectile.Initialize(GetEquipmentStat(EnumCollections.EquipmentStats.Size));
                 projectile.WeaponIndex = WeaponIndex;
 
                 //Set projectile stat values
-                projectile.Damage = GetEquipmentStat(EnumCollections.WeaponStats.Damage);
+                projectile.Damage = GetEquipmentStat(EnumCollections.EquipmentStats.Damage);
                 if (IsCrit())
                 {
                     projectile.SetCrit();
                 }
 
                 projectile.PlayerVelocity = velocity;
-                projectile.ProjectileSpeed = GetEquipmentStat(EnumCollections.WeaponStats.ProjectileSpeed) * Random.Range(0.75f, 1.25f);
+                projectile.ProjectileSpeed = GetEquipmentStat(EnumCollections.EquipmentStats.ProjectileSpeed) * Random.Range(0.75f, 1.25f);
 
                 //Random lifetime calculations
                 float lifeTimeMultiplier = Random.Range(0.1f, 2);
@@ -71,7 +71,7 @@ namespace AsteroidAnnihilation
                         }
                     }
                 }
-                projectile.LifeTime = GetEquipmentStat(EnumCollections.WeaponStats.LifeTime) * lifeTimeMultiplier;
+                projectile.LifeTime = GetEquipmentStat(EnumCollections.EquipmentStats.LifeTime) * lifeTimeMultiplier;
 
                 projectile.StartCoroutine(projectile.DisableAfterTime());
             }

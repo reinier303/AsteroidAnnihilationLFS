@@ -9,6 +9,7 @@ namespace AsteroidAnnihilation
         public static InventoryManager Instance;
 
         private GameManager gameManager;
+        private EquipmentManager equipmentManager;
 
         public int InventorySlots;
         List<ItemSlot> ItemSlots;

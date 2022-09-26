@@ -53,7 +53,7 @@ namespace AsteroidAnnihilation
     {
         public bool IsWeapon;
         [ShowIf("IsWeapon")] public EnumCollections.Weapons WeaponType;
-        [ShowIf("IsWeapon")] public EnumCollections.WeaponStats WeaponStatType;
+        [ShowIf("IsWeapon")] public EnumCollections.EquipmentStats WeaponStatType;
         [HideIf("IsWeapon")] public EnumCollections.PlayerStats PlayerStatType;
         public float RewardAmount;
         public int Weight = 1;

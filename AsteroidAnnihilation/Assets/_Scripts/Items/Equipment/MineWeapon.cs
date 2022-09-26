@@ -7,7 +7,7 @@ namespace AsteroidAnnihilation
     [CreateAssetMenu(menuName = "WeaponSystem/Weapons/MineWeapon", order = 997)]
     public class MineWeapon : Weapon
     {
-        public override void Initialize(PlayerStats pStats, Dictionary<EnumCollections.WeaponStats, float> weaponStats, Dictionary<EnumCollections.WeaponStats, float> rarityStats)
+        public override void Initialize(PlayerStats pStats, Dictionary<EnumCollections.EquipmentStats, float> weaponStats, Dictionary<EnumCollections.EquipmentStats, float> rarityStats)
         {
             base.Initialize(pStats, weaponStats, rarityStats);
         }
@@ -15,21 +15,21 @@ namespace AsteroidAnnihilation
         public override void Fire(ObjectPooler objectPooler, Transform player, Vector2 velocity)
         {
             GameObject Mine = objectPooler.SpawnFromPool("PlayerMine", player.position - (player.up * 0.75f), Quaternion.identity);
-            Mine.GetComponent<Rigidbody2D>().AddForce(-player.up * GetEquipmentStat(EnumCollections.WeaponStats.LaunchVelocity));
+            Mine.GetComponent<Rigidbody2D>().AddForce(-player.up * GetEquipmentStat(EnumCollections.EquipmentStats.LaunchVelocity));
             PlayerProjectile projectile = Mine.GetComponent<PlayerProjectile>();
 
             //Set projectile stat values
-            projectile.Damage = GetEquipmentStat(EnumCollections.WeaponStats.Damage);
-            projectile.LifeTime = GetEquipmentStat(EnumCollections.WeaponStats.LifeTime);
+            projectile.Damage = GetEquipmentStat(EnumCollections.EquipmentStats.Damage);
+            projectile.LifeTime = GetEquipmentStat(EnumCollections.EquipmentStats.LifeTime);
             if (IsCrit())
             {
                 projectile.SetCrit();
             }
             //Cast to projectile type to set type specific variables
             MineProjectile mineProjectile = (MineProjectile)projectile;
-            mineProjectile.Size = GetEquipmentStat(EnumCollections.WeaponStats.Size);
+            mineProjectile.Size = GetEquipmentStat(EnumCollections.EquipmentStats.Size);
 
-            projectile.Initialize(GetEquipmentStat(EnumCollections.WeaponStats.Size));
+            projectile.Initialize(GetEquipmentStat(EnumCollections.EquipmentStats.Size));
             projectile.WeaponIndex = WeaponIndex;
             projectile.StartCoroutine(projectile.DisableAfterTime());
         }

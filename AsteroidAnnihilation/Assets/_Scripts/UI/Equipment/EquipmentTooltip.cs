@@ -29,7 +29,7 @@ namespace AsteroidAnnihilation
         {
             SetItemProperties(weapon.EquipmentData.ItemData);
             SetStats(weapon.EquipmentData);
-            energyPerShot.text = EnumCollections.WeaponStats.EnergyPerShot.ToString() + ": " + weapon.EquipmentData.EquipmentStats[EnumCollections.WeaponStats.EnergyPerShot];
+            energyPerShot.text = EnumCollections.EquipmentStats.EnergyPerShot.ToString() + ": " + weapon.EquipmentData.EquipmentStats[EnumCollections.EquipmentStats.EnergyPerShot];
         }
 
         private void SetItemProperties(ItemData item)
@@ -46,14 +46,14 @@ namespace AsteroidAnnihilation
                 Transform child = transform.GetChild(i);
                 if (child.GetComponent<LayoutElement>() == null) { Destroy(child.gameObject); }
             }
-            Dictionary<EnumCollections.WeaponStats, float> stats = equipmentData.EquipmentStats;
-            foreach (EnumCollections.WeaponStats stat in stats.Keys)
+            Dictionary<EnumCollections.EquipmentStats, float> stats = equipmentData.EquipmentStats;
+            foreach (EnumCollections.EquipmentStats stat in stats.Keys)
             {
-                if (stat != EnumCollections.WeaponStats.EnergyPerShot)
+                if (stat != EnumCollections.EquipmentStats.EnergyPerShot)
                 {
                     //TODO::Link to ObjectPooler
                     TextMeshProUGUI statDisplay = Instantiate(statDisplayPrefab, transform).GetComponent<TextMeshProUGUI>();
-                    if (stat == EnumCollections.WeaponStats.Damage) 
+                    if (stat == EnumCollections.EquipmentStats.Damage) 
                     {
                         float minValue = Mathf.RoundToInt(stats[stat] * 0.75f);
                         float maxValue = Mathf.RoundToInt(stats[stat] * 1.25f);
@@ -67,14 +67,14 @@ namespace AsteroidAnnihilation
             TextMeshProUGUI spacer = Instantiate(statDisplayPrefab, transform).GetComponent<TextMeshProUGUI>();
             spacer.text = "";
 
-            Dictionary<EnumCollections.WeaponStats, float> rarityStats = equipmentData.RarityStats;
-            foreach (EnumCollections.WeaponStats stat in rarityStats.Keys)
+            Dictionary<EnumCollections.EquipmentStats, float> rarityStats = equipmentData.RarityStats;
+            foreach (EnumCollections.EquipmentStats stat in rarityStats.Keys)
             {
-                if (stat != EnumCollections.WeaponStats.EnergyPerShot)
+                if (stat != EnumCollections.EquipmentStats.EnergyPerShot)
                 {
                     //TODO::Link to ObjectPooler
                     TextMeshProUGUI statDisplay = Instantiate(statDisplayPrefab, transform).GetComponent<TextMeshProUGUI>();
-                    if (stat == EnumCollections.WeaponStats.Damage)
+                    if (stat == EnumCollections.EquipmentStats.Damage)
                     {
                         float minValue = Mathf.RoundToInt(rarityStats[stat] * 0.75f);
                         float maxValue = Mathf.RoundToInt(rarityStats[stat] * 1.25f);

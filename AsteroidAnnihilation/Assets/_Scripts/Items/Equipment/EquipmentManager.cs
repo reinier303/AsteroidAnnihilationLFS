@@ -14,6 +14,7 @@ namespace AsteroidAnnihilation
         private Dictionary<EnumCollections.Weapons, Weapon> weaponTypesT1;
 
         private List<WeaponData> equipedWeapons;
+        private Dictionary<EnumCollections.ItemType, EquipmentData> equipedGear;
 
         public GeneralItemSettings generalItemSettings;
 
@@ -31,6 +32,30 @@ namespace AsteroidAnnihilation
             {
                 if(weapon.EquipmentStatRanges == null) {Debug.LogWarning("WeaponStatRanges of " + weapon.name + " are not filled in"); return; }
                 weaponTypesT1.Add(weapon.WeaponType, weapon);
+            }
+
+            LoadEquipment();
+        }
+
+        private void SaveEquipment()
+        {
+            ES3.Save("equipedWeapons", equipedWeapons);
+            ES3.Save("equipedGear", equipedGear);
+        }
+
+        private void LoadEquipment()
+        {
+            if (!ES3.KeyExists("equipedWeapons"))
+            {
+                equipedWeapons = new List<WeaponData>();
+                equipedWeapons.Add(generalItemSettings.startWeapon);
+                equipedGear = generalItemSettings.startGear;
+                SaveEquipment();
+            }
+            else
+            {
+                equipedWeapons = (List<WeaponData>)ES3.Load("equipedGear");
+                equipedGear = (Dictionary<EnumCollections.ItemType, EquipmentData>)ES3.Load("equipedGear");
             }
         }
 
@@ -60,14 +85,14 @@ namespace AsteroidAnnihilation
             weaponData.EquipmentData.ItemData.Icon = weapon.GetIcon();
 
             //EquipmentData
-            weaponData.EquipmentData.EquipmentStats = new Dictionary<EnumCollections.WeaponStats, float>();
+            weaponData.EquipmentData.EquipmentStats = new Dictionary<EnumCollections.EquipmentStats, float>();
             weaponData.EquipmentData.RarityStats = weapon.GetRarityStats(rarity, generalItemSettings);
 
             //WeaponData
             weaponData.WeaponType = weapon.WeaponType;
             weaponData.ProjectileType = weapon.ProjectileType;
 
-            foreach (EnumCollections.WeaponStats stat in weapon.EquipmentStatRanges.Keys)
+            foreach (EnumCollections.EquipmentStats stat in weapon.EquipmentStatRanges.Keys)
             {
                 float value = Random.Range(weapon.EquipmentStatRanges[stat].x, weapon.EquipmentStatRanges[stat].y);
                 value = MathHelpers.RoundToDecimal(value, 2);
@@ -97,13 +122,21 @@ namespace AsteroidAnnihilation
             else { equipedWeapons.Add(weapon); }
             playerAttack.WeaponChanged();
         }
+
+        public void ChangeEquipment(EnumCollections.ItemType equipType, EquipmentData equipment)
+        {
+            if (equipedGear.ContainsKey(equipType))
+            {
+                equipedGear[equipType] = equipment;
+            }
+        }
     }
 
     public struct EquipmentData
     {
         public ItemData ItemData;
-        public Dictionary<EnumCollections.WeaponStats, float> EquipmentStats;
-        public Dictionary<EnumCollections.WeaponStats, float> RarityStats;
+        public Dictionary<EnumCollections.EquipmentStats, float> EquipmentStats;
+        public Dictionary<EnumCollections.EquipmentStats, float> RarityStats;
 
     }
 

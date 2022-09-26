@@ -50,7 +50,7 @@ namespace AsteroidAnnihilation
             EnergyMines,
         }
 
-        public enum WeaponStats
+        public enum EquipmentStats
         {
             Damage,
             LifeTime,
@@ -60,7 +60,21 @@ namespace AsteroidAnnihilation
             ProjectileCount,
             LaunchVelocity,
             ProjectileSpread,
-            EnergyPerShot
+            EnergyPerShot,
+            EnergyRegen,
+            EnergyCapacity,
+            EnergyEfficiency,
+            Health,
+            MovementSpeed,
+            BoostSpeed,
+            BoostFuel,
+            BoostRegen,
+            CritRate,
+            CritMultiplier,
+            ExperienceMultiplier,
+            UnitsMultiplier,
+            MagnetRadius,
+            Resistance,
         }
 
         public enum PlayerStats
@@ -68,8 +82,8 @@ namespace AsteroidAnnihilation
             CurrentUnits,
             CurrentExperience,
             Health,
-            UnitMultiplier,
-            AsteroidMultiplier,
+            UnitsMultiplier,
+            ExperienceMultiplier,
             MovementSpeed,
             BoostSpeed,
             BoostFuel,
@@ -115,7 +129,8 @@ namespace AsteroidAnnihilation
             EnergyCore,
             Engine,
             Weapon,
-            Consumable
+            Consumable,
+            /* Accesory */ShipComponent,
         }
     }
 }

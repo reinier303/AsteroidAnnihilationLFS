@@ -9,16 +9,16 @@ namespace AsteroidAnnihilation
 
     public class BulletWeapon : Weapon
     {
-        public override void Initialize(PlayerStats pStats, Dictionary<EnumCollections.WeaponStats, float> weaponStats, Dictionary<EnumCollections.WeaponStats, float> rarityStats)
+        public override void Initialize(PlayerStats pStats, Dictionary<EnumCollections.EquipmentStats, float> weaponStats, Dictionary<EnumCollections.EquipmentStats, float> rarityStats)
         {
             base.Initialize(pStats, weaponStats, rarityStats);
         }
 
         public override void Fire(ObjectPooler objectPooler, Transform player, Vector2 velocity)
         {
-            float spread = GetEquipmentStat(EnumCollections.WeaponStats.ProjectileSpread);
+            float spread = GetEquipmentStat(EnumCollections.EquipmentStats.ProjectileSpread);
             //Use ceil to int for powerUp to apply effects of 1.5 upward
-            int count = Mathf.FloorToInt(GetEquipmentStat(EnumCollections.WeaponStats.ProjectileCount));
+            int count = Mathf.FloorToInt(GetEquipmentStat(EnumCollections.EquipmentStats.ProjectileCount));
 
             float angleIncrease;
 
@@ -50,15 +50,15 @@ namespace AsteroidAnnihilation
                 projectile.WeaponIndex = WeaponIndex;
 
                 //Set projectile stat values
-                projectile.Damage = GetEquipmentStat(EnumCollections.WeaponStats.Damage);
+                projectile.Damage = GetEquipmentStat(EnumCollections.EquipmentStats.Damage);
                 if(IsCrit())
                 {
                     projectile.SetCrit();
                 }
                 projectile.PlayerVelocity = velocity;
-                projectile.ProjectileSpeed = GetEquipmentStat(EnumCollections.WeaponStats.ProjectileSpeed);
-                projectile.LifeTime = GetEquipmentStat(EnumCollections.WeaponStats.LifeTime);
-                projectile.Initialize(GetEquipmentStat(EnumCollections.WeaponStats.Size));
+                projectile.ProjectileSpeed = GetEquipmentStat(EnumCollections.EquipmentStats.ProjectileSpeed);
+                projectile.LifeTime = GetEquipmentStat(EnumCollections.EquipmentStats.LifeTime);
+                projectile.Initialize(GetEquipmentStat(EnumCollections.EquipmentStats.Size));
 
                 projectile.StartCoroutine(projectile.DisableAfterTime());
             }
