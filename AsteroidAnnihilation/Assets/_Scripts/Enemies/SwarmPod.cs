@@ -6,47 +6,28 @@ namespace AsteroidAnnihilation
 {
     public class SwarmPod : BaseEnemy
     {
-        public float AggroDistance = 8f;
-        public float StopDistance = 0.75f;
+        [SerializeField] protected float moveSpeed;
 
+        private Vector2 RandomPos;
 
-        [SerializeField]private Coroutine idleMoveRoutine;
+        protected override void Start()
+        {
+            base.Start();
+            transform.localRotation = Quaternion.Euler(transform.rotation.x, transform.rotation.y, Random.Range(0,360));
+            Vector2 randomSize = new Vector2(Random.Range(0.9f, 1.25f), Random.Range(0.9f, 1.25f));
+            transform.localScale = randomSize;
+        }
 
-        [SerializeField] protected float idleMoveTime = 2, idleWaitTime = 3.5f;
-        [Header("Aggro Movement Speed")]
-        [SerializeField] protected float aggroMove = 3f;
 
         protected virtual void Update()
         {
-            if(Vector2.Distance(transform.position, Player.position) <= AggroDistance)
-            {
-                if (idleMoveRoutine != null) 
-                {
-                    Debug.Log("stopt");
-                    StopCoroutine(idleMoveRoutine);
-                    idleMoveRoutine = null;
-                }
-
-                if(Vector2.Distance(transform.position, Player.position) >= StopDistance) { AggroMove();}
-            }
-            else if(idleMoveRoutine == null)
-            {
-                idleMoveRoutine = StartCoroutine(IdleMove());
-            }
+            Move();
         }
 
-        protected virtual IEnumerator IdleMove()
+        protected virtual void Move()
         {
-            Vector3 randomPos = transform.position + new Vector3(Random.Range(-2, 2), Random.Range(-2, 2), transform.position.z);
-            LeanTween.move(gameObject, randomPos , idleMoveTime);
-            yield return new WaitForSeconds(idleWaitTime);
-            idleMoveRoutine = StartCoroutine(IdleMove());
-        }
-
-        protected virtual void AggroMove()
-        {
-            transform.position = Vector2.MoveTowards(transform.position, Player.position, Time.deltaTime * aggroMove);
-
+            transform.position += transform.up * Time.deltaTime * moveSpeed;
+            Rotate();
         }
     }
 }

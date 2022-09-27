@@ -49,6 +49,8 @@ namespace AsteroidAnnihilation
 
         public int KilledByIndex;
 
+        public bool Aggro;
+
         protected virtual void Awake()
         {
             OnTakeDamage += TakeDamage;

@@ -15,6 +15,10 @@ namespace AsteroidAnnihilation
         public float DroppedUnits;
         public float ExperienceGained;
 
+        //Aggro
+        public float AggroDistance = 8f;
+        public float DeAggroDistance = 50f;
+
         protected override void Start()
         {
             base.Start();
@@ -31,6 +35,18 @@ namespace AsteroidAnnihilation
             }
         }
 
+        protected virtual void CheckAggroDistance()
+        {
+            if (Vector2.Distance(transform.position, Player.position) <= AggroDistance)
+            {
+                Aggro = true;
+            }
+            if (Vector2.Distance(transform.position, Player.position) >= DeAggroDistance)
+            {
+                Aggro = false;
+            }
+        }
+
         protected override void OnEnable()
         {
             base.OnEnable();
@@ -38,12 +54,14 @@ namespace AsteroidAnnihilation
             StartCoroutine(CheckDistanceToPlayer(1f));
         }
 
-        protected virtual void Rotate()
+        protected virtual void Rotate(Vector3 target = default(Vector3), float rotSpeedMultiplier = 1)
         {
-            Vector3 difference = Player.position - transform.position;
+            Vector3 difference;
+            if (target == default(Vector3)) { difference = Player.position - transform.position; }
+            else { difference = target - transform.position; }
             float rotationZ = Mathf.Atan2(difference.y, difference.x) * Mathf.Rad2Deg;
             Quaternion desiredRotation = Quaternion.Euler(0.0f, 0.0f, rotationZ - 90f);
-            transform.rotation = Quaternion.Slerp(transform.rotation, desiredRotation, RotationSpeed * Time.deltaTime);
+            transform.rotation = Quaternion.Slerp(transform.rotation, desiredRotation, RotationSpeed * rotSpeedMultiplier * Time.deltaTime);
             if (!gameManager.PlayerAlive)
             {
                 transform.rotation = Quaternion.Euler(0.0f, 0.0f, rotationZ + 90f);

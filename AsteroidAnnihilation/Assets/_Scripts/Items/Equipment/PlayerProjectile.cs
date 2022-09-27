@@ -14,6 +14,7 @@ namespace AsteroidAnnihilation
         public float Damage, ProjectileSpeed, LifeTime = 0;
         public bool IsCrit;
         public float Size = 1;
+        private bool canDamage;
 
         public Vector2 PlayerVelocity;
 
@@ -25,6 +26,7 @@ namespace AsteroidAnnihilation
 
         public virtual void Initialize(float size)
         {
+            canDamage = true;
             Size = size;
             transform.localScale = new Vector2(transform.localScale.x, transform.localScale.y) * Size;
         }
@@ -42,11 +44,13 @@ namespace AsteroidAnnihilation
         protected virtual void OnTriggerEnter2D(Collider2D collider)
         {
             BaseEntity entity = collider.GetComponent<BaseEntity>();
-            if (entity != null && !entity.isDead)
+            if (canDamage && entity != null && !entity.isDead)
             {
+                canDamage = false;
                 //gameManager.StartCoroutine(gameManager.Sleep(0.001f));
                 entity.KilledByIndex = WeaponIndex;
                 entity.OnTakeDamage?.Invoke(Damage, IsCrit);
+                entity.Aggro = true;
                 objectPooler.SpawnFromPool(OnHitEffectName, transform.position, Quaternion.identity);
                 gameObject.SetActive(false);
             }
