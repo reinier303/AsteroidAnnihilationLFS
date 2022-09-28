@@ -99,6 +99,7 @@ namespace AsteroidAnnihilation
             int currentSlot = 0;
             for (int i = 0; i < InventoryWeapons.Count; i++)
             {
+                Debug.Log("i:"+ i +",  currentslot:" + currentSlot);
                 ItemSlot itemSlot = ItemSlots[currentSlot];
                 itemSlot.InitializeSlot(InventoryWeapons[i]);
                 currentSlot++;
@@ -114,6 +115,10 @@ namespace AsteroidAnnihilation
                 ItemSlot itemSlot = ItemSlots[currentSlot];
                 itemSlot.InitializeSlot(InventoryItems[i]);
                 currentSlot++;
+            }
+            foreach (ItemSlot slot in ItemSlots)
+            {
+                if (!slot.ContainsItem()) { slot.ResetSlot(); }
             }
         }
 

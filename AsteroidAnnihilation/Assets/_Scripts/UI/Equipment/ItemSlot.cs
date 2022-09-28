@@ -54,7 +54,7 @@ namespace AsteroidAnnihilation
             icon.color = Color.white;
         }
 
-        private void ResetSlot()
+        public void ResetSlot()
         {
             switch (slotDataType)
             {
@@ -74,6 +74,15 @@ namespace AsteroidAnnihilation
             icon.sprite = null;
             icon.color = new Color(255,255,255,0);
 
+        }
+
+        public bool ContainsItem()
+        {
+            if(slotDataType == SlotDataType.None)
+            {
+                return false;
+            }
+            else { return true; }
         }
 
         public void OnPointerEnter(PointerEventData eventData)
@@ -114,11 +123,9 @@ namespace AsteroidAnnihilation
                         return;
                     case SlotDataType.Weapon:
                         if(equipmentManager.ChangeWeapon(weapon))
-                        {                          
-                            ResetSlot();
+                        {
+                            slotDataType = SlotDataType.None;
                         }
-                        else { }
-
                         break;
                 }
             }
