@@ -91,7 +91,7 @@ namespace AsteroidAnnihilation
                     case SlotDataType.Equipment:
                         return;
                     case SlotDataType.Weapon:
-                        equipmentManager.ChangeWeapon(0, weapon);
+                        equipmentManager.ChangeWeapon(weapon);
                         break;
                 }
             }

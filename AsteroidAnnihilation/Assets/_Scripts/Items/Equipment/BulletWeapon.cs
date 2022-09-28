@@ -9,16 +9,16 @@ namespace AsteroidAnnihilation
 
     public class BulletWeapon : Weapon
     {
-        public override void Initialize(PlayerStats pStats, Dictionary<EnumCollections.EquipmentStats, float> weaponStats, Dictionary<EnumCollections.EquipmentStats, float> rarityStats)
+        public override void Initialize(PlayerStats pStats, EquipmentManager equipmentManager)
         {
-            base.Initialize(pStats, weaponStats, rarityStats);
+            base.Initialize(pStats, equipmentManager);
         }
 
-        public override void Fire(ObjectPooler objectPooler, Transform player, Vector2 velocity, Vector2 weaponPosition)
+        public override void Fire(ObjectPooler objectPooler, Transform player, Vector2 velocity, Vector2 weaponPosition, int weaponIndex)
         {
-            float spread = GetEquipmentStat(EnumCollections.EquipmentStats.ProjectileSpread);
+            float spread = GetEquipmentStat(EnumCollections.EquipmentStats.ProjectileSpread, weaponIndex);
             //Use ceil to int for powerUp to apply effects of 1.5 upward
-            int count = Mathf.FloorToInt(GetEquipmentStat(EnumCollections.EquipmentStats.ProjectileCount));
+            int count = Mathf.FloorToInt(GetEquipmentStat(EnumCollections.EquipmentStats.ProjectileCount, weaponIndex));
 
             float angleIncrease;
 
@@ -42,7 +42,7 @@ namespace AsteroidAnnihilation
                 float newRotation = (player.eulerAngles.z - angleIncrease * i) + (spread / 2);
 
                 //Spawn Projectile with extra rotation based on projectile count
-                GameObject projectileObject = objectPooler.SpawnFromPool(EnumCollections.PlayerProjectiles.PlasmaBullet.ToString(), player.position + (player.up / 3),
+                GameObject projectileObject = objectPooler.SpawnFromPool(EnumCollections.PlayerProjectiles.PlasmaBullet.ToString(), player.position + player.TransformDirection(weaponPosition),
                 Quaternion.Euler(player.eulerAngles.x, player.eulerAngles.y, newRotation));
 
                 //Initialize projectile
@@ -50,15 +50,15 @@ namespace AsteroidAnnihilation
                 projectile.WeaponIndex = WeaponIndex;
 
                 //Set projectile stat values
-                projectile.Damage = GetEquipmentStat(EnumCollections.EquipmentStats.Damage);
+                projectile.Damage = GetEquipmentStat(EnumCollections.EquipmentStats.Damage, weaponIndex);
                 if(IsCrit())
                 {
                     projectile.SetCrit();
                 }
                 projectile.PlayerVelocity = velocity;
-                projectile.ProjectileSpeed = GetEquipmentStat(EnumCollections.EquipmentStats.ProjectileSpeed);
-                projectile.LifeTime = GetEquipmentStat(EnumCollections.EquipmentStats.LifeTime);
-                projectile.Initialize(GetEquipmentStat(EnumCollections.EquipmentStats.Size));
+                projectile.ProjectileSpeed = GetEquipmentStat(EnumCollections.EquipmentStats.ProjectileSpeed, weaponIndex);
+                projectile.LifeTime = GetEquipmentStat(EnumCollections.EquipmentStats.LifeTime, weaponIndex);
+                projectile.Initialize(GetEquipmentStat(EnumCollections.EquipmentStats.Size, weaponIndex));
 
                 projectile.StartCoroutine(projectile.DisableAfterTime());
             }

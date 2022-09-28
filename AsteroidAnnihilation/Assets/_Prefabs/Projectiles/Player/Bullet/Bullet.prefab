@@ -105,6 +105,7 @@ MonoBehaviour:
   ProjectileSpeed: 0
   LifeTime: 0
   IsCrit: 0
+  Size: 1
   PlayerVelocity: {x: 0, y: 0}
 --- !u!58 &7296814962085735422
 CircleCollider2D:
@@ -119,9 +120,9 @@ CircleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.1}
+  m_Offset: {x: 0, y: 0.05}
   serializedVersion: 2
-  m_Radius: 0.18
+  m_Radius: 0.11
 --- !u!1001 &688480940
 PrefabInstance:
   m_ObjectHideFlags: 0

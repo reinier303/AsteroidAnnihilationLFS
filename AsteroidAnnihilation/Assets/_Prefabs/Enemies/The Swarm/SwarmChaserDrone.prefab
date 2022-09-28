@@ -151,21 +151,22 @@ MonoBehaviour:
   PermanencePartOutwardsPower: 400
   PermanenceScaleFactor: 0.07
   Drops: []
+  DropChance: 25
   isDead: 0
   isInitialized: 0
   KilledByIndex: 0
   Aggro: 0
   Player: {fileID: 0}
   ContactDamage: 10
-  RotationSpeed: 2
+  RotationSpeed: 2.25
   DroppedUnits: 25
   ExperienceGained: 3
-  AggroDistance: 10
+  AggroDistance: 12
   DeAggroDistance: 45
   StopDistance: 0.75
   idleWaitTime: 6
   idleMove: 2
-  aggroMove: 6
+  aggroMove: 6.5
 --- !u!1 &6416701320494140666
 GameObject:
   m_ObjectHideFlags: 0

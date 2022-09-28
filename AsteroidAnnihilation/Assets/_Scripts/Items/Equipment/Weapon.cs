@@ -15,7 +15,7 @@ namespace AsteroidAnnihilation
 
         private UIManager uIManager;
 
-        public virtual void Fire(ObjectPooler objectPooler, Transform player, Vector2 velocity, Vector2 weaponPosition)
+        public virtual void Fire(ObjectPooler objectPooler, Transform player, Vector2 velocity, Vector2 weaponPosition, int weaponIndex)
         {
             //This method is meant to be overridden.
         }
@@ -36,6 +36,6 @@ namespace AsteroidAnnihilation
     public interface IFire
     {
         //Use Generic T for other optional parameters
-        void Fire(ObjectPooler objectPooler, Transform player, Vector2 velocity, Vector2 weaponPosition);
+        void Fire(ObjectPooler objectPooler, Transform player, Vector2 velocity, Vector2 weaponPosition, int weaponIndex);
     }
 }

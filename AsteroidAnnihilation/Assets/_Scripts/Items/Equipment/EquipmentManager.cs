@@ -10,13 +10,17 @@ namespace AsteroidAnnihilation
         public static EquipmentManager Instance { get; private set; }
 
         private PlayerAttack playerAttack;
+        private InventoryManager inventoryManager;
 
         private Dictionary<EnumCollections.Weapons, Weapon> weaponTypesT1;
 
         private List<WeaponData> equipedWeapons;
         private Dictionary<EnumCollections.ItemType, EquipmentData> equipedGear;
 
-        public GeneralItemSettings generalItemSettings;
+        private GeneralItemSettings generalItemSettings;
+        private PlayerShipSettings playerShipSettings;
+
+        private int weaponAmount;
 
         private void Awake()
         {
@@ -37,7 +41,11 @@ namespace AsteroidAnnihilation
         private void Start()
         {
             generalItemSettings = SettingsManager.Instance.generalItemSettings;
+            playerShipSettings = SettingsManager.Instance.playerShipSettings;
+            weaponAmount = playerShipSettings.GetWeaponPositions(EnumCollections.ShipType.Fighter).Count;
+
             playerAttack = Player.Instance.RPlayerAttack;
+            inventoryManager = InventoryManager.Instance;
             LoadEquipment();
             playerAttack.WeaponChanged();
         }
@@ -122,19 +130,33 @@ namespace AsteroidAnnihilation
         }
 
 
-        public void ChangeWeapon(int index, WeaponData weapon)
+        public void ChangeWeapon(WeaponData weapon, int index = 0)
         {
-            if (equipedWeapons.Count != 0 && equipedWeapons.Count >= index) { equipedWeapons[index] = weapon; }
-            else { equipedWeapons.Add(weapon); }
+            if(index == 0 && equipedWeapons.Count < weaponAmount)
+            {
+                equipedWeapons.Add(weapon);
+            }
+            else if(equipedWeapons.Count == weaponAmount)
+            {
+                equipedWeapons[index] = weapon;
+            }
+            //Case index parameter is supplied
+            else
+            {
+                if (equipedWeapons.Count != 0 && equipedWeapons.Count >= index) { equipedWeapons[index] = weapon; }
+                else { equipedWeapons.Add(weapon); }
+            }
             playerAttack.WeaponChanged();
+            inventoryManager.InitializeWeapons();
         }
 
-        public void ChangeEquipment(EnumCollections.ItemType equipType, EquipmentData equipment)
+        public void ChangeGear(EnumCollections.ItemType equipType, EquipmentData equipment)
         {
             if (equipedGear.ContainsKey(equipType))
             {
                 equipedGear[equipType] = equipment;
             }
+            inventoryManager.InitializeGear();
         }
     }
 

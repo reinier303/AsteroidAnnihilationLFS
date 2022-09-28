@@ -11,35 +11,28 @@ namespace AsteroidAnnihilation
     { 
         [SerializeField] public Dictionary<EnumCollections.EquipmentStats, Vector2> EquipmentStatRanges;
         [SerializeField] protected Dictionary<EnumCollections.EquipmentStats, Vector2> RarityStatRanges;
-            
-        [System.NonSerialized] private Dictionary<EnumCollections.EquipmentStats, float> EquipmentStats; 
-        [System.NonSerialized] private Dictionary<EnumCollections.EquipmentStats, float> RarityStats;
 
         protected PlayerStats playerStats;
+        protected EquipmentManager equipmentManager;
 
-        public virtual void Initialize(PlayerStats pStats, Dictionary<EnumCollections.EquipmentStats, float> weaponStats, Dictionary<EnumCollections.EquipmentStats, float> rarityStats)
+        public virtual void Initialize(PlayerStats pStats, EquipmentManager equipmentManager)
         {
             playerStats = pStats;
-            EquipmentStats = weaponStats;
-            RarityStats = rarityStats;
+            this.equipmentManager = equipmentManager;
         }
 
-        public float GetEquipmentStat(EnumCollections.EquipmentStats stat)
+        public float GetEquipmentStat(EnumCollections.EquipmentStats stat, int index)
         {
-            if (RarityStats.ContainsKey(stat))
+            EquipmentData data = equipmentManager.GetEquipedWeapon(index).EquipmentData;
+            if (data.RarityStats.ContainsKey(stat))
             {
-                return EquipmentStats[stat] + RarityStats[stat];
-            } else { return EquipmentStats[stat];}
-        }
-
-        public Dictionary<EnumCollections.EquipmentStats, float> GetEquipmentStats()
-        {
-            return EquipmentStats;
+                return data.EquipmentStats[stat] + data.RarityStats[stat];
+            } else { return data.EquipmentStats[stat];}
         }
 
         protected virtual void SaveEquipment()
         {
-            ES3.Save(BaseEquipmentName + "Data", EquipmentStats);
+            //ES3.Save(BaseEquipmentName + "Data", EquipmentStats);
         }
 
         public string GenerateName()

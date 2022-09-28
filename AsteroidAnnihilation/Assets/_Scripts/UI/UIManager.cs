@@ -107,6 +107,7 @@ namespace AsteroidAnnihilation
             currentMission = missionManager.GetCurrentMission();
             InitializeMissionUI();
             InitializeObjectiveMenu();
+            inventoryManager.SetUIElements(inventoryPanel, weaponSlotParent, gearSlotParent, componentSlotParent);
         }
 
         public void UpdateMissionUI()
@@ -152,7 +153,7 @@ namespace AsteroidAnnihilation
         public void OpenInventory()
         {
             inventoryScreen.SetActive(!inventoryScreen.activeSelf);
-            if(inventoryScreen.activeSelf) { inventoryManager.OpenInventory(inventoryPanel, weaponSlotParent, gearSlotParent, componentSlotParent); }
+            if(inventoryScreen.activeSelf) { inventoryManager.OpenInventory(); }
         }
 
         public void ShowItemTooltip(ItemData item)

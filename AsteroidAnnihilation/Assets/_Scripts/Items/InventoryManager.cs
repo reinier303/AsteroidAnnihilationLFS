@@ -20,6 +20,9 @@ namespace AsteroidAnnihilation
         public List<WeaponData> InventoryWeapons;
 
         private Transform inventoryPanel;
+        Transform weaponSlotParent;
+        Transform gearSlotParent;
+        Transform componentSlotParent;
         [SerializeField] private GameObject inventorySlot;
 
         private void Awake()
@@ -64,17 +67,25 @@ namespace AsteroidAnnihilation
             ItemSlots = new List<ItemSlot>();
         }
 
-        public void OpenInventory(Transform inventoryPanel, Transform weaponSlotParent, Transform gearSlotParent, Transform componentSlotParent)
+        public void OpenInventory()
         {
-            if (this.inventoryPanel == null) { this.inventoryPanel = inventoryPanel; }
-            InitializeInventoryItems(inventoryPanel);
+            InitializeInventoryItems();
 
             //TODO::Initialize Components/Trinkets
-            InitializeWeapons(weaponSlotParent, componentSlotParent);
-            InitializeGear(gearSlotParent);
+            InitializeWeapons();
+            InitializeGear();
+            InitializeShipComponents();
         }
 
-        private void InitializeInventoryItems(Transform inventoryPanel)
+        public void SetUIElements(Transform inventoryPanel, Transform weaponSlotParent, Transform gearSlotParent, Transform componentSlotParent)
+        {
+            if (this.inventoryPanel == null) { this.inventoryPanel = inventoryPanel; }
+            if (this.weaponSlotParent == null) { this.weaponSlotParent = weaponSlotParent; }
+            if (this.gearSlotParent == null) { this.gearSlotParent = gearSlotParent; }
+            if (this.componentSlotParent == null) { this.componentSlotParent = componentSlotParent; }
+        }
+
+        private void InitializeInventoryItems()
         {
             if (ItemSlots.Count != InventorySlots)
             {
@@ -106,7 +117,7 @@ namespace AsteroidAnnihilation
             }
         }
 
-        private void InitializeWeapons(Transform weaponSlotParent, Transform componentSlotParent)
+        public void InitializeWeapons()
         {
             int weaponSlots = settingsManager.playerShipSettings.WeaponPositions[EnumCollections.ShipType.Fighter].Count;
             for (int i = 0; i < weaponSlotParent.childCount; i++)
@@ -121,7 +132,7 @@ namespace AsteroidAnnihilation
             }
         }
 
-        private void InitializeGear(Transform gearSlotParent)
+        public void InitializeGear()
         {
             for (int i = 0; i < gearSlotParent.childCount; i++)
             {
@@ -132,12 +143,17 @@ namespace AsteroidAnnihilation
             }
         }
 
+        public void InitializeShipComponents()
+        {
+            //Update trinkets/components
+        }
+
         public bool AddItem(ItemData item)
         {
             if (GetItemCount() < InventorySlots)
             {
                 InventoryItems.Add(item);
-                InitializeInventoryItems(inventoryPanel);
+                InitializeInventoryItems();
                 return true;
             } else { return false; }
         }
@@ -147,7 +163,7 @@ namespace AsteroidAnnihilation
             if (GetItemCount() < InventorySlots)
             {
                 InventoryEquipment.Add(equipment);
-                InitializeInventoryItems(inventoryPanel);
+                InitializeInventoryItems();
                 return true;
             }
             else { return false; }
@@ -158,7 +174,7 @@ namespace AsteroidAnnihilation
             if (GetItemCount() < InventorySlots)
             {
                 InventoryWeapons.Add(weapon);
-                InitializeInventoryItems(inventoryPanel);
+                InitializeInventoryItems();
                 return true;
             }
             else { return false; }

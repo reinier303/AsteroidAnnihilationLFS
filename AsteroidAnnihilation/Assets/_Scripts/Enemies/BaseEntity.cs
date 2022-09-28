@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Sirenix.OdinInspector;
+
 namespace AsteroidAnnihilation
 {
     public class BaseEntity : MonoBehaviour
@@ -29,6 +31,7 @@ namespace AsteroidAnnihilation
 
         [Header("Drops")]
         public List<DropTableEntry> Drops;
+        public float DropChance;
 
         public System.Action<float, bool> OnTakeDamage;
 
@@ -151,13 +154,9 @@ namespace AsteroidAnnihilation
 
         protected virtual void DropPickUps()
         {
-            for (int i = 0; i < Drops.Count; i++)
+            if(Random.Range(0,100f) <= DropChance)
             {
-                if (Random.Range(0.0f, 100.0f) < Drops[i].DropChance && Drops[i].PickUp != null)
-                {
-                    GameObject pickUp = objectPooler.SpawnFromPool(Drops[i].PickUp.PickUpName, transform.position, Quaternion.Euler(0, 0, Random.Range(0, 360)));
-                    pickUp.GetComponent<PickUp>().InitializePickUp(Drops[i].PickUp.PickUpName);
-                }
+                objectPooler.SpawnFromPool("WeaponPickUp", transform.position, Quaternion.identity);
             }
         }
 

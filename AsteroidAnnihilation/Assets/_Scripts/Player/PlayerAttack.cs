@@ -50,7 +50,6 @@ namespace AsteroidAnnihilation
             completionRewardStats = CompletionRewardStats.Instance;
 
             Initialize();
-
         }
 
         private void Initialize()
@@ -67,10 +66,9 @@ namespace AsteroidAnnihilation
             foreach (WeaponData wData in currentWeaponDatas)
             {
                 currentWeapons.Add(equipmentManager.GetWeapon(wData.WeaponType));
-                currentWeapons[weaponCount].Initialize(rPlayer.RPlayerStats, wData.EquipmentData.EquipmentStats, wData.EquipmentData.RarityStats);
+                currentWeapons[weaponCount].Initialize(rPlayer.RPlayerStats, equipmentManager);
                 weaponCount++;
             }
-            Debug.Log(currentWeapons.Count);
 
         }
 
@@ -124,22 +122,38 @@ namespace AsteroidAnnihilation
 
                 if(mouseButton == 0)
                 {
-                    //TODO::Make this work for multiple
-                    currentWeapons[0].Fire(RObjectPooler, transform, rPlayer.RPlayerMovement.MovementInput * playerVelocityMultiplier, weaponPositions[0]);
+                    int weaponIndex = 0;
+                    foreach(Weapon weapon in currentWeapons)
+                    {
+                        currentWeapons[weaponIndex].Fire(RObjectPooler, transform, rPlayer.RPlayerMovement.MovementInput * playerVelocityMultiplier, weaponPositions[weaponIndex], weaponIndex);
+                        weaponIndex++;
+                    }
                     canFire = false;
                     StartCoroutine(FireCooldownTimer(mouseButton));
                 }
             }
         }
 
-
         private IEnumerator FireCooldownTimer(int mouseButton)
         {
             if(mouseButton == 0)
             {
-                yield return new WaitForSeconds(1 / currentWeapons[0].GetEquipmentStat(EnumCollections.EquipmentStats.FireRate));
+                yield return new WaitForSeconds(1 / GetCooldownAverage());
             }
             canFire = true;
+        }
+
+        //TODO::Create a way for weapons to fire independently based on their own firerate/alternating. Make this and average both options
+        private float GetCooldownAverage()
+        {
+            float totalFirerate = 0;
+            int weapons = 0;
+            foreach(Weapon weapon in currentWeapons)
+            {
+                totalFirerate += currentWeapons[weapons].GetEquipmentStat(EnumCollections.EquipmentStats.FireRate, weapons);
+                weapons++;
+            }
+            return totalFirerate / Mathf.Clamp(weapons, 1, 25);
         }
     }
 }

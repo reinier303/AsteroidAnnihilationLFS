@@ -24,7 +24,7 @@ namespace AsteroidAnnihilation
             AsteroidGroup3Random,
             AsteroidGroup_3Alligned,
             SwarmPod,
-            SwarmDrone,
+            SwarmChaserDrone,
             OutlawGrunt,
             OutlawMarauderMK1
         }

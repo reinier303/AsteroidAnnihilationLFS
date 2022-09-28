@@ -8,6 +8,7 @@ namespace AsteroidAnnihilation
     {
         private EquipmentManager equipmentManager;
         private InventoryManager inventoryManager;
+        private SettingsManager settingsManager;
 
         private WeaponData weaponData;
 
@@ -25,9 +26,10 @@ namespace AsteroidAnnihilation
 
         public void Initialize()
         {
+            settingsManager = SettingsManager.Instance;
             equipmentManager = EquipmentManager.Instance;
             inventoryManager = InventoryManager.Instance;
-            generalItemSettings = equipmentManager.generalItemSettings;
+            generalItemSettings = settingsManager.generalItemSettings;
             weaponData = equipmentManager.GenerateWeapon();
             icon.sprite = weaponData.EquipmentData.ItemData.Icon;
             background.material = generalItemSettings.GetRarityMaterial(weaponData.EquipmentData.ItemData.Rarity);
