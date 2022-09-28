@@ -344,19 +344,19 @@ MonoBehaviour:
       Data: 
     - Name: StartSpawnRateMin
       Entry: 4
-      Data: 0.65
+      Data: 0.85
     - Name: StartSpawnRateMax
       Entry: 4
-      Data: 0.55
+      Data: 0.75
     - Name: SpawnRateRampPerSecond
       Entry: 4
       Data: -0.002
     - Name: MaxSpawnRateMin
       Entry: 4
-      Data: 0.3
+      Data: 0.55
     - Name: MaxSpawnRateMax
       Entry: 4
-      Data: 0.4
+      Data: 0.6
     - Name: 
       Entry: 8
       Data: 
