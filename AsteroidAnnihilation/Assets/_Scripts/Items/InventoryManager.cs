@@ -180,6 +180,25 @@ namespace AsteroidAnnihilation
             else { return false; }
         }
 
+        public void RemoveItem(ItemData item)
+        {
+            InventoryItems.Remove(item);
+            InitializeInventoryItems();
+        }
+
+        public void RemoveItem(EquipmentData equipment)
+        {
+            InventoryEquipment.Remove(equipment);
+            InitializeInventoryItems();
+        }
+
+        public void RemoveItem(WeaponData weapon)
+        {
+            InventoryWeapons.Remove(weapon);
+            InitializeInventoryItems();
+            Debug.Log(InventoryWeapons.Count);
+        }
+
         public int GetItemCount()
         {
             return InventoryItems.Count + InventoryEquipment.Count + InventoryWeapons.Count;

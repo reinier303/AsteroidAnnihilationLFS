@@ -40,6 +40,7 @@ namespace AsteroidAnnihilation
 
         private void Start()
         {
+            GameManager.Instance.onEndGame += SaveEquipment;
             generalItemSettings = SettingsManager.Instance.generalItemSettings;
             playerShipSettings = SettingsManager.Instance.playerShipSettings;
             weaponAmount = playerShipSettings.GetWeaponPositions(EnumCollections.ShipType.Fighter).Count;
@@ -130,24 +131,41 @@ namespace AsteroidAnnihilation
         }
 
 
-        public void ChangeWeapon(WeaponData weapon, int index = 0)
+        public bool ChangeWeapon(WeaponData weapon, int index = 0)
         {
+            bool succes = false;
+            //CHECK REQUIREMENTS HERE and dont swap weapon if requirements not met
             if(index == 0 && equipedWeapons.Count < weaponAmount)
             {
                 equipedWeapons.Add(weapon);
+                succes = true;
             }
             else if(equipedWeapons.Count == weaponAmount)
             {
                 equipedWeapons[index] = weapon;
+                succes = true;
             }
             //Case index parameter is supplied
             else
             {
-                if (equipedWeapons.Count != 0 && equipedWeapons.Count >= index) { equipedWeapons[index] = weapon; }
-                else { equipedWeapons.Add(weapon); }
+                if (equipedWeapons.Count != 0 && equipedWeapons.Count >= index) 
+                { 
+                    equipedWeapons[index] = weapon;
+                    succes = true;
+                }
+                else { 
+                    equipedWeapons.Add(weapon);
+                    succes = true;
+                }
             }
-            playerAttack.WeaponChanged();
-            inventoryManager.InitializeWeapons();
+            if(succes)
+            {
+                inventoryManager.RemoveItem(weapon);
+                playerAttack.WeaponChanged();
+                inventoryManager.InitializeWeapons();
+                return true;
+            } else { return false; }
+
         }
 
         public void ChangeGear(EnumCollections.ItemType equipType, EquipmentData equipment)
