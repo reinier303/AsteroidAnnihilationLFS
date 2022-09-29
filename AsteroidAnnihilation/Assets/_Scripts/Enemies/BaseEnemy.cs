@@ -19,6 +19,17 @@ namespace AsteroidAnnihilation
         public float AggroDistance = 8f;
         public float DeAggroDistance = 50f;
 
+        [SerializeField] protected Vector2 sizeRange = new Vector2(0.9f, 1.25f);
+
+        [SerializeField] protected bool grouped = false;
+        protected EnemyGroup enemyGroup;
+
+        protected override void Awake()
+        {
+            base.Awake();
+            if (grouped) { enemyGroup = transform.parent.GetComponent<EnemyGroup>(); }
+        }
+
         protected override void Start()
         {
             base.Start();
@@ -80,6 +91,7 @@ namespace AsteroidAnnihilation
 
         protected override void Die()
         {
+            if (grouped) { enemyGroup.StartCoroutine(enemyGroup.EnemyDisabled()); }
             DropUnits(DroppedUnits);
             gameManager.RPlayer.RPlayerStats.AddToExperience(ExperienceGained);
             base.Die();

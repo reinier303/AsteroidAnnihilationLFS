@@ -6,7 +6,7 @@ using UnityEngine.EventSystems;
 
 namespace AsteroidAnnihilation
 {
-    public class ItemSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerDownHandler
+    public class ItemSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerDownHandler, IBeginDragHandler, IDragHandler, IEndDragHandler
     {
         private UIManager uIManager;
         private EquipmentManager equipmentManager;
@@ -21,10 +21,15 @@ namespace AsteroidAnnihilation
         private enum SlotDataType {None, Item, Equipment, Weapon}
         SlotDataType slotDataType;
 
+        private Vector2 iconStartPos;
+        private RectTransform iconTransform;
+
         private void Awake()
         {
             uIManager = UIManager.Instance;
             slotDataType = SlotDataType.None;
+            iconTransform = icon.GetComponent<RectTransform>();
+            iconStartPos = iconTransform.anchoredPosition;
         }
 
         private void Start()
@@ -76,7 +81,6 @@ namespace AsteroidAnnihilation
                     weapon = default;
                     break;
             }
-            Debug.Log("got here");
             slotDataType = SlotDataType.None;
             icon.sprite = null;
             icon.color = new Color(255,255,255,0);
@@ -143,14 +147,15 @@ namespace AsteroidAnnihilation
                     return;
                 case SlotDataType.Weapon:
                     (bool succes, WeaponData data) = equipmentManager.ChangeWeapon(weapon);
-                    if (!data.Equals(default(WeaponData)))
-                    {
-                        inventoryManager.AddItem(data);
-                    }
                     if (succes)
                     {
                         inventoryManager.RemoveItem(weapon);
                     }
+                    if (!data.Equals(default(WeaponData)))
+                    {
+                        inventoryManager.AddItem(data);
+                    }
+
                     break;
             }
         }
@@ -174,6 +179,22 @@ namespace AsteroidAnnihilation
                     ClearSlot();
                     break;
             }
+        }
+
+        public void OnBeginDrag(PointerEventData eventData)
+        {
+            //throw new System.NotImplementedException();
+        }
+
+        public void OnDrag(PointerEventData eventData)
+        {
+            iconTransform.anchoredPosition += eventData.delta;
+        }
+
+        public void OnEndDrag(PointerEventData eventData)
+        {
+            Debug.Log(eventData.pointerCurrentRaycast);
+            iconTransform.anchoredPosition = iconStartPos;
         }
     }
 }

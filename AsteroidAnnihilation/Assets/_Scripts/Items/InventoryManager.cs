@@ -25,6 +25,8 @@ namespace AsteroidAnnihilation
         Transform componentSlotParent;
         [SerializeField] private GameObject inventorySlot;
 
+        private GameObject DraggedObject;
+
         private void Awake()
         {
             Instance = this;
@@ -103,7 +105,6 @@ namespace AsteroidAnnihilation
             int currentSlot = 0;
             for (int i = 0; i < InventoryWeapons.Count; i++)
             {
-                Debug.Log(InventoryWeapons.Count);
                 ItemSlot itemSlot = ItemSlots[currentSlot];
                 itemSlot.InitializeSlot(InventoryWeapons[i]);
                 currentSlot++;

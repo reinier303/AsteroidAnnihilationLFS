@@ -115,7 +115,7 @@ namespace AsteroidAnnihilation
         private void Fire(int mouseButton)
         {
             //Fix UI Check
-            if (canFire)
+            if (canFire && currentWeapons.Count > 0)
             {
                 muzzleFlash.SetActive(false);
                 muzzleFlash.SetActive(true);

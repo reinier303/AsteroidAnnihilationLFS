@@ -16,17 +16,21 @@ namespace AsteroidAnnihilation
 
         public enum EnemyTypes
         {
-            Asteroid,
-            BigAsteroid,
-            BlueAsteroid,
-            HardAsteroid,
-            OrbitingAsteroid,
-            AsteroidGroup3Random,
-            AsteroidGroup_3Alligned,
-            SwarmPod,
-            SwarmChaserDrone,
-            OutlawGrunt,
-            OutlawMarauderMK1
+            Asteroid = 0,
+            BigAsteroid = 1,
+            BlueAsteroid = 2,
+            HardAsteroid = 3,
+            OrbitingAsteroid = 4,
+            AsteroidGroup3Random = 5,
+            AsteroidGroup_3Alligned = 6,
+            SwarmPod = 7,
+            SwarmPodGroupSmall = 8,
+            SwarmPodGroupMedium = 12,
+            SwarmPodGroupLarge = 13,
+            LoneSwarmPod = 14,
+            SwarmChaserDrone = 9,
+            OutlawGrunt = 10,
+            OutlawMarauderMK1 = 11
         }
 
         public enum Backgrounds
