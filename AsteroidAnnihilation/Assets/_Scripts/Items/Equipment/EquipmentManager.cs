@@ -131,9 +131,10 @@ namespace AsteroidAnnihilation
         }
 
 
-        public bool ChangeWeapon(WeaponData weapon, int index = 0)
+        public (bool, WeaponData) ChangeWeapon(WeaponData weapon, int index = 0)
         {
             bool succes = false;
+            WeaponData data = default;
             //CHECK REQUIREMENTS HERE and dont swap weapon if requirements not met
             if(index == 0 && equipedWeapons.Count < weaponAmount)
             {
@@ -142,6 +143,7 @@ namespace AsteroidAnnihilation
             }
             else if(equipedWeapons.Count == weaponAmount)
             {
+                data = equipedWeapons[index];
                 equipedWeapons[index] = weapon;
                 succes = true;
             }
@@ -149,7 +151,8 @@ namespace AsteroidAnnihilation
             else
             {
                 if (equipedWeapons.Count != 0 && equipedWeapons.Count >= index) 
-                { 
+                {
+                    data = equipedWeapons[index];
                     equipedWeapons[index] = weapon;
                     succes = true;
                 }
@@ -158,14 +161,20 @@ namespace AsteroidAnnihilation
                     succes = true;
                 }
             }
-            if(succes)
+            if (succes)
             {
-                inventoryManager.RemoveItem(weapon);
                 playerAttack.WeaponChanged();
                 inventoryManager.InitializeWeapons();
-                return true;
-            } else { return false; }
+                return (succes, data);
+            } else { return (succes, default); }
 
+        }
+
+        public WeaponData RemoveWeapon(WeaponData weapon)
+        {
+            equipedWeapons.Remove(weapon);
+            playerAttack.WeaponChanged();
+            return weapon;
         }
 
         public void ChangeGear(EnumCollections.ItemType equipType, EquipmentData equipment)

@@ -96,10 +96,14 @@ namespace AsteroidAnnihilation
                     ItemSlots.Add(slot);
                 }
             }
+            foreach (ItemSlot slot in ItemSlots)
+            {
+                slot.ClearSlot();
+            }
             int currentSlot = 0;
             for (int i = 0; i < InventoryWeapons.Count; i++)
             {
-                Debug.Log("i:"+ i +",  currentslot:" + currentSlot);
+                Debug.Log(InventoryWeapons.Count);
                 ItemSlot itemSlot = ItemSlots[currentSlot];
                 itemSlot.InitializeSlot(InventoryWeapons[i]);
                 currentSlot++;
@@ -115,10 +119,6 @@ namespace AsteroidAnnihilation
                 ItemSlot itemSlot = ItemSlots[currentSlot];
                 itemSlot.InitializeSlot(InventoryItems[i]);
                 currentSlot++;
-            }
-            foreach (ItemSlot slot in ItemSlots)
-            {
-                if (!slot.ContainsItem()) { slot.ResetSlot(); }
             }
         }
 
@@ -144,7 +144,7 @@ namespace AsteroidAnnihilation
                 GameObject gearSlot = gearSlotParent.GetChild(i).gameObject;
                 ItemSlot slot = gearSlot.GetComponent<ItemSlot>();
 
-                slot.InitializeSlot(equipmentManager.GetGear(slot.ItemType));
+                slot.InitializeSlot(equipmentManager.GetGear(slot.itemType));
             }
         }
 
@@ -155,7 +155,7 @@ namespace AsteroidAnnihilation
 
         public bool AddItem(ItemData item)
         {
-            if (GetItemCount() < InventorySlots)
+            if (!InventoryFull())
             {
                 InventoryItems.Add(item);
                 InitializeInventoryItems();
@@ -165,7 +165,7 @@ namespace AsteroidAnnihilation
 
         public bool AddItem(EquipmentData equipment)
         {
-            if (GetItemCount() < InventorySlots)
+            if (!InventoryFull())
             {
                 InventoryEquipment.Add(equipment);
                 InitializeInventoryItems();
@@ -176,7 +176,7 @@ namespace AsteroidAnnihilation
 
         public bool AddItem(WeaponData weapon)
         {
-            if (GetItemCount() < InventorySlots)
+            if (!InventoryFull())
             {
                 InventoryWeapons.Add(weapon);
                 InitializeInventoryItems();
@@ -201,12 +201,16 @@ namespace AsteroidAnnihilation
         {
             InventoryWeapons.Remove(weapon);
             InitializeInventoryItems();
-            Debug.Log(InventoryWeapons.Count);
         }
 
         public int GetItemCount()
         {
-            return InventoryItems.Count + InventoryEquipment.Count + InventoryWeapons.Count;
+            return (InventoryItems.Count + InventoryEquipment.Count + InventoryWeapons.Count) ;
+        }
+
+        public bool InventoryFull()
+        {
+            return GetItemCount() >= InventorySlots;
         }
     }
 

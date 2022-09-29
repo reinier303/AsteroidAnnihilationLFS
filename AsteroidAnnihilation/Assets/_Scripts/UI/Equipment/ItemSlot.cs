@@ -10,21 +10,27 @@ namespace AsteroidAnnihilation
     {
         private UIManager uIManager;
         private EquipmentManager equipmentManager;
+        private InventoryManager inventoryManager;
 
         private ItemData item;
         private EquipmentData equipment;
         private WeaponData weapon;
         [SerializeField] private Image icon;
 
-        public EnumCollections.ItemType ItemType;
+        public EnumCollections.ItemType itemType;
         private enum SlotDataType {None, Item, Equipment, Weapon}
         SlotDataType slotDataType;
 
         private void Awake()
         {
             uIManager = UIManager.Instance;
-            equipmentManager = EquipmentManager.Instance;
             slotDataType = SlotDataType.None;
+        }
+
+        private void Start()
+        {
+            equipmentManager = EquipmentManager.Instance;
+            inventoryManager = InventoryManager.Instance;
         }
 
         public void InitializeSlot(ItemData item)
@@ -54,12 +60,12 @@ namespace AsteroidAnnihilation
             icon.color = Color.white;
         }
 
-        public void ResetSlot()
+        public void ClearSlot()
         {
             switch (slotDataType)
             {
                 case SlotDataType.None:
-                    return;
+                    break;
                 case SlotDataType.Item:
                     item = default;
                     break;
@@ -70,6 +76,7 @@ namespace AsteroidAnnihilation
                     weapon = default;
                     break;
             }
+            Debug.Log("got here");
             slotDataType = SlotDataType.None;
             icon.sprite = null;
             icon.color = new Color(255,255,255,0);
@@ -113,21 +120,59 @@ namespace AsteroidAnnihilation
         {
             if(eventData.button == PointerEventData.InputButton.Right)
             {
-                switch (slotDataType)
+                if (itemType == EnumCollections.ItemType.Inventory)
                 {
-                    case SlotDataType.None:
-                        return;
-                    case SlotDataType.Item:
-                        return;
-                    case SlotDataType.Equipment:
-                        return;
-                    case SlotDataType.Weapon:
-                        if(equipmentManager.ChangeWeapon(weapon))
-                        {
-                            slotDataType = SlotDataType.None;
-                        }
-                        break;
+                    InventoryClick();
                 }
+                else
+                {
+                    EquipmentClick();
+                }
+            }
+        }
+
+        private void InventoryClick()
+        {
+            switch (slotDataType)
+            {
+                case SlotDataType.None:
+                    return;
+                case SlotDataType.Item:
+                    return;
+                case SlotDataType.Equipment:
+                    return;
+                case SlotDataType.Weapon:
+                    (bool succes, WeaponData data) = equipmentManager.ChangeWeapon(weapon);
+                    if (!data.Equals(default(WeaponData)))
+                    {
+                        inventoryManager.AddItem(data);
+                    }
+                    if (succes)
+                    {
+                        inventoryManager.RemoveItem(weapon);
+                    }
+                    break;
+            }
+        }
+
+        private void EquipmentClick()
+        {
+            switch (slotDataType)
+            {
+                case SlotDataType.None:
+                    return;
+                case SlotDataType.Item:
+                    return;
+                case SlotDataType.Equipment:
+                    return;
+                case SlotDataType.Weapon:
+                    if (inventoryManager.InventoryFull()) {
+                        Debug.Log("Inventory Full");
+                        return; }
+                    WeaponData data = equipmentManager.RemoveWeapon(weapon);
+                    inventoryManager.AddItem(data);
+                    ClearSlot();
+                    break;
             }
         }
     }

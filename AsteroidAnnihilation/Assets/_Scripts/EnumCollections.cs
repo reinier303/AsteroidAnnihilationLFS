@@ -131,6 +131,7 @@ namespace AsteroidAnnihilation
             Weapon,
             Consumable,
             /* Accesory */ShipComponent,
+            Inventory
         }
 
         public enum ShipType
