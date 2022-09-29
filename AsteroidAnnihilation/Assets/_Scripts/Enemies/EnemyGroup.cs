@@ -50,6 +50,7 @@ namespace AsteroidAnnihilation
             for (int i = 0; i < enemies.Count; i++)
             {
                 enemies[i].localPosition = enemyStartPositions[i];
+                enemies[i].gameObject.SetActive(false);
             }
             enemiesDisabled = 0;
         }

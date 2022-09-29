@@ -139,19 +139,43 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MaxHealth: 100
   currentHealth: 100
-  ShakeMagnitude: 6
+  ShakeMagnitude: 5.5
   ShakeDuration: 0.5
   HitSound: 
   DeathSound: 
-  ParticleEffect: AsteroidExplosion
+  ParticleEffect: SwarmExplosion1
   ParticleEffectScale: 1
   PermanenceSprites:
-  - {fileID: 21300000, guid: 84926054ca8a2e0429ad589ecf4d953c, type: 3}
+  - {fileID: -2103524419, guid: d260ab6374fa2774b89b7291f5ab0b68, type: 3}
+  - {fileID: 1969742146, guid: d260ab6374fa2774b89b7291f5ab0b68, type: 3}
+  - {fileID: 1256937384, guid: d260ab6374fa2774b89b7291f5ab0b68, type: 3}
+  - {fileID: 1663557177, guid: d260ab6374fa2774b89b7291f5ab0b68, type: 3}
+  - {fileID: -174853554, guid: d260ab6374fa2774b89b7291f5ab0b68, type: 3}
+  - {fileID: 1332243597, guid: d260ab6374fa2774b89b7291f5ab0b68, type: 3}
+  - {fileID: 1328406459, guid: d260ab6374fa2774b89b7291f5ab0b68, type: 3}
+  - {fileID: 185427147, guid: d260ab6374fa2774b89b7291f5ab0b68, type: 3}
+  - {fileID: -197955586, guid: d260ab6374fa2774b89b7291f5ab0b68, type: 3}
+  - {fileID: -779702973, guid: d260ab6374fa2774b89b7291f5ab0b68, type: 3}
+  - {fileID: 1614078161, guid: d260ab6374fa2774b89b7291f5ab0b68, type: 3}
+  - {fileID: -1744852768, guid: d260ab6374fa2774b89b7291f5ab0b68, type: 3}
+  - {fileID: -1765105239, guid: d260ab6374fa2774b89b7291f5ab0b68, type: 3}
+  - {fileID: -38284777, guid: d260ab6374fa2774b89b7291f5ab0b68, type: 3}
+  - {fileID: 717177853, guid: d260ab6374fa2774b89b7291f5ab0b68, type: 3}
+  - {fileID: 1615613773, guid: d260ab6374fa2774b89b7291f5ab0b68, type: 3}
+  - {fileID: 819086978, guid: d260ab6374fa2774b89b7291f5ab0b68, type: 3}
+  - {fileID: 117819793, guid: d260ab6374fa2774b89b7291f5ab0b68, type: 3}
+  - {fileID: -495974633, guid: d260ab6374fa2774b89b7291f5ab0b68, type: 3}
+  - {fileID: -923828661, guid: d260ab6374fa2774b89b7291f5ab0b68, type: 3}
+  - {fileID: 1098582771, guid: d260ab6374fa2774b89b7291f5ab0b68, type: 3}
+  - {fileID: -302234414, guid: d260ab6374fa2774b89b7291f5ab0b68, type: 3}
+  - {fileID: 768638732, guid: d260ab6374fa2774b89b7291f5ab0b68, type: 3}
+  - {fileID: -956300105, guid: d260ab6374fa2774b89b7291f5ab0b68, type: 3}
+  - {fileID: -688703716, guid: d260ab6374fa2774b89b7291f5ab0b68, type: 3}
   PermanencePartMinMaxAmount: {x: 8, y: 10}
-  PermanencePartOutwardsPower: 450
+  PermanencePartOutwardsPower: 850
   PermanenceScaleFactor: 0.1
   Drops: []
-  DropChance: 1
+  DropChance: 10
   isDead: 0
   isInitialized: 0
   KilledByIndex: 0
