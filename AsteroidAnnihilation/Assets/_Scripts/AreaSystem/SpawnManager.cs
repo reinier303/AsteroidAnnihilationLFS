@@ -28,6 +28,14 @@ namespace AsteroidAnnihilation
         //Spawn variables
         [SerializeField] private float spawnDistance = 100;
         private List<GameObject> enemiesAlive;
+        private Dictionary<string, int> enemyTypeCount;
+        private Dictionary<string, int> enemyTypeMax;
+
+        private void Awake()
+        {
+            enemyTypeCount = new Dictionary<string, int>();
+            enemyTypeMax = new Dictionary<string, int>();
+        }
 
         public void Initialize()
         {
@@ -71,8 +79,29 @@ namespace AsteroidAnnihilation
             {
                 Vector2 spawnPosition = GenerateSpawnPosition();
                 string enemy = enemyNames[Random.Range(0, enemyNames.Count)];
-                enemiesAlive.Add(RObjectPooler.SpawnFromPool(enemy, spawnPosition, Quaternion.identity));
+                if(CheckEnemyType(enemy))
+                {
+                    enemiesAlive.Add(RObjectPooler.SpawnFromPool(enemy, spawnPosition, Quaternion.identity));
+                }
             }
+        }
+
+        private bool CheckEnemyType(string enemy)
+        {
+            if (!enemyTypeCount.ContainsKey(enemy)) 
+            {
+                if (enemyTypeMax[enemy] >= enemyTypeCount[enemy])
+                {
+                    return false;
+                }
+                enemyTypeCount.Add(enemy, 1);
+                return true;
+            }
+            else { 
+                enemyTypeCount[enemy]++;
+                return true;
+            }
+
         }
 
         private IEnumerator RampSpawnRate()
@@ -105,6 +134,7 @@ namespace AsteroidAnnihilation
             enemyNames.Clear();
             for (int i = 0; i < currentMission.Enemies.Count; i++)
             {
+                enemyTypeMax.Add(currentMission.Enemies[i].EnemyType.ToString(), currentMission.Enemies[i].MaxAmount);
                 for (int j = 0; j < currentMission.Enemies[i].Priority; j++)
                 {
                     enemyNames.Add(currentMission.Enemies[i].EnemyType.ToString());

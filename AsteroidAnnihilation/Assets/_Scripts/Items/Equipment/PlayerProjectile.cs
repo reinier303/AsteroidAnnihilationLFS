@@ -24,10 +24,15 @@ namespace AsteroidAnnihilation
             gameManager = GameManager.Instance;
         }
 
-        public virtual void Initialize(float size)
+        public virtual void Initialize(float size, float damage, float speed, float lifeTime, bool isCrit)
         {
             canDamage = true;
             Size = size;
+            Damage = damage;
+            ProjectileSpeed = speed;
+            LifeTime = lifeTime;
+            IsCrit = isCrit;
+            if (IsCrit) { SetCrit(); }
             transform.localScale = new Vector2(transform.localScale.x, transform.localScale.y) * Size;
         }
 

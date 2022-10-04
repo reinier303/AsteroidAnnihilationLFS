@@ -42,18 +42,13 @@ namespace AsteroidAnnihilation
 
                 //Initialize projectile
                 PlayerProjectile projectile = projectileObject.GetComponent<PlayerProjectile>();
-                projectile.Initialize(GetEquipmentStat(EnumCollections.EquipmentStats.Size, weaponIndex));
                 projectile.WeaponIndex = WeaponIndex;
 
                 //Set projectile stat values
-                projectile.Damage = GetEquipmentStat(EnumCollections.EquipmentStats.Damage, weaponIndex);
-                if (IsCrit())
-                {
-                    projectile.SetCrit();
-                }
+                float damage = GetEquipmentStat(EnumCollections.EquipmentStats.Damage, weaponIndex);
 
                 projectile.PlayerVelocity = velocity;
-                projectile.ProjectileSpeed = GetEquipmentStat(EnumCollections.EquipmentStats.ProjectileSpeed, weaponIndex) * Random.Range(0.75f, 1.25f);
+                float projectileSpeed = GetEquipmentStat(EnumCollections.EquipmentStats.ProjectileSpeed, weaponIndex) * Random.Range(0.75f, 1.25f);
 
                 //Random lifetime calculations
                 float lifeTimeMultiplier = Random.Range(0.1f, 2);
@@ -71,7 +66,8 @@ namespace AsteroidAnnihilation
                         }
                     }
                 }
-                projectile.LifeTime = GetEquipmentStat(EnumCollections.EquipmentStats.LifeTime, weaponIndex) * lifeTimeMultiplier;
+                float lifeTime = GetEquipmentStat(EnumCollections.EquipmentStats.LifeTime, weaponIndex) * lifeTimeMultiplier;
+                projectile.Initialize(GetEquipmentStat(EnumCollections.EquipmentStats.Size, weaponIndex), damage, projectileSpeed, lifeTime, IsCrit());
 
                 projectile.StartCoroutine(projectile.DisableAfterTime());
             }

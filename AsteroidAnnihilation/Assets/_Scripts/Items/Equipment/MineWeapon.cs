@@ -19,17 +19,16 @@ namespace AsteroidAnnihilation
             PlayerProjectile projectile = Mine.GetComponent<PlayerProjectile>();
 
             //Set projectile stat values
-            projectile.Damage = GetEquipmentStat(EnumCollections.EquipmentStats.Damage, weaponIndex);
-            projectile.LifeTime = GetEquipmentStat(EnumCollections.EquipmentStats.LifeTime, weaponIndex);
+            float damage = GetEquipmentStat(EnumCollections.EquipmentStats.Damage, weaponIndex);
+            float lifeTime = GetEquipmentStat(EnumCollections.EquipmentStats.LifeTime, weaponIndex);
             if (IsCrit())
             {
                 projectile.SetCrit();
             }
             //Cast to projectile type to set type specific variables
             MineProjectile mineProjectile = (MineProjectile)projectile;
-            mineProjectile.Size = GetEquipmentStat(EnumCollections.EquipmentStats.Size, weaponIndex);
 
-            projectile.Initialize(GetEquipmentStat(EnumCollections.EquipmentStats.Size, weaponIndex));
+            projectile.Initialize(GetEquipmentStat(EnumCollections.EquipmentStats.Size, weaponIndex), damage, 0 ,lifeTime, IsCrit());
             projectile.WeaponIndex = WeaponIndex;
             projectile.StartCoroutine(projectile.DisableAfterTime());
         }

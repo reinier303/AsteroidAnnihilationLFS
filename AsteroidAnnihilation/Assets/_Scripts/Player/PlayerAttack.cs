@@ -19,7 +19,7 @@ namespace AsteroidAnnihilation
         public float fireCooldown;
 
         private List<Vector2> weaponPositions;
-        private List<WeaponData> currentWeaponDatas;
+        private Dictionary<int, WeaponData> currentWeaponDatas;
         private List<Weapon> currentWeapons;
 
         [SerializeField] private GameObject muzzleFlash;
@@ -55,7 +55,6 @@ namespace AsteroidAnnihilation
         private void Initialize()
         {
             canFire = true;
-            WeaponChanged();
         }
 
         public void WeaponChanged()
@@ -63,8 +62,9 @@ namespace AsteroidAnnihilation
             currentWeaponDatas = equipmentManager.GetAllEquipedWeapons();
             currentWeapons.Clear();
             int weaponCount = 0;
-            foreach (WeaponData wData in currentWeaponDatas)
+            foreach (WeaponData wData in currentWeaponDatas.Values)
             {
+                if (wData.WeaponType == EnumCollections.Weapons.None) { continue; }
                 currentWeapons.Add(equipmentManager.GetWeapon(wData.WeaponType));
                 currentWeapons[weaponCount].Initialize(rPlayer.RPlayerStats, equipmentManager);
                 weaponCount++;

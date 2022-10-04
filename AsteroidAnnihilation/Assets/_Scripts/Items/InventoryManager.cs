@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 namespace AsteroidAnnihilation
 {
@@ -13,7 +14,7 @@ namespace AsteroidAnnihilation
         private SettingsManager settingsManager;
 
         public int InventorySlots;
-        List<ItemSlot> ItemSlots;
+        Dictionary<int, ItemSlot> ItemSlots;
 
         public List<ItemData> InventoryItems;
         public List<EquipmentData> InventoryEquipment;
@@ -66,7 +67,7 @@ namespace AsteroidAnnihilation
                 InventoryEquipment = (List<EquipmentData>)ES3.Load("inventoryEquipment");
                 InventoryWeapons = (List<WeaponData>)ES3.Load("inventoryWeapons");
             }
-            ItemSlots = new List<ItemSlot>();
+            ItemSlots = new Dictionary<int, ItemSlot>();
         }
 
         public void OpenInventory()
@@ -95,10 +96,10 @@ namespace AsteroidAnnihilation
                 {
                     ItemSlot slot = inventoryPanel.GetChild(i).GetComponent<ItemSlot>();
                     slot.gameObject.SetActive(true);
-                    ItemSlots.Add(slot);
+                    ItemSlots.Add(i, slot);
                 }
             }
-            foreach (ItemSlot slot in ItemSlots)
+            foreach (ItemSlot slot in ItemSlots.Values)
             {
                 slot.ClearSlot();
             }
@@ -126,13 +127,14 @@ namespace AsteroidAnnihilation
         public void InitializeWeapons()
         {
             int weaponSlots = settingsManager.playerShipSettings.WeaponPositions[EnumCollections.ShipType.Fighter].Count;
+            Dictionary<int, WeaponData> weapons = equipmentManager.GetAllEquipedWeapons();
             for (int i = 0; i < weaponSlotParent.childCount; i++)
             {
                 GameObject weaponSlot = weaponSlotParent.GetChild(i).gameObject;
                 if (i < weaponSlots)
                 {
                     weaponSlot.SetActive(true);
-                    List<WeaponData> weapons = equipmentManager.GetAllEquipedWeapons();
+                    if (weapons[i].WeaponType == EnumCollections.Weapons.None) { continue; }
                     if (weapons.Count > i) { weaponSlot.GetComponent<ItemSlot>().InitializeSlot(weapons[i]); }
                 }
             }
@@ -145,7 +147,7 @@ namespace AsteroidAnnihilation
                 GameObject gearSlot = gearSlotParent.GetChild(i).gameObject;
                 ItemSlot slot = gearSlot.GetComponent<ItemSlot>();
 
-                slot.InitializeSlot(equipmentManager.GetGear(slot.itemType));
+                slot.InitializeSlot(equipmentManager.GetGear(slot.slotType));
             }
         }
 

@@ -14,7 +14,7 @@ namespace AsteroidAnnihilation
 
         private Dictionary<EnumCollections.Weapons, Weapon> weaponTypesT1;
 
-        private List<WeaponData> equipedWeapons;
+        private Dictionary<int, WeaponData> equipedWeapons;
         private Dictionary<EnumCollections.ItemType, EquipmentData> equipedGear;
 
         private GeneralItemSettings generalItemSettings;
@@ -25,17 +25,6 @@ namespace AsteroidAnnihilation
         private void Awake()
         {
             Instance = this;
-
-            weaponTypesT1 = new Dictionary<EnumCollections.Weapons, Weapon>();
-
-            equipedWeapons = new List<WeaponData>();
-
-            Object[] weapons = Resources.LoadAll("Weapons/WeaponsT1", typeof(Weapon));
-            foreach (Weapon weapon in weapons)
-            {
-                if(weapon.EquipmentStatRanges == null) {Debug.LogWarning("WeaponStatRanges of " + weapon.name + " are not filled in"); return; }
-                weaponTypesT1.Add(weapon.WeaponType, weapon);
-            }
         }
 
         private void Start()
@@ -43,12 +32,25 @@ namespace AsteroidAnnihilation
             GameManager.Instance.onEndGame += SaveEquipment;
             generalItemSettings = SettingsManager.Instance.generalItemSettings;
             playerShipSettings = SettingsManager.Instance.playerShipSettings;
-            weaponAmount = playerShipSettings.GetWeaponPositions(EnumCollections.ShipType.Fighter).Count;
-
             playerAttack = Player.Instance.RPlayerAttack;
             inventoryManager = InventoryManager.Instance;
+            
+            InitializeWeapons();
             LoadEquipment();
             playerAttack.WeaponChanged();
+        }
+
+        private void InitializeWeapons()
+        {
+            weaponTypesT1 = new Dictionary<EnumCollections.Weapons, Weapon>();
+
+            Object[] weapons = Resources.LoadAll("Weapons/WeaponsT1", typeof(Weapon));
+            foreach (Weapon weapon in weapons)
+            {
+                if (weapon.EquipmentStatRanges == null) { Debug.LogWarning("WeaponStatRanges of " + weapon.name + " are not filled in"); continue; }
+                weaponTypesT1.Add(weapon.WeaponType, weapon);
+            }
+            weaponAmount = playerShipSettings.GetWeaponPositions(EnumCollections.ShipType.Fighter).Count;
         }
 
         private void SaveEquipment()
@@ -61,14 +63,18 @@ namespace AsteroidAnnihilation
         {
             if (!ES3.KeyExists("equipedWeapons"))
             {
-                equipedWeapons = new List<WeaponData>();
-                equipedWeapons.Add(generalItemSettings.startWeapon);
+                equipedWeapons = new Dictionary<int, WeaponData>();
+                equipedWeapons.Add(0, generalItemSettings.startWeapon);
+                for (int i = 1; i < weaponAmount; i++)
+                {
+                    equipedWeapons.Add(i, default);
+                }
                 equipedGear = generalItemSettings.startGear;
                 SaveEquipment();
             }
             else
             {
-                equipedWeapons = (List<WeaponData>)ES3.Load("equipedWeapons");
+                equipedWeapons = (Dictionary<int, WeaponData>)ES3.Load("equipedWeapons");
                 equipedGear = (Dictionary<EnumCollections.ItemType, EquipmentData>)ES3.Load("equipedGear");
             }
         }
@@ -120,7 +126,7 @@ namespace AsteroidAnnihilation
             return equipedWeapons[index];
         }
 
-        public List<WeaponData> GetAllEquipedWeapons()
+        public Dictionary<int, WeaponData> GetAllEquipedWeapons()
         {
             return equipedWeapons;
         }
@@ -131,36 +137,47 @@ namespace AsteroidAnnihilation
         }
 
 
-        public (bool, WeaponData) ChangeWeapon(WeaponData weapon, int index = 0)
+        public (bool, WeaponData) ChangeWeapon(WeaponData weapon, int index = -1)
         {
             bool succes = false;
             WeaponData data = default;
+            Debug.Log(equipedWeapons.Count);
+
             //CHECK REQUIREMENTS HERE and dont swap weapon if requirements not met
-            if(index == 0 && equipedWeapons.Count < weaponAmount)
+            if (index == -1 )
             {
-                equipedWeapons.Add(weapon);
-                succes = true;
-            }
-            else if(equipedWeapons.Count == weaponAmount)
-            {
-                data = equipedWeapons[index];
-                equipedWeapons[index] = weapon;
-                succes = true;
+                Debug.Log("index paramater not supplied");
+                int emptyWeaponSlot = GetEmptyWeaponSlotIndex();
+                if (emptyWeaponSlot != -1)
+                {
+                    equipedWeapons[GetEmptyWeaponSlotIndex()] = weapon;
+                    succes = true;
+                }
+                else
+                {
+                    data = equipedWeapons[index];
+                    equipedWeapons[index] = weapon;
+                    //equipedWeapons[index] = weapon;
+                    succes = true;
+                }
             }
             //Case index parameter is supplied
             else
             {
-                if (equipedWeapons.Count != 0 && equipedWeapons.Count >= index) 
+                if (!equipedWeapons[index].Equals(default(WeaponData)))
                 {
-                    data = equipedWeapons[index];
                     equipedWeapons[index] = weapon;
                     succes = true;
                 }
-                else { 
-                    equipedWeapons.Add(weapon);
+                else
+                {
+                    data = equipedWeapons[index];
+                    equipedWeapons[index] = weapon;
+                    //equipedWeapons[index] = weapon;
                     succes = true;
                 }
             }
+
             if (succes)
             {
                 playerAttack.WeaponChanged();
@@ -170,11 +187,23 @@ namespace AsteroidAnnihilation
 
         }
 
-        public WeaponData RemoveWeapon(WeaponData weapon)
+        private int GetEmptyWeaponSlotIndex()
         {
-            equipedWeapons.Remove(weapon);
+            for(int i = 0; i < equipedWeapons.Count; i++)
+            {
+                if (!equipedWeapons[i].Equals(default(WeaponData)))
+                {
+                    return i;
+                }
+            }
+            return -1;
+        }
+
+        public void RemoveWeapon(int index)
+        {
+            inventoryManager.AddItem(equipedWeapons[index]);
+            equipedWeapons[index] = default;
             playerAttack.WeaponChanged();
-            return weapon;
         }
 
         public void ChangeGear(EnumCollections.ItemType equipType, EquipmentData equipment)

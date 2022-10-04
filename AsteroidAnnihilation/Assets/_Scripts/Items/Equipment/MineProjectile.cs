@@ -6,9 +6,9 @@ namespace AsteroidAnnihilation
 {
     public class MineProjectile : PlayerProjectile
     {
-        public override void Initialize(float size)
+        public override void Initialize(float size, float damage, float speed, float lifeTime, bool isCrit)
         {
-            base.Initialize(size);
+            base.Initialize(size, damage, speed, lifeTime, isCrit);
         }
 
         protected override void Move()

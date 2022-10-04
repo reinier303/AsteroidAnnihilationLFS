@@ -166,7 +166,7 @@ MonoBehaviour:
       Data: 8
     - Name: MaxAmount
       Entry: 3
-      Data: 25
+      Data: 20
     - Name: Priority
       Entry: 3
       Data: 35

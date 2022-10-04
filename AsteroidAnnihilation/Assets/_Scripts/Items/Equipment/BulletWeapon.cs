@@ -50,15 +50,11 @@ namespace AsteroidAnnihilation
                 projectile.WeaponIndex = WeaponIndex;
 
                 //Set projectile stat values
-                projectile.Damage = GetEquipmentStat(EnumCollections.EquipmentStats.Damage, weaponIndex);
-                if(IsCrit())
-                {
-                    projectile.SetCrit();
-                }
+                float damage = GetEquipmentStat(EnumCollections.EquipmentStats.Damage, weaponIndex);
                 projectile.PlayerVelocity = velocity;
-                projectile.ProjectileSpeed = GetEquipmentStat(EnumCollections.EquipmentStats.ProjectileSpeed, weaponIndex);
-                projectile.LifeTime = GetEquipmentStat(EnumCollections.EquipmentStats.LifeTime, weaponIndex);
-                projectile.Initialize(GetEquipmentStat(EnumCollections.EquipmentStats.Size, weaponIndex));
+                float projectileSpeed = GetEquipmentStat(EnumCollections.EquipmentStats.ProjectileSpeed, weaponIndex);
+                float lifeTime = GetEquipmentStat(EnumCollections.EquipmentStats.LifeTime, weaponIndex);
+                projectile.Initialize(GetEquipmentStat(EnumCollections.EquipmentStats.Size, weaponIndex), damage ,projectileSpeed, lifeTime, IsCrit());
 
                 projectile.StartCoroutine(projectile.DisableAfterTime());
             }

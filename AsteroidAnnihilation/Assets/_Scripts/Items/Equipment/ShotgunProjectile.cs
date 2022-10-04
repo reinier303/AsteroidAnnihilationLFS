@@ -13,9 +13,9 @@ namespace AsteroidAnnihilation
             baseScale = transform.localScale;
         }
 
-        public override void Initialize(float size)
+        public override void Initialize(float size, float damage, float speed, float lifeTime, bool isCrit)
         {
-            base.Initialize(size);
+            base.Initialize(size, damage, speed, lifeTime, isCrit);
             float sizeMultiplier = Random.Range(0.6f, 1.15f);
 
             transform.localScale = baseScale * sizeMultiplier * size;

@@ -173,7 +173,7 @@ MonoBehaviour:
   - {fileID: -688703716, guid: d260ab6374fa2774b89b7291f5ab0b68, type: 3}
   PermanencePartMinMaxAmount: {x: 8, y: 10}
   PermanencePartOutwardsPower: 850
-  PermanenceScaleFactor: 0.1
+  PermanenceScaleFactor: 0.09
   Drops: []
   DropChance: 10
   isDead: 0

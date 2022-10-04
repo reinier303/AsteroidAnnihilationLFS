@@ -114,6 +114,11 @@ namespace AsteroidAnnihilation
             ShotgunBullet
         }
 
+        public enum EnemyProjectiles
+        {
+            SwarmBullet1 = 0
+        }
+
         public enum Rarities
         {
             Common,
