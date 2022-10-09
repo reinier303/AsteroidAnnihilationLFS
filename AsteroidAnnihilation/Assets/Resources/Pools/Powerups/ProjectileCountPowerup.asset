@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Tag: ProjectileCountPowerup
   Prefab: {fileID: 7484127025371783983, guid: 3076a320c230f134196508055f5054ef, type: 3}
-  Amount: 20
+  Amount: 5

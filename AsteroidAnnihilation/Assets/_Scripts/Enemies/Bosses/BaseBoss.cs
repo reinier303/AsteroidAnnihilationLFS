@@ -48,8 +48,10 @@ namespace AsteroidAnnihilation
         {
             int random = Random.Range(0, moves.Count);
             BaseBossMove move = moves[random];
+            yield return new WaitForSeconds(move.MoveStartDelay);
             move.ExecuteMove(transform, this, objectPooler);
-            yield return new WaitForSeconds(move.moveTime + timeBetweenMoves);
+            yield return new WaitForSeconds(move.MoveTime + timeBetweenMoves);
+            yield return new WaitForSeconds(move.MoveEndDelay);
             StartCoroutine(StartMovesRandom());
         }
 
@@ -58,17 +60,18 @@ namespace AsteroidAnnihilation
             if (movesNotExecuted.Count == 0) { movesNotExecuted.AddRange(moves); }
 
             int random = Random.Range(0, movesNotExecuted.Count);
-            Debug.Log(random + ", " + movesNotExecuted.Count);
             BaseBossMove move = movesNotExecuted[random];
-            while(move == lastMove)
+            while(move == lastMove && moves.Count != 1)
             {
                 random = Random.Range(0, movesNotExecuted.Count);
                 move = movesNotExecuted[random];
             }
             lastMove = move;
+            yield return new WaitForSeconds(move.MoveStartDelay);
             move.ExecuteMove(transform, this, objectPooler);
             movesNotExecuted.RemoveAt(random);
-            yield return new WaitForSeconds(move.moveTime + timeBetweenMoves);
+            yield return new WaitForSeconds(move.MoveTime + timeBetweenMoves);
+            yield return new WaitForSeconds(move.MoveEndDelay);
             StartCoroutine(StartMovesRandomNonRecursive());
         }
 
@@ -76,16 +79,20 @@ namespace AsteroidAnnihilation
         {
             if(currentMove == moves.Count) { currentMove = 0; }
             BaseBossMove move = moves[currentMove];
+            yield return new WaitForSeconds(move.MoveStartDelay);
             move.ExecuteMove(transform, this, objectPooler);
             currentMove++;
-            yield return new WaitForSeconds(move.moveTime + timeBetweenMoves);
+            yield return new WaitForSeconds(move.MoveTime + timeBetweenMoves);
+            yield return new WaitForSeconds(move.MoveEndDelay);
             StartCoroutine(StartMovesOrdered());
         }
     }
 
     public class BaseBossMove : SerializedScriptableObject
     {
-        public float moveTime;
+        public float MoveTime;
+        public float MoveStartDelay = 0;
+        public float MoveEndDelay = 0;
 
         public virtual void ExecuteMove(Transform bossTransform, MonoBehaviour runOn, ObjectPooler objectPooler)
         {

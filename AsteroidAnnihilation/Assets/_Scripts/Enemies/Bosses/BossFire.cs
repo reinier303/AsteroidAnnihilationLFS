@@ -7,6 +7,8 @@ namespace AsteroidAnnihilation
     [CreateAssetMenu(menuName = "BossMoves/BossFire", order = 997)]
     public class BossFire : BaseBossMove
     {
+        public float Size;
+        public float ChargeTime;
         public float FireRate;
         public int Amount;
         public float Spread;
@@ -46,18 +48,21 @@ namespace AsteroidAnnihilation
                 angleIncrease = tempSpread / (tempAmount - 1);
             }
 
-            while (timer < moveTime)
-            {
+            ChargeEffect charge = objectPooler.SpawnFromPool("SwarmChargeEffect", bossTransform.position + bossTransform.up * 2f, bossTransform.rotation).GetComponent<ChargeEffect>();
+            charge.transform.parent = bossTransform;
+            charge.Initialize(ChargeTime, Size);
+            yield return new WaitForSeconds(ChargeTime);
 
-                //TODO::Make this an enemy projectile and make a base projectile which both player and enemy projectile inherit from
+            while (timer < MoveTime)
+            {
                 for (int i = 0; i < tempAmount; i++)
                 {
                     float newRotation = (bossTransform.eulerAngles.z - angleIncrease * i) + (tempSpread / 2);
 
-                    PlayerProjectile projectile = objectPooler.SpawnFromPool(Projectile.ToString(),
+                    BaseProjectile projectile = objectPooler.SpawnFromPool(Projectile.ToString(),
                         bossTransform.position + bossTransform.up * 2f,
-                        Quaternion.Euler(bossTransform.eulerAngles.x, bossTransform.eulerAngles.y, newRotation)).GetComponent<PlayerProjectile>();
-                    projectile.Initialize(1.5f, 1, BulletSpeed, ProjectileLifeTime, false);
+                        Quaternion.Euler(bossTransform.eulerAngles.x, bossTransform.eulerAngles.y, newRotation)).GetComponent<BaseProjectile>();
+                    projectile.Initialize(Size, 1, BulletSpeed, ProjectileLifeTime, false);
                 }
                 yield return new WaitForSeconds(1 / FireRate);
                 timer += 1 / FireRate;

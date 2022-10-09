@@ -20,11 +20,13 @@ namespace AsteroidAnnihilation
         public string DeathSound;
 
         [Header("Particle Effect")]
-        public string ParticleEffect;
+        public EnumCollections.ExplosionFX ParticleEffect;
+        protected string particleEffectName;
         public float ParticleEffectScale;
 
         [Header("Permanence Parts")]
-        public List<Sprite> PermanenceSprites;
+        public EnumCollections.PermanenceSprites PermanenceSprites;
+        protected List<Sprite> permanenceSpriteList;
         public Vector2 PermanencePartMinMaxAmount;
         public float PermanencePartOutwardsPower;
         public float PermanenceScaleFactor;
@@ -45,7 +47,7 @@ namespace AsteroidAnnihilation
         protected Material onHitMaterial;
         protected Material baseMaterial;
 
-        protected SpriteRenderer spriteRenderer;
+        [SerializeField] protected SpriteRenderer spriteRenderer;
 
         [HideInInspector] public bool isDead;
         [HideInInspector] public bool isInitialized;
@@ -56,6 +58,8 @@ namespace AsteroidAnnihilation
 
         protected virtual void Awake()
         {
+            isDead = false;
+
             OnTakeDamage += TakeDamage;
 
             onHitMaterial = (Material)Resources.Load("Materials/FlashWhite", typeof(Material));
@@ -65,7 +69,7 @@ namespace AsteroidAnnihilation
             InitializeDropPool();
         }
 
-        private void InitializeDropPool()
+        protected void InitializeDropPool()
         {
             //Get drops from resource database
         }
@@ -76,6 +80,9 @@ namespace AsteroidAnnihilation
             gameManager = GameManager.Instance;
             objectPooler = ObjectPooler.Instance;
             missionManager = MissionManager.Instance;
+            SettingsManager settingsManager = SettingsManager.Instance;
+            particleEffectName = settingsManager.fxSettings.ExplosionFxs[ParticleEffect];
+            permanenceSpriteList = settingsManager.fxSettings.PermanenceSprites[PermanenceSprites];
             playerStats = gameManager.RPlayer.RPlayerStats;
         }
 
@@ -138,7 +145,7 @@ namespace AsteroidAnnihilation
 
         protected virtual void SpawnParticleEffect()
         {
-            GameObject effect = objectPooler.SpawnFromPool(ParticleEffect, transform.position, Quaternion.identity);
+            GameObject effect = objectPooler.SpawnFromPool(particleEffectName, transform.position, Quaternion.identity);
             effect.transform.localScale *= ParticleEffectScale;
         }
 
@@ -148,7 +155,7 @@ namespace AsteroidAnnihilation
             {
                 GameObject permanencePart = objectPooler.SpawnFromPool("PermanencePart", transform.position, Quaternion.Euler(0, 0, Random.Range(0, 360)));
                 permanencePart.transform.localScale = transform.localScale;
-                permanencePart.GetComponent<PermanencePart>().InitializePart(PermanenceSprites, PermanencePartOutwardsPower, PermanenceScaleFactor);
+                permanencePart.GetComponent<PermanencePart>().InitializePart(permanenceSpriteList, PermanencePartOutwardsPower, PermanenceScaleFactor);
             }
         }
 

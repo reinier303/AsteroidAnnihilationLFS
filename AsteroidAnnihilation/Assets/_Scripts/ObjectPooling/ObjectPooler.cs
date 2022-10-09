@@ -10,8 +10,9 @@ namespace AsteroidAnnihilation
         //Assets/Resources/Pools/CreatePoolHere
         public static ObjectPooler Instance;
 
-        private List<ScriptablePool> Pools = new List<ScriptablePool>();
+        private Dictionary<string, ScriptablePool> Pools = new Dictionary<string, ScriptablePool>();
         public Dictionary<string, Queue<GameObject>> PoolDictionary;
+        private Dictionary<string, Transform> PoolParents = new Dictionary<string, Transform>();
         public Transform PopUpParent;
 
         private void Awake()
@@ -24,7 +25,7 @@ namespace AsteroidAnnihilation
                 //Check if pool info is filled.
                 if (pool.Amount > 0 && pool.Prefab != null && pool.Tag != null)
                 {
-                    Pools.Add(pool);
+                    Pools.Add(pool.Tag, pool);
                 }
                 else
                 {
@@ -45,19 +46,18 @@ namespace AsteroidAnnihilation
 
             GameObject PoolsContainerObject = new GameObject("Pools");
 
-            foreach (ScriptablePool pool in Pools)
+            foreach (ScriptablePool pool in Pools.Values)
             {
-
                 if (!PoolDictionary.ContainsKey(pool.Tag))
                 {
                     GameObject containerObject = new GameObject(pool.Tag + "Pool");
                     containerObject.transform.parent = PoolsContainerObject.transform;
-
+                    PoolParents.Add(pool.Tag, containerObject.transform);
                     Queue<GameObject> objectPool = new Queue<GameObject>();
 
                     for (int i = 0; i < pool.Amount; i++)
                     {
-                        GameObject obj = null;
+                        GameObject obj;
                         //Set DamagePopUp Pool parent to PopUpParent to make it function
                         if (pool.Tag == "DamagePopUp" || pool.Tag == "CritPopUp")
                         {
@@ -94,7 +94,19 @@ namespace AsteroidAnnihilation
                 return null;
             }
 
-            GameObject objectToSpawn = PoolDictionary[tag].Dequeue();
+            GameObject objectToSpawn = PoolDictionary[tag].Peek();
+            if (objectToSpawn.activeSelf)
+            {
+                Debug.Log("Active");
+                objectToSpawn = Instantiate(Pools[tag].Prefab, PoolParents[tag].transform);
+                PoolDictionary[tag].Enqueue(objectToSpawn);
+                Debug.Log(PoolDictionary[tag].Count);
+            }
+            else
+            {
+                objectToSpawn = PoolDictionary[tag].Dequeue();
+                PoolDictionary[tag].Enqueue(objectToSpawn);
+            }
 
             if (objectToSpawn == null)
             {
@@ -106,9 +118,6 @@ namespace AsteroidAnnihilation
 
             objectToSpawn.SetActive(false);
             objectToSpawn.SetActive(true);
-
-
-            PoolDictionary[tag].Enqueue(objectToSpawn);
 
             return objectToSpawn;
         }

@@ -2,10 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using Sirenix.OdinInspector;
 
 namespace AsteroidAnnihilation
 {
-    public class InventoryManager : MonoBehaviour
+    public class InventoryManager : SerializedMonoBehaviour
     {
         public static InventoryManager Instance;
 
@@ -14,11 +15,11 @@ namespace AsteroidAnnihilation
         private SettingsManager settingsManager;
 
         public int InventorySlots;
-        Dictionary<int, ItemSlot> ItemSlots;
+        [SerializeField] Dictionary<int, ItemSlot> ItemSlots;
 
-        public List<ItemData> InventoryItems;
-        public List<EquipmentData> InventoryEquipment;
-        public List<WeaponData> InventoryWeapons;
+        public Dictionary<int, ItemData> InventoryItems;
+        public Dictionary<int, EquipmentData> InventoryEquipment;
+        public Dictionary<int, WeaponData> InventoryWeapons;
 
         private Transform inventoryPanel;
         Transform weaponSlotParent;
@@ -39,7 +40,6 @@ namespace AsteroidAnnihilation
             equipmentManager = EquipmentManager.Instance;
             gameManager = GameManager.Instance;
             gameManager.onEndGame += SaveInventory;
-            LoadInventory();
         }
 
         private void SaveInventory()
@@ -50,24 +50,30 @@ namespace AsteroidAnnihilation
             ES3.Save("inventoryWeapons", InventoryWeapons);
         }
 
-        private void LoadInventory()
+        public void LoadInventory()
         {
             if (!ES3.KeyExists("inventoryItems"))
             {
                 InventorySlots = 24;
-                InventoryItems = new List<ItemData>();
-                InventoryEquipment = new List<EquipmentData>();
-                InventoryWeapons = new List<WeaponData>();
+                InventoryItems = new Dictionary<int, ItemData>();
+                InventoryEquipment = new Dictionary<int, EquipmentData>();
+                InventoryWeapons = new Dictionary<int, WeaponData>();
                 SaveInventory();
             }
             else
             {
                 InventorySlots = (int)ES3.Load("inventorySlots");
-                InventoryItems = (List<ItemData>)ES3.Load("inventoryItems");
-                InventoryEquipment = (List<EquipmentData>)ES3.Load("inventoryEquipment");
-                InventoryWeapons = (List<WeaponData>)ES3.Load("inventoryWeapons");
+                InventoryItems = (Dictionary<int, ItemData>)ES3.Load("inventoryItems");
+                InventoryEquipment = (Dictionary<int, EquipmentData>)ES3.Load("inventoryEquipment");
+                InventoryWeapons = (Dictionary<int, WeaponData>)ES3.Load("inventoryWeapons");
             }
             ItemSlots = new Dictionary<int, ItemSlot>();
+            for (int i = 0; i < InventorySlots; i++)
+            {
+                ItemSlot slot = inventoryPanel.GetChild(i).GetComponent<ItemSlot>();
+                slot.gameObject.SetActive(true);
+                ItemSlots.Add(i, slot);
+            }
         }
 
         public void OpenInventory()
@@ -90,37 +96,10 @@ namespace AsteroidAnnihilation
 
         private void InitializeInventoryItems()
         {
-            if (ItemSlots.Count != InventorySlots)
-            {
-                for (int i = 0; i < InventorySlots; i++)
-                {
-                    ItemSlot slot = inventoryPanel.GetChild(i).GetComponent<ItemSlot>();
-                    slot.gameObject.SetActive(true);
-                    ItemSlots.Add(i, slot);
-                }
-            }
             foreach (ItemSlot slot in ItemSlots.Values)
             {
-                slot.ClearSlot();
-            }
-            int currentSlot = 0;
-            for (int i = 0; i < InventoryWeapons.Count; i++)
-            {
-                ItemSlot itemSlot = ItemSlots[currentSlot];
-                itemSlot.InitializeSlot(InventoryWeapons[i]);
-                currentSlot++;
-            }
-            for (int i = 0; i < InventoryEquipment.Count; i++)
-            {
-                ItemSlot itemSlot = ItemSlots[currentSlot];
-                itemSlot.InitializeSlot(InventoryEquipment[i]);
-                currentSlot++;
-            }
-            for (int i = 0; i < InventoryItems.Count; i++)
-            {
-                ItemSlot itemSlot = ItemSlots[currentSlot];
-                itemSlot.InitializeSlot(InventoryItems[i]);
-                currentSlot++;
+                //slot.ClearSlot();
+                slot.InitializeSlot();
             }
         }
 
@@ -135,7 +114,10 @@ namespace AsteroidAnnihilation
                 {
                     weaponSlot.SetActive(true);
                     if (weapons[i].WeaponType == EnumCollections.Weapons.None) { continue; }
-                    if (weapons.Count > i) { weaponSlot.GetComponent<ItemSlot>().InitializeSlot(weapons[i]); }
+                    if (weapons.Count > i) { 
+                        weaponSlot.GetComponent<ItemSlot>().AddItem(weapons[i]);
+                        weaponSlot.GetComponent<ItemSlot>().InitializeSlot();
+                    }
                 }
             }
         }
@@ -147,7 +129,7 @@ namespace AsteroidAnnihilation
                 GameObject gearSlot = gearSlotParent.GetChild(i).gameObject;
                 ItemSlot slot = gearSlot.GetComponent<ItemSlot>();
 
-                slot.InitializeSlot(equipmentManager.GetGear(slot.slotType));
+                slot.AddItem(equipmentManager.GetGear(slot.slotType));
             }
         }
 
@@ -156,64 +138,101 @@ namespace AsteroidAnnihilation
             //Update trinkets/components
         }
 
-        public bool AddItem(ItemData item)
+        public bool AddItem(ItemData item, int index = -1)
         {
             if (!InventoryFull())
             {
-                InventoryItems.Add(item);
+                if (index == -1)
+                {
+                    index = GetAvailableSlotIndex();
+                    if (index == -1) { return false; }
+                }
+                InventoryItems.Add(index, item);
+                ItemSlots[index].AddItem(item);
                 InitializeInventoryItems();
                 return true;
             } else { return false; }
         }
 
-        public bool AddItem(EquipmentData equipment)
+        public bool AddItem(EquipmentData equipment, int index = -1)
         {
             if (!InventoryFull())
             {
-                InventoryEquipment.Add(equipment);
+                if (index == -1)
+                {
+                    index = GetAvailableSlotIndex();
+                    if (index == -1) { return false; }
+                }
+                InventoryEquipment.Add(index, equipment);
+                ItemSlots[index].AddItem(equipment);
                 InitializeInventoryItems();
                 return true;
             }
             else { return false; }
         }
 
-        public bool AddItem(WeaponData weapon)
+        public bool AddItem(WeaponData weapon, int index = -1)
         {
             if (!InventoryFull())
             {
-                InventoryWeapons.Add(weapon);
+                if (index == -1)
+                {
+                    index = GetAvailableSlotIndex();
+                    Debug.Log(index);
+                    if (index == -1) { return false; }
+                }
+
+                InventoryWeapons.Add(index, weapon);
+                inventoryPanel.GetChild(index).GetComponent<ItemSlot>().AddItem(weapon);
+
                 InitializeInventoryItems();
                 return true;
             }
             else { return false; }
         }
 
-        public void RemoveItem(ItemData item)
+        public void RemoveItem(ItemData item, int index)
         {
-            InventoryItems.Remove(item);
+            InventoryItems.Remove(index);
+            ItemSlots[index] = default;
             InitializeInventoryItems();
         }
 
-        public void RemoveItem(EquipmentData equipment)
+        public void RemoveItem(EquipmentData equipment, int index)
         {
-            InventoryEquipment.Remove(equipment);
+            InventoryEquipment.Remove(index);
+            ItemSlots[index] = default;
             InitializeInventoryItems();
         }
 
-        public void RemoveItem(WeaponData weapon)
+        public void RemoveItem(WeaponData weapon, int index)
         {
-            InventoryWeapons.Remove(weapon);
+            InventoryWeapons.Remove(index);
+            ItemSlots[index] = default;
             InitializeInventoryItems();
         }
 
         public int GetItemCount()
         {
-            return (InventoryItems.Count + InventoryEquipment.Count + InventoryWeapons.Count) ;
+            return (InventoryItems.Count + InventoryEquipment.Count + InventoryWeapons.Count);
         }
 
         public bool InventoryFull()
         {
             return GetItemCount() >= InventorySlots;
+        }
+
+        private int GetAvailableSlotIndex()
+        {
+            for(int i = 0; i < ItemSlots.Count; i++)
+            {
+                Debug.Log(ItemSlots[i].slotDataType.ToString());
+                if (!ItemSlots[i].ContainsItem())
+                {
+                    return i;
+                }
+            }
+            return -1;
         }
     }
 

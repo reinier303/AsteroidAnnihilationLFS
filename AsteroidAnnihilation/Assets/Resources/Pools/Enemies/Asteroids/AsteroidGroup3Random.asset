@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Tag: AsteroidGroup3Random
   Prefab: {fileID: 5260138247603558605, guid: 2929e2c9fe510484a960faf19f505baa, type: 3}
-  Amount: 150
+  Amount: 75

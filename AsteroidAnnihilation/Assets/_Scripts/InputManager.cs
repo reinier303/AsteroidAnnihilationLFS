@@ -74,7 +74,7 @@ namespace AsteroidAnnihilation
                 Attacking = false;
                 return;
             }
-            GetAxisNormalized();
+            GetAxisNormalizedCoef();
             PauseInput();
             if (gameManager.isPaused)
             {
@@ -165,7 +165,7 @@ namespace AsteroidAnnihilation
                 !Input.GetKey(DownButton2);
         }
 
-        private Vector2 GetAxisNormalized()
+        private Vector2 GetAxisNormalizedCoef()
         {
             float x = 0;
             float y = 0;
@@ -187,7 +187,8 @@ namespace AsteroidAnnihilation
                 y = -1;
             }
             Vector2 axises = new Vector2(x, y).normalized;
-            return  axises;
+            axises = new Vector2(Mathf.Pow(axises.x, 2) , Mathf.Pow(axises.y ,2));
+            return axises;
         }
 
         public float GetAxisSmoothHorizontal(float speed, float acceleration, float deceleration, float boostSpeed)
@@ -199,7 +200,7 @@ namespace AsteroidAnnihilation
             //Right button input
             if (Input.GetKey(RightButton) || Input.GetKey(RightButton2))
             {
-                axisX += acceleration * boost * Time.deltaTime * GetAxisNormalized().x;
+                axisX += (acceleration * boost * Time.deltaTime) * GetAxisNormalizedCoef().x;
                 if (axisX > speed * boost)
                 {
                     axisX = speed * boost;
@@ -213,7 +214,7 @@ namespace AsteroidAnnihilation
             //Left button input
             if (Input.GetKey(LeftButton) || Input.GetKey(LeftButton2))
             {
-                axisX -= acceleration * boost * Time.deltaTime * -GetAxisNormalized().x;
+                axisX -= (acceleration * boost * Time.deltaTime) * GetAxisNormalizedCoef().x;
                 if (axisX < -speed * boost)
                 {
                     axisX = -speed * boost;
@@ -236,7 +237,7 @@ namespace AsteroidAnnihilation
             //Right button input
             if (Input.GetKey(UpButton) || Input.GetKey(UpButton2))
             {
-                axisY += acceleration * boost * Time.deltaTime * GetAxisNormalized().y;
+                axisY += (acceleration * boost * Time.deltaTime) * GetAxisNormalizedCoef().y;
                 if (axisY > speed * boost)
                 {
                     axisY = speed * boost;
@@ -250,7 +251,7 @@ namespace AsteroidAnnihilation
             //Left button input
             if (Input.GetKey(DownButton) || Input.GetKey(DownButton2))
             {
-                axisY -= acceleration * boost * Time.deltaTime * -GetAxisNormalized().y;
+                axisY -= (acceleration * boost * Time.deltaTime) * GetAxisNormalizedCoef().y;
                 if (axisY < -speed * boost)
                 {
                     axisY = -speed * boost;

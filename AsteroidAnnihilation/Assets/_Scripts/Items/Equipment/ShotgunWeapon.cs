@@ -41,7 +41,7 @@ namespace AsteroidAnnihilation
                 Quaternion.Euler(player.eulerAngles.x, player.eulerAngles.y, newRotation + Random.Range(-4, 4)));
 
                 //Initialize projectile
-                PlayerProjectile projectile = projectileObject.GetComponent<PlayerProjectile>();
+                BaseProjectile projectile = projectileObject.GetComponent<BaseProjectile>();
                 projectile.WeaponIndex = WeaponIndex;
 
                 //Set projectile stat values

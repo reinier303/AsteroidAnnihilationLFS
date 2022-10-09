@@ -8,6 +8,8 @@ namespace AsteroidAnnihilation
     {
         public static SettingsManager Instance;
 
+        public FXSettings fxSettings;
+
         public PlayerShipSettings playerShipSettings;
         public GeneralItemSettings generalItemSettings;
         public PlayerLevelSettings playerLevelSettings;
@@ -19,6 +21,7 @@ namespace AsteroidAnnihilation
         {
             Instance = this;
 
+            fxSettings = (FXSettings)Resources.Load("Settings/FXSettings");
             playerShipSettings = (PlayerShipSettings)Resources.Load("Settings/PlayerShipSettings");
             generalItemSettings = (GeneralItemSettings)Resources.Load("Settings/GeneralItemSettings");
             playerLevelSettings = (PlayerLevelSettings)Resources.Load("Settings/PlayerLevelSettings");

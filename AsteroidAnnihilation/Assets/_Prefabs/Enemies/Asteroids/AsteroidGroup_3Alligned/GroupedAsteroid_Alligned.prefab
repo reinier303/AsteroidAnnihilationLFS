@@ -91,22 +91,28 @@ MonoBehaviour:
   ShakeDuration: 0.5
   HitSound: 
   DeathSound: 
-  ParticleEffect: AsteroidExplosion
+  ParticleEffect: 3
   ParticleEffectScale: 1
-  PermanenceSprites:
-  - {fileID: 21300000, guid: 84926054ca8a2e0429ad589ecf4d953c, type: 3}
+  PermanenceSprites: 1
   PermanencePartMinMaxAmount: {x: 6, y: 8}
   PermanencePartOutwardsPower: 400
   PermanenceScaleFactor: 0.07
   Drops: []
+  DropChance: 0
+  spriteRenderer: {fileID: 0}
   isDead: 0
   isInitialized: 0
   KilledByIndex: 0
+  Aggro: 0
   Player: {fileID: 0}
   ContactDamage: 10
   RotationSpeed: 0
   DroppedUnits: 10
   ExperienceGained: 1
+  AggroDistance: 8
+  DeAggroDistance: 50
+  sizeRange: {x: 0.9, y: 1.25}
+  grouped: 0
   MaxRotationSpeed: 750
   MinForce: 80
   MaxForce: 650

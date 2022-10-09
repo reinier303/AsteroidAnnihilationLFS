@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Tag: PickUp
   Prefab: {fileID: 1359969266023007380, guid: c237b66000a805a4ea5565c13fc4fbb2, type: 3}
-  Amount: 1000
+  Amount: 100

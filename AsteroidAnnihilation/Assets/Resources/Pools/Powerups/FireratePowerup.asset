@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Tag: FireratePowerup
   Prefab: {fileID: 9051274817123180343, guid: 6805844d68170324fb694d3aa438cd4f, type: 3}
-  Amount: 20
+  Amount: 5

@@ -147,13 +147,13 @@ namespace AsteroidAnnihilation
             {
                 GameObject permanencePart = objectPooler.SpawnFromPool("PermanencePart", transform.position, Quaternion.Euler(0, 0, Random.Range(0, 360)));
                 permanencePart.transform.localScale = RandomSize();
-                permanencePart.GetComponent<PermanencePart>().InitializePart(PermanenceSprites, PermanencePartOutwardsPower, PermanenceScaleFactor * Random.Range(0.65f, 1.15f));
+                permanencePart.GetComponent<PermanencePart>().InitializePart(permanenceSpriteList, PermanencePartOutwardsPower, PermanenceScaleFactor * Random.Range(0.65f, 1.15f));
             }
         }
 
         protected override void SpawnParticleEffect()
         {
-            GameObject effect = objectPooler.SpawnFromPool(ParticleEffect, transform.position, Quaternion.identity);
+            GameObject effect = objectPooler.SpawnFromPool(particleEffectName, transform.position, Quaternion.identity);
             float scaleFactor2 = (Mathf.Abs(transform.localScale.x - transform.localScale.y) / 2) + Mathf.Min(transform.localScale.x, transform.localScale.y);
             effect.transform.localScale *= ParticleEffectScale * scaleFactor2;
         }

@@ -90,18 +90,17 @@ namespace AsteroidAnnihilation
         {
             if (!enemyTypeCount.ContainsKey(enemy)) 
             {
-                if (enemyTypeMax[enemy] >= enemyTypeCount[enemy])
-                {
-                    return false;
-                }
                 enemyTypeCount.Add(enemy, 1);
                 return true;
             }
             else { 
                 enemyTypeCount[enemy]++;
+                if (enemyTypeMax[enemy] >= enemyTypeCount[enemy])
+                {
+                    return false;
+                }
                 return true;
             }
-
         }
 
         private IEnumerator RampSpawnRate()

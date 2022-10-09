@@ -2,10 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using Sirenix.OdinInspector;
 
 namespace AsteroidAnnihilation
 {
-    public class EquipmentManager : MonoBehaviour
+    public class EquipmentManager : SerializedMonoBehaviour
     {
         public static EquipmentManager Instance { get; private set; }
 
@@ -14,7 +15,7 @@ namespace AsteroidAnnihilation
 
         private Dictionary<EnumCollections.Weapons, Weapon> weaponTypesT1;
 
-        private Dictionary<int, WeaponData> equipedWeapons;
+        [SerializeField]private Dictionary<int, WeaponData> equipedWeapons;
         private Dictionary<EnumCollections.ItemType, EquipmentData> equipedGear;
 
         private GeneralItemSettings generalItemSettings;
@@ -37,7 +38,7 @@ namespace AsteroidAnnihilation
             
             InitializeWeapons();
             LoadEquipment();
-            playerAttack.WeaponChanged();
+            playerAttack.InitializeWeapons();
         }
 
         private void InitializeWeapons()
@@ -94,7 +95,7 @@ namespace AsteroidAnnihilation
             //ItemData
             weaponData.EquipmentData.ItemData.Tier = weapon.Tier;
             weaponData.EquipmentData.ItemData.ItemName = weapon.GenerateName();
-            weaponData.EquipmentData.ItemData.ItemType = weapon.Type;
+            weaponData.EquipmentData.ItemData.ItemType = weapon.ItemType;
             EnumCollections.Rarities rarity = weapon.GetRarity();
             weaponData.EquipmentData.ItemData.Rarity = rarity;
             weaponData.EquipmentData.ItemData.Icon = weapon.GetIcon();
@@ -141,7 +142,6 @@ namespace AsteroidAnnihilation
         {
             bool succes = false;
             WeaponData data = default;
-            Debug.Log(equipedWeapons.Count);
 
             //CHECK REQUIREMENTS HERE and dont swap weapon if requirements not met
             if (index == -1 )
@@ -166,12 +166,12 @@ namespace AsteroidAnnihilation
             {
                 if (!equipedWeapons[index].Equals(default(WeaponData)))
                 {
+                    data = equipedWeapons[index];
                     equipedWeapons[index] = weapon;
                     succes = true;
                 }
                 else
                 {
-                    data = equipedWeapons[index];
                     equipedWeapons[index] = weapon;
                     //equipedWeapons[index] = weapon;
                     succes = true;
@@ -184,7 +184,6 @@ namespace AsteroidAnnihilation
                 inventoryManager.InitializeWeapons();
                 return (succes, data);
             } else { return (succes, default); }
-
         }
 
         private int GetEmptyWeaponSlotIndex()
@@ -199,9 +198,15 @@ namespace AsteroidAnnihilation
             return -1;
         }
 
-        public void RemoveWeapon(int index)
+        public void MoveWeaponToInventory(int index)
         {
             inventoryManager.AddItem(equipedWeapons[index]);
+            RemoveWeapon(index);
+        }
+
+        public void RemoveWeapon(int index)
+        {
+            Debug.Log("Removed");
             equipedWeapons[index] = default;
             playerAttack.WeaponChanged();
         }

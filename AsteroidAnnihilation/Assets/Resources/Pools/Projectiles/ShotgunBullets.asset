@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Tag: ShotgunBullet
   Prefab: {fileID: 7296814962085735418, guid: 544ac41cae149c940837854ca3077323, type: 3}
-  Amount: 3000
+  Amount: 150

@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0d1a5f3d0bd2c094d9e8c2dd8e0c5677, type: 3}
-  m_Name: BossFire3
+  m_Name: BossFireCircle
   m_EditorClassIdentifier: 
   serializationData:
     SerializedFormat: 2
@@ -21,10 +21,14 @@ MonoBehaviour:
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
     SerializationNodes: []
-  moveTime: 5
-  FireRate: 1
-  Amount: 48
-  Spread: 6
+  MoveTime: 15
+  MoveStartDelay: 0
+  MoveEndDelay: 0
+  Size: 1.75
+  ChargeTime: 2.5
+  FireRate: 0.75
+  Amount: 36
+  Spread: 10
   BulletSpeed: 3
-  ProjectileLifeTime: 1
+  ProjectileLifeTime: 12
   Projectile: 0

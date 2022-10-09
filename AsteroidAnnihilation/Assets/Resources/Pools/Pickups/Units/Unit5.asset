@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Tag: Unit5
   Prefab: {fileID: 3534166788624539275, guid: c47aaa410a1c8954abbe7b3fedcc7663, type: 3}
-  Amount: 1000
+  Amount: 200

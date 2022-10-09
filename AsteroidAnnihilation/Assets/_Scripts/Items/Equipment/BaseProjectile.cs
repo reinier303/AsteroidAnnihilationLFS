@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace AsteroidAnnihilation
 {
-    public class PlayerProjectile : MonoBehaviour
+    public class BaseProjectile : MonoBehaviour
     {
         public string OnHitEffectName;
         protected ObjectPooler objectPooler;
@@ -14,14 +14,17 @@ namespace AsteroidAnnihilation
         public float Damage, ProjectileSpeed, LifeTime = 0;
         public bool IsCrit;
         public float Size = 1;
-        private bool canDamage;
+        protected bool canDamage;
 
         public Vector2 PlayerVelocity;
+
+        protected Vector2 baseScale;
 
         protected virtual void Awake()
         {
             objectPooler = ObjectPooler.Instance;
             gameManager = GameManager.Instance;
+            baseScale = transform.localScale;
         }
 
         public virtual void Initialize(float size, float damage, float speed, float lifeTime, bool isCrit)
@@ -33,7 +36,8 @@ namespace AsteroidAnnihilation
             LifeTime = lifeTime;
             IsCrit = isCrit;
             if (IsCrit) { SetCrit(); }
-            transform.localScale = new Vector2(transform.localScale.x, transform.localScale.y) * Size;
+            transform.localScale = baseScale * Size;
+            StartCoroutine(DisableAfterTime());
         }
 
         protected virtual void Update()
@@ -56,7 +60,8 @@ namespace AsteroidAnnihilation
                 entity.KilledByIndex = WeaponIndex;
                 entity.OnTakeDamage?.Invoke(Damage, IsCrit);
                 entity.Aggro = true;
-                objectPooler.SpawnFromPool(OnHitEffectName, transform.position, Quaternion.identity);
+                GameObject hitEffect = objectPooler.SpawnFromPool(OnHitEffectName, transform.position, Quaternion.identity);
+                hitEffect.transform.localScale = new Vector2(Size, Size);
                 gameObject.SetActive(false);
             }
         }

@@ -7,13 +7,21 @@ namespace AsteroidAnnihilation
     public class PlayerEntity : BaseEntity
     {
         [SerializeField] private GameObject PlayerHitEffect;
-        private bool canHit = true;
+        public bool canHit = true;
         [SerializeField] private float hitCooldown;
         private UIManager RUIManager;
 
         protected override void Awake()
         {
-            base.Awake();
+            isDead = false;
+
+            OnTakeDamage += TakeDamage;
+
+            onHitMaterial = (Material)Resources.Load("Materials/FlashWhite", typeof(Material));
+            baseMaterial = spriteRenderer.material;
+
+            InitializeDropPool();
+
             MaxHealth = GetComponent<PlayerStats>().GetStatValue(EnumCollections.PlayerStats.Health);
             currentHealth = MaxHealth;
         }
@@ -64,7 +72,22 @@ namespace AsteroidAnnihilation
         private IEnumerator HitCooldown()
         {
             canHit = false;
-            yield return new WaitForSeconds(hitCooldown);
+            bool back = false;
+            for(int i = 0; i < 16; i++)
+            {
+                if(back)
+                {
+                    spriteRenderer.color = new Color(1, 1, 1, 1f);
+                }
+                else
+                {
+                    spriteRenderer.color = new Color(1, 1, 1, 0.35f);
+                }
+                back = !back;
+                yield return new WaitForSeconds(hitCooldown / 16);
+            }
+            //yield return new WaitForSeconds(hitCooldown);
+            spriteRenderer.color = new Color(1, 1, 1, 1f);
             canHit = true;
         }
     }

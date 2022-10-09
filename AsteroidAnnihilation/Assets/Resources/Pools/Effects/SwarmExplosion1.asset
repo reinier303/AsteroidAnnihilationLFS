@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Tag: SwarmExplosion1
   Prefab: {fileID: 163640, guid: 509a7fe469ed21a4ca0bd6ae268ce85f, type: 3}
-  Amount: 500
+  Amount: 50

@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Tag: SwarmBullet1
   Prefab: {fileID: 7296814962085735418, guid: 450a19b815601e2439a2e731677d4273, type: 3}
-  Amount: 3000
+  Amount: 500

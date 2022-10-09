@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Tag: SwarmChaserDrone
   Prefab: {fileID: 631180164220643606, guid: 714caf9cfcfa6ed4c9c1431103a44ae5, type: 3}
-  Amount: 300
+  Amount: 100

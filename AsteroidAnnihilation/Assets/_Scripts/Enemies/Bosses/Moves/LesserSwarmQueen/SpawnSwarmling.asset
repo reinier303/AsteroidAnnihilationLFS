@@ -9,8 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0d1a5f3d0bd2c094d9e8c2dd8e0c5677, type: 3}
-  m_Name: BossFire1
+  m_Script: {fileID: 11500000, guid: d68ae0fc29357be479e1f9d5dcf33e75, type: 3}
+  m_Name: SpawnSwarmling
   m_EditorClassIdentifier: 
   serializationData:
     SerializedFormat: 2
@@ -21,10 +21,9 @@ MonoBehaviour:
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
     SerializationNodes: []
-  moveTime: 2
-  FireRate: 5
-  Amount: 3
-  Spread: 20
-  BulletSpeed: 3
-  ProjectileLifeTime: 1
-  Projectile: 0
+  MoveTime: 0
+  MoveStartDelay: 0
+  MoveEndDelay: 0
+  EnemyToSpawn: 0
+  SpawnAmount: 0
+  SpawnPosition: {x: 0, y: 0}

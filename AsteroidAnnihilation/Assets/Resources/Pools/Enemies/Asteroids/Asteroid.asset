@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Tag: Asteroid
   Prefab: {fileID: 7543579959878461129, guid: add962f2d1dae9747a0df83617ddd28f, type: 3}
-  Amount: 500
+  Amount: 100

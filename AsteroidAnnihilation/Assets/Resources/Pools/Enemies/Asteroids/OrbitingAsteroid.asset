@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Tag: OrbitingAsteroid
   Prefab: {fileID: 5193660487725811691, guid: e6b1d3b6c38edb242919a7fe1a18fcd7, type: 3}
-  Amount: 200
+  Amount: 50

@@ -24,6 +24,7 @@ namespace AsteroidAnnihilation
         public float GetEquipmentStat(EnumCollections.EquipmentStats stat, int index)
         {
             EquipmentData data = equipmentManager.GetEquipedWeapon(index).EquipmentData;
+
             if (data.RarityStats.ContainsKey(stat))
             {
                 return data.EquipmentStats[stat] + data.RarityStats[stat];

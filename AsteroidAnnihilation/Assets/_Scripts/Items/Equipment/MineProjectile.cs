@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace AsteroidAnnihilation
 {
-    public class MineProjectile : PlayerProjectile
+    public class MineProjectile : BaseProjectile
     {
         public override void Initialize(float size, float damage, float speed, float lifeTime, bool isCrit)
         {

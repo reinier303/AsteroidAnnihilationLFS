@@ -3,15 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 using UnityEngine.EventSystems;
+using Sirenix.OdinInspector;
 
 namespace AsteroidAnnihilation
 {
-    public class PlayerAttack : MonoBehaviour
+    public class PlayerAttack : SerializedMonoBehaviour
     {
         private InputManager inputManager;
         private ObjectPooler RObjectPooler;
         EquipmentManager equipmentManager;
         private Player rPlayer;
+        private PlayerMovement playerMovement;
         private CompletionRewardStats completionRewardStats;
         private PlayerShipSettings playerShipSettings;
 
@@ -19,8 +21,8 @@ namespace AsteroidAnnihilation
         public float fireCooldown;
 
         private List<Vector2> weaponPositions;
-        private Dictionary<int, WeaponData> currentWeaponDatas;
-        private List<Weapon> currentWeapons;
+        [SerializeField] private Dictionary<int, WeaponData> currentWeaponDatas;
+        [SerializeField] private Dictionary<int, Weapon> currentWeapons;
 
         [SerializeField] private GameObject muzzleFlash;
 
@@ -34,7 +36,7 @@ namespace AsteroidAnnihilation
 
             eventSystem = EventSystem.current;
 
-            currentWeapons = new List<Weapon>();
+            currentWeapons = new Dictionary<int, Weapon>();
 
             //TODO::Make this work for multiple ship types when starting work on that
         }
@@ -48,6 +50,7 @@ namespace AsteroidAnnihilation
             RObjectPooler = ObjectPooler.Instance;
             inputManager = InputManager.Instance;
             completionRewardStats = CompletionRewardStats.Instance;
+            playerMovement = rPlayer.RPlayerMovement;
 
             Initialize();
         }
@@ -57,19 +60,34 @@ namespace AsteroidAnnihilation
             canFire = true;
         }
 
+        public void InitializeWeapons()
+        {
+            currentWeaponDatas = equipmentManager.GetAllEquipedWeapons();
+            foreach (int index in currentWeaponDatas.Keys)
+            {
+                if (currentWeaponDatas[index].WeaponType == EnumCollections.Weapons.None)
+                {
+                    currentWeapons.Add(index, (Weapon)ScriptableObject.CreateInstance("Weapon"));
+                    continue;
+                }
+                currentWeapons.Add(index, equipmentManager.GetWeapon(currentWeaponDatas[index].WeaponType));
+                currentWeapons[index].Initialize(rPlayer.RPlayerStats, equipmentManager);
+            }
+        }
+
         public void WeaponChanged()
         {
             currentWeaponDatas = equipmentManager.GetAllEquipedWeapons();
-            currentWeapons.Clear();
-            int weaponCount = 0;
-            foreach (WeaponData wData in currentWeaponDatas.Values)
+            foreach (int index in currentWeaponDatas.Keys)
             {
-                if (wData.WeaponType == EnumCollections.Weapons.None) { continue; }
-                currentWeapons.Add(equipmentManager.GetWeapon(wData.WeaponType));
-                currentWeapons[weaponCount].Initialize(rPlayer.RPlayerStats, equipmentManager);
-                weaponCount++;
+                if (currentWeaponDatas[index].WeaponType == EnumCollections.Weapons.None) 
+                {
+                    currentWeapons[index] = (Weapon)ScriptableObject.CreateInstance("Weapon");
+                    continue; 
+                }
+                currentWeapons[index] = equipmentManager.GetWeapon(currentWeaponDatas[index].WeaponType);
+                currentWeapons[index].Initialize(rPlayer.RPlayerStats, equipmentManager);
             }
-
         }
 
         //Old SortWeapons() might use/recycle later
@@ -122,11 +140,11 @@ namespace AsteroidAnnihilation
 
                 if(mouseButton == 0)
                 {
-                    int weaponIndex = 0;
-                    foreach(Weapon weapon in currentWeapons)
+                    Vector2 addedPlayerVelocity = playerMovement.MovementInput * playerVelocityMultiplier * playerMovement.GetCurrentSpeed();
+                    for (int i = 0; i < currentWeapons.Count; i++)
                     {
-                        currentWeapons[weaponIndex].Fire(RObjectPooler, transform, rPlayer.RPlayerMovement.MovementInput * playerVelocityMultiplier, weaponPositions[weaponIndex], weaponIndex);
-                        weaponIndex++;
+                        if (currentWeapons[i].WeaponType == EnumCollections.Weapons.None) { continue; }
+                        currentWeapons[i].Fire(RObjectPooler, transform, addedPlayerVelocity, weaponPositions[i], i);
                     }
                     canFire = false;
                     StartCoroutine(FireCooldownTimer(mouseButton));
@@ -148,9 +166,10 @@ namespace AsteroidAnnihilation
         {
             float totalFirerate = 0;
             int weapons = 0;
-            foreach(Weapon weapon in currentWeapons)
+            for (int i = 0; i < currentWeapons.Count; i++)
             {
-                totalFirerate += currentWeapons[weapons].GetEquipmentStat(EnumCollections.EquipmentStats.FireRate, weapons);
+                if (currentWeapons[i].WeaponType == EnumCollections.Weapons.None) { continue; }
+                totalFirerate += currentWeapons[i].GetEquipmentStat(EnumCollections.EquipmentStats.FireRate, i);
                 weapons++;
             }
             return totalFirerate / Mathf.Clamp(weapons, 1, 25);

@@ -107,7 +107,8 @@ namespace AsteroidAnnihilation
             currentMission = missionManager.GetCurrentMission();
             InitializeMissionUI();
             InitializeObjectiveMenu();
-            inventoryManager.SetUIElements(inventoryPanel, weaponSlotParent, gearSlotParent, componentSlotParent);
+            inventoryManager.SetUIElements(inventoryPanel, weaponSlotParent, gearSlotParent, componentSlotParent);   
+            inventoryManager.LoadInventory();
         }
 
         public void UpdateMissionUI()

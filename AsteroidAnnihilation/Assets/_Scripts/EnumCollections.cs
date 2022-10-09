@@ -151,5 +151,23 @@ namespace AsteroidAnnihilation
             Ghost,//Very Fast and agile ship... Don't know implementation yet
             Carrier//Drone ship
         }
+
+        public enum ExplosionFX
+        {
+            SwarmExplosion1,
+            SwarmExplosion2,
+            SwarmExplosionBoss,
+            AsteroidExplosion1,
+            AsteroidExplosion2,
+            AsteroidExplosionBoss,
+            PlayerExplosion,
+        }
+
+        public enum PermanenceSprites
+        {
+            SwarmPermanence,
+            AsteroidPermanence,
+            BanditPermanence
+        }
     }
 }

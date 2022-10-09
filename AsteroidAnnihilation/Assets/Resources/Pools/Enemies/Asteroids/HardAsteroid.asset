@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Tag: HardAsteroid
   Prefab: {fileID: 2692166872094017402, guid: f5cd9e6f3c17feb448669385171f7e27, type: 3}
-  Amount: 200
+  Amount: 50

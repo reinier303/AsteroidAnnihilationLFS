@@ -18,8 +18,8 @@ namespace AsteroidAnnihilation
         [SerializeField] private Image icon;
 
         public EnumCollections.ItemType slotType;
-        private enum SlotDataType {None, Item, Equipment, Weapon}
-        SlotDataType slotDataType;
+        public enum SlotDataType {None, Item, Equipment, Weapon}
+        public SlotDataType slotDataType;
 
         private Vector2 iconStartPos;
         private RectTransform iconTransform;
@@ -38,25 +38,41 @@ namespace AsteroidAnnihilation
             inventoryManager = InventoryManager.Instance;
         }
 
-        public void InitializeSlot(ItemData item)
+        public void InitializeSlot()
+        {
+            switch(slotDataType)
+            {
+                case SlotDataType.None:
+                    return;
+                case SlotDataType.Item:
+                    SetIcon(item.Icon);
+                    break;
+                case SlotDataType.Equipment:
+                    SetIcon(equipment.ItemData.Icon);
+                    break;
+                case SlotDataType.Weapon:
+                    SetIcon(weapon.EquipmentData.ItemData.Icon);
+                    break;
+            }
+        }
+
+        public void AddItem(ItemData item)
         {
             slotDataType = SlotDataType.Item;
             this.item = item;
-            SetIcon(item.Icon);
         }
 
-        public void InitializeSlot(EquipmentData equip)
+        public void AddItem(EquipmentData equip)
         {
             slotDataType = SlotDataType.Equipment;
             equipment = equip;
-            SetIcon(equip.ItemData.Icon);
         }
 
-        public void InitializeSlot(WeaponData weapon)
+        public void AddItem(WeaponData weapon)
         {
             slotDataType = SlotDataType.Weapon;
+            Debug.Log(transform.name);
             this.weapon = weapon;
-            SetIcon(weapon.EquipmentData.ItemData.Icon);
         }
 
         private void SetIcon(Sprite Icon)
@@ -174,7 +190,7 @@ namespace AsteroidAnnihilation
                     if (inventoryManager.InventoryFull()) {
                         Debug.Log("Inventory Full");
                         return; }
-                    equipmentManager.RemoveWeapon(index);
+                    equipmentManager.MoveWeaponToInventory(index);
                     ClearSlot();
                     break;
             }
@@ -199,13 +215,20 @@ namespace AsteroidAnnihilation
             ItemSlot hoveredSlot = null;
             if (eventData.pointerCurrentRaycast.gameObject != null) { hoveredSlot = eventData.pointerCurrentRaycast.gameObject.GetComponent<ItemSlot>(); }
 
+            iconTransform.anchoredPosition = iconStartPos;
+
             if (hoveredSlot != null)
             {
-                SwapEquipment(hoveredSlot);
-            }
-            else
-            {
-                iconTransform.anchoredPosition = iconStartPos;
+                //Check what type of slot our current slot is
+                switch (slotType)
+                {
+                    case EnumCollections.ItemType.Weapon:
+                        SwapEquipment(hoveredSlot);
+                        break;
+                    case EnumCollections.ItemType.Inventory:
+                        MoveFromInventory(hoveredSlot);
+                        break;
+                }
             }
         }
 
@@ -220,30 +243,72 @@ namespace AsteroidAnnihilation
                 case SlotDataType.Equipment:
                     return;
                 case SlotDataType.Weapon:
-                    //Debug.Log(hoveredSlot.slotType.ToString());
                     int hoverIndex = hoveredSlot.transform.GetSiblingIndex();
-                    Debug.Log(hoveredSlot.slotType.ToString() + ", " + hoverIndex);
 
-                    //If item comes from inventory
-                    if (slotType == EnumCollections.ItemType.Inventory)
+                    //If item moves to inventory
+                    if (hoveredSlot.slotType == EnumCollections.ItemType.Inventory)
                     {
-                        (bool succes, WeaponData data) = equipmentManager.ChangeWeapon(weapon, hoverIndex);
-
+                        equipmentManager.RemoveWeapon(transform.GetSiblingIndex());
+                        inventoryManager.AddItem(weapon);
                         ClearSlot();
-                        if (!data.Equals(default(WeaponData)))
-                        {
-                            inventoryManager.AddItem(data);
-                        }
+                        //ClearSlot();
+
                         return;
                     }
                     //Case where we swap with other weaponslot
-                    else if (slotType == EnumCollections.ItemType.Weapon)
+                    else if (hoveredSlot.slotType == EnumCollections.ItemType.Weapon)
                     {
                         (bool succes, WeaponData data) = equipmentManager.ChangeWeapon(weapon, hoverIndex);
-                        ClearSlot();
+                        if (succes)
+                        {
+                            equipmentManager.RemoveWeapon(transform.GetSiblingIndex());
+                            ClearSlot();
+                        }
                         if (!data.Equals(default(WeaponData)))
                         {
-                            equipmentManager.ChangeWeapon(weapon, transform.GetSiblingIndex());
+                            equipmentManager.ChangeWeapon(data, transform.GetSiblingIndex());
+                        }
+                        inventoryManager.InitializeWeapons();
+                        return;
+                    }
+                    else { return; }
+
+            }
+        }
+
+        private void MoveFromInventory(ItemSlot hoveredSlot)
+        {
+            switch (slotDataType)
+            {
+                case SlotDataType.None:
+                    return;
+                case SlotDataType.Item:
+                    return;
+                case SlotDataType.Equipment:
+                    return;
+                case SlotDataType.Weapon:
+                    int hoverIndex = hoveredSlot.transform.GetSiblingIndex();
+
+                    //If item moves to inventory
+                    if (hoveredSlot.slotType == EnumCollections.ItemType.Inventory)
+                    {
+                        inventoryManager.AddItem(weapon, hoverIndex);
+                        ClearSlot();
+                        return;
+                    }
+                    //Case where we swap with other weaponslot
+                    else if (hoveredSlot.slotType == EnumCollections.ItemType.Weapon)
+                    {
+                        (bool succes, WeaponData data) = equipmentManager.ChangeWeapon(weapon, hoverIndex);
+                        if (succes)
+                        {
+                            inventoryManager.RemoveItem(weapon, hoverIndex);
+                            equipmentManager.RemoveWeapon(transform.GetSiblingIndex());
+                            ClearSlot();
+                        }
+                        if (!data.Equals(default(WeaponData)))
+                        {
+                            inventoryManager.AddItem(weapon);
                         }
                         inventoryManager.InitializeWeapons();
                         return;

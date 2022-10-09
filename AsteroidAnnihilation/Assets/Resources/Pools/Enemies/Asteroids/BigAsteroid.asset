@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Tag: BigAsteroid
   Prefab: {fileID: 7543579959878461129, guid: faf5f2e49889b914d947a67a69682925, type: 3}
-  Amount: 300
+  Amount: 50

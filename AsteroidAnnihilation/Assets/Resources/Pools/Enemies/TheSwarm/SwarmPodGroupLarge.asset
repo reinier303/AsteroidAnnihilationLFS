@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Tag: SwarmPodGroupLarge
   Prefab: {fileID: 5599343326941359975, guid: d9ab8f703a577f14c958716cf289e54e, type: 3}
-  Amount: 50
+  Amount: 40

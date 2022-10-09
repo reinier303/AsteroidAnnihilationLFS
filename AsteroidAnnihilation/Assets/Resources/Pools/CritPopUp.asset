@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Tag: CritPopUp
   Prefab: {fileID: 4760912296385663683, guid: b36f4951eaeef484592daffce85d8a9f, type: 3}
-  Amount: 1000
+  Amount: 100

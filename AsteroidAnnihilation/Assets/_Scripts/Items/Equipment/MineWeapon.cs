@@ -16,7 +16,7 @@ namespace AsteroidAnnihilation
         {
             GameObject Mine = objectPooler.SpawnFromPool("PlayerMine", player.position - (player.up * 0.75f), Quaternion.identity);
             Mine.GetComponent<Rigidbody2D>().AddForce(-player.up * GetEquipmentStat(EnumCollections.EquipmentStats.LaunchVelocity, weaponIndex));
-            PlayerProjectile projectile = Mine.GetComponent<PlayerProjectile>();
+            BaseProjectile projectile = Mine.GetComponent<BaseProjectile>();
 
             //Set projectile stat values
             float damage = GetEquipmentStat(EnumCollections.EquipmentStats.Damage, weaponIndex);

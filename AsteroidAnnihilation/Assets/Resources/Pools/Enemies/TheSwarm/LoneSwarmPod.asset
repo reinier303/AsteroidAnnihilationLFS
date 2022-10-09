@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Tag: LoneSwarmPod
   Prefab: {fileID: 4589539109915000858, guid: 8cfc2ea9e2bf0d34a809fa2bcdd063c0, type: 3}
-  Amount: 100
+  Amount: 50

@@ -4,13 +4,11 @@ using UnityEngine;
 
 namespace AsteroidAnnihilation
 {
-    public class ShotgunProjectile : PlayerProjectile
+    public class ShotgunProjectile : BaseProjectile
     {
-        private Vector2 baseScale;
         protected override void Awake()
         {
             base.Awake();
-            baseScale = transform.localScale;
         }
 
         public override void Initialize(float size, float damage, float speed, float lifeTime, bool isCrit)

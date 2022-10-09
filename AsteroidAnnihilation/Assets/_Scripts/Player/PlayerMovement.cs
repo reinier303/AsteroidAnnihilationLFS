@@ -9,7 +9,7 @@ namespace AsteroidAnnihilation
     public class PlayerMovement : MonoBehaviour
     {
         [Header("Movement Variables")]
-        private float currentSpeed;
+        public float currentSpeed;
         private float Acceleration;
         private float Deceleration;
         public float AccelerationMultiplier;
@@ -196,6 +196,11 @@ namespace AsteroidAnnihilation
             var dir = target - transform.position;
             var angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
             transform.rotation = Quaternion.AngleAxis(angle - 90, Vector3.forward);
+        }
+    
+        public float GetCurrentSpeed()
+        {
+            return currentSpeed;
         }
     }
 }

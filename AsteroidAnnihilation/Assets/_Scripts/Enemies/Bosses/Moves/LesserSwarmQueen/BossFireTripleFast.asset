@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0d1a5f3d0bd2c094d9e8c2dd8e0c5677, type: 3}
-  m_Name: BossFire2
+  m_Name: BossFireTripleFast
   m_EditorClassIdentifier: 
   serializationData:
     SerializedFormat: 2
@@ -21,10 +21,14 @@ MonoBehaviour:
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
     SerializationNodes: []
-  moveTime: 4
-  FireRate: 3
-  Amount: 9
-  Spread: 10
-  BulletSpeed: 3
-  ProjectileLifeTime: 1
+  MoveTime: 1
+  MoveStartDelay: 0
+  MoveEndDelay: 0
+  Size: 3
+  ChargeTime: 2.5
+  FireRate: 1
+  Amount: 3
+  Spread: 30
+  BulletSpeed: 14
+  ProjectileLifeTime: 4
   Projectile: 0

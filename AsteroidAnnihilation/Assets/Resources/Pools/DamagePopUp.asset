@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Tag: DamagePopUp
   Prefab: {fileID: 4760912296385663683, guid: aff1c514bd22de947bf35e468b8aa531, type: 3}
-  Amount: 1000
+  Amount: 100

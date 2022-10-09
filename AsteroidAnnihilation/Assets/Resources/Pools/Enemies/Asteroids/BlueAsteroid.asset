@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Tag: BlueAsteroid
   Prefab: {fileID: 7543579959878461129, guid: e2c0e2934b91ec243961242e7debd12a, type: 3}
-  Amount: 250
+  Amount: 50

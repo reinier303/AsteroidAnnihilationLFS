@@ -84,7 +84,7 @@ namespace AsteroidAnnihilation
             Time.timeScale = 1;
 
             //Make sure multiple sleeps cant happen in sequence which caused the game to seem laggy
-            yield return new WaitForSeconds(0.2f);
+            yield return new WaitForSeconds(0.3f);
             sleeping = false;
         }
 
