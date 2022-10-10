@@ -42,6 +42,7 @@ namespace AsteroidAnnihilation
 
         protected virtual void Update()
         {
+            if (gameManager.isPaused) { return; }
             Move();
         }
 

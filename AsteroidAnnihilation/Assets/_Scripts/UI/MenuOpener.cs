@@ -19,7 +19,7 @@ namespace AsteroidAnnihilation
         private void Start()
         {
             direction = 1;
-            UIManager.Instance.OnClosePauseMenu += CloseMenu;
+            //UIManager.Instance.OnClosePauseMenu += CloseMenu;
             //UIManager.Instance.OnOpenPauseMenu += OpenMenu;
 
             open = false;

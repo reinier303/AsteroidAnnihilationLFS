@@ -21,9 +21,9 @@ MonoBehaviour:
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
     SerializationNodes: []
-  MoveTime: 0
+  MoveTime: 10
   MoveStartDelay: 0
-  MoveEndDelay: 0
-  EnemyToSpawn: 0
-  SpawnAmount: 0
-  SpawnPosition: {x: 0, y: 0}
+  MoveEndDelay: 2
+  EnemyToSpawn: 9
+  SpawnAmount: 5
+  SpawnPosition: {x: 0, y: 2}

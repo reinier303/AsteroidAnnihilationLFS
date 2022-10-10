@@ -19,6 +19,7 @@ namespace AsteroidAnnihilation
         [FoldoutGroup("GUI Components")] public TMP_Text WaveEnterText;
         [FoldoutGroup("GUI Components")] public TMP_Text BossEnterText;
         [FoldoutGroup("GUI Components")] public HealthBar PlayerHealthBar;
+        [FoldoutGroup("GUI Components")] public EnergyBar EnergyBar;
         [FoldoutGroup("GUI Components")] public Slider ExperienceBar;
 
         [FoldoutGroup("Missions")] public TMP_Text MissionAreaText;
@@ -73,6 +74,8 @@ namespace AsteroidAnnihilation
         private InventoryManager inventoryManager;
         private PlayerEntity RPlayerEntity;
         private PlayerStats playerStats;
+        private PlayerAttack playerAttack;
+
         private Player RPlayer;
 
         public delegate void OnPauseMenuOpen();
@@ -94,6 +97,7 @@ namespace AsteroidAnnihilation
             RPlayer = gameManager.RPlayer;
             RPlayerEntity = RPlayer.RPlayerEntity;
             playerStats = RPlayer.RPlayerStats;
+            playerAttack = RPlayer.RPlayerAttack;
 
             waveEnterCanvasGroup = WaveEnterText.GetComponent<CanvasGroup>();
         }
@@ -107,8 +111,9 @@ namespace AsteroidAnnihilation
             currentMission = missionManager.GetCurrentMission();
             InitializeMissionUI();
             InitializeObjectiveMenu();
-            inventoryManager.SetUIElements(inventoryPanel, weaponSlotParent, gearSlotParent, componentSlotParent);   
-            inventoryManager.LoadInventory();
+            EquipmentManager.Instance.InitializeEquipment();
+            inventoryManager.SetUIElements(inventoryPanel, weaponSlotParent, gearSlotParent, componentSlotParent);
+            inventoryManager.InitializeInventory();
         }
 
         public void UpdateMissionUI()
@@ -130,6 +135,14 @@ namespace AsteroidAnnihilation
 
             LivesText.text = currentHealth + "/" + maxHealth;
             PlayerHealthBar.UpdateHealth(currentHealth, maxHealth);
+        }
+
+        public void UpdateEnergy(float current, float max)
+        {
+            float currentEnergy = current;
+            float maxEnergy = max;
+
+            EnergyBar.UpdateEnergy(currentEnergy, maxEnergy);
         }
 
         public void UpdateUnits()
@@ -267,7 +280,7 @@ namespace AsteroidAnnihilation
 
         public void ClosePauseMenu()
         {
-            OnClosePauseMenu.Invoke();
+            //OnClosePauseMenu.Invoke();
             PauseMenu.SetActive(false);
         }
 

@@ -56,22 +56,21 @@ namespace AsteroidAnnihilation
             }
         }
 
-        public void AddItem(ItemData item)
+        public void SetItem(ItemData item)
         {
             slotDataType = SlotDataType.Item;
             this.item = item;
         }
 
-        public void AddItem(EquipmentData equip)
+        public void SetItem(EquipmentData equip)
         {
             slotDataType = SlotDataType.Equipment;
             equipment = equip;
         }
 
-        public void AddItem(WeaponData weapon)
+        public void SetItem(WeaponData weapon)
         {
             slotDataType = SlotDataType.Weapon;
-            Debug.Log(transform.name);
             this.weapon = weapon;
         }
 
@@ -223,7 +222,7 @@ namespace AsteroidAnnihilation
                 switch (slotType)
                 {
                     case EnumCollections.ItemType.Weapon:
-                        SwapEquipment(hoveredSlot);
+                        MoveFromEquipment(hoveredSlot);
                         break;
                     case EnumCollections.ItemType.Inventory:
                         MoveFromInventory(hoveredSlot);
@@ -232,7 +231,7 @@ namespace AsteroidAnnihilation
             }
         }
 
-        private void SwapEquipment(ItemSlot hoveredSlot)
+        private void MoveFromEquipment(ItemSlot hoveredSlot)
         {
             switch (slotDataType)
             {
@@ -249,10 +248,9 @@ namespace AsteroidAnnihilation
                     if (hoveredSlot.slotType == EnumCollections.ItemType.Inventory)
                     {
                         equipmentManager.RemoveWeapon(transform.GetSiblingIndex());
-                        inventoryManager.AddItem(weapon);
+                        //inventoryManager
+                        inventoryManager.AddItem(weapon, hoverIndex);
                         ClearSlot();
-                        //ClearSlot();
-
                         return;
                     }
                     //Case where we swap with other weaponslot
@@ -292,23 +290,36 @@ namespace AsteroidAnnihilation
                     //If item moves to inventory
                     if (hoveredSlot.slotType == EnumCollections.ItemType.Inventory)
                     {
+                        //Get item in hoveredSlot and remove it
+                        WeaponData data = inventoryManager.RemoveItem(weapon, hoverIndex);
+
+                        //Add current item to hoveredSlot
                         inventoryManager.AddItem(weapon, hoverIndex);
-                        ClearSlot();
+
+                        //Remove current item from current slot
+                        inventoryManager.RemoveItem(weapon, transform.GetSiblingIndex());
+
+                        //Add item in hoveredSlot to current slot if hovered slot contains item
+                        if (!data.Equals(default(WeaponData)))
+                        {
+                            Debug.Log(data.WeaponType);
+                            inventoryManager.AddItem(data, transform.GetSiblingIndex());
+                        }
                         return;
                     }
-                    //Case where we swap with other weaponslot
+                    //Case where we move from inventory to weaponslot
                     else if (hoveredSlot.slotType == EnumCollections.ItemType.Weapon)
                     {
                         (bool succes, WeaponData data) = equipmentManager.ChangeWeapon(weapon, hoverIndex);
                         if (succes)
                         {
-                            inventoryManager.RemoveItem(weapon, hoverIndex);
-                            equipmentManager.RemoveWeapon(transform.GetSiblingIndex());
+                            //Remove current weapon from inventory
+                            inventoryManager.RemoveItem(weapon, transform.GetSiblingIndex());
                             ClearSlot();
                         }
                         if (!data.Equals(default(WeaponData)))
                         {
-                            inventoryManager.AddItem(weapon);
+                            inventoryManager.AddItem(weapon, transform.GetSiblingIndex());
                         }
                         inventoryManager.InitializeWeapons();
                         return;

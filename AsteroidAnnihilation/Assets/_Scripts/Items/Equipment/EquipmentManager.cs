@@ -10,6 +10,7 @@ namespace AsteroidAnnihilation
     {
         public static EquipmentManager Instance { get; private set; }
 
+        private SettingsManager settingsManager;
         private PlayerAttack playerAttack;
         private InventoryManager inventoryManager;
 
@@ -31,13 +32,17 @@ namespace AsteroidAnnihilation
         private void Start()
         {
             GameManager.Instance.onEndGame += SaveEquipment;
-            generalItemSettings = SettingsManager.Instance.generalItemSettings;
-            playerShipSettings = SettingsManager.Instance.playerShipSettings;
-            playerAttack = Player.Instance.RPlayerAttack;
             inventoryManager = InventoryManager.Instance;
-            
-            InitializeWeapons();
+        }
+
+        public void InitializeEquipment()
+        {
+            playerAttack = Player.Instance.RPlayerAttack;
+            settingsManager = SettingsManager.Instance;
+            generalItemSettings = settingsManager.generalItemSettings;
+            playerShipSettings = settingsManager.playerShipSettings;
             LoadEquipment();
+            InitializeWeapons();
             playerAttack.InitializeWeapons();
         }
 
@@ -51,7 +56,6 @@ namespace AsteroidAnnihilation
                 if (weapon.EquipmentStatRanges == null) { Debug.LogWarning("WeaponStatRanges of " + weapon.name + " are not filled in"); continue; }
                 weaponTypesT1.Add(weapon.WeaponType, weapon);
             }
-            weaponAmount = playerShipSettings.GetWeaponPositions(EnumCollections.ShipType.Fighter).Count;
         }
 
         private void SaveEquipment()
@@ -62,6 +66,8 @@ namespace AsteroidAnnihilation
 
         private void LoadEquipment()
         {
+            weaponAmount = playerShipSettings.GetWeaponPositions(EnumCollections.ShipType.Fighter).Count;
+
             if (!ES3.KeyExists("equipedWeapons"))
             {
                 equipedWeapons = new Dictionary<int, WeaponData>();
@@ -202,6 +208,7 @@ namespace AsteroidAnnihilation
         {
             inventoryManager.AddItem(equipedWeapons[index]);
             RemoveWeapon(index);
+            playerAttack.WeaponChanged();
         }
 
         public void RemoveWeapon(int index)

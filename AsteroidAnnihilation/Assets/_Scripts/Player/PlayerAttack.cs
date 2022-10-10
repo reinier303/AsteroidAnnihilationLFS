@@ -16,9 +16,13 @@ namespace AsteroidAnnihilation
         private PlayerMovement playerMovement;
         private CompletionRewardStats completionRewardStats;
         private PlayerShipSettings playerShipSettings;
+        private UIManager uiManager;
 
         private bool canFire;
         public float fireCooldown;
+        public float MaxEnergy;
+        private float currentEnergy;
+        private float energyRegen;
 
         private List<Vector2> weaponPositions;
         [SerializeField] private Dictionary<int, WeaponData> currentWeaponDatas;
@@ -49,6 +53,7 @@ namespace AsteroidAnnihilation
             equipmentManager = EquipmentManager.Instance;
             RObjectPooler = ObjectPooler.Instance;
             inputManager = InputManager.Instance;
+            uiManager = UIManager.Instance;
             completionRewardStats = CompletionRewardStats.Instance;
             playerMovement = rPlayer.RPlayerMovement;
 
@@ -58,6 +63,10 @@ namespace AsteroidAnnihilation
         private void Initialize()
         {
             canFire = true;
+            MaxEnergy = rPlayer.RPlayerStats.GetStatValue(EnumCollections.PlayerStats.EnergyCapacity);
+            currentEnergy = MaxEnergy;
+            energyRegen = rPlayer.RPlayerStats.GetStatValue(EnumCollections.PlayerStats.EnergyRegen);
+            StartCoroutine(RegenerateEnergy());
         }
 
         public void InitializeWeapons()
@@ -127,13 +136,14 @@ namespace AsteroidAnnihilation
             if (inputManager.Attacking)
             {
                 Fire(0);
+
             }
         }
 
         private void Fire(int mouseButton)
         {
             //Fix UI Check
-            if (canFire && currentWeapons.Count > 0)
+            if (canFire && currentWeapons.Count > 0 && CanApplyEnergyCost())
             {
                 muzzleFlash.SetActive(false);
                 muzzleFlash.SetActive(true);
@@ -173,6 +183,30 @@ namespace AsteroidAnnihilation
                 weapons++;
             }
             return totalFirerate / Mathf.Clamp(weapons, 1, 25);
+        }
+
+        private bool CanApplyEnergyCost()
+        {
+            float cost = 0;
+            for (int i = 0; i < currentWeapons.Count; i++)
+            {
+                if (currentWeapons[i].WeaponType == EnumCollections.Weapons.None) { continue; }
+                cost += currentWeapons[i].GetEquipmentStat(EnumCollections.EquipmentStats.EnergyPerShot, i);
+            }
+            if (currentEnergy >= cost) 
+            {               
+                currentEnergy -= cost;
+                return true;
+            } else { return false; }
+        }
+
+        private IEnumerator RegenerateEnergy()
+        {
+            if (currentEnergy < MaxEnergy) { currentEnergy += energyRegen / 30; }
+            else { currentEnergy = MaxEnergy; }
+            uiManager.UpdateEnergy(currentEnergy, MaxEnergy);
+            yield return new WaitForSeconds(1f/ 30);
+            StartCoroutine(RegenerateEnergy());
         }
     }
 }

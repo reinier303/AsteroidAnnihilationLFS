@@ -7,6 +7,7 @@ namespace AsteroidAnnihilation
     public class SwarmPod : BaseEnemy
     {
         [SerializeField] protected float moveSpeed;
+        [SerializeField] protected float aggroMove;
         protected float currSpeed;
 
         [SerializeField] private bool randomRotation = true;
@@ -25,13 +26,29 @@ namespace AsteroidAnnihilation
 
         protected virtual void Update()
         {
-            Move();
+            CheckAggroDistance();
+
+            if (Aggro)
+            {
+                AggroMove();
+            }
+            else
+            {
+                IdleMove();
+            }
         }
 
-        protected virtual void Move()
+
+        protected virtual void IdleMove()
         {
             transform.position += transform.up * Time.deltaTime * moveSpeed;
             Rotate();
+        }
+
+        protected virtual void AggroMove()
+        {
+            transform.position += transform.up * Time.deltaTime * aggroMove;
+            Rotate(rotSpeedMultiplier: 125);
         }
     }
 }

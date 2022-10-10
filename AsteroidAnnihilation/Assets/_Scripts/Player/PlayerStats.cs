@@ -57,6 +57,8 @@ namespace AsteroidAnnihilation
             Stats.Add(EnumCollections.PlayerStats.CurrentUnits, 0);
             Stats.Add(EnumCollections.PlayerStats.CurrentExperience, 0);
             Stats.Add(EnumCollections.PlayerStats.PowerUpChance, 0);
+            Stats.Add(EnumCollections.PlayerStats.EnergyCapacity, 50);
+            Stats.Add(EnumCollections.PlayerStats.EnergyRegen, 1);
 
             //Save to file
             SavePlayerStats();

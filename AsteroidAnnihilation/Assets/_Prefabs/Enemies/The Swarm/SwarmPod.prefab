@@ -143,53 +143,30 @@ MonoBehaviour:
   ShakeDuration: 0.45
   HitSound: 
   DeathSound: 
-  ParticleEffect: SwarmExplosion1
+  ParticleEffect: 0
   ParticleEffectScale: 1
-  PermanenceSprites:
-  - {fileID: -2103524419, guid: d260ab6374fa2774b89b7291f5ab0b68, type: 3}
-  - {fileID: 1969742146, guid: d260ab6374fa2774b89b7291f5ab0b68, type: 3}
-  - {fileID: 1256937384, guid: d260ab6374fa2774b89b7291f5ab0b68, type: 3}
-  - {fileID: 1663557177, guid: d260ab6374fa2774b89b7291f5ab0b68, type: 3}
-  - {fileID: -174853554, guid: d260ab6374fa2774b89b7291f5ab0b68, type: 3}
-  - {fileID: 1332243597, guid: d260ab6374fa2774b89b7291f5ab0b68, type: 3}
-  - {fileID: 1328406459, guid: d260ab6374fa2774b89b7291f5ab0b68, type: 3}
-  - {fileID: 185427147, guid: d260ab6374fa2774b89b7291f5ab0b68, type: 3}
-  - {fileID: -197955586, guid: d260ab6374fa2774b89b7291f5ab0b68, type: 3}
-  - {fileID: -779702973, guid: d260ab6374fa2774b89b7291f5ab0b68, type: 3}
-  - {fileID: 1614078161, guid: d260ab6374fa2774b89b7291f5ab0b68, type: 3}
-  - {fileID: -1744852768, guid: d260ab6374fa2774b89b7291f5ab0b68, type: 3}
-  - {fileID: -1765105239, guid: d260ab6374fa2774b89b7291f5ab0b68, type: 3}
-  - {fileID: -38284777, guid: d260ab6374fa2774b89b7291f5ab0b68, type: 3}
-  - {fileID: 717177853, guid: d260ab6374fa2774b89b7291f5ab0b68, type: 3}
-  - {fileID: 1615613773, guid: d260ab6374fa2774b89b7291f5ab0b68, type: 3}
-  - {fileID: 819086978, guid: d260ab6374fa2774b89b7291f5ab0b68, type: 3}
-  - {fileID: 117819793, guid: d260ab6374fa2774b89b7291f5ab0b68, type: 3}
-  - {fileID: -495974633, guid: d260ab6374fa2774b89b7291f5ab0b68, type: 3}
-  - {fileID: -923828661, guid: d260ab6374fa2774b89b7291f5ab0b68, type: 3}
-  - {fileID: 1098582771, guid: d260ab6374fa2774b89b7291f5ab0b68, type: 3}
-  - {fileID: -302234414, guid: d260ab6374fa2774b89b7291f5ab0b68, type: 3}
-  - {fileID: 768638732, guid: d260ab6374fa2774b89b7291f5ab0b68, type: 3}
-  - {fileID: -956300105, guid: d260ab6374fa2774b89b7291f5ab0b68, type: 3}
-  - {fileID: -688703716, guid: d260ab6374fa2774b89b7291f5ab0b68, type: 3}
+  PermanenceSprites: 0
   PermanencePartMinMaxAmount: {x: 6, y: 8}
   PermanencePartOutwardsPower: 700
   PermanenceScaleFactor: 0.07
   Drops: []
   DropChance: 4
+  spriteRenderer: {fileID: 0}
   isDead: 0
   isInitialized: 0
   KilledByIndex: 0
   Aggro: 0
   Player: {fileID: 0}
   ContactDamage: 10
-  RotationSpeed: 0.016
+  RotationSpeed: 0.007
   DroppedUnits: 15
   ExperienceGained: 3
-  AggroDistance: 10
+  AggroDistance: 9
   DeAggroDistance: 45
   sizeRange: {x: 0.9, y: 1.1}
   grouped: 0
   moveSpeed: 1.15
+  aggroMove: 2.25
   randomRotation: 0
 --- !u!1 &7585125964869766783
 GameObject:

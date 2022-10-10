@@ -19,7 +19,8 @@ namespace AsteroidAnnihilation
         protected override void Start()
         {
             base.Start();
-            Vector2 randomSize = new Vector2(Random.Range(0.85f, 1.15f), Random.Range(0.85f, 1.15f));
+            float randomScale = Random.Range(sizeRange.x, sizeRange.y);
+            Vector2 randomSize = new Vector2(randomScale, randomScale);
             transform.localScale = randomSize;
         }
 
