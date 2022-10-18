@@ -36,7 +36,7 @@ namespace AsteroidAnnihilation
 
             objectPooler = ObjectPooler.Instance;
             uIManager = UIManager.Instance;
-            magnetRadius = playerScript.RPlayerStats.GetStatValue(EnumCollections.PlayerStats.MagnetRadius);
+            magnetRadius = playerScript.RPlayerStats.GetStatValue(EnumCollections.PlayerStats.BaseMagnetRadius);
         }
 
         protected virtual void OnEnable()

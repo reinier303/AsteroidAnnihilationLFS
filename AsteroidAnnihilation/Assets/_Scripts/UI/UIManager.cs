@@ -4,6 +4,7 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 using Sirenix.OdinInspector;
+using UnityEngine.EventSystems;
 
 namespace AsteroidAnnihilation
 {
@@ -88,6 +89,10 @@ namespace AsteroidAnnihilation
 
         private Mission currentMission;
 
+        private EventSystem eventSystem;
+
+        public bool MouseOverUI = false;
+
         private void Awake()
         {
             Instance = this;
@@ -98,15 +103,15 @@ namespace AsteroidAnnihilation
             RPlayerEntity = RPlayer.RPlayerEntity;
             playerStats = RPlayer.RPlayerStats;
             playerAttack = RPlayer.RPlayerAttack;
-
             waveEnterCanvasGroup = WaveEnterText.GetComponent<CanvasGroup>();
         }
 
         private void Start()
         {
             UpdateUnits();
-            UpdateHealth();
+            UpdateHealth(RPlayerEntity.currentHealth, RPlayerEntity.MaxHealth);
             UpdateLevel();
+            eventSystem = EventSystem.current;
 
             currentMission = missionManager.GetCurrentMission();
             InitializeMissionUI();
@@ -128,12 +133,9 @@ namespace AsteroidAnnihilation
             MissionComplete.SetActive(true);
         }
 
-        public void UpdateHealth()
+        public void UpdateHealth(float currentHealth, float maxHealth)
         {
-            float currentHealth = RPlayerEntity.currentHealth;
-            float maxHealth = RPlayerEntity.MaxHealth;
-
-            LivesText.text = currentHealth + "/" + maxHealth;
+            LivesText.text = Mathf.Round(currentHealth) + "/" + Mathf.Round(maxHealth);
             PlayerHealthBar.UpdateHealth(currentHealth, maxHealth);
         }
 

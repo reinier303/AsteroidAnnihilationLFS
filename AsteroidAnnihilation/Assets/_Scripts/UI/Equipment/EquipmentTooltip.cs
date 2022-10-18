@@ -58,9 +58,9 @@ namespace AsteroidAnnihilation
                         float minValue = Mathf.RoundToInt(stats[stat] * 0.75f);
                         float maxValue = Mathf.RoundToInt(stats[stat] * 1.25f);
 
-                        statDisplay.text = stat.ToString() + ": " + minValue + "-" + maxValue; 
+                        statDisplay.text = stat.ToString() + ": " + MathHelpers.RoundToDecimal(minValue , 2) + "-" + MathHelpers.RoundToDecimal(maxValue , 2); 
                     } 
-                    else { statDisplay.text = stat.ToString() + ": " + stats[stat]; }
+                    else { statDisplay.text = stat.ToString() + ": " + MathHelpers.RoundToDecimal(stats[stat], 2); }
                 }
             }
 

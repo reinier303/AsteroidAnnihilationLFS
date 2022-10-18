@@ -28,7 +28,7 @@ MonoBehaviour:
   ChargeTime: 2.5
   FireRate: 0.75
   Amount: 36
-  Spread: 10
+  Spread: 12
   BulletSpeed: 3
   ProjectileLifeTime: 12
   Projectile: 0

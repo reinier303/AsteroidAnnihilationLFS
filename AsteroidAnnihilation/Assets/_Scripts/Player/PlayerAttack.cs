@@ -28,8 +28,6 @@ namespace AsteroidAnnihilation
         [SerializeField] private Dictionary<int, WeaponData> currentWeaponDatas;
         [SerializeField] private Dictionary<int, Weapon> currentWeapons;
 
-        [SerializeField] private GameObject muzzleFlash;
-
         [SerializeField] private float playerVelocityMultiplier;
 
         private EventSystem eventSystem;
@@ -63,9 +61,6 @@ namespace AsteroidAnnihilation
         private void Initialize()
         {
             canFire = true;
-            MaxEnergy = rPlayer.RPlayerStats.GetStatValue(EnumCollections.PlayerStats.EnergyCapacity);
-            currentEnergy = MaxEnergy;
-            energyRegen = rPlayer.RPlayerStats.GetStatValue(EnumCollections.PlayerStats.EnergyRegen);
             StartCoroutine(RegenerateEnergy());
         }
 
@@ -82,6 +77,13 @@ namespace AsteroidAnnihilation
                 currentWeapons.Add(index, equipmentManager.GetWeapon(currentWeaponDatas[index].WeaponType));
                 currentWeapons[index].Initialize(rPlayer.RPlayerStats, equipmentManager);
             }
+        }
+
+        public void GetEquipmentVariables()
+        {
+            MaxEnergy = equipmentManager.GetGearStatValue(EnumCollections.ItemType.EnergyCore, EnumCollections.EquipmentStats.EnergyCapacity);
+            currentEnergy = MaxEnergy;
+            energyRegen = equipmentManager.GetGearStatValue(EnumCollections.ItemType.EnergyCore, EnumCollections.EquipmentStats.EnergyRegen);
         }
 
         public void WeaponChanged()
@@ -132,8 +134,7 @@ namespace AsteroidAnnihilation
             {
                 return;
             }
-            //TEMP: Get input from inputManager
-            if (inputManager.Attacking)
+            if (inputManager.Attacking && !uiManager.MouseOverUI)
             {
                 Fire(0);
 
@@ -143,11 +144,8 @@ namespace AsteroidAnnihilation
         private void Fire(int mouseButton)
         {
             //Fix UI Check
-            if (canFire && currentWeapons.Count > 0 && CanApplyEnergyCost())
+            if (canFire && HasWeapon() && CanApplyEnergyCost())
             {
-                muzzleFlash.SetActive(false);
-                muzzleFlash.SetActive(true);
-
                 if(mouseButton == 0)
                 {
                     Vector2 addedPlayerVelocity = playerMovement.MovementInput * playerVelocityMultiplier * playerMovement.GetCurrentSpeed();
@@ -162,24 +160,35 @@ namespace AsteroidAnnihilation
             }
         }
 
+        private bool HasWeapon()
+        {
+            bool hasWeapon = false;
+            for(int i = 0; i < currentWeapons.Count; i++)
+            {
+                if (currentWeapons[i].WeaponType != EnumCollections.Weapons.None) { hasWeapon = true; break; }
+            }
+            return hasWeapon;
+        }
+
         private IEnumerator FireCooldownTimer(int mouseButton)
         {
             if(mouseButton == 0)
             {
-                yield return new WaitForSeconds(1 / GetCooldownAverage());
-            }
+                yield return new WaitForSeconds(1 / GetFireRateAverage());
+            }            
             canFire = true;
         }
 
         //TODO::Create a way for weapons to fire independently based on their own firerate/alternating. Make this and average both options
-        private float GetCooldownAverage()
+        private float GetFireRateAverage()
         {
             float totalFirerate = 0;
             int weapons = 0;
             for (int i = 0; i < currentWeapons.Count; i++)
             {
                 if (currentWeapons[i].WeaponType == EnumCollections.Weapons.None) { continue; }
-                totalFirerate += currentWeapons[i].GetEquipmentStat(EnumCollections.EquipmentStats.FireRate, i);
+                float coreFireRate = equipmentManager.GetGearStatValue(EnumCollections.ItemType.EnergyCore, EnumCollections.EquipmentStats.FireRate);
+                totalFirerate += (currentWeapons[i].GetEquipmentStat(EnumCollections.EquipmentStats.FireRate, i) + coreFireRate);
                 weapons++;
             }
             return totalFirerate / Mathf.Clamp(weapons, 1, 25);
@@ -202,10 +211,10 @@ namespace AsteroidAnnihilation
 
         private IEnumerator RegenerateEnergy()
         {
-            if (currentEnergy < MaxEnergy) { currentEnergy += energyRegen / 30; }
+            if (currentEnergy < MaxEnergy) { currentEnergy += energyRegen / 30f; }
             else { currentEnergy = MaxEnergy; }
             uiManager.UpdateEnergy(currentEnergy, MaxEnergy);
-            yield return new WaitForSeconds(1f/ 30);
+            yield return new WaitForSeconds(1f/ 30f);
             StartCoroutine(RegenerateEnergy());
         }
     }

@@ -13,11 +13,14 @@ namespace AsteroidAnnihilation
         private SettingsManager settingsManager;
         private PlayerAttack playerAttack;
         private InventoryManager inventoryManager;
+        private PlayerEntity playerEntity;
+        private PlayerMovement playerMovement;
 
-        private Dictionary<EnumCollections.Weapons, Weapon> weaponTypesT1;
+        [SerializeField] private Dictionary<EnumCollections.Weapons, Weapon> weaponTypesT1;
+        [SerializeField] private Dictionary<EnumCollections.ItemType, Equipment> equipmentTypesT1;
 
         [SerializeField]private Dictionary<int, WeaponData> equipedWeapons;
-        private Dictionary<EnumCollections.ItemType, EquipmentData> equipedGear;
+        [SerializeField]private Dictionary<EnumCollections.ItemType, EquipmentData> equipedGear;
 
         private GeneralItemSettings generalItemSettings;
         private PlayerShipSettings playerShipSettings;
@@ -37,16 +40,27 @@ namespace AsteroidAnnihilation
 
         public void InitializeEquipment()
         {
-            playerAttack = Player.Instance.RPlayerAttack;
+            Player player = Player.Instance;
+            playerAttack = player.RPlayerAttack;
+            playerEntity = player.RPlayerEntity;
             settingsManager = SettingsManager.Instance;
+            playerMovement = player.RPlayerMovement;
             generalItemSettings = settingsManager.generalItemSettings;
             playerShipSettings = settingsManager.playerShipSettings;
             LoadEquipment();
-            InitializeWeapons();
+            InitializeEquipmentGeneration();
             playerAttack.InitializeWeapons();
+            SetEquipmentStats();
         }
 
-        private void InitializeWeapons()
+        public void SetEquipmentStats()
+        {
+            playerAttack.GetEquipmentVariables();
+            playerEntity.GetHealthVariables();
+            playerEntity.SetHealthToMax();
+        }
+
+        private void InitializeEquipmentGeneration()
         {
             weaponTypesT1 = new Dictionary<EnumCollections.Weapons, Weapon>();
 
@@ -55,6 +69,15 @@ namespace AsteroidAnnihilation
             {
                 if (weapon.EquipmentStatRanges == null) { Debug.LogWarning("WeaponStatRanges of " + weapon.name + " are not filled in"); continue; }
                 weaponTypesT1.Add(weapon.WeaponType, weapon);
+            }
+
+            equipmentTypesT1 = new Dictionary<EnumCollections.ItemType, Equipment>();
+
+            Object[] equipment = Resources.LoadAll("Equipment/EquipmentT1", typeof(Equipment));
+            foreach (Equipment equip in equipment)
+            {
+                if (equip.EquipmentStatRanges == null) { Debug.LogWarning("WeaponStatRanges of " + equip.name + " are not filled in"); continue; }
+                if (!equipmentTypesT1.ContainsKey(equip.ItemType)) { equipmentTypesT1.Add(equip.ItemType, equip); }//TODO::REMOVE THIS CHECK UPON ADDING EQUIPMENT SUBTYPES
             }
         }
 
@@ -76,7 +99,12 @@ namespace AsteroidAnnihilation
                 {
                     equipedWeapons.Add(i, default);
                 }
-                equipedGear = generalItemSettings.startGear;
+                equipedGear = new Dictionary<EnumCollections.ItemType, EquipmentData>();
+                foreach(EquipmentData equipData in generalItemSettings.startGear.Values)
+                {
+                    equipedGear.Add(equipData.ItemData.ItemType,equipData);
+                }
+
                 SaveEquipment();
             }
             else
@@ -122,7 +150,41 @@ namespace AsteroidAnnihilation
             }
             return weaponData;
         }
+        
+        public EquipmentData GenerateEquipment(List<EnumCollections.ItemType> forcedEquipTypes = null)
+        {
+            Equipment equipment;
+            EquipmentData equipmentData = new EquipmentData();
 
+            if (forcedEquipTypes == null)
+            {
+                List<Equipment> keyList = Enumerable.ToList(equipmentTypesT1.Values);
+                equipment = keyList[Random.Range(0, keyList.Count)];
+            }
+            else { equipment = equipmentTypesT1[forcedEquipTypes[Random.Range(0, forcedEquipTypes.Count)]]; }
+
+            //ItemData
+            equipmentData.ItemData.Tier = equipment.Tier;
+            equipmentData.ItemData.ItemName = equipment.GenerateName();
+            equipmentData.ItemData.ItemType = equipment.ItemType;
+            EnumCollections.Rarities rarity = equipment.GetRarity();
+            equipmentData.ItemData.Rarity = rarity;
+            equipmentData.ItemData.Icon = equipment.GetIcon();
+
+            //EquipmentData
+            equipmentData.EquipmentStats = new Dictionary<EnumCollections.EquipmentStats, float>();
+            equipmentData.RarityStats = equipment.GetRarityStats(rarity, generalItemSettings);
+            equipmentData.ItemData.ItemType = equipment.ItemType;
+
+            foreach (EnumCollections.EquipmentStats stat in equipment.EquipmentStatRanges.Keys)
+            {
+                float value = Random.Range(equipment.EquipmentStatRanges[stat].x, equipment.EquipmentStatRanges[stat].y);
+                value = MathHelpers.RoundToDecimal(value, 3);
+                equipmentData.EquipmentStats.Add(stat, value);
+            }
+            return equipmentData;
+        }
+        
         public Weapon GetWeapon(EnumCollections.Weapons weaponType)
         {
             return weaponTypesT1[weaponType];
@@ -143,13 +205,81 @@ namespace AsteroidAnnihilation
             return equipedGear[gearType];
         }
 
+        public float GetGearStatValue(EnumCollections.ItemType gearType, EnumCollections.EquipmentStats statType)
+        {
+            if (equipedGear[gearType].EquipmentStats == null)
+            {
+                return 0;
+            }
+            float baseValue = 0;
+            float rarityValue = 0;
+
+            if (equipedGear[gearType].EquipmentStats.ContainsKey(statType))
+            {
+                baseValue = equipedGear[gearType].EquipmentStats[statType];
+            }
+            if(equipedGear[gearType].RarityStats.ContainsKey(statType))
+            {
+                rarityValue = equipedGear[gearType].RarityStats[statType];
+            }
+            return baseValue + rarityValue;
+        }
+
+
+        public (bool, EquipmentData) ChangeGear(EquipmentData equip)
+        {
+            bool succes = false;
+            //EquipmentData data = default;
+
+            /*
+            //int emptyWeaponSlot = GetEmptyWeaponSlotIndex();
+            if (emptyWeaponSlot != -1)
+            {
+                equipedGear[equip.ItemData.ItemType] = equip;
+                succes = true;
+            }
+            else
+            {*/
+                EquipmentData data = equipedGear[equip.ItemData.ItemType];
+                equipedGear[equip.ItemData.ItemType] = equip;
+                //equipedWeapons[index] = weapon;
+                succes = true;
+            //}
+            /*
+            //Case index parameter is supplied
+            else
+            {
+                if (!equipedWeapons[index].Equals(default(EquipmentData)))
+                {
+                    data = equipedGear[equip.ItemData.ItemType];
+                    equipedGear[equip.ItemData.ItemType] = equip;
+                    succes = true;
+                }
+                else
+                {
+                    equipedGear[equip.ItemData.ItemType] = equip;
+                    //equipedWeapons[index] = weapon;
+                    succes = true;
+                }
+            }
+            */
+            if (succes)
+            {
+                playerAttack.GetEquipmentVariables();
+                playerEntity.GetHealthVariables();
+                playerMovement.GetMovementVariables();
+
+                inventoryManager.InitializeGear();
+                return (succes, data);
+            }
+            else { return (succes, default); }
+        }
 
         public (bool, WeaponData) ChangeWeapon(WeaponData weapon, int index = -1)
         {
             bool succes = false;
             WeaponData data = default;
 
-            //CHECK REQUIREMENTS HERE and dont swap weapon if requirements not met
             if (index == -1 )
             {
                 Debug.Log("index paramater not supplied");
@@ -198,24 +328,40 @@ namespace AsteroidAnnihilation
             {
                 if (!equipedWeapons[i].Equals(default(WeaponData)))
                 {
+                    Debug.Log(i);
                     return i;
                 }
             }
             return -1;
         }
 
+        public void MoveGearToInventory(EquipmentData data)
+        {
+            inventoryManager.AddItem(data);
+            RemoveGear(data);
+        }
+
+        public void RemoveGear(EquipmentData data)
+        {
+            equipedGear[data.ItemData.ItemType] = default;
+            playerAttack.GetEquipmentVariables();
+            playerEntity.GetHealthVariables();
+            playerMovement.GetMovementVariables();
+        }
+
         public void MoveWeaponToInventory(int index)
         {
             inventoryManager.AddItem(equipedWeapons[index]);
             RemoveWeapon(index);
-            playerAttack.WeaponChanged();
         }
 
-        public void RemoveWeapon(int index)
+        public WeaponData RemoveWeapon(int index)
         {
-            Debug.Log("Removed");
+            WeaponData data;
+            data = equipedWeapons[index];
             equipedWeapons[index] = default;
             playerAttack.WeaponChanged();
+            return data;
         }
 
         public void ChangeGear(EnumCollections.ItemType equipType, EquipmentData equipment)

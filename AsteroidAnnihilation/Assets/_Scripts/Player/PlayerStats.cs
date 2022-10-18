@@ -49,16 +49,17 @@ namespace AsteroidAnnihilation
             //Player Stats
             PlayerLevel = 1;
 
-            Stats.Add(EnumCollections.PlayerStats.Health, 100);
-            Stats.Add(EnumCollections.PlayerStats.MovementSpeed, 4.0f);
-            Stats.Add(EnumCollections.PlayerStats.MagnetRadius, 3);
-            Stats.Add(EnumCollections.PlayerStats.CritRate, 5.0f);
-            Stats.Add(EnumCollections.PlayerStats.CritMultiplier, 2.0f);
+            Stats.Add(EnumCollections.PlayerStats.BaseHealth, 20); //+30 BaseHull
+            Stats.Add(EnumCollections.PlayerStats.BaseHealthRegen, 0.1f);
+            Stats.Add(EnumCollections.PlayerStats.BaseMovementSpeed, 1.0f); //+3 BaseEngine
+            Stats.Add(EnumCollections.PlayerStats.BaseMagnetRadius, 3); // Magnet Accesories
+            Stats.Add(EnumCollections.PlayerStats.CritRate, 5.0f); // Weapons
+            Stats.Add(EnumCollections.PlayerStats.CritMultiplier, 2.0f); // Weapons
             Stats.Add(EnumCollections.PlayerStats.CurrentUnits, 0);
             Stats.Add(EnumCollections.PlayerStats.CurrentExperience, 0);
             Stats.Add(EnumCollections.PlayerStats.PowerUpChance, 0);
-            Stats.Add(EnumCollections.PlayerStats.EnergyCapacity, 50);
-            Stats.Add(EnumCollections.PlayerStats.EnergyRegen, 1);
+            Stats.Add(EnumCollections.PlayerStats.BaseEnergyCapacity, 0); //+50 BaseEnergyCore
+            Stats.Add(EnumCollections.PlayerStats.BaseEnergyRegen, 1);//+1 BaseEnergyCore
 
             //Save to file
             SavePlayerStats();

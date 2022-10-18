@@ -204,16 +204,6 @@ namespace AsteroidAnnihilation
         {
             ES3.Save("tierData", tierData);
         }
-
-        public List<Sprite> GetCurrentBackgrounds()
-        {
-            List<Sprite> backgrounds = new List<Sprite>();
-            foreach(EnumCollections.Backgrounds bg in GetCurrentAreaData().Backgrounds)
-            {
-                backgrounds.Add(Resources.Load<Sprite>("Backgrounds/" + bg.ToString()));
-            }
-            return backgrounds;
-        }
     }
 
     [System.Serializable]

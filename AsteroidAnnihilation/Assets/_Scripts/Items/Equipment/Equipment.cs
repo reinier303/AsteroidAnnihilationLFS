@@ -5,9 +5,9 @@ using System.Linq;
 using Sirenix.OdinInspector;
 
 namespace AsteroidAnnihilation
-{
-    [System.Serializable]
-    public class Equipment : Item
+{   
+     [CreateAssetMenu(menuName = "Equipment", order = 997)]
+    [System.Serializable]public class Equipment : Item
     { 
         [SerializeField] public Dictionary<EnumCollections.EquipmentStats, Vector2> EquipmentStatRanges;
         [SerializeField] protected Dictionary<EnumCollections.EquipmentStats, Vector2> RarityStatRanges;

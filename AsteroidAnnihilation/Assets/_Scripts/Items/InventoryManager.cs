@@ -150,6 +150,7 @@ namespace AsteroidAnnihilation
                 ItemSlot slot = gearSlot.GetComponent<ItemSlot>();
 
                 slot.SetItem(equipmentManager.GetGear(slot.slotType));
+                slot.GetComponent<ItemSlot>().InitializeSlot();
             }
         }
 
@@ -174,41 +175,50 @@ namespace AsteroidAnnihilation
             } else { return false; }
         }
 
-        public bool AddItem(EquipmentData equipment, int index = -1)
+        public (bool, EquipmentData) AddItem(EquipmentData equipment, int index = -1)
         {
             if (!InventoryFull())
             {
+                EquipmentData data = default;
                 if (index == -1)
                 {
                     index = GetAvailableSlotIndex();
-                    if (index == -1) { return false; }
+                    if (index == -1) { return (false, default); }
                 }
+                if (InventoryEquipment.ContainsKey(index)) { data = InventoryEquipment[index]; }
                 InventoryEquipment.Add(index, equipment);
                 ItemSlots[index].SetItem(equipment);
                 InitializeInventoryItems();
-                return true;
+                InitializeGear();
+                InitializeShipComponents();
+                equipmentManager.SetEquipmentStats();
+                return (true, data);
             }
-            else { return false; }
+            else { return (false, default); }
         }
 
-        public bool AddItem(WeaponData weapon, int index = -1)
+        public (bool, WeaponData) AddItem(WeaponData weapon, int index = -1)
         {
             if (!InventoryFull())
             {
+                WeaponData data = default;
                 if (index == -1)
                 {
                     index = GetAvailableSlotIndex();
-                    if (index == -1) { return false; }
+                    if (index == -1) { return (false, default); }
                 }
 
                 if (!InventoryWeapons.ContainsKey(index)) { InventoryWeapons.Add(index, weapon);}
-                else { InventoryWeapons[index] = weapon; }
+                else { 
+                    data = InventoryWeapons[index];
+                    InventoryWeapons[index] = weapon; 
+                }
                 inventoryPanel.GetChild(index).GetComponent<ItemSlot>().SetItem(weapon);
 
                 InitializeInventoryItems();
-                return true;
+                return (true, data);
             }
-            else { return false; }
+            else { return (false, default); }
         }
 
         public void RemoveItem(ItemData item, int index)
@@ -218,11 +228,17 @@ namespace AsteroidAnnihilation
             InitializeInventoryItems();
         }
 
-        public void RemoveItem(EquipmentData equipment, int index)
+        public EquipmentData RemoveItem(EquipmentData equipment, int index)
         {
+            EquipmentData data = default;
+            if (InventoryEquipment.ContainsKey(index)) { data = InventoryEquipment[index]; }
             InventoryEquipment.Remove(index);
-            ItemSlots[index] = default;
+            ItemSlots[index].ClearSlot();
             InitializeInventoryItems();
+            InitializeGear();
+            InitializeShipComponents();
+            equipmentManager.SetEquipmentStats();
+            return data;
         }
 
         public WeaponData RemoveItem(WeaponData weapon, int index)

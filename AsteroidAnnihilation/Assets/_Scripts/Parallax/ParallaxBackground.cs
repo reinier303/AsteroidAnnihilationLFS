@@ -7,6 +7,7 @@ namespace AsteroidAnnihilation
 {
     public class ParallaxBackground : SerializedMonoBehaviour
     {
+        public static ParallaxBackground Instance;
         private Transform player;
 
         private Vector2 size;
@@ -29,6 +30,7 @@ namespace AsteroidAnnihilation
 
         private void Awake()
         {
+            Instance = this;
             BackgroundElements = new Dictionary<Transform, Vector2>();
 
             SpriteRenderer spriteRenderer = transform.GetChild(0).GetComponent<SpriteRenderer>();
@@ -42,22 +44,49 @@ namespace AsteroidAnnihilation
         private void Start()
         {
             player = GameManager.Instance.RPlayer.transform;
-            GetBackgroundSprites();
+            InitializeBackgrounds();
             SetBackgroundsStart();
             StartCoroutine(CheckParallax());
         }
 
-        private void GetBackgroundSprites()
+        public void SetMissionBackgrounds()
         {
             //TODO::Make background colors work with new mission system
-            if (GetSpritesFromResources) { BackgroundSprites = AreaManager.Instance.GetCurrentBackgrounds(); }
+            if (GetSpritesFromResources) { BackgroundSprites = MissionManager.Instance.GetCurrentBackgrounds(); }
+            SetBackgrounds();
+        }
 
+        public void SetHubBackgrounds()
+        {
+            if (!GetSpritesFromResources) { return; }
+            BackgroundSprites.Clear();
+            Sprite sprite = (Sprite)Resources.Load<Sprite>("Backgrounds/" + EnumCollections.Backgrounds.BackgroundNebulaBlue.ToString());
+            BackgroundSprites.Add(sprite);
+            SetBackgrounds();
+        }
+
+        private void InitializeBackgrounds()
+        {
+            SetHubBackgrounds();
             for (int i = 0; i < transform.childCount; i++)
             {
                 RandomSprite backgroundRandom = transform.GetChild(i).GetComponent<RandomSprite>();
                 if (backgroundRandom != null)
                 {
                     BackgroundElements.Add(transform.GetChild(i), new Vector2(0, i * 10));
+                    backgroundRandom.SetSprites(BackgroundSprites);
+                    continue;
+                }
+            }
+        }
+
+        private void SetBackgrounds()
+        {
+            for (int i = 0; i < transform.childCount; i++)
+            {
+                RandomSprite backgroundRandom = transform.GetChild(i).GetComponent<RandomSprite>();
+                if (backgroundRandom != null)
+                {
                     backgroundRandom.SetSprites(BackgroundSprites);
                     continue;
                 }

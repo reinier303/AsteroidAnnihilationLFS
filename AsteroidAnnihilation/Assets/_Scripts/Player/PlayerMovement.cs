@@ -33,6 +33,7 @@ namespace AsteroidAnnihilation
         private Player player;
         private PlayerStats playerStats;
         private InputManager inputManager;
+        private EquipmentManager equipmentManager;
 
         public List<ParticleSystem> Engines;
 
@@ -58,6 +59,7 @@ namespace AsteroidAnnihilation
             cam = Camera.main;
             SceneManager.sceneLoaded += OnSceneLoaded;
             gameManager = GameManager.Instance;
+            equipmentManager = EquipmentManager.Instance;
             player = gameManager.RPlayer;
             playerStats = GetComponent<PlayerStats>();
             inputManager = gameManager.RInputManager;
@@ -87,13 +89,16 @@ namespace AsteroidAnnihilation
             }
         }
 
-        private void GetMovementVariables()
+        public void GetMovementVariables()
         {
-            if (playerStats.HasStat(EnumCollections.PlayerStats.MovementSpeed))
+            if (playerStats.HasStat(EnumCollections.PlayerStats.BaseMovementSpeed))
             {
-                currentSpeed = playerStats.GetStatValue(EnumCollections.PlayerStats.MovementSpeed);
-                Acceleration = playerStats.GetStatValue(EnumCollections.PlayerStats.MovementSpeed) * AccelerationMultiplier;
-                Deceleration = playerStats.GetStatValue(EnumCollections.PlayerStats.MovementSpeed) * DecelerationMultiplier;
+                float baseSpeed = playerStats.GetStatValue(EnumCollections.PlayerStats.BaseMovementSpeed);
+                float engineSpeed = equipmentManager.GetGearStatValue(EnumCollections.ItemType.Engine, EnumCollections.EquipmentStats.MovementSpeed);
+                float accesorySpeed = 0; //TODO::Get from accessories once implemented.
+                currentSpeed = baseSpeed + engineSpeed + accesorySpeed;
+                Acceleration = currentSpeed * AccelerationMultiplier;
+                Deceleration = currentSpeed * DecelerationMultiplier;
             }
         }
 
@@ -139,7 +144,7 @@ namespace AsteroidAnnihilation
 
             //Debug.Log("Regular: " + new Vector2(axisX,axisY) + "Normalized: " + new Vector2(axisX, axisY).normalized);
             MovementInput = input * currentSpeed * Time.deltaTime;
-
+            Debug.Log(input);
             //MovementInput = new Vector2(axisX, axisY) * currentSpeed * Time.deltaTime;
             transform.position += (Vector3)MovementInput;
 
@@ -190,7 +195,7 @@ namespace AsteroidAnnihilation
                     lastInputs.RemoveAt(0);
                     lastInputs.Add(MovementInput);
                 }*/
-                target = transform.position + ((Vector3)MovementInput * 0.5f) + (Vector3)CameraOffset.Instance.Offset * offsetMultiplier; 
+            target = transform.position + ((Vector3)MovementInput) + (Vector3)CameraOffset.Instance.Offset * offsetMultiplier; 
             //}
 
             var dir = target - transform.position;

@@ -12,7 +12,7 @@ namespace AsteroidAnnihilation
         public float FireRate;
         public int Amount;
         public float Spread;
-        public int BulletSpeed;
+        public float BulletSpeed;
         public float ProjectileLifeTime = 1f;
         public EnumCollections.EnemyProjectiles Projectile;
         private ObjectPooler objectPooler;

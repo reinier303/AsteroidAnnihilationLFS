@@ -9,7 +9,9 @@ namespace AsteroidAnnihilation
         [SerializeField] private GameObject PlayerHitEffect;
         public bool canHit = true;
         [SerializeField] private float hitCooldown;
-        private UIManager RUIManager;
+        private UIManager uIManager;
+        private EquipmentManager equipmentManager;
+        private float healthRegen;
 
         protected override void Awake()
         {
@@ -21,15 +23,34 @@ namespace AsteroidAnnihilation
             baseMaterial = spriteRenderer.material;
 
             InitializeDropPool();
+            currentHealth = MaxHealth;
+        }
 
-            MaxHealth = GetComponent<PlayerStats>().GetStatValue(EnumCollections.PlayerStats.Health);
+        public void GetHealthVariables()
+        {
+            PlayerStats pStats = GetComponent<PlayerStats>();
+            float baseHealth = pStats.GetStatValue(EnumCollections.PlayerStats.BaseHealth);
+            float hullHealth = equipmentManager.GetGearStatValue(EnumCollections.ItemType.HullPlating, EnumCollections.EquipmentStats.Health);
+            float baseRegen = pStats.GetStatValue(EnumCollections.PlayerStats.BaseHealthRegen);
+            float hullRegen = equipmentManager.GetGearStatValue(EnumCollections.ItemType.HullPlating, EnumCollections.EquipmentStats.HealthRegen);
+            healthRegen = baseRegen + hullRegen;
+            float accessoriesHealth = 0;//TODO::Get from accessories
+
+            MaxHealth = baseHealth + hullHealth + accessoriesHealth;
+            uIManager.UpdateHealth(currentHealth, MaxHealth);
+        }
+
+        public void SetHealthToMax()
+        {
             currentHealth = MaxHealth;
         }
 
         protected override void Start()
         {
             base.Start();
-            RUIManager = UIManager.Instance;
+            uIManager = UIManager.Instance;
+            equipmentManager = EquipmentManager.Instance;
+            StartCoroutine(RegenerateHealth());
         }
 
         public override void TakeDamage(float damage, bool isCrit)
@@ -39,14 +60,14 @@ namespace AsteroidAnnihilation
                 return;
             }
             PlayerHitEffect.SetActive(true);
-            RUIManager.StartCoroutine(RUIManager.TweenAlpha(RUIManager.HitVignette.rectTransform, RUIManager.VignetteDuration, RUIManager.AlphaTo, 0));
+            uIManager.StartCoroutine(uIManager.TweenAlpha(uIManager.HitVignette.rectTransform, uIManager.VignetteDuration, uIManager.AlphaTo, 0));
             if (!gameManager.PlayerAlive)
             {
                 return;
             }
             StartCoroutine(HitCooldown());
             base.TakeDamage(damage, isCrit);
-            RUIManager.UpdateHealth();
+            uIManager.UpdateHealth(currentHealth, MaxHealth);
         }
 
         protected override void SpawnParticleEffect()
@@ -89,6 +110,15 @@ namespace AsteroidAnnihilation
             //yield return new WaitForSeconds(hitCooldown);
             spriteRenderer.color = new Color(1, 1, 1, 1f);
             canHit = true;
+        }
+
+        private IEnumerator RegenerateHealth()
+        {
+            if (currentHealth < MaxHealth) { currentHealth += healthRegen / 30; }
+            else { currentHealth = MaxHealth; }
+            uIManager.UpdateHealth(currentHealth, MaxHealth);
+            yield return new WaitForSeconds(1f / 30);
+            StartCoroutine(RegenerateHealth());
         }
     }
 }

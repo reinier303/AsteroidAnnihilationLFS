@@ -131,12 +131,15 @@ namespace AsteroidAnnihilation
         private void GenerateRandomEnemyList()
         {
             enemyNames.Clear();
+            enemyTypeMax.Clear();
             for (int i = 0; i < currentMission.Enemies.Count; i++)
             {
-                enemyTypeMax.Add(currentMission.Enemies[i].EnemyType.ToString(), currentMission.Enemies[i].MaxAmount);
+                string enemy = currentMission.Enemies[i].EnemyType.ToString();
+                if (!enemyTypeMax.ContainsKey(enemy)) { enemyTypeMax.Add(enemy, currentMission.Enemies[i].MaxAmount); }
+                else { enemyTypeMax[enemy] += currentMission.Enemies[i].MaxAmount; }
                 for (int j = 0; j < currentMission.Enemies[i].Priority; j++)
                 {
-                    enemyNames.Add(currentMission.Enemies[i].EnemyType.ToString());
+                    enemyNames.Add(enemy);
                 }
             }
         }

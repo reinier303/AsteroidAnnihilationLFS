@@ -13,7 +13,7 @@ namespace AsteroidAnnihilation
         private GameManager gameManager;
         private UIManager uiManager;
         private InputManager inputManager;
-
+        private ParallaxBackground parallaxBackground;
 
         [SerializeField] private SpawnManager spawnManager;
         private AreaGenerationSettings generationSettingsT1;
@@ -49,6 +49,7 @@ namespace AsteroidAnnihilation
             gameManager = GameManager.Instance;
             uiManager = UIManager.Instance;
             inputManager = InputManager.Instance;
+            parallaxBackground = ParallaxBackground.Instance;
             gameManager.onEndGame += SaveMissions;
 
         }
@@ -85,6 +86,7 @@ namespace AsteroidAnnihilation
             hubElements.SetActive(false);
             yield return new WaitForSecondsRealtime(3f);
             spawnManager.gameObject.SetActive(true);
+            parallaxBackground.SetMissionBackgrounds();
             spawnManager.Initialize();
             uiManager.UpdateMissionUI();
             canGainProgress = true;
@@ -103,6 +105,7 @@ namespace AsteroidAnnihilation
             spawnManager.gameObject.SetActive(false);
             gameElements.SetActive(false);
             hubElements.SetActive(true);
+            parallaxBackground.SetHubBackgrounds();
             Time.timeScale = 1;
             yield return new WaitForSecondsRealtime(2.25f);
             StartCoroutine(uiManager.LoadingScreen.GetComponent<LoadingScreen>().FadeOutLoadingScreen());
@@ -181,6 +184,16 @@ namespace AsteroidAnnihilation
                 case 2: return generationSettingsT2;
                 default: return generationSettingsT1;
             }
+        }
+
+        public List<Sprite> GetCurrentBackgrounds()
+        {
+            List<Sprite> backgrounds = new List<Sprite>();
+            foreach (EnumCollections.Backgrounds bg in GetCurrentMission().Backgrounds)
+            {
+                backgrounds.Add(Resources.Load<Sprite>("Backgrounds/" + bg.ToString()));
+            }
+            return backgrounds;
         }
 
         #region Objectives
