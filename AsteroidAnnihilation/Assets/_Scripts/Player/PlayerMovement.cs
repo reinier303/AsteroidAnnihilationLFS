@@ -14,6 +14,10 @@ namespace AsteroidAnnihilation
         private float Deceleration;
         public float AccelerationMultiplier;
         public float DecelerationMultiplier;
+        public float ForceModifier = 100;
+        public float MaxVelocityCoeficient;
+        public float MaxVelocity;
+
 
         [Header("Boost Variables")]
         public float BoostSpeed = 1.5f;
@@ -38,6 +42,7 @@ namespace AsteroidAnnihilation
         public List<ParticleSystem> Engines;
 
         public PolygonCollider2D BackgroundCollider;
+        private Rigidbody2D rb;
         private Vector2 backGroundSize;
 
         [SerializeField] private GameObject circle;
@@ -52,6 +57,9 @@ namespace AsteroidAnnihilation
         {
             backGroundSize = BackgroundCollider.transform.localScale * 14.5f;
             lastInputs = new List<Vector3>();
+            rb = GetComponent<Rigidbody2D>();
+            //TODO:: IMPORTANT CHECK IF THIS CAN BE ONLY DONE FOR PLAYER OBJECT
+            Physics2D.simulationMode = SimulationMode2D.Update;
         }
 
         private void Start()
@@ -99,6 +107,7 @@ namespace AsteroidAnnihilation
                 currentSpeed = baseSpeed + engineSpeed + accesorySpeed;
                 Acceleration = currentSpeed * AccelerationMultiplier;
                 Deceleration = currentSpeed * DecelerationMultiplier;
+                MaxVelocity = currentSpeed * MaxVelocityCoeficient;
             }
         }
 
@@ -119,23 +128,28 @@ namespace AsteroidAnnihilation
             {
                 return;
             }
-            bool driftCheck = MovementInput.x <= 0.01f && MovementInput.y <= 0.01f && MovementInput.x >= -0.01f && MovementInput.y >= -0.01f ? true : false;
             if (inputManager.Attacking)
             {
                 RotateToMouse();
             } else if (!inputManager.MovementInputZero()) { RotateToMoveDirection();}
             
             CheckEnginePS(inputManager.MovementInputZero());
+            bool driftCheck = MovementInput.x <= 0.01f && MovementInput.y <= 0.01f && MovementInput.x >= -0.01f && MovementInput.y >= -0.01f ? true : false;
 
             //fix drift
-            if (driftCheck) 
-            { 
+            if (driftCheck)
+            {
                 MovementInput = Vector2.zero;
             }
-            Move();         
+            Move();
         }
 
-        private void Move()
+        private void FixedUpdate()
+        {
+
+        }
+
+        private void MoveOld()
         {
             float axisX = inputManager.GetAxisSmoothHorizontal(currentSpeed, Acceleration, Deceleration, BoostSpeed);
             float axisY = inputManager.GetAxisSmoothVertical(currentSpeed, Acceleration, Deceleration, BoostSpeed);
@@ -147,8 +161,36 @@ namespace AsteroidAnnihilation
             Debug.Log(input);
             //MovementInput = new Vector2(axisX, axisY) * currentSpeed * Time.deltaTime;
             transform.position += (Vector3)MovementInput;
-
         }
+
+        private void Move()
+        {
+            Vector2 axisses = inputManager.GetAxisNormalizedCoef();
+
+            //Debug.Log("Regular: " + new Vector2(axisX,axisY) + "Normalized: " + new Vector2(axisX, axisY).normalized);
+            MovementInput = axisses * currentSpeed * Time.deltaTime;
+
+            //MovementInput = new Vector2(axisX, axisY) * currentSpeed * Time.deltaTime;
+            ApplyForce();
+            //transform.position += (Vector3)MovementInput;
+        }
+
+        private void ApplyForce()
+        {
+            if (MovementInput.x != 0)
+            {
+                rb.AddForce(new Vector2(MovementInput.x * ForceModifier, 0));
+            }
+            if (MovementInput.y != 0)
+            {
+                rb.AddForce(new Vector2(0, MovementInput.y * ForceModifier));
+            }
+            float x = Mathf.Clamp(rb.velocity.x,-MaxVelocity, MaxVelocity);
+            float y = Mathf.Clamp(rb.velocity.y, -MaxVelocity, MaxVelocity);
+            rb.velocity = new Vector2(x,y);
+            Debug.Log(rb.velocity);
+        }
+
         private void CheckEnginePS(bool input)
         {
             if(input)
@@ -195,7 +237,8 @@ namespace AsteroidAnnihilation
                     lastInputs.RemoveAt(0);
                     lastInputs.Add(MovementInput);
                 }*/
-            target = transform.position + ((Vector3)MovementInput) + (Vector3)CameraOffset.Instance.Offset * offsetMultiplier; 
+
+            target = transform.position + (((Vector3)rb.velocity) * 0.35f) + (Vector3)CameraOffset.Instance.Offset * offsetMultiplier; 
             //}
 
             var dir = target - transform.position;

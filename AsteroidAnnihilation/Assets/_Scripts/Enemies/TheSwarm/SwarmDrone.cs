@@ -1,0 +1,74 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+namespace AsteroidAnnihilation
+{
+    public class SwarmDrone : BaseEnemy
+    {
+        [SerializeField] protected float moveSpeed;
+        [SerializeField] protected float aggroMove;
+        protected float currSpeed;
+        [SerializeField] EnumCollections.EnemyProjectiles projectileType;
+        [SerializeField] private float projectileDamage;
+        [SerializeField] private float fireRate = 1.5f;
+        [SerializeField] private float projectileSize = 1;
+        [SerializeField] private float projectileLifeTime = 10f;
+        [SerializeField] private float projectileSpeed = 7.5f;
+
+        [SerializeField] private bool randomRotation = true;
+        [SerializeField] private float fireTimer;
+
+        protected override void Start()
+        {
+            base.Start();
+            if (randomRotation) { transform.localRotation = Quaternion.Euler(transform.rotation.x, transform.rotation.y, Random.Range(0, 360)); }
+            float sizeMultiplier = Random.Range(sizeRange.x, sizeRange.y);
+            Vector2 randomSize = new Vector2(transform.localScale.x * sizeMultiplier, transform.localScale.y * sizeMultiplier);
+            transform.localScale = randomSize;
+            currSpeed = moveSpeed * Random.Range(0.998f, 1.002f);
+            RotationSpeed *= Random.Range(0.998f, 1.002f);
+            fireTimer = fireRate;
+        }
+
+
+        protected virtual void Update()
+        {
+            CheckAggroDistance();
+
+            if (Aggro)
+            {
+                AggroMove();
+                fireTimer -= Time.deltaTime;
+                if(fireTimer <= 0)
+                {
+                    Fire();
+                    fireTimer = fireRate;
+                }
+            }
+            else
+            {
+                IdleMove();
+            }
+        }
+
+
+        protected virtual void IdleMove()
+        {
+            transform.position += transform.up * Time.deltaTime * moveSpeed;
+            Rotate();
+        }
+
+        protected virtual void AggroMove()
+        {
+            transform.position += transform.up * Time.deltaTime * aggroMove;
+            Rotate(rotSpeedMultiplier: 175);
+        }
+
+        protected virtual void Fire()
+        {
+            SwarmProjectile projectile = objectPooler.SpawnFromPool(projectileType.ToString(), transform.position + transform.up, transform.rotation).GetComponent<SwarmProjectile>();
+            projectile.Initialize(projectileSize, projectileDamage, projectileSpeed, projectileLifeTime, false);
+        }
+    }
+}

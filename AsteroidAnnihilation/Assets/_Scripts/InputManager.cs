@@ -165,7 +165,7 @@ namespace AsteroidAnnihilation
                 !Input.GetKey(DownButton2);
         }
 
-        private Vector2 GetAxisNormalizedCoef()
+        public Vector2 GetAxisNormalizedCoef(bool absolute = false)
         {
             float x = 0;
             float y = 0;
@@ -185,7 +185,9 @@ namespace AsteroidAnnihilation
             {
                 y = -1;
             }
-            Vector2 axises = new Vector2(Mathf.Abs(x), Mathf.Abs(y)).normalized;
+            Vector2 axises;
+            if (absolute) { axises = new Vector2(Mathf.Abs(x), Mathf.Abs(y)).normalized; }
+            else { axises = new Vector2(x, y).normalized; }
             //axises = new Vector2(Mathf.Pow(axises.x, 2) , Mathf.Pow(axises.y ,2));
             return axises;
         }
@@ -200,7 +202,7 @@ namespace AsteroidAnnihilation
             if (Input.GetKey(RightButton) || Input.GetKey(RightButton2))
             {
                 if (axisX < 0) { axisX = 0; }
-                axisX += (acceleration * boost * Time.deltaTime) * GetAxisNormalizedCoef().x;
+                axisX += (acceleration * boost * Time.deltaTime) * GetAxisNormalizedCoef(true).x;
                 if (axisX > speed * boost)
                 {
                     axisX = speed * boost;
@@ -215,7 +217,7 @@ namespace AsteroidAnnihilation
             if (Input.GetKey(LeftButton) || Input.GetKey(LeftButton2))
             {
                 if (axisX > 0) { axisX = 0; }
-                axisX -= (acceleration * boost * Time.deltaTime) * GetAxisNormalizedCoef().x;
+                axisX -= (acceleration * boost * Time.deltaTime) * GetAxisNormalizedCoef(true).x;
                 if (axisX < -speed * boost)
                 {
                     axisX = -speed * boost;
@@ -225,7 +227,7 @@ namespace AsteroidAnnihilation
             {
                 axisX += deceleration * boost * Time.deltaTime;
             }
-            return axisX * GetAxisNormalizedCoef().x;
+            return axisX * GetAxisNormalizedCoef(true).x;
         }
 
 
@@ -239,7 +241,7 @@ namespace AsteroidAnnihilation
             {
                 if (axisY < 0) { axisY = 0; }
 
-                axisY += (acceleration * boost * Time.deltaTime) * GetAxisNormalizedCoef().y;
+                axisY += (acceleration * boost * Time.deltaTime) * GetAxisNormalizedCoef(true).y;
                 if (axisY > speed * boost)
                 {
                     axisY = speed * boost;
@@ -255,7 +257,7 @@ namespace AsteroidAnnihilation
             {
                 if (axisY > 0) { axisY = 0; }
 
-                axisY -= (acceleration * boost * Time.deltaTime) * GetAxisNormalizedCoef().y;
+                axisY -= (acceleration * boost * Time.deltaTime) * GetAxisNormalizedCoef(true).y;
                 if (axisY < -speed * boost)
                 {
                     axisY = -speed * boost;
@@ -266,7 +268,7 @@ namespace AsteroidAnnihilation
                 axisY += deceleration * boost * Time.deltaTime;
             }
 
-            return axisY * GetAxisNormalizedCoef().y;
+            return axisY * GetAxisNormalizedCoef(true).y;
         }
 
         public float Boost(float boostSpeed)
