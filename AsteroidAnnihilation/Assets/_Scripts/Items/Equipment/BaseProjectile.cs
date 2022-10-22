@@ -48,7 +48,12 @@ namespace AsteroidAnnihilation
 
         protected virtual void Move()
         {
-            transform.position += (transform.up * Time.deltaTime * ProjectileSpeed) + (Vector3)PlayerVelocity;
+            Vector3 extraUp = transform.up * new Vector2(Mathf.Abs(PlayerVelocity.x), Mathf.Abs(PlayerVelocity.y));
+            Vector3 finalUp = extraUp + transform.up;
+            Debug.Log(PlayerVelocity + ", " + finalUp);
+
+            transform.position += (finalUp * Time.deltaTime * ProjectileSpeed);
+            Debug.Log(transform.up);
         }
 
         protected virtual void OnTriggerEnter2D(Collider2D collider)

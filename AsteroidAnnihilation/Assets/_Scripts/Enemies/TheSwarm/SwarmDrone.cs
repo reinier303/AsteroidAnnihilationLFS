@@ -19,6 +19,8 @@ namespace AsteroidAnnihilation
         [SerializeField] private bool randomRotation = true;
         [SerializeField] private float fireTimer;
 
+        private float baseStopDistance;
+
         protected override void Start()
         {
             base.Start();
@@ -29,6 +31,8 @@ namespace AsteroidAnnihilation
             currSpeed = moveSpeed * Random.Range(0.998f, 1.002f);
             RotationSpeed *= Random.Range(0.998f, 1.002f);
             fireTimer = fireRate;
+            baseStopDistance = StopDistance;
+            StopDistance = baseStopDistance + Random.Range(-5, 3);
         }
 
 
@@ -55,13 +59,12 @@ namespace AsteroidAnnihilation
 
         protected virtual void IdleMove()
         {
-            transform.position += transform.up * Time.deltaTime * moveSpeed;
-            Rotate();
-        }
+            if(Vector2.Distance(transform.position, Player.position) > StopDistance) { transform.position += transform.up * Time.deltaTime * moveSpeed; }
+                    }
 
         protected virtual void AggroMove()
         {
-            transform.position += transform.up * Time.deltaTime * aggroMove;
+            if (Vector2.Distance(transform.position, Player.position) > StopDistance) { transform.position += transform.up * Time.deltaTime * aggroMove; }
             Rotate(rotSpeedMultiplier: 175);
         }
 

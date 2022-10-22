@@ -6,12 +6,15 @@ namespace AsteroidAnnihilation
 {
     public class PlayerEntity : BaseEntity
     {
+        private SpawnManager spawnManager;
         [SerializeField] private GameObject PlayerHitEffect;
         public bool canHit = true;
         [SerializeField] private float hitCooldown;
         private UIManager uIManager;
         private EquipmentManager equipmentManager;
         private float healthRegen;
+
+        public bool RecentlyHit;
 
         protected override void Awake()
         {
@@ -24,6 +27,7 @@ namespace AsteroidAnnihilation
 
             InitializeDropPool();
             currentHealth = MaxHealth;
+            RecentlyHit = false;
         }
 
         public void GetHealthVariables()
@@ -50,6 +54,7 @@ namespace AsteroidAnnihilation
             base.Start();
             uIManager = UIManager.Instance;
             equipmentManager = EquipmentManager.Instance;
+            spawnManager = SpawnManager.Instance;
             StartCoroutine(RegenerateHealth());
         }
 
@@ -67,6 +72,7 @@ namespace AsteroidAnnihilation
             }
             StartCoroutine(HitCooldown());
             base.TakeDamage(damage, isCrit);
+            RecentlyHit = true;
             uIManager.UpdateHealth(currentHealth, MaxHealth);
         }
 

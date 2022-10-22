@@ -158,7 +158,6 @@ namespace AsteroidAnnihilation
 
             //Debug.Log("Regular: " + new Vector2(axisX,axisY) + "Normalized: " + new Vector2(axisX, axisY).normalized);
             MovementInput = input * currentSpeed * Time.deltaTime;
-            Debug.Log(input);
             //MovementInput = new Vector2(axisX, axisY) * currentSpeed * Time.deltaTime;
             transform.position += (Vector3)MovementInput;
         }
@@ -168,7 +167,7 @@ namespace AsteroidAnnihilation
             Vector2 axisses = inputManager.GetAxisNormalizedCoef();
 
             //Debug.Log("Regular: " + new Vector2(axisX,axisY) + "Normalized: " + new Vector2(axisX, axisY).normalized);
-            MovementInput = axisses * currentSpeed * Time.deltaTime;
+            MovementInput = axisses * currentSpeed * Time.fixedDeltaTime;
 
             //MovementInput = new Vector2(axisX, axisY) * currentSpeed * Time.deltaTime;
             ApplyForce();
@@ -188,7 +187,6 @@ namespace AsteroidAnnihilation
             float x = Mathf.Clamp(rb.velocity.x,-MaxVelocity, MaxVelocity);
             float y = Mathf.Clamp(rb.velocity.y, -MaxVelocity, MaxVelocity);
             rb.velocity = new Vector2(x,y);
-            Debug.Log(rb.velocity);
         }
 
         private void CheckEnginePS(bool input)

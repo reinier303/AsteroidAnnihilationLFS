@@ -9829,8 +9829,9 @@ MonoBehaviour:
   DeAggroDistance: 50
   sizeRange: {x: 0.9, y: 1.25}
   grouped: 0
+  StopDistance: 0.75
   MaxRotationSpeed: 750
-  MinForce: 80
-  MaxForce: 650
+  MinForce: 800
+  MaxForce: 2250
   MinMaxSize: {x: 1.2, y: 1.6}
   TrailEffects: {fileID: 3919056589315201910}

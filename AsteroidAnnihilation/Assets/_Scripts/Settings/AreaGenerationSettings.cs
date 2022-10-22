@@ -37,6 +37,8 @@ namespace AsteroidAnnihilation
         /// </summary>
         public List<EnemyAreaData> AlwaysPresentEnemies;
         public List<EnemyAreaData> RandomisedEnemies;
+        public List<EnemyAreaData> SeekerEnemies;
+
         public List<EnemyAreaData> GetEnemies()
         {
             List<EnemyAreaData> enemies = new List<EnemyAreaData>();

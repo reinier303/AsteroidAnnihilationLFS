@@ -29,7 +29,16 @@ namespace AsteroidAnnihilation
             SwarmPodGroupLarge = 13,
             LoneSwarmPod = 14,
             SwarmChaserDrone = 9,
+            SwarmChaserDroneGroupSmall = 18,
+            SwarmChaserDroneGroupMedium = 19,
+            SwarmChaserDroneGroupLarge = 20,
+            LoneSwarmChaserDrone = 21,
             Swarmling = 15,
+            SwarmSeekerDrone = 16,
+            SwarmDrone = 17,
+            SwarmDroneGroupSmall = 22,
+            SwarmDroneGroupMedium = 23,
+            SwarmDroneGroupLarge = 24,
             OutlawGrunt = 10,
             OutlawMarauderMK1 = 11
         }

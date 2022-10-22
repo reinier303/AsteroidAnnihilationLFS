@@ -137,8 +137,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6f3db687988b974f868e7f9eb59b4cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxHealth: 30
-  currentHealth: 30
+  MaxHealth: 20
+  currentHealth: 20
   ShakeMagnitude: 5.5
   ShakeDuration: 0.5
   HitSound: 

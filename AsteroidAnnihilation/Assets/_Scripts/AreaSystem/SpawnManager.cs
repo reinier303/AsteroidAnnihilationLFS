@@ -6,10 +6,13 @@ namespace AsteroidAnnihilation
 {
     public class SpawnManager : MonoBehaviour
     {
+        public static SpawnManager Instance;
+
         //Script References
         private GameManager gameManager;
         private ObjectPooler RObjectPooler;
         private MissionManager missionManager;
+        private PlayerEntity playerEntity;
 
         //Current Wave Data
         public Mission currentMission;
@@ -33,6 +36,7 @@ namespace AsteroidAnnihilation
 
         private void Awake()
         {
+            Instance = this;
             enemyTypeCount = new Dictionary<string, int>();
             enemyTypeMax = new Dictionary<string, int>();
         }
@@ -42,6 +46,7 @@ namespace AsteroidAnnihilation
             RObjectPooler = ObjectPooler.Instance;
             gameManager = GameManager.Instance;
             missionManager = MissionManager.Instance;
+            playerEntity = Player.Instance.RPlayerEntity;
             enemiesAlive = new List<GameObject>();
 
             SetMission();
@@ -51,6 +56,7 @@ namespace AsteroidAnnihilation
 
             StartCoroutine(StartSpawning());
             StartCoroutine(RampSpawnRate());
+            StartCoroutine(CheckRecentlyHit());
         }
 
         private void OnDisable()
@@ -70,7 +76,19 @@ namespace AsteroidAnnihilation
         {
             SpawnEnemy();
             yield return new WaitForSeconds(currentSpawnTime);
+            Debug.Log(currentSpawnTime);
             StartCoroutine(StartSpawning());
+        }
+
+        private IEnumerator CheckRecentlyHit()
+        {
+            yield return new WaitForSeconds(Random.Range(20, 45));
+            if (!playerEntity.RecentlyHit)
+            {
+                SpawnSeekerEnemy();
+            }
+            playerEntity.RecentlyHit = false;
+            StartCoroutine(CheckRecentlyHit());
         }
 
         private void SpawnEnemy()
@@ -86,6 +104,19 @@ namespace AsteroidAnnihilation
             }
         }
 
+        public void SpawnSeekerEnemy()
+        {
+            if (Spawning)
+            {
+                Vector2 spawnPosition = GenerateSpawnPosition();
+                string enemy = currentMission.SeekerEnemies[Random.Range(0, currentMission.SeekerEnemies.Count)].EnemyType.ToString();
+                if (CheckEnemyType(enemy))
+                {
+                    enemiesAlive.Add(RObjectPooler.SpawnFromPool(enemy, spawnPosition, Quaternion.identity));
+                }
+            }
+        }
+
         private bool CheckEnemyType(string enemy)
         {
             if (!enemyTypeCount.ContainsKey(enemy)) 
@@ -95,7 +126,7 @@ namespace AsteroidAnnihilation
             }
             else { 
                 enemyTypeCount[enemy]++;
-                if (enemyTypeMax[enemy] >= enemyTypeCount[enemy])
+                if (enemyTypeCount[enemy] >= enemyTypeMax[enemy])
                 {
                     return false;
                 }
@@ -148,7 +179,7 @@ namespace AsteroidAnnihilation
         {
             foreach(GameObject gameObject in enemiesAlive)
             {
-                gameObject.SetActive(false);
+                if (gameObject != null) { gameObject.SetActive(false); }
             }
         }
     }

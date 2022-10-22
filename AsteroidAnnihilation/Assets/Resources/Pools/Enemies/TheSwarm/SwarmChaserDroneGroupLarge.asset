@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81ef996067970074d8dd88ba76874a9d, type: 3}
+  m_Name: SwarmChaserDroneGroupLarge
+  m_EditorClassIdentifier: 
+  Tag: SwarmChaserDroneGroupLarge
+  Prefab: {fileID: 2810490152950670893, guid: aa3535d54ab9ece47852da3d47e5e0cf, type: 3}
+  Amount: 10

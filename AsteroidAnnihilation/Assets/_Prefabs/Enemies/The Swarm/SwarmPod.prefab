@@ -137,8 +137,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d9ee45ed52401364ebbb05f339558250, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxHealth: 30
-  currentHealth: 30
+  MaxHealth: 15
+  currentHealth: 15
   ShakeMagnitude: 4.5
   ShakeDuration: 0.45
   HitSound: 
@@ -165,6 +165,7 @@ MonoBehaviour:
   DeAggroDistance: 45
   sizeRange: {x: 0.9, y: 1.1}
   grouped: 0
+  StopDistance: 0.75
   moveSpeed: 1.15
   aggroMove: 2.25
   randomRotation: 0

@@ -23,6 +23,7 @@ namespace AsteroidAnnihilation
 
         [SerializeField] protected bool grouped = false;
         protected EnemyGroup enemyGroup;
+        public float StopDistance = 0.75f;
 
         protected override void Awake()
         {

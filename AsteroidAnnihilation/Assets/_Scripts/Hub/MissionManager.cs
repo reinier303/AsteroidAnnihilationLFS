@@ -162,6 +162,11 @@ namespace AsteroidAnnihilation
             mission.AreaTextMaterial = settings.Factions[mission.Faction].AreaTextMaterial;
 
             mission.Enemies = settings.Factions[mission.Faction].GetEnemies();
+            mission.SeekerEnemies = new List<EnemyAreaData>();
+            foreach(EnemyAreaData data in settings.Factions[mission.Faction].SeekerEnemies)
+            {
+                mission.SeekerEnemies.Add(data);
+            }
             mission.Objectives = settings.Factions[mission.Faction].GetObjectives();
             Vector2 rewards = settings.Factions[mission.Faction].GetRewards();
             mission.UnitsReward = rewards.x;
@@ -269,6 +274,7 @@ namespace AsteroidAnnihilation
         public Material AreaTextMaterial;
 
         public List<EnemyAreaData> Enemies;
+        public List<EnemyAreaData> SeekerEnemies;
 
         public List<AreaObjective> Objectives;
 

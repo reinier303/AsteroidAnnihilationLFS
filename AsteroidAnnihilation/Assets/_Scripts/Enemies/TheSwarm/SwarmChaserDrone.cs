@@ -6,8 +6,6 @@ namespace AsteroidAnnihilation
 {
     public class SwarmChaserDrone : BaseEnemy
     {
-        public float StopDistance = 0.75f;
-
         [SerializeField]private Coroutine randomIdleMoveRoutine;
 
         [SerializeField] protected float idleWaitTime = 3.5f;
