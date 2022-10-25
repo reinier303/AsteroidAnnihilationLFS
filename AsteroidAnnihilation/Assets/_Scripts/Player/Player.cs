@@ -16,6 +16,7 @@ namespace AsteroidAnnihilation
 
         //Script references
         private UIManager RUIManager;
+        private Rigidbody2D rb;
 
         private void Awake()
         {
@@ -29,6 +30,12 @@ namespace AsteroidAnnihilation
             RPlayerEntity = GetComponent<PlayerEntity>();
             RPlayerStats = GetComponent<PlayerStats>();
             RUIManager = GameManager.Instance.RUIManager;
+            rb = GetComponent<Rigidbody2D>();
+        }
+
+        public Vector2 GetPlayerPositionAfterSeconds(float seconds)
+        {
+            return (Vector2)transform.position + rb.velocity * seconds;
         }
 
         private void GetSaveData()

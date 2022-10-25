@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d1a5f3d0bd2c094d9e8c2dd8e0c5677, type: 3}
+  m_Name: BossFireLargeSlow
+  m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes: []
+  MoveTime: 10
+  MoveStartDelay: 0.5
+  MoveEndDelay: 0.5
+  PreFire: 1.85
+  Size: 4.25
+  ChargeTime: 1.25
+  FireRate: 0.8
+  Amount: 5
+  Spread: 10
+  BulletSpeed: 4.5
+  ProjectileLifeTime: 12
+  Projectile: 0

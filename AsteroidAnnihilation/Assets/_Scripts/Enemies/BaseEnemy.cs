@@ -73,7 +73,7 @@ namespace AsteroidAnnihilation
             else { difference = target - transform.position; }
             float rotationZ = Mathf.Atan2(difference.y, difference.x) * Mathf.Rad2Deg;
             Quaternion desiredRotation = Quaternion.Euler(0.0f, 0.0f, rotationZ - 90f);
-            transform.rotation = Quaternion.Slerp(transform.rotation, desiredRotation, RotationSpeed * rotSpeedMultiplier * Time.deltaTime);
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, desiredRotation, RotationSpeed * rotSpeedMultiplier * Time.deltaTime * 60);
             if (!gameManager.PlayerAlive)
             {
                 transform.rotation = Quaternion.Euler(0.0f, 0.0f, rotationZ + 90f);

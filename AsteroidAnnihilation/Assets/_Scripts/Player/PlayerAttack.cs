@@ -31,10 +31,12 @@ namespace AsteroidAnnihilation
         [SerializeField] private float playerVelocityMultiplier;
 
         private EventSystem eventSystem;
+        private Rigidbody2D rb;
 
         private void Awake()
         {
             rPlayer = GetComponent<Player>();
+            rb = GetComponent<Rigidbody2D>();
 
             eventSystem = EventSystem.current;
 
@@ -152,6 +154,7 @@ namespace AsteroidAnnihilation
                     for (int i = 0; i < currentWeapons.Count; i++)
                     {
                         if (currentWeapons[i].WeaponType == EnumCollections.Weapons.None) { continue; }
+                        rb.AddForce(-transform.up * 250);
                         currentWeapons[i].Fire(RObjectPooler, transform, addedPlayerVelocity, weaponPositions[i], i);
                     }
                     canFire = false;

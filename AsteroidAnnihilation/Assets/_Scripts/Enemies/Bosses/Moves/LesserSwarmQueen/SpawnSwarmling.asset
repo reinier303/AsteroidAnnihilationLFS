@@ -24,6 +24,7 @@ MonoBehaviour:
   MoveTime: 10
   MoveStartDelay: 0
   MoveEndDelay: 2
+  PreFire: 0
   EnemyToSpawn: 15
   SpawnAmount: 5
   SpawnPosition: {x: 0, y: 2}
