@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
+
 
 namespace AsteroidAnnihilation
 {
@@ -10,6 +12,9 @@ namespace AsteroidAnnihilation
 
         private ObjectPooler objectPooler;
         private Dictionary<string, ScriptableAudio> Audios;
+        [SerializeField] List<AudioMixerGroup> audioMixers;
+        [SerializeField] private Coroutine dampenCoroutine;
+
         public List<AudioClip> MusicTracks;
         private List<AudioClip> musicPlayed = new List<AudioClip>();
 
@@ -64,6 +69,7 @@ namespace AsteroidAnnihilation
             audio.clip = sa.Clips[Random.Range(0, sa.Clips.Length)];
             audio.volume = Random.Range(sa.VolumeMinMax.x, sa.VolumeMinMax.y);
             audio.pitch = Random.Range(sa.PitchMinMax.x, sa.PitchMinMax.y);
+            audio.outputAudioMixerGroup = sa.MixerGroup;
             audio.Play();
         }
 
@@ -130,5 +136,36 @@ namespace AsteroidAnnihilation
 
             musicSource.volume = EndValue;
         }
+
+        public void DampenNonShotMixers()
+        {
+            if(dampenCoroutine == null)
+            {
+                dampenCoroutine = StartCoroutine(DampenNonShotMixersVolume());
+            }
+        }
+
+        private IEnumerator DampenNonShotMixersVolume()
+        {
+    
+            for(int i = 0; i < 10; i++)
+            {
+                foreach (AudioMixerGroup mixer in audioMixers)
+                {
+                    mixer.audioMixer.SetFloat("Volume", -0.4f * i + 1);
+                    yield return new WaitForSeconds(0.02f);
+                }
+            }
+            for (int i = 0; i < 10; i++)
+            {
+                foreach (AudioMixerGroup mixer in audioMixers)
+                {
+                    mixer.audioMixer.SetFloat("Volume", -0.4f * i + 1);
+                    yield return new WaitForSeconds(0.02f);
+                }
+            }
+            dampenCoroutine = null;
+        }
+
     }
 }

@@ -10,6 +10,7 @@ namespace AsteroidAnnihilation
     public class PlayerAttack : SerializedMonoBehaviour
     {
         private InputManager inputManager;
+        private AudioManager audioManager;
         private ObjectPooler RObjectPooler;
         EquipmentManager equipmentManager;
         private Player rPlayer;
@@ -50,6 +51,7 @@ namespace AsteroidAnnihilation
             playerShipSettings = SettingsManager.Instance.playerShipSettings;
             weaponPositions = playerShipSettings.GetWeaponPositions(EnumCollections.ShipType.Fighter);
 
+            audioManager = AudioManager.Instance;
             equipmentManager = EquipmentManager.Instance;
             RObjectPooler = ObjectPooler.Instance;
             inputManager = InputManager.Instance;
@@ -151,10 +153,14 @@ namespace AsteroidAnnihilation
                 if(mouseButton == 0)
                 {
                     Vector2 addedPlayerVelocity = playerMovement.MovementInput * playerVelocityMultiplier * playerMovement.GetCurrentSpeed();
+                    //TODO::Add this to weapon to make this different on weapon basis.
+                    rb.AddForce(-transform.up * 150);
+                    audioManager.DampenNonShotMixers();
+                    //Temp
+                    //audioManager.PlayAudio("PlasmaGunShot");
                     for (int i = 0; i < currentWeapons.Count; i++)
                     {
                         if (currentWeapons[i].WeaponType == EnumCollections.Weapons.None) { continue; }
-                        rb.AddForce(-transform.up * 250);
                         currentWeapons[i].Fire(RObjectPooler, transform, addedPlayerVelocity, weaponPositions[i], i);
                     }
                     canFire = false;
