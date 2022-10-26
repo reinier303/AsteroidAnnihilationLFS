@@ -8,7 +8,8 @@ namespace AsteroidAnnihilation
     {
         public static AudioManager Instance;
 
-        List<AudioData> AudioDatas = new List<AudioData>();
+        private ObjectPooler objectPooler;
+        private Dictionary<string, ScriptableAudio> Audios;
         public List<AudioClip> MusicTracks;
         private List<AudioClip> musicPlayed = new List<AudioClip>();
 
@@ -22,6 +23,7 @@ namespace AsteroidAnnihilation
         private void Awake()
         {
             Instance = this;
+            LoadAudioFromResources();
             musicSource = GetComponent<AudioSource>();
             musicSource.volume = regularMusicVolume;
             if (RandomAudioEnabled)
@@ -31,35 +33,40 @@ namespace AsteroidAnnihilation
             StartCoroutine(CheckIfPlaying());
         }
 
-        public void AddAudio(string name, float duration)
-        {
-            AudioData data = new AudioData();
-            data.name = name;
-            data.duration = duration;
-            AudioDatas.Add(data);
-        }
 
-        public void PlaySound(string audioName)
+        private void LoadAudioFromResources()
         {
-            //AkSoundEngine.PostEvent(audioName, gameObject);
-        }
-
-        public float GetAudioLength(string audioName)
-        {
-            float length = 0;
-            foreach (AudioData data in AudioDatas)
+            Audios = new Dictionary<string, ScriptableAudio>();
+            Object[] ScriptableAudios = Resources.LoadAll("Audios", typeof(ScriptableAudio));
+            foreach (ScriptableAudio audio in ScriptableAudios)
             {
-                if (data.name == audioName)
+                //Check if pool info is filled.
+                if (audio.Clips.Length > 0 && audio.Tag != null)
                 {
-                    length = data.duration;
+                    Audios.Add(audio.Tag, audio);
+                }
+                else
+                {
+                    Debug.LogWarning("Pool: " + audio.name + " is missing some information. \n Please go back to Resources/Pools and fill in the information correctly");
                 }
             }
-            if (length == 0)
-            {
-                Debug.LogWarning("Audio not found");
-            }
-            return length;
         }
+
+        private void Start()
+        {
+            objectPooler = ObjectPooler.Instance;
+        }
+
+        public void PlayAudio(string tag)
+        {
+            ScriptableAudio sa = Audios[tag];
+            AudioSource audio = objectPooler.SpawnFromPool("Audio", transform.position, Quaternion.identity).GetComponent<AudioSource>();
+            audio.clip = sa.Clips[Random.Range(0, sa.Clips.Length)];
+            audio.volume = Random.Range(sa.VolumeMinMax.x, sa.VolumeMinMax.y);
+            audio.pitch = Random.Range(sa.PitchMinMax.x, sa.PitchMinMax.y);
+            audio.Play();
+        }
+
         public virtual void MoveToNextSongRoundRobin()
         {
             //If all moves have been performed refill the moves list
@@ -123,13 +130,5 @@ namespace AsteroidAnnihilation
 
             musicSource.volume = EndValue;
         }
-    }
-
-    [System.Serializable]
-    public struct AudioData
-    {
-        public AudioClip clip;
-        public string name;
-        public float duration;
     }
 }
