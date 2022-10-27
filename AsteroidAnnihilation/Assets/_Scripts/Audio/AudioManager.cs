@@ -65,12 +65,13 @@ namespace AsteroidAnnihilation
         public void PlayAudio(string tag)
         {
             ScriptableAudio sa = Audios[tag];
-            AudioSource audio = objectPooler.SpawnFromPool("Audio", transform.position, Quaternion.identity).GetComponent<AudioSource>();
+            AudioSource audio = objectPooler.SpawnFromPool("AudioSource", transform.position, Quaternion.identity).GetComponent<AudioSource>();
             audio.clip = sa.Clips[Random.Range(0, sa.Clips.Length)];
             audio.volume = Random.Range(sa.VolumeMinMax.x, sa.VolumeMinMax.y);
             audio.pitch = Random.Range(sa.PitchMinMax.x, sa.PitchMinMax.y);
             audio.outputAudioMixerGroup = sa.MixerGroup;
             audio.Play();
+            audio.GetComponent<DisableAfterTime>().Disable(audio.clip.length + 1f);
         }
 
         public virtual void MoveToNextSongRoundRobin()
@@ -148,19 +149,19 @@ namespace AsteroidAnnihilation
         private IEnumerator DampenNonShotMixersVolume()
         {
     
-            for(int i = 0; i < 10; i++)
+            for(int i = 0; i < 5; i++)
             {
                 foreach (AudioMixerGroup mixer in audioMixers)
                 {
-                    mixer.audioMixer.SetFloat("Volume", -0.4f * i + 1);
-                    yield return new WaitForSeconds(0.02f);
+                    mixer.audioMixer.SetFloat("Volume", -0.8f * (i + 1));
+                    yield return new WaitForSeconds(0.01f);
                 }
             }
-            for (int i = 0; i < 10; i++)
+            for (int i = 0; i < 5; i++)
             {
                 foreach (AudioMixerGroup mixer in audioMixers)
                 {
-                    mixer.audioMixer.SetFloat("Volume", -0.4f * i + 1);
+                    mixer.audioMixer.SetFloat("Volume", -4 + (0.8f * (i + 1)));
                     yield return new WaitForSeconds(0.02f);
                 }
             }

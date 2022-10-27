@@ -157,10 +157,10 @@ namespace AsteroidAnnihilation
                     rb.AddForce(-transform.up * 150);
                     audioManager.DampenNonShotMixers();
                     //Temp
-                    //audioManager.PlayAudio("PlasmaGunShot");
                     for (int i = 0; i < currentWeapons.Count; i++)
                     {
                         if (currentWeapons[i].WeaponType == EnumCollections.Weapons.None) { continue; }
+                        audioManager.PlayAudio("PlasmaGunShot");
                         currentWeapons[i].Fire(RObjectPooler, transform, addedPlayerVelocity, weaponPositions[i], i);
                     }
                     canFire = false;

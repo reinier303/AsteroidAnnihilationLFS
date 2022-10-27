@@ -7,6 +7,8 @@ namespace AsteroidAnnihilation
 {
     public class BaseBoss : BaseEnemy
     {
+        private UIManager uiManager;
+
         [FoldoutGroup("Boss Variables")][SerializeField] protected List<BaseBossMove> moves;
         protected enum MoveOrders {Random, RandomNonRecursive, Ordered}
         [FoldoutGroup("Boss Variables")][SerializeField] protected MoveOrders moveOrder;
@@ -22,6 +24,7 @@ namespace AsteroidAnnihilation
         protected override void Awake()
         {
             base.Awake();
+            uiManager = UIManager.Instance;
             movesNotExecuted = new List<BaseBossMove>();
         }
 
@@ -29,6 +32,8 @@ namespace AsteroidAnnihilation
         {
             base.Start();
             playerScript = Player.GetComponent<Player>();
+            uiManager.EnableBossHealthBar();
+            uiManager.UpdateBossHealthBar(MaxHealth, MaxHealth);
             switch (moveOrder)
             {
                 case MoveOrders.Random:
@@ -47,7 +52,6 @@ namespace AsteroidAnnihilation
         {
             if(moveBeingExecuted != null && moveBeingExecuted.PreFire != 0)
             {
-                Debug.Log(Player.position + ", " + playerScript.GetPlayerPositionAfterSeconds(moveBeingExecuted.PreFire));
                 Rotate(playerScript.GetPlayerPositionAfterSeconds(moveBeingExecuted.PreFire));
             }
             else { Rotate(); }
@@ -98,6 +102,18 @@ namespace AsteroidAnnihilation
             yield return new WaitForSeconds(move.MoveEndDelay);
             StartCoroutine(StartMovesOrdered());
         }
+
+        protected override void Die()
+        {
+            uiManager.DisableBossHealthBar();
+            base.Die();
+        }
+
+        public override void TakeDamage(float damage, bool isCrit)
+        {
+            base.TakeDamage(damage, isCrit);
+            uiManager.UpdateBossHealthBar(currentHealth, MaxHealth);
+        }
     }
 
     public class BaseBossMove : SerializedScriptableObject
@@ -111,6 +127,17 @@ namespace AsteroidAnnihilation
         public virtual void ExecuteMove(Transform bossTransform, MonoBehaviour runOn, ObjectPooler objectPooler)
         {
             //this method is meant to be overridden
+        }
+    }
+
+    [System.Serializable]
+    public class BossMoveCollection
+    {
+        public List<BaseBossMove> Moves;
+
+        public BaseBossMove GetRandomMove()
+        {
+            return Moves[Random.Range(0, Moves.Count)];
         }
     }
 }
