@@ -9,6 +9,7 @@ namespace AsteroidAnnihilation
         public string OnHitEffectName;
         protected ObjectPooler objectPooler;
         protected GameManager gameManager;
+        protected AudioManager audioManager;
         [HideInInspector] public int WeaponIndex;
 
         public float Damage, ProjectileSpeed, LifeTime = 0;
@@ -24,6 +25,7 @@ namespace AsteroidAnnihilation
         {
             objectPooler = ObjectPooler.Instance;
             gameManager = GameManager.Instance;
+            audioManager = AudioManager.Instance;
             baseScale = transform.localScale;
         }
 
@@ -66,6 +68,7 @@ namespace AsteroidAnnihilation
                 entity.Aggro = true;
                 GameObject hitEffect = objectPooler.SpawnFromPool(OnHitEffectName, transform.position, Quaternion.identity);
                 hitEffect.transform.localScale = new Vector2(Size, Size);
+                audioManager.PlayAudio("PlasmaGunHit");
                 gameObject.SetActive(false);
             }
         }
@@ -74,6 +77,7 @@ namespace AsteroidAnnihilation
         {
             yield return new WaitForSeconds(LifeTime);
             objectPooler.SpawnFromPool(OnHitEffectName, transform.position, Quaternion.identity);
+            //audioManager.PlayAudio("PlasmaGunHit");
             gameObject.SetActive(false);
         }
 

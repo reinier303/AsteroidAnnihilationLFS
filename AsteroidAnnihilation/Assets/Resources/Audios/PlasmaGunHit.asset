@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 28a5890b76b58a04b8b86195bb58c0c8, type: 3}
+  m_Name: PlasmaGunHit
+  m_EditorClassIdentifier: 
+  Tag: PlasmaGunHit
+  Clips:
+  - {fileID: 8300000, guid: 074cee5e8624aa4428300be00e1d2bd2, type: 3}
+  MixerGroup: {fileID: 24300002, guid: c581ec550c197d14ea4fa4f0fb8d76d4, type: 2}
+  VolumeMinMax: {x: 0.25, y: 0.35}
+  PitchMinMax: {x: 0.8, y: 1.2}

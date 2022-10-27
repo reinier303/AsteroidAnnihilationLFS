@@ -37,13 +37,14 @@ namespace AsteroidAnnihilation
 
         public TMP_Text AreaText;
 
-        private CanvasGroup waveEnterCanvasGroup;
-        private CanvasGroup bossEnterCanvasGroup;
+        [FoldoutGroup("Boss")] private CanvasGroup waveEnterCanvasGroup;
+        [FoldoutGroup("Boss")] private CanvasGroup bossEnterCanvasGroup;
+        [FoldoutGroup("Boss")][SerializeField] private Slider bossBar;
 
         //Powerup
         public Slider PowerUpTimer;
         public TMP_Text PowerUpText;
-        public Slider BossBar;
+        
         private int currentID;
 
         public GameObject PostGamePanel;
@@ -141,10 +142,7 @@ namespace AsteroidAnnihilation
 
         public void UpdateEnergy(float current, float max)
         {
-            float currentEnergy = current;
-            float maxEnergy = max;
-
-            EnergyBar.UpdateEnergy(currentEnergy, maxEnergy);
+            EnergyBar.UpdateEnergy(current, max);
         }
 
         public void UpdateUnits()
@@ -164,6 +162,22 @@ namespace AsteroidAnnihilation
             playerLevelText.text = "" + playerStats.GetPlayerLevel();
             ExperienceBar.maxValue = playerStats.GetExperienceDifference();
             UpdateExperience();
+        }
+
+        public void EnableBossHealthBar()
+        {
+            bossBar.gameObject.SetActive(true);
+        }
+
+        public void DisableBossHealthBar()
+        {
+            bossBar.gameObject.SetActive(false);
+        }
+
+        public void UpdateBossHealthBar(float currentHealth, float maxHealth)
+        {
+            bossBar.maxValue = maxHealth;
+            bossBar.value = currentHealth;
         }
 
         public void OpenInventory()

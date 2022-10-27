@@ -24,11 +24,12 @@ MonoBehaviour:
   MoveTime: 1
   MoveStartDelay: 0
   MoveEndDelay: 0
+  PreFire: 0.05
   Size: 3
   ChargeTime: 2.5
   FireRate: 1
   Amount: 3
   Spread: 30
-  BulletSpeed: 14
+  BulletSpeed: 12.5
   ProjectileLifeTime: 4
   Projectile: 0
