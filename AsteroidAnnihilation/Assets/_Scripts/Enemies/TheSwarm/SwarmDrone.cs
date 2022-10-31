@@ -60,7 +60,7 @@ namespace AsteroidAnnihilation
         protected virtual void IdleMove()
         {
             if(Vector2.Distance(transform.position, Player.position) > StopDistance) { transform.position += transform.up * Time.deltaTime * moveSpeed; }
-                    }
+        }
 
         protected virtual void AggroMove()
         {

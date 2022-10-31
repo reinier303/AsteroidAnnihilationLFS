@@ -9,98 +9,115 @@ namespace AsteroidAnnihilation
     {
         private UIManager uiManager;
 
-        [FoldoutGroup("Boss Variables")][SerializeField] protected List<BaseBossMove> moves;
         protected enum MoveOrders {Random, RandomNonRecursive, Ordered}
-        [FoldoutGroup("Boss Variables")][SerializeField] protected MoveOrders moveOrder;
 
-        protected List<BaseBossMove> movesNotExecuted;
-        [FoldoutGroup("Boss Variables")] [SerializeField] protected float timeBetweenMoves = 0.1f;
-        BaseBossMove lastMove;
-        private BaseBossMove moveBeingExecuted;
+        [FoldoutGroup("Boss Variables")][SerializeField] protected List<BossPhase> phases;
+        [FoldoutGroup("Boss Variables")][SerializeField] protected MoveOrders moveOrder;
+        [FoldoutGroup("Boss Variables")][SerializeField] protected float timeBetweenMoves = 0.1f;
+        
+
+        protected List<BossMoveCollection> movesNotExecuted;
+        BossMoveCollection lastMove;
+        private BossMoveCollection moveCollectionBeingExecuted;
+        private List<Coroutine> movesActive;
+        private Coroutine moveLoop;
+
+        private int currentPhase;
         private int currentMove = 0;
-        //This is te vector rotated towards based on the prefire variable.
         private Player playerScript;
 
         protected override void Awake()
         {
             base.Awake();
-            uiManager = UIManager.Instance;
-            movesNotExecuted = new List<BaseBossMove>();
+            movesNotExecuted = new List<BossMoveCollection>();
+            movesActive = new List<Coroutine>();
         }
 
         protected override void Start()
         {
             base.Start();
+            uiManager = UIManager.Instance;
             playerScript = Player.GetComponent<Player>();
             uiManager.EnableBossHealthBar();
             uiManager.UpdateBossHealthBar(MaxHealth, MaxHealth);
+            currentPhase = 0;
+            StartMoves();
+        }
+
+        protected void StartMoves()
+        {
             switch (moveOrder)
             {
                 case MoveOrders.Random:
-                    StartCoroutine(StartMovesRandom());
+                    moveLoop = StartCoroutine(StartMovesRandom());
                     break;
                 case MoveOrders.RandomNonRecursive:
-                    StartCoroutine(StartMovesRandomNonRecursive());
+                    moveLoop = StartCoroutine(StartMovesRandomNonRecursive());
                     break;
                 case MoveOrders.Ordered:
-                    StartCoroutine(StartMovesOrdered());
+                    moveLoop = StartCoroutine(StartMovesOrdered());
                     break;
             }
         }
 
         protected virtual void Update()
         {
-            if(moveBeingExecuted != null && moveBeingExecuted.PreFire != 0)
+            if(moveCollectionBeingExecuted != null && moveCollectionBeingExecuted.PreFire != 0)
             {
-                Rotate(playerScript.GetPlayerPositionAfterSeconds(moveBeingExecuted.PreFire));
+                Rotate(playerScript.GetPlayerPositionAfterSeconds(moveCollectionBeingExecuted.PreFire));
             }
             else { Rotate(); }
         }
 
         private IEnumerator StartMovesRandom()
         {
-            int random = Random.Range(0, moves.Count);
-            BaseBossMove move = moves[random];
+            movesActive.Clear();
+            int random = Random.Range(0, phases[currentPhase].moves.Count);
+            BossMoveCollection move = phases[currentPhase].moves[random];
             yield return new WaitForSeconds(move.MoveStartDelay);
-            moveBeingExecuted = move;
-            move.ExecuteMove(transform, this, objectPooler);
-            yield return new WaitForSeconds(move.MoveTime + timeBetweenMoves);
+            moveCollectionBeingExecuted = move;
+            move.ExecuteMoves(transform, this, objectPooler);
+            yield return new WaitForSeconds(move.GetMovesTime() + timeBetweenMoves);
             yield return new WaitForSeconds(move.MoveEndDelay);
-            StartCoroutine(StartMovesRandom());
+            moveLoop = StartCoroutine(StartMovesRandom());
         }
 
         private IEnumerator StartMovesRandomNonRecursive()
         {
-            if (movesNotExecuted.Count == 0) { movesNotExecuted.AddRange(moves); }
+            movesActive.Clear();
+
+            if (movesNotExecuted.Count == 0) { movesNotExecuted.AddRange(phases[currentPhase].moves); }
 
             int random = Random.Range(0, movesNotExecuted.Count);
-            BaseBossMove move = movesNotExecuted[random];
-            while(move == lastMove && moves.Count != 1)
+            BossMoveCollection move = movesNotExecuted[random];
+            while(move == lastMove && phases[currentPhase].moves.Count != 1)
             {
                 random = Random.Range(0, movesNotExecuted.Count);
                 move = movesNotExecuted[random];
             }
             lastMove = move;
             yield return new WaitForSeconds(move.MoveStartDelay);
-            moveBeingExecuted = move;
-            move.ExecuteMove(transform, this, objectPooler);
+            moveCollectionBeingExecuted = move;
+            move.ExecuteMoves(transform, this, objectPooler);
             movesNotExecuted.RemoveAt(random);
-            yield return new WaitForSeconds(move.MoveTime + timeBetweenMoves);
+            yield return new WaitForSeconds(move.GetMovesTime() + timeBetweenMoves);
             yield return new WaitForSeconds(move.MoveEndDelay);
-            StartCoroutine(StartMovesRandomNonRecursive());
+            moveLoop = StartCoroutine(StartMovesRandomNonRecursive());
         }
 
         private IEnumerator StartMovesOrdered()
         {
-            if(currentMove == moves.Count) { currentMove = 0; }
-            BaseBossMove move = moves[currentMove];
+            movesActive.Clear();
+
+            if (currentMove == phases[currentPhase].moves.Count) { currentMove = 0; }
+            BossMoveCollection move = phases[currentPhase].moves[currentMove];
             yield return new WaitForSeconds(move.MoveStartDelay);
-            moveBeingExecuted = move;
-            move.ExecuteMove(transform, this, objectPooler);
+            moveCollectionBeingExecuted = move;
+            move.ExecuteMoves(transform, this, objectPooler);
             currentMove++;
-            yield return new WaitForSeconds(move.MoveTime + timeBetweenMoves);
+            yield return new WaitForSeconds(move.GetMovesTime() + timeBetweenMoves);
             yield return new WaitForSeconds(move.MoveEndDelay);
-            StartCoroutine(StartMovesOrdered());
+            moveLoop = StartCoroutine(StartMovesOrdered());
         }
 
         protected override void Die()
@@ -112,32 +129,54 @@ namespace AsteroidAnnihilation
         public override void TakeDamage(float damage, bool isCrit)
         {
             base.TakeDamage(damage, isCrit);
+            CheckPhase();
             uiManager.UpdateBossHealthBar(currentHealth, MaxHealth);
+        }
+
+        public void CheckPhase()
+        {
+            float healthPercentage = currentHealth / MaxHealth * 100;
+            if(phases.Count - 1 > currentPhase && healthPercentage < phases[currentPhase + 1].Percentage)
+            {
+                currentPhase++;
+                movesNotExecuted.Clear();
+                cameraManager.StartCoroutine(cameraManager.Shake(ShakeDuration / 2, ShakeMagnitude / 2));
+                objectPooler.SpawnFromPool(EnumCollections.ExplosionFX.SwarmExplosion1.ToString(), transform.position, transform.rotation);
+                StopAllMoves();
+                StartMoves();
+                GameManager.Instance.Sleep(0.1f);
+            }
+        }
+
+        public void AddActiveMove(Coroutine move)
+        {
+            movesActive.Add(move);
+        }
+
+        private void StopAllMoves()
+        {
+            StopCoroutine(moveLoop);
+            foreach(Coroutine move in movesActive)
+            {
+                StopCoroutine(move);
+            }
         }
     }
 
     public class BaseBossMove : SerializedScriptableObject
     {
         public float MoveTime;
-        public float MoveStartDelay = 0;
-        public float MoveEndDelay = 0;
-        //This is in baseSO because we will be able to access it easily from the boss script this way. Leave at 0 if not wanted/not applicable
-        public float PreFire = 0.05f;
 
-        public virtual void ExecuteMove(Transform bossTransform, MonoBehaviour runOn, ObjectPooler objectPooler)
+        public virtual void ExecuteMove(Transform bossTransform, BaseBoss runOn, ObjectPooler objectPooler)
         {
             //this method is meant to be overridden
         }
     }
 
     [System.Serializable]
-    public class BossMoveCollection
+    public struct BossPhase
     {
-        public List<BaseBossMove> Moves;
-
-        public BaseBossMove GetRandomMove()
-        {
-            return Moves[Random.Range(0, Moves.Count)];
-        }
+        public float Percentage;
+        public List<BossMoveCollection> moves;
     }
 }

@@ -14,11 +14,11 @@ namespace AsteroidAnnihilation
         private ObjectPooler objectPooler;
         private Transform bossTransform;
 
-        public override void ExecuteMove(Transform bossTransform, MonoBehaviour runOn, ObjectPooler objectPooler)
+        public override void ExecuteMove(Transform bossTransform, BaseBoss runOn, ObjectPooler objectPooler)
         {
             if (this.objectPooler == null) { this.objectPooler = objectPooler; }
             if (this.bossTransform == null) { this.bossTransform = bossTransform; }
-            runOn.StartCoroutine(Spawn());
+            runOn.AddActiveMove(runOn.StartCoroutine(Spawn()));
         }
         
         private IEnumerator Spawn()

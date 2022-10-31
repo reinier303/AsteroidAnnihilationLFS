@@ -7,6 +7,7 @@ namespace AsteroidAnnihilation
     [CreateAssetMenu(menuName = "BossMoves/BossFire", order = 997)]
     public class BossFire : BaseBossMove
     {
+        public float Damage = 5;
         public float Size;
         public float ChargeTime;
         public float FireRate;
@@ -17,12 +18,12 @@ namespace AsteroidAnnihilation
         public EnumCollections.EnemyProjectiles Projectile;
         private ObjectPooler objectPooler;
         private Transform bossTransform;
-
-        public override void ExecuteMove(Transform bossTransform, MonoBehaviour runOn, ObjectPooler objectPooler)
+             
+        public override void ExecuteMove(Transform bossTransform, BaseBoss runOn, ObjectPooler objectPooler)
         {
             if(this.objectPooler == null) { this.objectPooler = objectPooler; }
             if (this.bossTransform == null) { this.bossTransform = bossTransform; }
-            runOn.StartCoroutine(Fire());
+            runOn.AddActiveMove(runOn.StartCoroutine(Fire()));
         }
 
         private IEnumerator Fire()
@@ -62,7 +63,7 @@ namespace AsteroidAnnihilation
                     BaseProjectile projectile = objectPooler.SpawnFromPool(Projectile.ToString(),
                         bossTransform.position + bossTransform.up * 2f,
                         Quaternion.Euler(bossTransform.eulerAngles.x, bossTransform.eulerAngles.y, newRotation)).GetComponent<BaseProjectile>();
-                    projectile.Initialize(Size, 1, BulletSpeed, ProjectileLifeTime, false);
+                    projectile.Initialize(Size, Damage, BulletSpeed, ProjectileLifeTime, false);
                 }
                 yield return new WaitForSeconds(1 / FireRate);
                 timer += 1 / FireRate;
