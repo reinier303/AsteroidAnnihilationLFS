@@ -23,7 +23,8 @@ namespace AsteroidAnnihilation
         
         private IEnumerator Spawn()
         {
-            for(int i = 0; i < SpawnAmount; i++)
+            yield return new WaitForSeconds(MoveStartDelay);
+            for (int i = 0; i < SpawnAmount; i++)
             {
                 Vector3 spawnOffset = bossTransform.TransformDirection(SpawnPosition);
                 objectPooler.SpawnFromPool(EnemyToSpawn.ToString(), bossTransform.position + spawnOffset, bossTransform.rotation);

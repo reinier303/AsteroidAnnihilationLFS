@@ -158,7 +158,7 @@ MonoBehaviour:
   Aggro: 0
   Player: {fileID: 0}
   ContactDamage: 10
-  RotationSpeed: 2.25
+  RotationSpeed: 2
   DroppedUnits: 25
   ExperienceGained: 3
   AggroDistance: 16
@@ -166,6 +166,7 @@ MonoBehaviour:
   sizeRange: {x: 0.9, y: 1.25}
   grouped: 0
   StopDistance: 0.75
+  DeathOnImpact: 0
   idleWaitTime: 6
   idleMove: 2
   aggroMove: 8.5

@@ -41,7 +41,7 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 12
-      Data: 2
+      Data: 1
     - Name: 
       Entry: 7
       Data: 
@@ -74,13 +74,13 @@ MonoBehaviour:
       Data: UnityEngine.Color, UnityEngine.CoreModule
     - Name: 
       Entry: 4
-      Data: 0.9716981
+      Data: 0.5631342
     - Name: 
       Entry: 4
-      Data: 0.202154309
+      Data: 0.972549
     - Name: 
       Entry: 4
-      Data: 0.0779192
+      Data: 0.07843135
     - Name: 
       Entry: 4
       Data: 1
@@ -340,424 +340,19 @@ MonoBehaviour:
     - Name: 
       Entry: 8
       Data: 
-    - Name: NumberOfObjectives
-      Entry: 3
-      Data: 1
-    - Name: Objectives
+    - Name: Bosses
       Entry: 7
-      Data: 8|System.Collections.Generic.List`1[[AsteroidAnnihilation.AreaObjective,
+      Data: 8|System.Collections.Generic.List`1[[AsteroidAnnihilation.EnumCollections+Bosses,
         Assembly-CSharp]], mscorlib
     - Name: 
       Entry: 12
-      Data: 1
-    - Name: 
-      Entry: 7
-      Data: 9|AsteroidAnnihilation.AreaObjective, Assembly-CSharp
-    - Name: ObjectiveType
-      Entry: 3
-      Data: 0
-    - Name: ObjectiveAmountRange
-      Entry: 7
-      Data: UnityEngine.Vector2Int, UnityEngine.CoreModule
-    - Name: 
-      Entry: 3
-      Data: 40
-    - Name: 
-      Entry: 3
-      Data: 50
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: ObjectiveAmount
-      Entry: 3
-      Data: 0
-    - Name: ObjectiveProgress
-      Entry: 3
-      Data: 0
-    - Name: ObjectiveDone
-      Entry: 5
-      Data: false
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: UnitsRewardMinMax
-      Entry: 7
-      Data: UnityEngine.Vector2, UnityEngine.CoreModule
-    - Name: 
-      Entry: 4
-      Data: 200
-    - Name: 
-      Entry: 4
-      Data: 250
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: ExperienceRewardMinMax
-      Entry: 7
-      Data: UnityEngine.Vector2, UnityEngine.CoreModule
-    - Name: 
-      Entry: 4
-      Data: 100
-    - Name: 
-      Entry: 4
-      Data: 150
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: Backgrounds
-      Entry: 7
-      Data: 10|System.Collections.Generic.List`1[[AsteroidAnnihilation.AreaBackgrounds,
-        Assembly-CSharp]], mscorlib
-    - Name: 
-      Entry: 12
-      Data: 1
-    - Name: 
-      Entry: 7
-      Data: AsteroidAnnihilation.AreaBackgrounds, Assembly-CSharp
-    - Name: Backgrounds
-      Entry: 7
-      Data: 11|System.Collections.Generic.List`1[[AsteroidAnnihilation.EnumCollections+Backgrounds,
-        Assembly-CSharp]], mscorlib
-    - Name: 
-      Entry: 12
-      Data: 1
-    - Name: 
-      Entry: 3
-      Data: 1
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: StartSpawnRateMin
-      Entry: 4
-      Data: 0.85
-    - Name: StartSpawnRateMax
-      Entry: 4
-      Data: 0.75
-    - Name: SpawnRateRampPerSecond
-      Entry: 4
-      Data: -0.002
-    - Name: MaxSpawnRateMin
-      Entry: 4
-      Data: 0.55
-    - Name: MaxSpawnRateMax
-      Entry: 4
-      Data: 0.6
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: 
-    - Name: $k
-      Entry: 3
-      Data: 1
-    - Name: $v
-      Entry: 7
-      Data: 12|AsteroidAnnihilation.TierSettings, Assembly-CSharp
-    - Name: BaseAreaName
-      Entry: 7
-      Data: 13|System.String[], mscorlib
-    - Name: 
-      Entry: 12
-      Data: 1
-    - Name: 
-      Entry: 1
-      Data: 'Swarm Infested Cluster '
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: RandomNameAddition
-      Entry: 5
-      Data: true
-    - Name: AreaTextColor
-      Entry: 7
-      Data: UnityEngine.Color, UnityEngine.CoreModule
-    - Name: 
-      Entry: 4
-      Data: 0.6095679
-    - Name: 
-      Entry: 4
-      Data: 1
-    - Name: 
-      Entry: 4
-      Data: 0.3537736
-    - Name: 
-      Entry: 4
-      Data: 1
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: AreaTextMaterial
-      Entry: 10
-      Data: 0
-    - Name: CompletionRewardPool
-      Entry: 7
-      Data: 14|System.Collections.Generic.List`1[[AsteroidAnnihilation.StatCompletionReward,
-        Assembly-CSharp]], mscorlib
-    - Name: 
-      Entry: 12
-      Data: 0
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: EnemyTypeAmount
-      Entry: 3
-      Data: 3
-    - Name: AlwaysPresentEnemies
-      Entry: 7
-      Data: 15|System.Collections.Generic.List`1[[AsteroidAnnihilation.EnemyAreaData,
-        Assembly-CSharp]], mscorlib
-    - Name: 
-      Entry: 12
-      Data: 6
-    - Name: 
-      Entry: 7
-      Data: AsteroidAnnihilation.EnemyAreaData, Assembly-CSharp
-    - Name: EnemyType
-      Entry: 3
-      Data: 0
-    - Name: MaxAmount
-      Entry: 3
-      Data: 200
-    - Name: Priority
-      Entry: 3
-      Data: 125
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: AsteroidAnnihilation.EnemyAreaData, Assembly-CSharp
-    - Name: EnemyType
-      Entry: 3
-      Data: 1
-    - Name: MaxAmount
-      Entry: 3
-      Data: 150
-    - Name: Priority
-      Entry: 3
-      Data: 75
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: AsteroidAnnihilation.EnemyAreaData, Assembly-CSharp
-    - Name: EnemyType
-      Entry: 3
       Data: 2
-    - Name: MaxAmount
+    - Name: 
       Entry: 3
-      Data: 100
-    - Name: Priority
+      Data: 0
+    - Name: 
       Entry: 3
       Data: 1
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: AsteroidAnnihilation.EnemyAreaData, Assembly-CSharp
-    - Name: EnemyType
-      Entry: 3
-      Data: 8
-    - Name: MaxAmount
-      Entry: 3
-      Data: 20
-    - Name: Priority
-      Entry: 3
-      Data: 35
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: AsteroidAnnihilation.EnemyAreaData, Assembly-CSharp
-    - Name: EnemyType
-      Entry: 3
-      Data: 16
-    - Name: MaxAmount
-      Entry: 3
-      Data: 10
-    - Name: Priority
-      Entry: 3
-      Data: 5
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: AsteroidAnnihilation.EnemyAreaData, Assembly-CSharp
-    - Name: EnemyType
-      Entry: 3
-      Data: 22
-    - Name: MaxAmount
-      Entry: 3
-      Data: 20
-    - Name: Priority
-      Entry: 3
-      Data: 40
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: RandomisedEnemies
-      Entry: 7
-      Data: 16|System.Collections.Generic.List`1[[AsteroidAnnihilation.EnemyAreaData,
-        Assembly-CSharp]], mscorlib
-    - Name: 
-      Entry: 12
-      Data: 6
-    - Name: 
-      Entry: 7
-      Data: AsteroidAnnihilation.EnemyAreaData, Assembly-CSharp
-    - Name: EnemyType
-      Entry: 3
-      Data: 3
-    - Name: MaxAmount
-      Entry: 3
-      Data: 200
-    - Name: Priority
-      Entry: 3
-      Data: 50
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: AsteroidAnnihilation.EnemyAreaData, Assembly-CSharp
-    - Name: EnemyType
-      Entry: 3
-      Data: 6
-    - Name: MaxAmount
-      Entry: 3
-      Data: 200
-    - Name: Priority
-      Entry: 3
-      Data: 75
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: AsteroidAnnihilation.EnemyAreaData, Assembly-CSharp
-    - Name: EnemyType
-      Entry: 3
-      Data: 12
-    - Name: MaxAmount
-      Entry: 3
-      Data: 10
-    - Name: Priority
-      Entry: 3
-      Data: 15
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: AsteroidAnnihilation.EnemyAreaData, Assembly-CSharp
-    - Name: EnemyType
-      Entry: 3
-      Data: 14
-    - Name: MaxAmount
-      Entry: 3
-      Data: 10
-    - Name: Priority
-      Entry: 3
-      Data: 20
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: AsteroidAnnihilation.EnemyAreaData, Assembly-CSharp
-    - Name: EnemyType
-      Entry: 3
-      Data: 18
-    - Name: MaxAmount
-      Entry: 3
-      Data: 20
-    - Name: Priority
-      Entry: 3
-      Data: 35
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: AsteroidAnnihilation.EnemyAreaData, Assembly-CSharp
-    - Name: EnemyType
-      Entry: 3
-      Data: 21
-    - Name: MaxAmount
-      Entry: 3
-      Data: 10
-    - Name: Priority
-      Entry: 3
-      Data: 15
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: SeekerEnemies
-      Entry: 7
-      Data: 17|System.Collections.Generic.List`1[[AsteroidAnnihilation.EnemyAreaData,
-        Assembly-CSharp]], mscorlib
-    - Name: 
-      Entry: 12
-      Data: 1
-    - Name: 
-      Entry: 7
-      Data: AsteroidAnnihilation.EnemyAreaData, Assembly-CSharp
-    - Name: EnemyType
-      Entry: 3
-      Data: 16
-    - Name: MaxAmount
-      Entry: 3
-      Data: 10
-    - Name: Priority
-      Entry: 3
-      Data: 5
-    - Name: 
-      Entry: 8
-      Data: 
     - Name: 
       Entry: 13
       Data: 
@@ -769,14 +364,14 @@ MonoBehaviour:
       Data: 1
     - Name: Objectives
       Entry: 7
-      Data: 18|System.Collections.Generic.List`1[[AsteroidAnnihilation.AreaObjective,
+      Data: 9|System.Collections.Generic.List`1[[AsteroidAnnihilation.AreaObjective,
         Assembly-CSharp]], mscorlib
     - Name: 
       Entry: 12
       Data: 1
     - Name: 
       Entry: 7
-      Data: 19|AsteroidAnnihilation.AreaObjective, Assembly-CSharp
+      Data: 10|AsteroidAnnihilation.AreaObjective, Assembly-CSharp
     - Name: ObjectiveType
       Entry: 3
       Data: 0
@@ -785,10 +380,10 @@ MonoBehaviour:
       Data: UnityEngine.Vector2Int, UnityEngine.CoreModule
     - Name: 
       Entry: 3
-      Data: 40
+      Data: 3
     - Name: 
       Entry: 3
-      Data: 50
+      Data: 5
     - Name: 
       Entry: 8
       Data: 
@@ -836,7 +431,7 @@ MonoBehaviour:
       Data: 
     - Name: Backgrounds
       Entry: 7
-      Data: 20|System.Collections.Generic.List`1[[AsteroidAnnihilation.AreaBackgrounds,
+      Data: 11|System.Collections.Generic.List`1[[AsteroidAnnihilation.AreaBackgrounds,
         Assembly-CSharp]], mscorlib
     - Name: 
       Entry: 12
@@ -846,14 +441,14 @@ MonoBehaviour:
       Data: AsteroidAnnihilation.AreaBackgrounds, Assembly-CSharp
     - Name: Backgrounds
       Entry: 7
-      Data: 21|System.Collections.Generic.List`1[[AsteroidAnnihilation.EnumCollections+Backgrounds,
+      Data: 12|System.Collections.Generic.List`1[[AsteroidAnnihilation.EnumCollections+Backgrounds,
         Assembly-CSharp]], mscorlib
     - Name: 
       Entry: 12
       Data: 1
     - Name: 
       Entry: 3
-      Data: 5
+      Data: 1
     - Name: 
       Entry: 13
       Data: 
@@ -1225,6 +820,7 @@ MonoBehaviour:
       MaxAmount: 150
       Priority: 30
     SeekerEnemies: []
+    Bosses: 
     NumberOfObjectives: 1
     Objectives:
     - ObjectiveType: 0

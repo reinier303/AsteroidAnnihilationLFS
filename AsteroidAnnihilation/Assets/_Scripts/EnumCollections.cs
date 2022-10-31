@@ -43,6 +43,12 @@ namespace AsteroidAnnihilation
             OutlawMarauderMK1 = 11
         }
 
+        public enum Bosses
+        {
+            SwarmPrincess = 0,
+            SwarmRoyalWarrior = 1
+        }
+
         public enum Backgrounds
         {
             BackgroundNebulaBlue,

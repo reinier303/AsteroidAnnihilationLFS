@@ -28,6 +28,7 @@ namespace AsteroidAnnihilation
 
         private IEnumerator Fire()
         {
+            yield return new WaitForSeconds(MoveStartDelay);
             //Create variables unattached to scriptable object
             int tempAmount = Amount;
             float tempSpread = Spread;

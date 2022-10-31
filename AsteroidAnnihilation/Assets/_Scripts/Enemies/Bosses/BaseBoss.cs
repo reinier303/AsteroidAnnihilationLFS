@@ -123,6 +123,7 @@ namespace AsteroidAnnihilation
         protected override void Die()
         {
             uiManager.DisableBossHealthBar();
+            missionManager.MissionCompleted();
             base.Die();
         }
 
@@ -161,11 +162,28 @@ namespace AsteroidAnnihilation
                 StopCoroutine(move);
             }
         }
+
+        protected override IEnumerator CheckDistanceToPlayer(float time)
+        {
+            yield return new WaitForSeconds(time / 2);
+
+            if (Vector2.Distance(transform.position, Player.position) > 70f)
+            {
+                transform.position = Vector3.MoveTowards(transform.position, Player.position, 55f);
+                Debug.Log(objectPooler);
+                GameObject teleport = objectPooler.SpawnFromPool("SwarmTeleport", transform.position, Quaternion.identity);
+                teleport.transform.localScale = new Vector3(4.5f, 4.5f, 4.5f);
+            }
+            yield return new WaitForSeconds(time / 2);
+            StartCoroutine(CheckDistanceToPlayer(time));
+        }
     }
 
     public class BaseBossMove : SerializedScriptableObject
     {
         public float MoveTime;
+        public float MoveStartDelay;
+        public bool AddDelayToMoveTime;
 
         public virtual void ExecuteMove(Transform bossTransform, BaseBoss runOn, ObjectPooler objectPooler)
         {

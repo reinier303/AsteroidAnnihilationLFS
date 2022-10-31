@@ -166,8 +166,9 @@ MonoBehaviour:
   sizeRange: {x: 0.9, y: 1.1}
   grouped: 0
   StopDistance: 0.75
+  DeathOnImpact: 0
   moveSpeed: 1.25
-  aggroMove: 0
+  aggroMove: 2.25
   randomRotation: 1
 --- !u!1 &7962229281253139958
 GameObject:

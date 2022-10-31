@@ -38,6 +38,7 @@ namespace AsteroidAnnihilation
         public List<EnemyAreaData> AlwaysPresentEnemies;
         public List<EnemyAreaData> RandomisedEnemies;
         public List<EnemyAreaData> SeekerEnemies;
+        public List<EnumCollections.Bosses> Bosses;
 
         public List<EnemyAreaData> GetEnemies()
         {
@@ -52,6 +53,13 @@ namespace AsteroidAnnihilation
             }
             return enemies;
         }
+
+        public string GetBoss()
+        {
+            if(Bosses == null) { return ""; }
+            return Bosses[Random.Range(0, Bosses.Count)].ToString();
+        }
+
         public int NumberOfObjectives;
         public List<AreaObjective> Objectives;
         public List<AreaObjective> GetObjectives()

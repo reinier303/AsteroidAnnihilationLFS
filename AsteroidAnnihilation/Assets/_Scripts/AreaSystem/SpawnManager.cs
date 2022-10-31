@@ -53,6 +53,7 @@ namespace AsteroidAnnihilation
 
             currentSpawnTime = currentMission.StartSpawnRate;
             player = gameManager.RPlayer.transform;
+            Spawning = true;
 
             StartCoroutine(StartSpawning());
             StartCoroutine(RampSpawnRate());
@@ -76,7 +77,6 @@ namespace AsteroidAnnihilation
         {
             SpawnEnemy();
             yield return new WaitForSeconds(currentSpawnTime);
-            Debug.Log(currentSpawnTime);
             StartCoroutine(StartSpawning());
         }
 
@@ -115,6 +115,13 @@ namespace AsteroidAnnihilation
                     enemiesAlive.Add(RObjectPooler.SpawnFromPool(enemy, spawnPosition, Quaternion.identity));
                 }
             }
+        }
+
+        public void SpawnBoss(Mission mission)
+        {
+            Spawning = false;
+            Vector2 spawnPosition = GenerateSpawnPosition();
+            enemiesAlive.Add(RObjectPooler.SpawnFromPool(mission.Boss, spawnPosition, Quaternion.identity));
         }
 
         private bool CheckEnemyType(string enemy)

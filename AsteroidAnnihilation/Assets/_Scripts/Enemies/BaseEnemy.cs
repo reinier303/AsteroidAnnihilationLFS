@@ -24,6 +24,7 @@ namespace AsteroidAnnihilation
         [SerializeField] protected bool grouped = false;
         protected EnemyGroup enemyGroup;
         public float StopDistance = 0.75f;
+        public bool DeathOnImpact;
 
         protected override void Awake()
         {
@@ -44,6 +45,10 @@ namespace AsteroidAnnihilation
             if (player != null)
             {
                 player.OnTakeDamage?.Invoke(ContactDamage, false);
+                if(DeathOnImpact)
+                {
+                    Die();
+                }
             }
         }
 

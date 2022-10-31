@@ -104,12 +104,13 @@ namespace AsteroidAnnihilation
             Vector3 offset = new Vector3(Random.Range(-10f, 10f), Random.Range(-10f, 10f), 0);
             if (isCrit)
             {
-                //ADD OFSET TO FOLLOW
+                //ADD OFFSET TO FOLLOW
                 GameObject damagePopUp = objectPooler.SpawnFromPool("CritPopUp", transform.position + offset, Quaternion.identity);
                 damagePopUp.GetComponent<DamagePopUp>().FollowDamagedObject(transform, offset, damage);
             }
             else
             {
+                Debug.Log(objectPooler);
                 GameObject damagePopUp = objectPooler.SpawnFromPool("DamagePopUp", transform.position, Quaternion.identity);
                 damagePopUp.GetComponent<DamagePopUp>().FollowDamagedObject(transform, offset, damage);
             }
@@ -166,7 +167,6 @@ namespace AsteroidAnnihilation
                 objectPooler.SpawnFromPool("WeaponPickUp", transform.position, Quaternion.identity);
             }
         }
-
         //Old DropPowerUps() method, might use/recycle later
         /*
         protected virtual void DropPowerUps()

@@ -39,14 +39,19 @@ namespace AsteroidAnnihilation
         public float GetMovesTime()
         {
             float time = 0;
+            float highestDelay = 0;
             foreach (BaseBossMove move in Moves)
             {
+                if(move.AddDelayToMoveTime && move.MoveStartDelay > highestDelay)
+                {
+                    highestDelay = move.MoveStartDelay;
+                }
                 if (move.MoveTime > time)
                 {
                     time = move.MoveTime;
                 }
             }
-            return time;
+            return time + highestDelay;
         }
     }
 }

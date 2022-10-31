@@ -22,9 +22,7 @@ MonoBehaviour:
     PrefabModifications: []
     SerializationNodes: []
   MoveTime: 10
-  MoveStartDelay: 0.5
-  MoveEndDelay: 0.5
-  PreFire: 1.85
+  Damage: 15
   Size: 4.25
   ChargeTime: 1.25
   FireRate: 0.8

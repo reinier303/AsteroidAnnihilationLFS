@@ -167,6 +167,8 @@ namespace AsteroidAnnihilation
             {
                 mission.SeekerEnemies.Add(data);
             }
+            mission.Boss = settings.Factions[mission.Faction].GetBoss();
+
             mission.Objectives = settings.Factions[mission.Faction].GetObjectives();
             Vector2 rewards = settings.Factions[mission.Faction].GetRewards();
             mission.UnitsReward = rewards.x;
@@ -233,7 +235,8 @@ namespace AsteroidAnnihilation
                 }
                 if (objectivesDone == mission.Objectives.Count)
                 {
-                    MissionCompleted(mission);
+                    spawnManager.SpawnBoss(mission);
+                    //MissionCompleted(mission);
                 }
                 return true;
             }
@@ -243,8 +246,9 @@ namespace AsteroidAnnihilation
             }
         }
 
-        private void MissionCompleted(Mission mission)
+        public void MissionCompleted()
         {
+            Mission mission = GetCurrentMission();
             //mission.AreaCompleted = true;
             //CompletionRewardStats.Instance.AddRewardedStat(area.CompletionRewards);
             gameManager.RPlayer.RPlayerStats.AddToUnits(mission.UnitsReward);
@@ -275,6 +279,7 @@ namespace AsteroidAnnihilation
 
         public List<EnemyAreaData> Enemies;
         public List<EnemyAreaData> SeekerEnemies;
+        public string Boss;
 
         public List<AreaObjective> Objectives;
 
