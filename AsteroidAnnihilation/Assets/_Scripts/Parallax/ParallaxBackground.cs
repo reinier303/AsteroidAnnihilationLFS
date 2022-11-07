@@ -93,7 +93,7 @@ namespace AsteroidAnnihilation
             }
         }
 
-        private void SetBackgroundsStart()
+        public void SetBackgroundsStart()
         {
             Vector3 position = new Vector3(size.x * (parallaxNumber.x + 1), size.x * parallaxNumber.y, zValue);
             Vector2 gridPosition = new Vector2(parallaxNumber.x + 1, parallaxNumber.y);
@@ -107,6 +107,10 @@ namespace AsteroidAnnihilation
             position = new Vector3(size.x * parallaxNumber.x, size.y * (parallaxNumber.y - 1), zValue);
             gridPosition = new Vector2(parallaxNumber.x, parallaxNumber.y - 1);
             SpawnBackground(position, gridPosition, false);
+            position = new Vector3(0 ,0, zValue);
+            gridPosition = new Vector2(0, 0);
+            SpawnBackground(position, gridPosition, false);
+
         }
 
         private IEnumerator CheckParallax()

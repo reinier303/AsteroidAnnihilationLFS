@@ -154,7 +154,7 @@ namespace AsteroidAnnihilation
                 {
                     Vector2 addedPlayerVelocity = playerMovement.MovementInput * playerVelocityMultiplier * playerMovement.GetCurrentSpeed();
                     //TODO::Add this to weapon to make this different on weapon basis.
-                    rb.AddForce(-transform.up * 150);
+                    rb.AddForce(-transform.up * 100);
                     audioManager.DampenNonShotMixers();
                     //Temp
                     for (int i = 0; i < currentWeapons.Count; i++)

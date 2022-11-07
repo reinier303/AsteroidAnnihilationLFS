@@ -99,7 +99,19 @@ namespace AsteroidAnnihilation
                 string enemy = enemyNames[Random.Range(0, enemyNames.Count)];
                 if(CheckEnemyType(enemy))
                 {
-                    enemiesAlive.Add(RObjectPooler.SpawnFromPool(enemy, spawnPosition, Quaternion.identity));
+                    GameObject enemyObject = RObjectPooler.SpawnFromPool(enemy, spawnPosition, Quaternion.identity);
+                    BaseEnemy enemyScipt = enemyObject.GetComponent<BaseEnemy>();
+                    if (enemyScipt == null)
+                    {
+                        EnemyGroup groupScipt = enemyObject.GetComponent<EnemyGroup>();
+                        if(groupScipt != null) { groupScipt.enemyType = enemy; }          
+                    }
+                    else 
+                    {
+                        enemyScipt.enemyType = enemy;
+                    }
+                    enemiesAlive.Add(enemyObject);
+
                 }
             }
         }
@@ -138,6 +150,14 @@ namespace AsteroidAnnihilation
                     return false;
                 }
                 return true;
+            }
+        }
+
+        public void RemoveEnemyType(string enemyType)
+        {
+            if (enemyTypeCount.ContainsKey(enemyType))
+            {
+                enemyTypeCount[enemyType] = enemyTypeCount[enemyType]--;
             }
         }
 

@@ -37,6 +37,8 @@ namespace AsteroidAnnihilation
                 yield return new WaitForEndOfFrame();
             }
             LeanTween.scale(gameObject, Vector2.zero, TweenOutTime).setEase(TweenOutType);
+            yield return new WaitForSeconds(TweenOutTime + 1f);
+            gameObject.SetActive(false);
         }
     }
 }

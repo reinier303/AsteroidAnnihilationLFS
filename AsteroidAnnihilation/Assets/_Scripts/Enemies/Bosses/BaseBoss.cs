@@ -41,7 +41,30 @@ namespace AsteroidAnnihilation
             uiManager.EnableBossHealthBar();
             uiManager.UpdateBossHealthBar(MaxHealth, MaxHealth);
             currentPhase = 0;
-            StartMoves();
+            if(moveLoop == null) { StartMoves(); }
+        }
+
+        protected override void OnEnable()
+        {
+            base.OnEnable();
+
+            if (UIManager.Instance != null)
+            {
+                if (uiManager == null)
+                {
+                    uiManager = UIManager.Instance;
+                }
+                uiManager.EnableBossHealthBar();
+                uiManager.UpdateBossHealthBar(MaxHealth, MaxHealth);
+                currentPhase = 0;
+                if (moveLoop == null) { StartMoves(); }
+            }
+        }
+
+        private void OnDisable()
+        {
+            uiManager.DisableBossHealthBar();
+            StopAllMoves();
         }
 
         protected void StartMoves()
@@ -99,6 +122,7 @@ namespace AsteroidAnnihilation
             yield return new WaitForSeconds(move.MoveStartDelay);
             moveCollectionBeingExecuted = move;
             move.ExecuteMoves(transform, this, objectPooler);
+            //TODO::FIX THIS THROWING OUT OF RANGE
             movesNotExecuted.RemoveAt(random);
             yield return new WaitForSeconds(move.GetMovesTime() + timeBetweenMoves);
             yield return new WaitForSeconds(move.MoveEndDelay);
@@ -136,6 +160,7 @@ namespace AsteroidAnnihilation
 
         public void CheckPhase()
         {
+            if(currentHealth <= 0) { return; }
             float healthPercentage = currentHealth / MaxHealth * 100;
             if(phases.Count - 1 > currentPhase && healthPercentage < phases[currentPhase + 1].Percentage)
             {
@@ -156,8 +181,12 @@ namespace AsteroidAnnihilation
 
         private void StopAllMoves()
         {
-            StopCoroutine(moveLoop);
-            foreach(Coroutine move in movesActive)
+            if (moveLoop != null)
+            {
+                StopCoroutine(moveLoop);
+                moveLoop = null;
+            }
+            foreach (Coroutine move in movesActive)
             {
                 StopCoroutine(move);
             }

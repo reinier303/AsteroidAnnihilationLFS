@@ -150,7 +150,7 @@ MonoBehaviour:
   PermanencePartOutwardsPower: 850
   PermanenceScaleFactor: 0.09
   Drops: []
-  DropChance: 10
+  DropChance: 6
   spriteRenderer: {fileID: 0}
   isDead: 0
   isInitialized: 0
@@ -161,11 +161,13 @@ MonoBehaviour:
   RotationSpeed: 0.025
   DroppedUnits: 50
   ExperienceGained: 3
-  AggroDistance: 20
+  AggroDistance: 18
   DeAggroDistance: 45
   sizeRange: {x: 0.9, y: 1.1}
   grouped: 0
   StopDistance: 12.5
+  DeathOnImpact: 0
+  enemyType: 
   moveSpeed: 3.25
   aggroMove: 6
   projectileType: 0

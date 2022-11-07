@@ -38,7 +38,20 @@ MonoBehaviour:
       Entry: 4
       Data: 200
     - Name: Unlocks
+      Entry: 7
+      Data: 1|System.Collections.Generic.List`1[[AsteroidAnnihilation.BaseUnlockable,
+        Assembly-CSharp]], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 1
+    - Name: 
       Entry: 6
+      Data: 
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
       Data: 
     - Name: 
       Entry: 8

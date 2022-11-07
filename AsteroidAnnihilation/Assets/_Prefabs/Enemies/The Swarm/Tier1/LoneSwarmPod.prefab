@@ -78,7 +78,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 436b72cab7ab30542a5056a355805347, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.59607846, g: 0.6509804, b: 0.48235294, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -150,7 +150,7 @@ MonoBehaviour:
   PermanencePartOutwardsPower: 850
   PermanenceScaleFactor: 0.09
   Drops: []
-  DropChance: 10
+  DropChance: 25
   spriteRenderer: {fileID: 0}
   isDead: 0
   isInitialized: 0
@@ -163,12 +163,12 @@ MonoBehaviour:
   ExperienceGained: 3
   AggroDistance: 10
   DeAggroDistance: 45
-  sizeRange: {x: 0.9, y: 1.1}
+  sizeRange: {x: 1.9, y: 2.1}
   grouped: 0
   StopDistance: 0.75
   DeathOnImpact: 0
   moveSpeed: 1.25
-  aggroMove: 2.25
+  aggroMove: 3
   randomRotation: 1
 --- !u!1 &7962229281253139958
 GameObject:

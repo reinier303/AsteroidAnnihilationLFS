@@ -126,5 +126,11 @@ namespace AsteroidAnnihilation
             yield return new WaitForSeconds(1f / 30);
             StartCoroutine(RegenerateHealth());
         }
+
+        protected override void Die()
+        {
+            uIManager.StartCoroutine(uIManager.ShowDeathScreen());
+            base.Die();
+        }
     }
 }

@@ -40,6 +40,7 @@ namespace AsteroidAnnihilation
         [FoldoutGroup("Boss")] private CanvasGroup waveEnterCanvasGroup;
         [FoldoutGroup("Boss")] private CanvasGroup bossEnterCanvasGroup;
         [FoldoutGroup("Boss")][SerializeField] private Slider bossBar;
+        [FoldoutGroup("Boss")][SerializeField] private GameObject bossWarning;
 
         //Powerup
         public Slider PowerUpTimer;
@@ -93,6 +94,8 @@ namespace AsteroidAnnihilation
         private EventSystem eventSystem;
 
         public bool MouseOverUI = false;
+
+        [SerializeField] private GameObject deathScreen;
 
         private void Awake()
         {
@@ -164,6 +167,13 @@ namespace AsteroidAnnihilation
             UpdateExperience();
         }
 
+        public IEnumerator ShowDeathScreen()
+        {
+            yield return new WaitForSeconds(3f);
+            //deathScreen.LeanAlpha(1);
+            deathScreen.SetActive(true);
+        }
+
         public void EnableBossHealthBar()
         {
             bossBar.gameObject.SetActive(true);
@@ -178,6 +188,11 @@ namespace AsteroidAnnihilation
         {
             bossBar.maxValue = maxHealth;
             bossBar.value = currentHealth;
+        }
+
+        public void EnableBossWarning()
+        {
+            bossWarning.SetActive(true);
         }
 
         public void OpenInventory()

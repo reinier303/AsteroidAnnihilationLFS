@@ -125,8 +125,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 16d82413806be664d810db3105358936, type: 3}
-  m_Color: {r: 0.972549, g: 0.40784314, b: 0.40784314, a: 1}
+  m_Sprite: {fileID: 21300000, guid: 63e139600b7f09b43a7d52657f60950f, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -198,15 +198,15 @@ MonoBehaviour:
   PermanencePartOutwardsPower: 700
   PermanenceScaleFactor: 0.07
   Drops: []
-  DropChance: 6
+  DropChance: 8
   spriteRenderer: {fileID: 0}
   isDead: 0
   isInitialized: 0
   KilledByIndex: 0
   Aggro: 0
   Player: {fileID: 0}
-  ContactDamage: 10
-  RotationSpeed: 2.5
+  ContactDamage: 5
+  RotationSpeed: 2.15
   DroppedUnits: 25
   ExperienceGained: 3
   AggroDistance: 14
@@ -215,6 +215,6 @@ MonoBehaviour:
   grouped: 0
   StopDistance: 0.75
   DeathOnImpact: 0
-  moveSpeed: 6.75
-  chargeMultiplier: 2.75
-  chargeDistance: 12
+  moveSpeed: 7
+  chargeMultiplier: 2.65
+  chargeDistance: 13

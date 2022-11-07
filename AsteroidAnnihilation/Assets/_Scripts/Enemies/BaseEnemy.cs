@@ -7,6 +7,7 @@ namespace AsteroidAnnihilation
 {
     public class BaseEnemy : BaseEntity
     {
+        protected SpawnManager spawnManager;
         public Transform Player;
 
         //Stats
@@ -26,6 +27,8 @@ namespace AsteroidAnnihilation
         public float StopDistance = 0.75f;
         public bool DeathOnImpact;
 
+        public string enemyType;
+
         protected override void Awake()
         {
             base.Awake();
@@ -36,6 +39,7 @@ namespace AsteroidAnnihilation
         {
             base.Start();
             Player = GameManager.Instance.RPlayer.transform;
+            spawnManager = SpawnManager.Instance;
         }
 
         protected virtual void OnTriggerEnter2D(Collider2D collision)
@@ -100,6 +104,7 @@ namespace AsteroidAnnihilation
             if (grouped) { enemyGroup.StartCoroutine(enemyGroup.EnemyDisabled()); }
             DropUnits(DroppedUnits);
             gameManager.RPlayer.RPlayerStats.AddToExperience(ExperienceGained);
+            spawnManager.RemoveEnemyType(enemyType);
             base.Die();
         }
 

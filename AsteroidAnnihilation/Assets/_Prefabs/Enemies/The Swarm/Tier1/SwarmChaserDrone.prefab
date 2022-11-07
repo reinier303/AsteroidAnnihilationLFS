@@ -166,6 +166,7 @@ MonoBehaviour:
   sizeRange: {x: 0.9, y: 1.25}
   grouped: 0
   StopDistance: 0.75
+  DeathOnImpact: 0
   idleWaitTime: 6
   idleMove: 2
   aggroMove: 8.5

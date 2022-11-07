@@ -88,6 +88,13 @@ namespace AsteroidAnnihilation
 
         protected virtual void OnEnable()
         {
+            if (objectPooler == null)
+            {
+                if(ObjectPooler.Instance != null)
+                {
+                    objectPooler = ObjectPooler.Instance;
+                }
+            }
             gameManager = GameManager.Instance;
             isDead = false;
             currentHealth = MaxHealth;
@@ -104,12 +111,17 @@ namespace AsteroidAnnihilation
             Vector3 offset = new Vector3(Random.Range(-10f, 10f), Random.Range(-10f, 10f), 0);
             if (isCrit)
             {
+
                 //ADD OFFSET TO FOLLOW
                 GameObject damagePopUp = objectPooler.SpawnFromPool("CritPopUp", transform.position + offset, Quaternion.identity);
                 damagePopUp.GetComponent<DamagePopUp>().FollowDamagedObject(transform, offset, damage);
             }
             else
             {
+                if (objectPooler == null)
+                {
+                    Debug.Log(gameObject.name);
+                }
                 Debug.Log(objectPooler);
                 GameObject damagePopUp = objectPooler.SpawnFromPool("DamagePopUp", transform.position, Quaternion.identity);
                 damagePopUp.GetComponent<DamagePopUp>().FollowDamagedObject(transform, offset, damage);

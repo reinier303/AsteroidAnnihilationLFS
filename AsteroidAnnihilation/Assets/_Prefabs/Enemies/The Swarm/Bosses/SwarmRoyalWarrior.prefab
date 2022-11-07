@@ -112,14 +112,14 @@ MonoBehaviour:
   PermanencePartOutwardsPower: 1300
   PermanenceScaleFactor: 0.18
   Drops: []
-  DropChance: 0
+  DropChance: 100
   spriteRenderer: {fileID: 0}
   isDead: 0
   isInitialized: 0
   KilledByIndex: 0
   Aggro: 0
   Player: {fileID: 0}
-  ContactDamage: 0
+  ContactDamage: 10
   RotationSpeed: 1.5
   DroppedUnits: 0
   ExperienceGained: 0
@@ -129,6 +129,7 @@ MonoBehaviour:
   grouped: 0
   StopDistance: 0.75
   DeathOnImpact: 0
+  enemyType: 
   phases:
   - Percentage: 100
     moves:
@@ -139,7 +140,7 @@ MonoBehaviour:
   - Percentage: 33
     moves:
     - {fileID: 11400000, guid: 0426d3085261dca45a4784c0bec4138a, type: 2}
-  moveOrder: 1
+  moveOrder: 0
   timeBetweenMoves: 2
 --- !u!58 &3820378649300474532
 CircleCollider2D:

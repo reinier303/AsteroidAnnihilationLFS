@@ -6,12 +6,15 @@ namespace AsteroidAnnihilation
 {
     public class EnemyGroup : MonoBehaviour
     {
+        private SpawnManager spawnManager;
         [SerializeField] protected List<Transform> enemies;
         protected List<Vector3> enemyStartPositions;
         [SerializeField] protected Vector2Int enemyAmountRange = new Vector2Int(3, 5);
         protected int enemyAmount;
 
         protected float enemiesDisabled;
+
+        public string enemyType;
 
         private void Awake()
         {
@@ -25,6 +28,11 @@ namespace AsteroidAnnihilation
                 enemies.Add(child);
                 child.gameObject.SetActive(false);
             }
+        }
+
+        private void Start()
+        {
+            spawnManager = SpawnManager.Instance;
         }
 
         protected virtual void OnEnable()
@@ -47,6 +55,10 @@ namespace AsteroidAnnihilation
 
         protected virtual void ResetEnemies()
         {
+            if(spawnManager != null)
+            {
+                spawnManager.RemoveEnemyType(enemyType);
+            }
             for (int i = 0; i < enemies.Count; i++)
             {
                 enemies[i].localPosition = enemyStartPositions[i];

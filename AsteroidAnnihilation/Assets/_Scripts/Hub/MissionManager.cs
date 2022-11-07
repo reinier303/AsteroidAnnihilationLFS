@@ -10,17 +10,20 @@ namespace AsteroidAnnihilation
     {
         public static MissionManager Instance;
 
+        //Script References
         private GameManager gameManager;
         private UIManager uiManager;
         private InputManager inputManager;
         private ParallaxBackground parallaxBackground;
-
         [SerializeField] private SpawnManager spawnManager;
+
         private AreaGenerationSettings generationSettingsT1;
         private AreaGenerationSettings generationSettingsT2;
 
         private List<Mission> currentMissions;
         private int currentMissionIndex;
+        private int bountyHunterRank = 0;
+        private float bountyHunterExp = 0;
 
         //TODO::Save this in playerdata as a stat
         public int maxMissions = 3;
@@ -30,7 +33,8 @@ namespace AsteroidAnnihilation
 
         [SerializeField] private GameObject gameElements, hubElements;
 
-        private bool newMissionGenerated, canGainProgress;
+        private bool newMissionGenerated, canGainProgress, bossActive;
+
 
         private void Awake()
         {
@@ -95,6 +99,11 @@ namespace AsteroidAnnihilation
             inputManager.InputEnabled = true;
         }
 
+        public void ToHub()
+        {
+            StartCoroutine(MoveToHub());
+        }
+
         public IEnumerator MoveToHub()
         {
             uiManager.LoadingScreen.SetActive(true);
@@ -106,6 +115,10 @@ namespace AsteroidAnnihilation
             gameElements.SetActive(false);
             hubElements.SetActive(true);
             parallaxBackground.SetHubBackgrounds();
+            parallaxBackground.SetBackgroundsStart();
+
+            uiManager.DisableBossHealthBar();
+            bossActive = false;
             Time.timeScale = 1;
             yield return new WaitForSecondsRealtime(2.25f);
             StartCoroutine(uiManager.LoadingScreen.GetComponent<LoadingScreen>().FadeOutLoadingScreen());
@@ -124,17 +137,30 @@ namespace AsteroidAnnihilation
             {
                 currentMissions = new List<Mission>();
                 GenerateMissions(maxMissions);
+                maxMissions = 3;
+                bountyHunterRank = 0;
+                bountyHunterExp = 0;
                 ES3.Save("currentMissions", currentMissions);
+                ES3.Save("maxMissions", maxMissions);
+                ES3.Save("bountyHunterRank", bountyHunterRank);
+                ES3.Save("bountyHunterExp", bountyHunterExp);
             }
             else
             {
                 currentMissions = ES3.Load<List<Mission>>("currentMissions");
+                maxMissions = ES3.Load<int>("maxMissions");
+                bountyHunterRank = ES3.Load<int>("bountyHunterRank");
+                bountyHunterExp = ES3.Load<float>("bountyHunterExp");
+
             }
         }
 
         private void SaveMissions()
         {
             ES3.Save("currentMissions", currentMissions);
+            ES3.Save("maxMissions", maxMissions);
+            ES3.Save("bountyHunterRank", bountyHunterRank);
+            ES3.Save("bountyHunterExp", bountyHunterExp);
         }
 
         private void GenerateMissions(int amount)
@@ -211,10 +237,13 @@ namespace AsteroidAnnihilation
             Mission mission = GetCurrentMission();
             for (int i = 0; i < mission.Objectives.Count; i++)
             {
-                if (mission.Objectives[i].ObjectiveType == type && !mission.Objectives[i].ObjectiveDone)
+                if (mission.Objectives[i].ObjectiveType == type)
                 {
-                    AddToObjective(mission, i);
-                    UIManager.Instance.UpdateObjectives();
+                    if (!mission.Objectives[i].ObjectiveDone)
+                    {
+                        AddToObjective(mission, i);
+                        UIManager.Instance.UpdateObjectives();
+                    }
                     if (CheckObjectiveDone(mission, i)) { return; }
                     return;
                 }
@@ -233,10 +262,9 @@ namespace AsteroidAnnihilation
                 {
                     if (mission.Objectives[i].ObjectiveDone) { objectivesDone++; }
                 }
-                if (objectivesDone == mission.Objectives.Count)
+                if (objectivesDone == mission.Objectives.Count && !bossActive)
                 {
-                    spawnManager.SpawnBoss(mission);
-                    //MissionCompleted(mission);
+                    StartCoroutine(WarningAndBossSpawn(mission));
                 }
                 return true;
             }
@@ -244,6 +272,14 @@ namespace AsteroidAnnihilation
             {
                 return false;
             }
+        }
+
+        private IEnumerator WarningAndBossSpawn(Mission mission)
+        {
+            bossActive = true;
+            uiManager.EnableBossWarning();
+            yield return new WaitForSeconds(5f);
+            spawnManager.SpawnBoss(mission);
         }
 
         public void MissionCompleted()

@@ -17,6 +17,6 @@ namespace AsteroidAnnihilation
         public int Level;
         public float TotalExp;
         //Fill this with useful data later
-        public List<string> Unlocks;
+        public List<BaseUnlockable> Unlocks;
     }
 }

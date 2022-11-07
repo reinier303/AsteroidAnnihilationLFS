@@ -150,7 +150,7 @@ MonoBehaviour:
   PermanencePartOutwardsPower: 700
   PermanenceScaleFactor: 0.07
   Drops: []
-  DropChance: 4
+  DropChance: 3
   spriteRenderer: {fileID: 0}
   isDead: 0
   isInitialized: 0
@@ -165,9 +165,10 @@ MonoBehaviour:
   DeAggroDistance: 45
   sizeRange: {x: 0.9, y: 1.1}
   grouped: 0
-  StopDistance: 0.75
+  StopDistance: 0.5
+  DeathOnImpact: 1
   moveSpeed: 1.15
-  aggroMove: 2.25
+  aggroMove: 3
   randomRotation: 0
 --- !u!1 &7585125964869766783
 GameObject:

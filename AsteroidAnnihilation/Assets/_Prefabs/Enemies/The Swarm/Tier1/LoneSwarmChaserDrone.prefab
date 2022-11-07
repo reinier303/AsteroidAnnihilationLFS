@@ -29,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 631180164220643606}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 12, y: 12, z: 0}
-  m_LocalScale: {x: 1.75, y: 1.75, z: 1}
+  m_LocalScale: {x: 2, y: 2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8704073557298634646}
@@ -78,7 +78,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 16d82413806be664d810db3105358936, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.5942931, g: 0.6509804, b: 0.48235294, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -150,7 +150,7 @@ MonoBehaviour:
   PermanencePartOutwardsPower: 700
   PermanenceScaleFactor: 0.07
   Drops: []
-  DropChance: 6
+  DropChance: 40
   spriteRenderer: {fileID: 0}
   isDead: 0
   isInitialized: 0
@@ -158,12 +158,12 @@ MonoBehaviour:
   Aggro: 0
   Player: {fileID: 0}
   ContactDamage: 10
-  RotationSpeed: 2
+  RotationSpeed: 2.25
   DroppedUnits: 25
   ExperienceGained: 3
   AggroDistance: 16
   DeAggroDistance: 45
-  sizeRange: {x: 0.9, y: 1.25}
+  sizeRange: {x: 2, y: 2.25}
   grouped: 0
   StopDistance: 0.75
   DeathOnImpact: 0
