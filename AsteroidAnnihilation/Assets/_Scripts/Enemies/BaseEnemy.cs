@@ -94,6 +94,7 @@ namespace AsteroidAnnihilation
             if (Vector2.Distance(transform.position, Player.position) > 250f)
             {
                 gameObject.SetActive(false);
+                spawnManager.RemoveEnemyType(enemyType);
             }
             yield return new WaitForSeconds(time);
             StartCoroutine(CheckDistanceToPlayer(time));

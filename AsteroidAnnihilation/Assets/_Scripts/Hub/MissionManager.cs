@@ -19,6 +19,7 @@ namespace AsteroidAnnihilation
 
         private AreaGenerationSettings generationSettingsT1;
         private AreaGenerationSettings generationSettingsT2;
+        private BountyHunterLevelSettings bountyHunterLevelSettings;
 
         private List<Mission> currentMissions;
         private int currentMissionIndex;
@@ -47,6 +48,7 @@ namespace AsteroidAnnihilation
             SettingsManager settingsManager = SettingsManager.Instance;
             generationSettingsT1 = settingsManager.generationSettingsT1;
             generationSettingsT2 = settingsManager.generationSettingsT2;
+            bountyHunterLevelSettings = settingsManager.bountyHunterLevelSettings;
 
             newMissionGenerated = false;
             LoadMissions();
@@ -147,10 +149,10 @@ namespace AsteroidAnnihilation
             }
             else
             {
-                currentMissions = ES3.Load<List<Mission>>("currentMissions");
-                maxMissions = ES3.Load<int>("maxMissions");
-                bountyHunterRank = ES3.Load<int>("bountyHunterRank");
-                bountyHunterExp = ES3.Load<float>("bountyHunterExp");
+                currentMissions = ES3.Load<List<Mission>>("currentMissions", defaultValue:new List<Mission>());
+                maxMissions = ES3.Load<int>("maxMissions", defaultValue: 3);
+                bountyHunterRank = ES3.Load<int>("bountyHunterRank", defaultValue: 0);
+                bountyHunterExp = ES3.Load<float>("bountyHunterExp", defaultValue: 0);
 
             }
         }
@@ -294,6 +296,11 @@ namespace AsteroidAnnihilation
             currentMissions.Insert(currentMissionIndex, GenerateMission());
             newMissionGenerated = true;
             canGainProgress = false;
+        }
+
+        private void GainRankProgress()
+        {
+
         }
 
         public void AddToObjective(Mission mission, int objectiveIndex)

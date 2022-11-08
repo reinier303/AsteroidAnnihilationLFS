@@ -28,7 +28,7 @@ namespace AsteroidAnnihilation
                 //
                 //
                 Stats = ES3.Load<Dictionary<EnumCollections.PlayerStats, float>>("playerData");
-                PlayerLevel = ES3.Load<int>("playerLevel");
+                PlayerLevel = ES3.Load<int>("playerLevel", defaultValue: 1);
             }
 
         }

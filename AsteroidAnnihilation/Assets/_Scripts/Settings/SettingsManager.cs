@@ -17,6 +17,8 @@ namespace AsteroidAnnihilation
         public AreaGenerationSettings generationSettingsT1;
         public AreaGenerationSettings generationSettingsT2;
 
+        public BountyHunterLevelSettings bountyHunterLevelSettings;
+
         private void Awake()
         {
             Instance = this;
@@ -28,6 +30,8 @@ namespace AsteroidAnnihilation
 
             generationSettingsT1 = (AreaGenerationSettings)Resources.Load("Settings/AreaGenerationSettings_Tier1");
             generationSettingsT2 = (AreaGenerationSettings)Resources.Load("Settings/AreaGenerationSettings_Tier2");
+
+            bountyHunterLevelSettings = (BountyHunterLevelSettings)Resources.Load("Settings/BountyHunterLevelSettings");
         }
     }
 }

@@ -215,6 +215,7 @@ MonoBehaviour:
   grouped: 0
   StopDistance: 0.75
   DeathOnImpact: 0
+  enemyType: 
   moveSpeed: 7
-  chargeMultiplier: 2.65
-  chargeDistance: 13
+  chargeMultiplier: 2.5
+  chargeDistance: 8

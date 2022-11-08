@@ -178,6 +178,43 @@ namespace AsteroidAnnihilation
                     BackgroundElements[background] = gridPosition;
                 }
             }
+            /*
+            for (int i = -1; i < 2; i++)
+            {
+                float posOrNegX = startGridPos.x / Mathf.Abs(startGridPos.x);
+                posOrNegX = Mathf.RoundToInt(posOrNegX);
+                float posOrNegY = startGridPos.y / Mathf.Abs(startGridPos.y);
+                posOrNegY = Mathf.RoundToInt(posOrNegY);
+
+                if (x)
+                {
+                    gridPosition = startGridPos + new Vector2(posOrNegX, i);
+                }
+                else
+                {
+
+                    gridPosition = startGridPos + new Vector2(i, posOrNegY);
+                }
+                if (BackgroundElements.ContainsValue(gridPosition))
+                {
+                    continue;
+                }
+                Transform background = GetAvailableBackground();
+
+                background.gameObject.SetActive(true);
+
+                if (x)
+                {
+                    background.localPosition = position + new Vector3(size.x * posOrNegX, size.y * i, 0);
+                    BackgroundElements[background] = gridPosition;
+                }
+                else
+                {
+                    background.localPosition = position + new Vector3(size.x * i, size.y * posOrNegY, 0);
+                    BackgroundElements[background] = gridPosition;
+                }
+                Debug.Log(gridPosition);           
+            }*/
         }
 
         private Vector2 CalculateParallaxNumber()
@@ -207,7 +244,7 @@ namespace AsteroidAnnihilation
         {
             foreach(Transform background in BackgroundElements.Keys)
             {
-                if (Vector2.Distance(background.localPosition, player.position) >= size.x * 1.5f)
+                if (Vector2.Distance(background.localPosition, player.position) >= size.x * 2f)
                 {
                     return background;
                 }

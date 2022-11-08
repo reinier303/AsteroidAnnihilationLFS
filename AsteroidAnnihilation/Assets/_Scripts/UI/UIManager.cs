@@ -181,7 +181,7 @@ namespace AsteroidAnnihilation
 
         public void DisableBossHealthBar()
         {
-            bossBar.gameObject.SetActive(false);
+            if (bossBar.gameObject.activeSelf) { bossBar.gameObject.SetActive(false); }
         }
 
         public void UpdateBossHealthBar(float currentHealth, float maxHealth)

@@ -8,14 +8,14 @@ namespace AsteroidAnnihilation
     [CreateAssetMenu(menuName = "Settings/Bounty Hunter Levels", order = 1001)]
     public class BountyHunterLevelSettings : SerializedScriptableObject
     {
-        public List<BountyHunterLevel> BountyHunterLevels;
+        public List<BountyHunterRank> BountyHunterLevels;
     }
 
-    public struct BountyHunterLevel
+    public struct BountyHunterRank
     {
-        public int Level;
+        public string RankName;
         public float TotalExp;
         //Fill this with useful data later
-        public List<string> Unlocks;
+        public List<BaseUnlockable> Unlocks;
     }
 }

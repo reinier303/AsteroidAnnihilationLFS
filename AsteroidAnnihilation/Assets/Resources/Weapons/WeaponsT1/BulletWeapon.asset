@@ -61,7 +61,7 @@ MonoBehaviour:
       Data: 1
     - Name: $v
       Entry: 4
-      Data: 5
+      Data: 10
     - Name: 
       Entry: 8
       Data: 
@@ -73,7 +73,7 @@ MonoBehaviour:
       Data: 2
     - Name: $v
       Entry: 4
-      Data: 0.5
+      Data: 1
     - Name: 
       Entry: 8
       Data: 
@@ -117,7 +117,7 @@ MonoBehaviour:
       Data: 8
     - Name: 
       Entry: 4
-      Data: 12
+      Data: 13
     - Name: 
       Entry: 8
       Data: 
@@ -135,10 +135,10 @@ MonoBehaviour:
       Data: UnityEngine.Vector2, UnityEngine.CoreModule
     - Name: 
       Entry: 4
-      Data: 1.4
+      Data: 2.4
     - Name: 
       Entry: 4
-      Data: 1.7
+      Data: 2.75
     - Name: 
       Entry: 8
       Data: 
@@ -261,10 +261,10 @@ MonoBehaviour:
       Data: UnityEngine.Vector2, UnityEngine.CoreModule
     - Name: 
       Entry: 4
-      Data: 0.66
+      Data: 0.55
     - Name: 
       Entry: 4
-      Data: 1
+      Data: 0.66
     - Name: 
       Entry: 8
       Data: 

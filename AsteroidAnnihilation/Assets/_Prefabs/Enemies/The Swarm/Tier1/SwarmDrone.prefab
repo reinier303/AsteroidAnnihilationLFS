@@ -159,13 +159,13 @@ MonoBehaviour:
   Player: {fileID: 0}
   ContactDamage: 20
   RotationSpeed: 0.025
-  DroppedUnits: 50
+  DroppedUnits: 20
   ExperienceGained: 3
-  AggroDistance: 18
+  AggroDistance: 19
   DeAggroDistance: 45
   sizeRange: {x: 0.9, y: 1.1}
   grouped: 0
-  StopDistance: 12.5
+  StopDistance: 17
   DeathOnImpact: 0
   enemyType: 
   moveSpeed: 3.25
@@ -173,9 +173,9 @@ MonoBehaviour:
   projectileType: 0
   projectileDamage: 5
   fireRate: 2.25
-  projectileSize: 0.85
+  projectileSize: 1
   projectileLifeTime: 5
-  projectileSpeed: 11
+  projectileSpeed: 14
   randomRotation: 1
   fireTimer: 0
 --- !u!1 &5249170621695936568
