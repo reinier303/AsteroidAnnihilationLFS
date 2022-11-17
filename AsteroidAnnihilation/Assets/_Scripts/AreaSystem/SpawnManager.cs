@@ -44,8 +44,11 @@ namespace AsteroidAnnihilation
             enemyTypeMax = new Dictionary<string, int>();
         }
 
+        //Time measurement = 0-2ms
         public void Initialize()
         {
+            System.Diagnostics.Stopwatch stopWatch = new System.Diagnostics.Stopwatch();
+            stopWatch.Start();
             RObjectPooler = ObjectPooler.Instance;
             gameManager = GameManager.Instance;
             missionManager = MissionManager.Instance;
@@ -61,6 +64,8 @@ namespace AsteroidAnnihilation
             StartCoroutine(StartSpawning());
             StartCoroutine(RampSpawnRate());
             StartCoroutine(CheckRecentlyHit());
+            stopWatch.Stop();
+            Debug.Log("Elapsed time is: " + stopWatch.ElapsedMilliseconds);
         }
 
         private void OnDisable()
@@ -135,6 +140,7 @@ namespace AsteroidAnnihilation
 
         public void SpawnBoss(Mission mission)
         {
+            //O(1)
             Spawning = false;
             Vector2 spawnPosition = GenerateSpawnPosition();
             enemiesAlive.Add(RObjectPooler.SpawnFromPool(mission.Boss, spawnPosition, Quaternion.identity));
@@ -142,6 +148,7 @@ namespace AsteroidAnnihilation
 
         private bool CheckEnemyType(string enemy)
         {
+            //O(1)
             Debug.Log(enemy);
 
             if (!enemyTypeCount.ContainsKey(enemy)) 
@@ -197,6 +204,7 @@ namespace AsteroidAnnihilation
         {
             enemyNames.Clear();
             enemyTypeMax.Clear();
+            //O(i*j)
             for (int i = 0; i < currentMission.Enemies.Count; i++)
             {
                 string enemy = currentMission.Enemies[i].EnemyType.ToString();
@@ -207,10 +215,12 @@ namespace AsteroidAnnihilation
                     enemyNames.Add(enemy);
                 }
             }
+
         }
 
         private void GenerateRandomSeekerEnemyList()
         {
+            //O(i*j)
             for (int i = 0; i < currentMission.SeekerEnemies.Count; i++)
             {
                 string enemy = currentMission.SeekerEnemies[i].EnemyType.ToString();
@@ -225,6 +235,7 @@ namespace AsteroidAnnihilation
 
         public void DisableAllEnemies()
         {
+            //O(N)
             foreach(GameObject gameObject in enemiesAlive)
             {
                 if (gameObject != null) { gameObject.SetActive(false); }
