@@ -26,7 +26,6 @@ namespace AsteroidAnnihilation
         private int bountyHunterRank = 0;
         private float bountyHunterExp = 0;
 
-        //TODO::Save this in playerdata as a stat
         public int maxMissions = 3;
 
         [SerializeField] private Transform missionCardHolder;

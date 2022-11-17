@@ -42,8 +42,6 @@ namespace AsteroidAnnihilation
             eventSystem = EventSystem.current;
 
             currentWeapons = new Dictionary<int, Weapon>();
-
-            //TODO::Make this work for multiple ship types when starting work on that
         }
 
         private void Start()
@@ -152,7 +150,7 @@ namespace AsteroidAnnihilation
             {
                 if(mouseButton == 0)
                 {
-                    Vector2 addedPlayerVelocity = playerMovement.MovementInput * playerVelocityMultiplier * playerMovement.GetCurrentSpeed();
+                    Vector2 addedPlayerVelocity = playerMovement.MovementInput * playerVelocityMultiplier * playerMovement.GetMovementSpeed();
                     //TODO::Add this to weapon to make this different on weapon basis.
                     rb.AddForce(-transform.up * 100);
                     audioManager.DampenNonShotMixers();

@@ -15,9 +15,9 @@ MonoBehaviour:
   Tag: PlasmaGunShot
   Clips:
   - {fileID: 8300000, guid: c5b2797d6eda5614485c9ddb3d755ceb, type: 3}
-  - {fileID: 8300000, guid: 823ceaf1964b3f14e9ac28c62bcd38f8, type: 3}
-  - {fileID: 8300000, guid: 1f501013c4d7b004ea66f0f60490f661, type: 3}
+  - {fileID: 8300000, guid: 7920e3fb0b75d6646a419d4aa3609f52, type: 3}
+  - {fileID: 8300000, guid: 7920e3fb0b75d6646a419d4aa3609f52, type: 3}
   - {fileID: 8300000, guid: 254eddb0df66d0f47882048efc2f123f, type: 3}
   MixerGroup: {fileID: 24300002, guid: c581ec550c197d14ea4fa4f0fb8d76d4, type: 2}
   VolumeMinMax: {x: 0.5, y: 0.6}
-  PitchMinMax: {x: 0.8, y: 1.2}
+  PitchMinMax: {x: 0.6, y: 1.4}

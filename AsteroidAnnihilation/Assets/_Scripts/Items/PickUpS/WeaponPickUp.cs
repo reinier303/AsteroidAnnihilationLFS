@@ -9,6 +9,8 @@ namespace AsteroidAnnihilation
         private EquipmentManager equipmentManager;
         private InventoryManager inventoryManager;
         private SettingsManager settingsManager;
+        private AudioManager audioManager;
+        private ObjectPooler objectPooler;
 
         private EquipmentData equipmentData; 
         private WeaponData weaponData;
@@ -30,6 +32,8 @@ namespace AsteroidAnnihilation
             settingsManager = SettingsManager.Instance;
             equipmentManager = EquipmentManager.Instance;
             inventoryManager = InventoryManager.Instance;
+            audioManager = AudioManager.Instance;
+            objectPooler = ObjectPooler.Instance;
             generalItemSettings = settingsManager.generalItemSettings;
 
             itemType = GetItemType();
@@ -37,10 +41,8 @@ namespace AsteroidAnnihilation
             GenerateDrop();
 
             icon.sprite = weaponData.EquipmentData.ItemData.Icon;
-            background.material = generalItemSettings.GetRarityMaterial(weaponData.EquipmentData.ItemData.Rarity);
-            //SpawnEffect based on rarity
-            //EmissionEffect based on rarity
-
+            //TODO:: Fix this with ObjectPooler and make it return itself to poolparent after disabling
+            Instantiate(generalItemSettings.GetRarityMaterial(weaponData.EquipmentData.ItemData.Rarity), transform.position, transform.rotation, transform);
         }
 
         private EnumCollections.ItemType GetItemType()
@@ -95,7 +97,7 @@ namespace AsteroidAnnihilation
                     (bool success, WeaponData data) = inventoryManager.AddItem(weaponData);
                     if (success)
                     {
-                        gameObject.SetActive(false);
+                        ItemPickedUp();
                     }
                     else { return false; }
                     break;
@@ -103,7 +105,7 @@ namespace AsteroidAnnihilation
                     (bool equipmentSuccess, EquipmentData equipData) = inventoryManager.AddItem(equipmentData);
                     if (equipmentSuccess)
                     {
-                        gameObject.SetActive(false);
+                        ItemPickedUp();
                     }
                     else { return false; }
                     break;
@@ -114,6 +116,13 @@ namespace AsteroidAnnihilation
                     break;
             }
             return false;
+        }
+
+        private void ItemPickedUp()
+        {
+            objectPooler.SpawnFromPool("EquipmentPickupEffect", transform.position, transform.rotation);
+            audioManager.PlayAudio("PickupEquipment");
+            gameObject.SetActive(false);
         }
     }
 }

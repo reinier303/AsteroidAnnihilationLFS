@@ -8,9 +8,9 @@ namespace AsteroidAnnihilation
 {
     public class AudioManager : MonoBehaviour
     {
-        [Range(0f,100f)]public float MasterVolumePercentage = 100f;
-        [Range(0f, 100f)] public float MusicVolumePercentage = 100f;
-        [Range(0f, 100f)] public float SFXVolumePercentage = 100f;
+        [Range(0f,100f)]public float MasterVolumePercentage = 75;
+        [Range(0f, 100f)] public float MusicVolumePercentage = 75;
+        [Range(0f, 100f)] public float SFXVolumePercentage = 75;
 
         public static AudioManager Instance;
 

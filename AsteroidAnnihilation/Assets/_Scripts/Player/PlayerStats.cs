@@ -98,7 +98,6 @@ namespace AsteroidAnnihilation
 
         public void AddToExperience(float value)
         {
-            //TODO::Fix overlevel exp
             Stats[EnumCollections.PlayerStats.CurrentExperience] += Mathf.Clamp(value, 0, Mathf.Infinity);
             CheckLevelUp(value);
             uIManager.UpdateExperience();

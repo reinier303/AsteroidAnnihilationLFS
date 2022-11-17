@@ -18,8 +18,8 @@ namespace AsteroidAnnihilation
         public KeyCode PauseButton2;
 
         [Header("Movement")]
-        public KeyCode BoostButton;
-        public KeyCode BoostButton2;
+        public KeyCode MovementSkillButton;
+        public KeyCode MovementSkillButton2;
         public KeyCode UpButton;
         public KeyCode UpButton2;
         public KeyCode DownButton;
@@ -40,7 +40,6 @@ namespace AsteroidAnnihilation
         private float axisX;
         private float axisY;
 
-        private bool boosting;
         private float boost;
         public bool Attacking;
 
@@ -102,6 +101,12 @@ namespace AsteroidAnnihilation
                     gameManager.UnpauseGame();
                 }
             }
+        }
+
+        public bool GetMovementSkillButtonDown()
+        {
+            return Input.GetKeyDown(MovementSkillButton) || Input.GetKeyDown(MovementSkillButton2);
+
         }
 
         public void WeaponInput()
@@ -196,7 +201,7 @@ namespace AsteroidAnnihilation
         {
             if (!InputEnabled) { return 0; }
 
-            boost = Boost(boostSpeed);
+            //boost = Boost(boostSpeed);
 
             //Right button input
             if (Input.GetKey(RightButton) || Input.GetKey(RightButton2))
@@ -235,7 +240,7 @@ namespace AsteroidAnnihilation
         {
             if (!InputEnabled) { return 0; }
 
-            boost = Boost(boostSpeed);
+            //boost = Boost(boostSpeed);
             //Right button input
             if (Input.GetKey(UpButton) || Input.GetKey(UpButton2))
             {
@@ -270,12 +275,12 @@ namespace AsteroidAnnihilation
 
             return axisY * GetAxisNormalizedCoef(true).y;
         }
-
+        /*
         public float Boost(float boostSpeed)
         {
             if (!InputEnabled) { return 0; }
 
-            if (boost <= boostSpeed && Input.GetKey(BoostButton) || Input.GetKey(BoostButton2))
+            if (boost <= boostSpeed && Input.GetKey(MovementSkillButton) || Input.GetKey(MovementSkillButton2))
             {
                 boosting = true;
             }
@@ -294,6 +299,7 @@ namespace AsteroidAnnihilation
             }
             return boost;
         }
+        */
     }
 }
 

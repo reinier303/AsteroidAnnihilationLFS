@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 81ef996067970074d8dd88ba76874a9d, type: 3}
-  m_Name: SwarmSeekerDrone
+  m_Name: Seeker_SwarmPod
   m_EditorClassIdentifier: 
-  Tag: SwarmSeekerDrone
-  Prefab: {fileID: 7023608820023519141, guid: 2c5e8608f20a6cf449df1e9b5d21c3c0, type: 3}
-  Amount: 20
+  Tag: Seeker_SwarmPod
+  Prefab: {fileID: 4074934377280580499, guid: 5f288cab25c0493409fee7ff2eb26517, type: 3}
+  Amount: 50

@@ -49,7 +49,7 @@ namespace AsteroidAnnihilation
             float playerDistance = Vector2.Distance(transform.position, player.position);
             if (playerDistance < magnetRadius)
             {
-                transform.position = Vector2.MoveTowards(transform.position, player.transform.position, Time.deltaTime * Mathf.Clamp(magnetRadius / (playerDistance / 1.5f), 1, 50));
+                transform.position = Vector2.MoveTowards(transform.position, player.transform.position, Time.deltaTime * Mathf.Clamp(magnetRadius / (playerDistance / 2f), 1, 50));
             }
         }
 

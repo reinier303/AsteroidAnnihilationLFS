@@ -62,7 +62,7 @@ GameObject:
   - component: {fileID: 3198683231121054544}
   - component: {fileID: 3198683231121054545}
   m_Layer: 0
-  m_Name: SwarmSeekerDrone
+  m_Name: Seeker_ChargeDrone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -208,7 +208,7 @@ MonoBehaviour:
   ContactDamage: 5
   RotationSpeed: 2.15
   DroppedUnits: 25
-  ExperienceGained: 3
+  ExperienceGained: 6
   AggroDistance: 14
   DeAggroDistance: 45
   sizeRange: {x: 0.9, y: 1.25}

@@ -244,6 +244,28 @@ namespace AsteroidAnnihilation
                         break;
                 }
             }
+            else if(eventData.pointerCurrentRaycast.gameObject.tag == "Drop")
+            {
+                //TODO::Make this drop the item
+                if(slotType == EnumCollections.ItemType.Inventory)
+                {
+                    //Warning you sure?
+                    switch (slotDataType)
+                    {
+                        case SlotDataType.None:
+                            return;
+                        case SlotDataType.Item:
+                            inventoryManager.RemoveItem(item, transform.GetSiblingIndex());
+                            break;
+                        case SlotDataType.Equipment:
+                            inventoryManager.RemoveItem(equipment, transform.GetSiblingIndex());
+                            break;
+                        case SlotDataType.Weapon:
+                            inventoryManager.RemoveItem(weapon, transform.GetSiblingIndex());
+                            break;
+                    }
+                }
+            }
         }
 
         private void MoveFromEquipment(ItemSlot hoveredSlot)
@@ -397,5 +419,7 @@ namespace AsteroidAnnihilation
 
             }
         }
+
+
     }
 }

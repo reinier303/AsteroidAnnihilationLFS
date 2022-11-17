@@ -7,11 +7,13 @@ namespace AsteroidAnnihilation
     public class NPC_Missions : NPCBase
     {
         private MissionManager missionManager;
+        private Player player;
         // Start is called before the first frame update
         protected override void Start()
         {
             base.Start();
             missionManager = MissionManager.Instance;
+            player = Player.Instance;
         }
 
         protected override void Update()
@@ -22,6 +24,7 @@ namespace AsteroidAnnihilation
                 menuToOpen.gameObject.SetActive(true);
                 inputManager.InputEnabled = false;
                 missionManager.ShowMissionCards();
+                player.DisablePlayerVelocity();
             }
         }
     }

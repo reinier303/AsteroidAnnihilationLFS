@@ -72,7 +72,7 @@ namespace AsteroidAnnihilation
             while(timer < 1f)
             {
                 transform.position += transform.up * Time.deltaTime * moveSpeed * chargeMultiplier;
-                Rotate(rotSpeedMultiplier: 0.5f);
+                Rotate(rotSpeedMultiplier: 0.35f);
                 yield return new WaitForEndOfFrame();
                 timer += Time.deltaTime;
             }

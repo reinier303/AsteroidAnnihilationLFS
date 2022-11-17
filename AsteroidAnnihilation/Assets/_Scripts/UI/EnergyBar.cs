@@ -11,7 +11,7 @@ namespace AsteroidAnnihilation
 
         public void UpdateEnergy(float currentValue, float MaxValue)
         {
-            float fillAmount = currentValue / MaxValue;
+            float fillAmount = (currentValue / MaxValue) / 2;
             fillImage.fillAmount = fillAmount;
         }
     }

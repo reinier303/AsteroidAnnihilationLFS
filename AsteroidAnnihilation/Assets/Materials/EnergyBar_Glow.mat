@@ -42,7 +42,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _EmissionMap:
-        m_Texture: {fileID: 2800000, guid: a583a11eb0be7bd40820e9669e6a8804, type: 3}
+        m_Texture: {fileID: 2800000, guid: f689b0ea5c9c4f242b36732a732a2096, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
@@ -97,8 +97,8 @@ Material:
     - _UseUIAlphaClip: 1
     - _ZWrite: 1
     m_Colors:
-    - _Color: {r: 0, g: 0.34961152, b: 1, a: 1}
-    - _EmissionColor: {r: 2.4298375, g: 3.905096, b: 16.574965, a: 1}
+    - _Color: {r: 0, g: 0.66060615, b: 1, a: 1}
+    - _EmissionColor: {r: 0.5792899, g: 0.9268639, b: 29.543785, a: 1}
     - _Flip: {r: 1, g: 1, b: 1, a: 1}
     - _RendererColor: {r: 1, g: 1, b: 1, a: 1}
     - _Specular: {r: 0, g: 0, b: 0, a: 0}

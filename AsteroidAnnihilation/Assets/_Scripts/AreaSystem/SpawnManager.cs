@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using Sirenix.OdinInspector;
+
 namespace AsteroidAnnihilation
 {
-    public class SpawnManager : MonoBehaviour
+    public class SpawnManager : SerializedMonoBehaviour
     {
         public static SpawnManager Instance;
 
@@ -25,14 +27,15 @@ namespace AsteroidAnnihilation
         //Background Renderer: info for spawn location
         public SpriteRenderer MapRenderer;
         private List<string> enemyNames = new List<string>();
+        private List<string> seekerEnemyNames = new List<string>();
 
         private Transform player;
 
         //Spawn variables
         [SerializeField] private float spawnDistance = 100;
         private List<GameObject> enemiesAlive;
-        private Dictionary<string, int> enemyTypeCount;
-        private Dictionary<string, int> enemyTypeMax;
+        [SerializeField] private Dictionary<string, int> enemyTypeCount;
+        [SerializeField] private Dictionary<string, int> enemyTypeMax;
 
         private void Awake()
         {
@@ -71,6 +74,7 @@ namespace AsteroidAnnihilation
             currentMission = missionManager.GetCurrentMission(); 
 
             GenerateRandomEnemyList();
+            GenerateRandomSeekerEnemyList();
         }
 
         private IEnumerator StartSpawning()
@@ -121,7 +125,7 @@ namespace AsteroidAnnihilation
             if (Spawning)
             {
                 Vector2 spawnPosition = GenerateSpawnPosition();
-                string enemy = currentMission.SeekerEnemies[Random.Range(0, currentMission.SeekerEnemies.Count)].EnemyType.ToString();
+                string enemy = seekerEnemyNames[Random.Range(0, seekerEnemyNames.Count)];
                 if (CheckEnemyType(enemy))
                 {
                     enemiesAlive.Add(RObjectPooler.SpawnFromPool(enemy, spawnPosition, Quaternion.identity));
@@ -138,17 +142,19 @@ namespace AsteroidAnnihilation
 
         private bool CheckEnemyType(string enemy)
         {
+            Debug.Log(enemy);
+
             if (!enemyTypeCount.ContainsKey(enemy)) 
             {
                 enemyTypeCount.Add(enemy, 1);
                 return true;
             }
-            else { 
-                enemyTypeCount[enemy]++;
+            else {
                 if (enemyTypeCount[enemy] >= enemyTypeMax[enemy])
                 {
                     return false;
                 }
+                enemyTypeCount[enemy]++;
                 return true;
             }
         }
@@ -157,7 +163,8 @@ namespace AsteroidAnnihilation
         {
             if (enemyTypeCount.ContainsKey(enemyType))
             {
-                enemyTypeCount[enemyType] = enemyTypeCount[enemyType]--;
+                Debug.Log("s");
+                enemyTypeCount[enemyType] = enemyTypeCount[enemyType] - 1;
             }
         }
 
@@ -198,6 +205,20 @@ namespace AsteroidAnnihilation
                 for (int j = 0; j < currentMission.Enemies[i].Priority; j++)
                 {
                     enemyNames.Add(enemy);
+                }
+            }
+        }
+
+        private void GenerateRandomSeekerEnemyList()
+        {
+            for (int i = 0; i < currentMission.SeekerEnemies.Count; i++)
+            {
+                string enemy = currentMission.SeekerEnemies[i].EnemyType.ToString();
+                if (!enemyTypeMax.ContainsKey(enemy)) { enemyTypeMax.Add(enemy, currentMission.SeekerEnemies[i].MaxAmount); }
+                else { enemyTypeMax[enemy] += currentMission.SeekerEnemies[i].MaxAmount; }
+                for (int j = 0; j < currentMission.SeekerEnemies[i].Priority; j++)
+                {
+                    seekerEnemyNames.Add(enemy);
                 }
             }
         }

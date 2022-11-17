@@ -51,7 +51,6 @@ namespace AsteroidAnnihilation
 
         public void SetMissionBackgrounds()
         {
-            //TODO::Make background colors work with new mission system
             if (GetSpritesFromResources) { BackgroundSprites = MissionManager.Instance.GetCurrentBackgrounds(); }
             SetBackgrounds();
         }

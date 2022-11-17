@@ -38,6 +38,11 @@ namespace AsteroidAnnihilation
             return (Vector2)transform.position + rb.velocity * seconds;
         }
 
+        public void DisablePlayerVelocity()
+        {
+            rb.velocity = Vector2.zero;
+        }
+
         private void GetSaveData()
         {
 

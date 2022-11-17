@@ -16,14 +16,14 @@ MonoBehaviour:
     SerializedFormat: 2
     SerializedBytes: 
     ReferencedUnityObjects:
-    - {fileID: 2100000, guid: ec392cbff90e34e4c8ab08309b81ff77, type: 2}
-    - {fileID: 2100000, guid: 9ea75eb24eda11b449fd2d0f7d3e4ae3, type: 2}
-    - {fileID: 2100000, guid: f93a18d3f1e4058418f67e6d48ae675d, type: 2}
-    - {fileID: 2100000, guid: 221501ec5a0e6e64fa247d15433d8fa6, type: 2}
-    - {fileID: 2100000, guid: 1eb5b93539049c94e90706c7f88a4830, type: 2}
-    - {fileID: 2100000, guid: 5c265bb7b45f92648b7b7b78234e64aa, type: 2}
-    - {fileID: 2100000, guid: e2d2159b3aee3af4c859e471307f7beb, type: 2}
-    - {fileID: 2100000, guid: af92c1d396c1a8b48bdca76b0c0a9040, type: 2}
+    - {fileID: 108116, guid: 940d94a32fde2264eb9e2dc04abda5cb, type: 3}
+    - {fileID: 108116, guid: 9b688d797b7de474fb02d45c1a439d7a, type: 3}
+    - {fileID: 108116, guid: 521b886316df1ea46a1f9f742df2fc6f, type: 3}
+    - {fileID: 108116, guid: 414b26716f7307a4a91c40fe738809b0, type: 3}
+    - {fileID: 108116, guid: b7c6a01a9e1336748a7b4acee312d04b, type: 3}
+    - {fileID: 108116, guid: 3a8a426e1e0745a42889051d6ec93d08, type: 3}
+    - {fileID: 108116, guid: 80f26260455382b4386016507ef06ce0, type: 3}
+    - {fileID: 108116, guid: 2327c2c7ea4df2b4abdf0207fec9887f, type: 3}
     - {fileID: 21300000, guid: 2c3181253d376944496192401e9ab3dc, type: 3}
     - {fileID: 21300000, guid: ad99e8a9cb963334685b18d7fda45e9e, type: 3}
     - {fileID: 21300000, guid: 5555a7bc63e5f3a4aa18981a999435e3, type: 3}
@@ -227,10 +227,10 @@ MonoBehaviour:
     - Name: 
       Entry: 8
       Data: 
-    - Name: RarityMaterials
+    - Name: RarityIdleEffects
       Entry: 7
       Data: 2|System.Collections.Generic.Dictionary`2[[AsteroidAnnihilation.EnumCollections+Rarities,
-        Assembly-CSharp],[UnityEngine.Material, UnityEngine.CoreModule]], mscorlib
+        Assembly-CSharp],[UnityEngine.GameObject, UnityEngine.CoreModule]], mscorlib
     - Name: comparer
       Entry: 7
       Data: 3|System.Collections.Generic.EnumEqualityComparer`1[[AsteroidAnnihilation.EnumCollections+Rarities,

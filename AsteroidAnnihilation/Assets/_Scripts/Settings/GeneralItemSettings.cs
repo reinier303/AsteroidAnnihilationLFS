@@ -9,7 +9,7 @@ namespace AsteroidAnnihilation
     public class GeneralItemSettings : SerializedScriptableObject
     {
         public Dictionary<EnumCollections.Rarities, Vector2Int> RarityModAmountRange;
-        public Dictionary<EnumCollections.Rarities, Material> RarityMaterials;
+        public Dictionary<EnumCollections.Rarities, GameObject> RarityIdleEffects;
 
         public WeaponData startWeapon;
         public Dictionary<EnumCollections.ItemType, EquipmentData> startGear;
@@ -19,9 +19,9 @@ namespace AsteroidAnnihilation
             return Random.Range(RarityModAmountRange[rarity].x, RarityModAmountRange[rarity].y);
         }
 
-        public Material GetRarityMaterial(EnumCollections.Rarities rarity)
+        public GameObject GetRarityMaterial(EnumCollections.Rarities rarity)
         {
-            return RarityMaterials[rarity];
+            return RarityIdleEffects[rarity];
         }
     }
 }

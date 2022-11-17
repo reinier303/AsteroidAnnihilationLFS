@@ -10,6 +10,7 @@ namespace AsteroidAnnihilation
     {
         [Header("Movement Variables")]
         public float currentSpeed;
+        public float BaseSpeed;
         private float Acceleration;
         private float Deceleration;
         public float AccelerationMultiplier;
@@ -18,13 +19,17 @@ namespace AsteroidAnnihilation
         public float MaxVelocityCoeficient;
         public float MaxVelocity;
 
+        [Header("Movement Skill Variables")]
+        public float DashVelocityMultiplier = 3;
+        public float DashDuration = 0.4f;
+        public float DashCooldown = 1f;
 
-        [Header("Boost Variables")]
         public float BoostSpeed = 1.5f;
-        public float BaseSpeed;
-
         public float Fuel;
         public float BoostRegen;
+        private bool canDash;
+        private bool dashing;
+
 
         private float cameraDistance;
         private float screenRatio;
@@ -38,6 +43,7 @@ namespace AsteroidAnnihilation
         private PlayerStats playerStats;
         private InputManager inputManager;
         private EquipmentManager equipmentManager;
+        private ObjectPooler objectPooler;
 
         public List<ParticleSystem> Engines;
 
@@ -58,6 +64,7 @@ namespace AsteroidAnnihilation
             backGroundSize = BackgroundCollider.transform.localScale * 14.5f;
             lastInputs = new List<Vector3>();
             rb = GetComponent<Rigidbody2D>();
+            canDash = true;
             //TODO:: IMPORTANT CHECK IF THIS CAN BE ONLY DONE FOR PLAYER OBJECT
             Physics2D.simulationMode = SimulationMode2D.Update;
         }
@@ -68,6 +75,7 @@ namespace AsteroidAnnihilation
             SceneManager.sceneLoaded += OnSceneLoaded;
             gameManager = GameManager.Instance;
             equipmentManager = EquipmentManager.Instance;
+            objectPooler = ObjectPooler.Instance;
             player = gameManager.RPlayer;
             playerStats = GetComponent<PlayerStats>();
             inputManager = gameManager.RInputManager;
@@ -108,6 +116,7 @@ namespace AsteroidAnnihilation
                 Acceleration = currentSpeed * AccelerationMultiplier;
                 Deceleration = currentSpeed * DecelerationMultiplier;
                 MaxVelocity = currentSpeed * MaxVelocityCoeficient;
+                BaseSpeed = currentSpeed;
             }
         }
 
@@ -141,12 +150,34 @@ namespace AsteroidAnnihilation
             {
                 MovementInput = Vector2.zero;
             }
+            if(canDash && inputManager.GetMovementSkillButtonDown())
+            {
+                StartCoroutine(Dash());
+            }
             Move();
         }
 
-        private void FixedUpdate()
+        private IEnumerator Dash()
         {
-
+            canDash = false;
+            float baseSpeed = currentSpeed;
+            dashing = true;
+            for (int i = 0; i < 5; i++)
+            {
+                objectPooler.SpawnFromPool("DashParticle", transform.position, transform.rotation);      
+                currentSpeed = baseSpeed + (baseSpeed * DashVelocityMultiplier / 3);
+                yield return new WaitForSeconds(DashDuration / 15);
+            }
+            for (int i = 0; i < 10; i++)
+            {
+                objectPooler.SpawnFromPool("DashParticle", transform.position, transform.rotation);
+                currentSpeed = baseSpeed - (baseSpeed * DashVelocityMultiplier / 12);
+                yield return new WaitForSeconds(DashDuration / 15);
+            }
+            currentSpeed = baseSpeed;
+            dashing = false;
+            yield return new WaitForSeconds(DashCooldown);
+            canDash = true;
         }
 
         private void MoveOld()
@@ -184,8 +215,13 @@ namespace AsteroidAnnihilation
             {
                 rb.AddForce(new Vector2(0, MovementInput.y * ForceModifier));
             }
-            float x = Mathf.Clamp(rb.velocity.x,-MaxVelocity, MaxVelocity);
-            float y = Mathf.Clamp(rb.velocity.y, -MaxVelocity, MaxVelocity);
+            float x = rb.velocity.x;
+            float y = rb.velocity.y;
+            if (!dashing)
+            {
+                x = Mathf.Clamp(rb.velocity.x, -MaxVelocity, MaxVelocity);
+                y = Mathf.Clamp(rb.velocity.y, -MaxVelocity, MaxVelocity);
+            }
             rb.velocity = new Vector2(x,y);
         }
 
@@ -244,9 +280,9 @@ namespace AsteroidAnnihilation
             transform.rotation = Quaternion.AngleAxis(angle - 90, Vector3.forward);
         }
     
-        public float GetCurrentSpeed()
+        public float GetMovementSpeed()
         {
-            return currentSpeed;
+            return BaseSpeed;
         }
     }
 }

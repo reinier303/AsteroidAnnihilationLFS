@@ -36,6 +36,7 @@ namespace AsteroidAnnihilation
         {
             GameManager.Instance.onEndGame += SaveEquipment;
             inventoryManager = InventoryManager.Instance;
+            playerEntity.SetHealthToMax();
         }
 
         public void InitializeEquipment()
@@ -57,7 +58,6 @@ namespace AsteroidAnnihilation
         {
             playerAttack.GetEquipmentVariables();
             playerEntity.GetHealthVariables();
-            playerEntity.SetHealthToMax();
         }
 
         private void InitializeEquipmentGeneration()
