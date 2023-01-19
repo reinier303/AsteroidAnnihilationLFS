@@ -27,6 +27,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0.17364816, w: 0.9848078}
   m_LocalPosition: {x: 3.18, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3353449810881029645}
   - {fileID: 4847048572140187853}
@@ -47,8 +48,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   asteroids: []
-  MinForce: 80
-  MaxForce: 650
+  MinForce: 1350
+  MaxForce: 1950
   MaxRotationSpeed: 750
   GroupForce: {x: 0, y: 0}
   GroupTorque: 0

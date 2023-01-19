@@ -15,6 +15,7 @@ namespace AsteroidAnnihilation
         private UIManager uiManager;
         private InputManager inputManager;
         private ParallaxBackground parallaxBackground;
+        private Player player;
         [SerializeField] private SpawnManager spawnManager;
 
         private AreaGenerationSettings generationSettingsT1;
@@ -44,6 +45,7 @@ namespace AsteroidAnnihilation
 
         private void Start()
         {
+            player = Player.Instance;
             SettingsManager settingsManager = SettingsManager.Instance;
             generationSettingsT1 = settingsManager.generationSettingsT1;
             generationSettingsT2 = settingsManager.generationSettingsT2;
@@ -56,7 +58,6 @@ namespace AsteroidAnnihilation
             inputManager = InputManager.Instance;
             parallaxBackground = ParallaxBackground.Instance;
             gameManager.onEndGame += SaveMissions;
-
         }
 
         public void ShowMissionCards()
@@ -119,7 +120,8 @@ namespace AsteroidAnnihilation
             hubElements.SetActive(true);
             parallaxBackground.SetHubBackgrounds();
             parallaxBackground.SetBackgroundsStart();
-
+            player.RPlayerEntity.SetHealthToMax();
+            player.RPlayerAttack.ResetEnergy();
             uiManager.DisableBossHealthBar();
             bossActive = false;
             Time.timeScale = 1;
