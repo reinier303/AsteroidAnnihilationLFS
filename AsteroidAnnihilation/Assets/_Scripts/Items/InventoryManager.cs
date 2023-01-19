@@ -149,8 +149,10 @@ namespace AsteroidAnnihilation
                 GameObject gearSlot = gearSlotParent.GetChild(i).gameObject;
                 ItemSlot slot = gearSlot.GetComponent<ItemSlot>();
 
+                //Debug.Log(equipmentManager.GetGear(slot.slotType).ItemData.ItemName);
                 slot.SetItem(equipmentManager.GetGear(slot.slotType));
                 slot.GetComponent<ItemSlot>().InitializeSlot();
+                //Debug.Log(slot.equipment.ItemData.ItemName);
             }
         }
 

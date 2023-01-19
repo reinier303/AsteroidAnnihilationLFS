@@ -61,7 +61,7 @@ MonoBehaviour:
       Data: 1
     - Name: $v
       Entry: 4
-      Data: 10
+      Data: 15
     - Name: 
       Entry: 8
       Data: 
@@ -73,7 +73,7 @@ MonoBehaviour:
       Data: 2
     - Name: $v
       Entry: 4
-      Data: 1
+      Data: 2
     - Name: 
       Entry: 8
       Data: 
@@ -85,11 +85,11 @@ MonoBehaviour:
       Data: 
     - Name: EquipmentStatRanges
       Entry: 7
-      Data: 2|System.Collections.Generic.Dictionary`2[[AsteroidAnnihilation.EnumCollections+EquipmentStats,
+      Data: 2|System.Collections.Generic.Dictionary`2[[AsteroidAnnihilation.EnumCollections+Stats,
         Assembly-CSharp],[UnityEngine.Vector2, UnityEngine.CoreModule]], mscorlib
     - Name: comparer
       Entry: 7
-      Data: 3|System.Collections.Generic.EnumEqualityComparer`1[[AsteroidAnnihilation.EnumCollections+EquipmentStats,
+      Data: 3|System.Collections.Generic.EnumEqualityComparer`1[[AsteroidAnnihilation.EnumCollections+Stats,
         Assembly-CSharp]], mscorlib
     - Name: 
       Entry: 12
@@ -114,10 +114,10 @@ MonoBehaviour:
       Data: UnityEngine.Vector2, UnityEngine.CoreModule
     - Name: 
       Entry: 4
-      Data: 8
+      Data: 11
     - Name: 
       Entry: 4
-      Data: 13
+      Data: 14
     - Name: 
       Entry: 8
       Data: 
@@ -261,10 +261,10 @@ MonoBehaviour:
       Data: UnityEngine.Vector2, UnityEngine.CoreModule
     - Name: 
       Entry: 4
-      Data: 0.55
+      Data: 0.5
     - Name: 
       Entry: 4
-      Data: 0.66
+      Data: 0.6
     - Name: 
       Entry: 8
       Data: 
@@ -279,7 +279,7 @@ MonoBehaviour:
       Data: 
     - Name: RarityStatRanges
       Entry: 7
-      Data: 4|System.Collections.Generic.Dictionary`2[[AsteroidAnnihilation.EnumCollections+EquipmentStats,
+      Data: 4|System.Collections.Generic.Dictionary`2[[AsteroidAnnihilation.EnumCollections+Stats,
         Assembly-CSharp],[UnityEngine.Vector2, UnityEngine.CoreModule]], mscorlib
     - Name: comparer
       Entry: 9
@@ -465,11 +465,9 @@ MonoBehaviour:
   BaseEquipmentName: Plasma Gun
   Tier: 1
   Icons:
-  - {fileID: 21300000, guid: 7302ba4e8b8cd95489ace5fc913acc18, type: 3}
-  - {fileID: 21300000, guid: 608d00f938e2d0f409ebab6c39df3f90, type: 3}
-  - {fileID: 21300000, guid: 8bcd0a39b4c2bb14c8de59ac41a2d7fe, type: 3}
-  - {fileID: 21300000, guid: 9a35b741f0c816d49ace01b157f27fad, type: 3}
-  - {fileID: 21300000, guid: 8bcd0a39b4c2bb14c8de59ac41a2d7fe, type: 3}
+  - {fileID: 21300000, guid: cf5a1866f085f0d4baf1cc773e74d130, type: 3}
+  - {fileID: 21300000, guid: 476a3920779d3af4899d29786ae3de47, type: 3}
+  - {fileID: 21300000, guid: d18601fa773b39f4493c3fcef97da9ee, type: 3}
   ItemType: 4
   WeaponType: 1
   ProjectileType: 0

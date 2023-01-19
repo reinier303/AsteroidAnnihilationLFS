@@ -22,12 +22,14 @@ MonoBehaviour:
     PrefabModifications: []
     SerializationNodes: []
   MoveTime: 15
+  MoveStartDelay: 0
+  AddDelayToMoveTime: 0
   Damage: 10
   Size: 1.25
   ChargeTime: 1.5
   FireRate: 1.65
   Amount: 5
   Spread: 60
-  BulletSpeed: 6.5
+  BulletSpeed: 9.5
   ProjectileLifeTime: 4
   Projectile: 0

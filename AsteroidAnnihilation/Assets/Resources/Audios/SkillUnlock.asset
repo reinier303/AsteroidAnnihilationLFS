@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 28a5890b76b58a04b8b86195bb58c0c8, type: 3}
+  m_Name: SkillUnlock
+  m_EditorClassIdentifier: 
+  Tag: SkillUnlock
+  Clips:
+  - {fileID: 8300000, guid: a74ed0b043da83748b91a83ec4f02e4c, type: 3}
+  MixerGroup: {fileID: 24300002, guid: f2fa7d76331da83479e900f03ed5e5fe, type: 2}
+  VolumeMinMax: {x: 0.8, y: 0.9}
+  PitchMinMax: {x: 0.8, y: 1.2}

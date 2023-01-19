@@ -11,6 +11,7 @@ namespace AsteroidAnnihilation
         public Transform Player;
 
         //Stats
+        public EnumCollections.DamageType DamageType;
         public float ContactDamage;
         public float RotationSpeed;
         public float DroppedUnits;
@@ -54,6 +55,13 @@ namespace AsteroidAnnihilation
                     Die();
                 }
             }
+        }
+
+        protected void MoveAwayFromBoss()
+        {
+            Vector2 target = -Player.position;
+            transform.position += transform.up * Time.deltaTime * 3.5f;
+            Rotate(target);
         }
 
         protected virtual void CheckAggroDistance()
@@ -105,6 +113,8 @@ namespace AsteroidAnnihilation
             if (grouped) { enemyGroup.StartCoroutine(enemyGroup.EnemyDisabled()); }
             DropUnits(DroppedUnits);
             gameManager.RPlayer.RPlayerStats.AddToExperience(ExperienceGained);
+            ExpPopUp expPopUp = objectPooler.SpawnFromPool("ExpPopUp", Vector2.zero, Quaternion.identity).GetComponent<ExpPopUp>();
+            expPopUp.Initialize(ExperienceGained);
             spawnManager.RemoveEnemyType(enemyType);
             base.Die();
         }

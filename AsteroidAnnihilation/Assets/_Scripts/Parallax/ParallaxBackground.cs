@@ -96,19 +96,19 @@ namespace AsteroidAnnihilation
         {
             Vector3 position = new Vector3(size.x * (parallaxNumber.x + 1), size.x * parallaxNumber.y, zValue);
             Vector2 gridPosition = new Vector2(parallaxNumber.x + 1, parallaxNumber.y);
-            SpawnBackground(position, gridPosition, true);
+            SpawnBackground(position, gridPosition, true, true);
             position = new Vector3(size.x * (parallaxNumber.x - 1), size.x * parallaxNumber.y, zValue);
             gridPosition = new Vector2(parallaxNumber.x - 1, parallaxNumber.y);
-            SpawnBackground(position, gridPosition, true);
+            SpawnBackground(position, gridPosition, true, false);
             position = new Vector3(size.x * parallaxNumber.x, size.y * (parallaxNumber.y + 1), zValue);
             gridPosition = new Vector2(parallaxNumber.x, parallaxNumber.y + 1);
-            SpawnBackground(position, gridPosition, false);
+            SpawnBackground(position, gridPosition, false, true);
             position = new Vector3(size.x * parallaxNumber.x, size.y * (parallaxNumber.y - 1), zValue);
             gridPosition = new Vector2(parallaxNumber.x, parallaxNumber.y - 1);
-            SpawnBackground(position, gridPosition, false);
+            SpawnBackground(position, gridPosition, false, true);
             position = new Vector3(0 ,0, zValue);
             gridPosition = new Vector2(0, 0);
-            SpawnBackground(position, gridPosition, false);
+            SpawnBackground(position, gridPosition, false, true);
 
         }
 
@@ -119,37 +119,40 @@ namespace AsteroidAnnihilation
             {
                 Vector3 position = new Vector3(size.x * (parallaxNumber.x + 1), size.x * parallaxNumber.y, zValue);
                 Vector2 gridPosition = new Vector2(parallaxNumber.x + 1, parallaxNumber.y);
-                SpawnBackground(position, gridPosition, true);
+                SpawnBackground(position, gridPosition, true , true);
             }
             if (player.transform.position.x <= (size.x * (parallaxNumber.x - 1)) + (size.x / 2) + parallaxMoveOffset)
             {
                 Vector3 position = new Vector3(size.x * (parallaxNumber.x - 1), size.x * parallaxNumber.y, zValue);
                 Vector2 gridPosition = new Vector2(parallaxNumber.x - 1, parallaxNumber.y);
-                SpawnBackground(position, gridPosition , true);
+                SpawnBackground(position, gridPosition , true, false);
             }
 
             if (player.transform.position.y >= (size.y * (parallaxNumber.y + 1)) - (size.y / 2) - parallaxMoveOffset)
             {
                 Vector3 position = new Vector3(size.x * parallaxNumber.x, size.y * (parallaxNumber.y + 1), zValue);
                 Vector2 gridPosition = new Vector2(parallaxNumber.x, parallaxNumber.y + 1);
-                SpawnBackground(position, gridPosition, false);
+                SpawnBackground(position, gridPosition, false, true);
             }
             if (player.transform.position.y <= (size.y * (parallaxNumber.y - 1)) + (size.y / 2) + parallaxMoveOffset)
             {
                 Vector3 position = new Vector3(size.x * parallaxNumber.x, size.y * (parallaxNumber.y - 1), zValue);
                 Vector2 gridPosition = new Vector2(parallaxNumber.x, parallaxNumber.y - 1);
-                SpawnBackground(position, gridPosition, false);
+                SpawnBackground(position, gridPosition, false, false);
             }
             yield return new WaitForSeconds(0.5f);
             StartCoroutine(CheckParallax());
         }
 
         //Spawns 3 for diagonals
-        private void SpawnBackground(Vector3 position, Vector2 gridPosition, bool x)
+        private void SpawnBackground(Vector3 position, Vector2 gridPosition, bool x, bool positive)
         {
             Vector2 startGridPos = gridPosition;
-            for(int i = -1; i < 2; i++)
+            Transform background = null;
+            //Three side to side
+            for (int i = -1; i < 2; i++)
             {
+                //Calculate position on grid
                 if (x)
                 {
                     gridPosition = startGridPos + new Vector2(0, i);
@@ -162,10 +165,11 @@ namespace AsteroidAnnihilation
                 {
                     continue;
                 }
-                Transform background = GetAvailableBackground();
-
+                //Get available background and set active
+                background = GetAvailableBackground();
                 background.gameObject.SetActive(true);
 
+                //Calculate and set position in world
                 if(x)
                 {
                     background.localPosition = position + new Vector3(0, size.y * i, 0);
@@ -177,43 +181,29 @@ namespace AsteroidAnnihilation
                     BackgroundElements[background] = gridPosition;
                 }
             }
-            /*
-            for (int i = -1; i < 2; i++)
+
+            //Extra in front
+            int direction = positive ? 1 : -1;
+
+            if (x) { gridPosition = startGridPos + new Vector2(direction, 0); } 
+            else { gridPosition = startGridPos + new Vector2(0, direction); }
+            if (BackgroundElements.ContainsValue(gridPosition))
             {
-                float posOrNegX = startGridPos.x / Mathf.Abs(startGridPos.x);
-                posOrNegX = Mathf.RoundToInt(posOrNegX);
-                float posOrNegY = startGridPos.y / Mathf.Abs(startGridPos.y);
-                posOrNegY = Mathf.RoundToInt(posOrNegY);
-
-                if (x)
-                {
-                    gridPosition = startGridPos + new Vector2(posOrNegX, i);
-                }
-                else
-                {
-
-                    gridPosition = startGridPos + new Vector2(i, posOrNegY);
-                }
-                if (BackgroundElements.ContainsValue(gridPosition))
-                {
-                    continue;
-                }
-                Transform background = GetAvailableBackground();
-
-                background.gameObject.SetActive(true);
-
-                if (x)
-                {
-                    background.localPosition = position + new Vector3(size.x * posOrNegX, size.y * i, 0);
-                    BackgroundElements[background] = gridPosition;
-                }
-                else
-                {
-                    background.localPosition = position + new Vector3(size.x * i, size.y * posOrNegY, 0);
-                    BackgroundElements[background] = gridPosition;
-                }
-                Debug.Log(gridPosition);           
-            }*/
+                return;
+            }
+            background = GetAvailableBackground();
+            background.gameObject.SetActive(true);
+            if (x)
+            {
+                background.localPosition = position + new Vector3(size.x * direction, 0, 0);
+                BackgroundElements[background] = gridPosition;
+            }
+            else
+            {
+                background.localPosition = position + new Vector3(0, size.y * direction, 0);
+                BackgroundElements[background] = gridPosition;
+            }
+            
         }
 
         private Vector2 CalculateParallaxNumber()

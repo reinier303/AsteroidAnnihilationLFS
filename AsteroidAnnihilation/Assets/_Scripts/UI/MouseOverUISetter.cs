@@ -30,7 +30,7 @@ namespace AsteroidAnnihilation
 
         private void OnDisable()
         {
-            uiManager.MouseOverUI = false;
+            if (uiManager != null) { uiManager.MouseOverUI = false; }
         }
     }
 }

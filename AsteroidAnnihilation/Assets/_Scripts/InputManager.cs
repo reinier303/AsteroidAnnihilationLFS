@@ -75,16 +75,25 @@ namespace AsteroidAnnihilation
             }
             GetAxisNormalizedCoef();
             PauseInput();
+            if (Input.GetKeyDown(Inventory))
+            {
+                uiManager.OpenInventory();
+                if (Time.timeScale == 1)
+                {
+                    gameManager.PauseGame(false);
+                }
+                else
+                {
+                    gameManager.UnpauseGame();
+                }
+            }
             if (gameManager.isPaused)
             {
                 Attacking = false;
                 return;
             }
             //Pause dependent input
-            if (Input.GetKeyDown(Inventory))
-            {
-                uiManager.OpenInventory();
-            }
+
             WeaponInput();
         }
 
@@ -92,6 +101,13 @@ namespace AsteroidAnnihilation
         {
             if (Input.GetKeyDown(PauseButton) || Input.GetKeyDown(PauseButton2))
             {
+                if (uiManager.MenuOpen)
+                {
+                    uiManager.CloseAllMenus();
+                    gameManager.UnpauseGame();
+                    return;
+                }
+
                 if (Time.timeScale == 1)
                 {
                     gameManager.PauseGame();
@@ -111,7 +127,7 @@ namespace AsteroidAnnihilation
 
         public void WeaponInput()
         {
-            if (Input.GetMouseButton(0))
+            if (Input.GetMouseButton(0) || Input.GetMouseButton(1))
             {
                 Attacking = true;
             }

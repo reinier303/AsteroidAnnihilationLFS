@@ -9,8 +9,8 @@ namespace AsteroidAnnihilation
      [CreateAssetMenu(menuName = "Equipment", order = 997)]
     [System.Serializable]public class Equipment : Item
     { 
-        [SerializeField] public Dictionary<EnumCollections.EquipmentStats, Vector2> EquipmentStatRanges;
-        [SerializeField] protected Dictionary<EnumCollections.EquipmentStats, Vector2> RarityStatRanges;
+        [SerializeField] public Dictionary<EnumCollections.Stats, Vector2> EquipmentStatRanges;
+        [SerializeField] protected Dictionary<EnumCollections.Stats, Vector2> RarityStatRanges;
 
         protected PlayerStats playerStats;
         protected EquipmentManager equipmentManager;
@@ -21,7 +21,7 @@ namespace AsteroidAnnihilation
             this.equipmentManager = equipmentManager;
         }
 
-        public float GetEquipmentStat(EnumCollections.EquipmentStats stat, int index)
+        public float GetEquipmentStat(EnumCollections.Stats stat, int index)
         {
             EquipmentData data = equipmentManager.GetEquipedWeapon(index).EquipmentData;
 
@@ -44,20 +44,20 @@ namespace AsteroidAnnihilation
             return BaseEquipmentName + " Model-" + randomString;
         }
 
-        public Dictionary<EnumCollections.EquipmentStats, float> GetRarityStats(EnumCollections.Rarities rarity, GeneralItemSettings settings)
+        public Dictionary<EnumCollections.Stats, float> GetRarityStats(EnumCollections.Rarities rarity, GeneralItemSettings settings)
         {
             //Common scenario
-            Dictionary<EnumCollections.EquipmentStats, float> rarityStats = new Dictionary<EnumCollections.EquipmentStats, float>();
+            Dictionary<EnumCollections.Stats, float> rarityStats = new Dictionary<EnumCollections.Stats, float>();
             if (rarity == EnumCollections.Rarities.Common) { return rarityStats; }
 
             //Has Rarity > Common
             float modAmount = settings.GetModAmount(rarity);
 
-            List<EnumCollections.EquipmentStats> modList = Enumerable.ToList(RarityStatRanges.Keys);
+            List<EnumCollections.Stats> modList = Enumerable.ToList(RarityStatRanges.Keys);
 
             for (int i = 0; i < modAmount; i++)
             {
-                EnumCollections.EquipmentStats mod = modList[Random.Range(0, modList.Count)];
+                EnumCollections.Stats mod = modList[Random.Range(0, modList.Count)];
                 float modValue = Random.Range(RarityStatRanges[mod].x, RarityStatRanges[mod].y);
                 modValue = MathHelpers.RoundToDecimal(modValue, 2);
                 if (rarityStats.ContainsKey(mod))

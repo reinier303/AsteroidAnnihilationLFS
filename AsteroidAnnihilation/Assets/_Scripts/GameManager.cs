@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.IO;
+using UnityEngine.SceneManagement;
 
 namespace AsteroidAnnihilation
 {
@@ -24,6 +26,8 @@ namespace AsteroidAnnihilation
         private CameraOffset cameraOffset;
         #endregion
 
+        public float Version;
+
         public delegate void OnEndGame();
         public OnEndGame onEndGame;
 
@@ -45,13 +49,39 @@ namespace AsteroidAnnihilation
 
         private void Awake()
         {
-            if (Instance != null) { Destroy(gameObject); } else { Instance = this; }
-            DontDestroyOnLoad(gameObject);
+            Instance = this;
 
             Time.timeScale = 1;
             PlayerAlive = true;
             isPaused = false;
             player = RPlayer.transform;
+
+            CheckVersion();
+        }
+
+        //TODO EXTREMELY IMPORTANT!!!::Remove this when releasing game. This is testing only to make sure people don't use weird save files
+        private void CheckVersion()
+        {
+            if (!ES3.KeyExists("version"))
+            {
+                ResetSave();
+            }
+            else if (ES3.Load<float>("version") < Version)
+            {
+                ResetSave();
+            }
+            ES3.Save("version", Version);
+        }
+
+        public void ResetSave(bool reloadScene = false)
+        {
+            //string[] filePaths = Directory.GetFiles(Application.persistentDataPath);
+            Debug.Log(Application.persistentDataPath + "/SaveFile.es3");
+            File.Delete(Application.persistentDataPath + "/SaveFile.es3");
+            onEndGame = null;
+            onChangeScene= null;
+
+            if (reloadScene) { LoadSceneAsync(SceneManager.GetActiveScene().buildIndex); }
         }
 
         private void Start()
@@ -68,7 +98,7 @@ namespace AsteroidAnnihilation
 
         private void OnApplicationQuit()
         {
-            onEndGame.Invoke();
+            if (onEndGame != null) { onEndGame.Invoke(); }
         }
 
         public IEnumerator Sleep(float seconds)
@@ -90,16 +120,19 @@ namespace AsteroidAnnihilation
 
         public void LoadSceneAsync(int scene)
         {
-            onChangeScene.Invoke();
+            if (onChangeScene != null){ onChangeScene.Invoke();}
             ExtensionMethods.LoadSceneWithLoadingScreen(scene, LoadingScreen, this);
         }
 
-        public void PauseGame()
+        public void PauseGame(bool pauseMenu = true)
         {
             Time.timeScale = 0;
             isPaused = true;
             RAudioManager.AdjustMusicVolumePaused();
-            RUIManager.OpenPauseMenu();
+            if(pauseMenu)
+            {
+                RUIManager.OpenPauseMenu();
+            }
         }
 
         public void UnpauseGame()

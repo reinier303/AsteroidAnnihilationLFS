@@ -26,6 +26,16 @@ namespace AsteroidAnnihilation
         [SerializeField, FoldoutGroup("Color")] protected Color hoverColor;
         [SerializeField, FoldoutGroup("Color")] protected Color clickColor;
 
+        [SerializeField, FoldoutGroup("Rotate")] protected float startRotationZ;
+        [SerializeField, FoldoutGroup("Rotate")] protected LeanTweenType rotateTypeIn;
+        [SerializeField, FoldoutGroup("Rotate")] protected LeanTweenType rotateTypeOut;
+        [SerializeField, FoldoutGroup("Rotate")] protected float rotateTime = 0.1f;
+
+        [SerializeField, FoldoutGroup("PixelsPerUnit")] protected float startPPU;
+        [SerializeField, FoldoutGroup("PixelsPerUnit")] protected LeanTweenType PPUTypeIn;
+        [SerializeField, FoldoutGroup("PixelsPerUnit")] protected LeanTweenType PPUTypeOut;
+        [SerializeField, FoldoutGroup("PixelsPerUnit")] protected float PPUTime = 0.1f;
+
         //SFX
         protected AudioSource audioSource;
         [SerializeField] protected AudioClip hoverSFX;
@@ -40,6 +50,8 @@ namespace AsteroidAnnihilation
         protected virtual void Awake()
         {
             startSizeX = transform.localScale.x;
+            startRotationZ = transform.localRotation.z;
+            if(image != null){startPPU = image.pixelsPerUnitMultiplier;}
             audioSource = GetComponent<AudioSource>();
             eventSystem = EventSystem.current;
         }
@@ -116,6 +128,16 @@ namespace AsteroidAnnihilation
             LeanTween.scaleX(image.gameObject, startSizeX * scaleMultiplier, TweenTime).setIgnoreTimeScale(true).setEase(tweenTypeIn);
         }
 
+        public virtual void PPUOriginal()
+        {
+            LeanTween.value(image.gameObject,image.pixelsPerUnitMultiplier, startPPU, PPUTime).setOnUpdate((float val) => { image.pixelsPerUnitMultiplier = val; }).setIgnoreTimeScale(true).setEase(PPUTypeOut);
+        }
+
+        public virtual void PPUUp(float to)
+        {
+            LeanTween.value(image.gameObject, image.pixelsPerUnitMultiplier, to, PPUTime).setOnUpdate((float val) => { image.pixelsPerUnitMultiplier = val; }).setIgnoreTimeScale(true).setEase(PPUTypeIn);
+        }
+
         public virtual void ChangeColorBase()
         {
             image.color = baseColor;
@@ -130,6 +152,17 @@ namespace AsteroidAnnihilation
         {
             image.color = clickColor;
         }
+
+        public virtual void RotateIn(float degrees)
+        {
+            LeanTween.rotateZ(image.gameObject, startRotationZ + degrees, rotateTime).setIgnoreTimeScale(true);
+        }
+
+        public virtual void RotateBack()
+        {
+            LeanTween.rotateZ(image.gameObject, startRotationZ, rotateTime).setIgnoreTimeScale(true);
+        }
+
         #endregion
     }
 }

@@ -5,6 +5,7 @@ using TMPro;
 using UnityEngine.UI;
 using Sirenix.OdinInspector;
 using UnityEngine.EventSystems;
+using Newtonsoft.Json.Bson;
 
 namespace AsteroidAnnihilation
 {
@@ -71,6 +72,17 @@ namespace AsteroidAnnihilation
         [FoldoutGroup("Wave Text Values")] public float AlphaToWave;
         [FoldoutGroup("Wave Text Values")] public LeanTweenType EaseTypeWave;
 
+        [FoldoutGroup("Skills")][SerializeField] private TextMeshProUGUI SkillPoints;
+        [FoldoutGroup("Skills")][SerializeField] private SkillTooltip skillTooltip;
+
+        [FoldoutGroup("Tutorial")][SerializeField] private TextMeshProUGUI TutorialText;
+        [FoldoutGroup("Tutorial")][SerializeField] private GameObject StayInsideText;
+        [FoldoutGroup("Tutorial")][SerializeField] private GameObject QuestionPrompt;
+        [FoldoutGroup("Tutorial")][SerializeField] private GameObject LmbPrompt;
+        [FoldoutGroup("Tutorial")][SerializeField] private GameObject FirstLevelUpPanel;
+        [FoldoutGroup("Tutorial")][SerializeField] private GameObject IndicationArrow;
+
+
         //Script References
         private GameManager gameManager;
         private MissionManager missionManager;
@@ -94,8 +106,12 @@ namespace AsteroidAnnihilation
         private EventSystem eventSystem;
 
         public bool MouseOverUI = false;
+        public bool MenuOpen;
 
         [SerializeField] private GameObject deathScreen;
+        [SerializeField] private GameObject LevelUpText;
+        [SerializeField] private GameObject Plus;
+        public Transform ExpHolder;
 
         private void Awake()
         {
@@ -115,6 +131,7 @@ namespace AsteroidAnnihilation
             UpdateUnits();
             UpdateHealth(RPlayerEntity.currentHealth, RPlayerEntity.MaxHealth);
             UpdateLevel();
+            UpdateSkillPoints();
             eventSystem = EventSystem.current;
 
             currentMission = missionManager.GetCurrentMission();
@@ -123,6 +140,12 @@ namespace AsteroidAnnihilation
             EquipmentManager.Instance.InitializeEquipment();
             inventoryManager.SetUIElements(inventoryPanel, weaponSlotParent, gearSlotParent, componentSlotParent);
             inventoryManager.InitializeInventory();
+        }
+
+        public void CloseAllMenus()
+        {
+            inventoryScreen.SetActive(false);
+            MenuOpen = false;
         }
 
         public void UpdateMissionUI()
@@ -136,6 +159,55 @@ namespace AsteroidAnnihilation
         {
             MissionComplete.SetActive(true);
         }
+
+        private void SetupEliminationUI()
+        {
+
+        }
+
+        private void SetupSurvivalUI()
+        {
+
+        }
+
+        private void SetupDefenseUI()
+        {
+
+        }
+
+        #region Tutorial
+
+        public void EnableStayInsideMessage()
+        {
+            if (!StayInsideText.activeSelf) { StayInsideText.SetActive(true); }
+        }
+
+        public void ChangeTutorialMessage(string message)
+        {
+            TutorialText.text = message;
+        }
+
+        public void QuestionPromptSwitch(bool enable)
+        {
+            QuestionPrompt.SetActive(enable);
+        }
+
+        public void LmbPromptSwitch(bool enable)
+        {
+            LmbPrompt.SetActive(enable);
+        }
+
+        public void EnableLevelTutorial()
+        {
+            FirstLevelUpPanel.SetActive(true);
+        }
+
+        public void EnableHubIndicator()
+        {
+            IndicationArrow.SetActive(true);
+        }
+
+        #endregion
 
         public void UpdateHealth(float currentHealth, float maxHealth)
         {
@@ -165,6 +237,35 @@ namespace AsteroidAnnihilation
             playerLevelText.text = "" + playerStats.GetPlayerLevel();
             ExperienceBar.maxValue = playerStats.GetExperienceDifference();
             UpdateExperience();
+        }
+
+        public void OnLevelUp()
+        {
+            LevelUpText.SetActive(true);
+            CheckPlusSign();
+        }
+
+        private void CheckPlusSign()
+        {
+            if (playerStats.GetCurrentSkillPoints() > 0) { Plus.SetActive(true); }
+            else { Plus.SetActive(false); }
+        }
+
+        public void UpdateSkillPoints()
+        {
+            SkillPoints.text = "" + playerStats.GetCurrentSkillPoints();
+            CheckPlusSign();
+        }
+
+        public void SetSkillTooltip(Skill_Stat skill, Vector2 position)
+        {
+            skillTooltip.SetTooltip(skill, position);
+            skillTooltip.gameObject.SetActive(true);
+        }
+
+        public void HideSkillTooltip()
+        {
+            skillTooltip.gameObject.SetActive(false);
         }
 
         public IEnumerator ShowDeathScreen()
@@ -198,7 +299,12 @@ namespace AsteroidAnnihilation
         public void OpenInventory()
         {
             inventoryScreen.SetActive(!inventoryScreen.activeSelf);
-            if(inventoryScreen.activeSelf) { inventoryManager.OpenInventory(); }
+            if(inventoryScreen.activeSelf) 
+            {
+                MenuOpen = true;
+                UpdateSkillPoints();
+                inventoryManager.OpenInventory(); 
+            }
         }
 
         public void ShowItemTooltip(ItemData item)

@@ -19,6 +19,8 @@ namespace AsteroidAnnihilation
         [SerializeField] List<AudioMixerGroup> audioMixers;
         [SerializeField] private Coroutine dampenCoroutine;
 
+        public AudioClip TutorialMusic;
+
         public List<AudioClip> MusicTracks;
         private List<AudioClip> musicPlayed = new List<AudioClip>();
 

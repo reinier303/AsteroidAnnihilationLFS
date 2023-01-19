@@ -182,11 +182,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 7460752114634920342}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b6f3db687988b974f868e7f9eb59b4cb, type: 3}
+  m_Script: {fileID: 11500000, guid: 2423d808f69b7ed44a5154e2ef4ce6f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxHealth: 5
-  currentHealth: 5
+  Sprites: []
+  MaxHealth: 15
+  currentHealth: 15
   ShakeMagnitude: 3
   ShakeDuration: 0.3
   HitSound: 
@@ -215,6 +216,7 @@ MonoBehaviour:
   grouped: 0
   StopDistance: 0.4
   DeathOnImpact: 1
+  enemyType: 
   idleWaitTime: 6
   idleMove: 2
   aggroMove: 11

@@ -7,11 +7,16 @@ namespace AsteroidAnnihilation
     public class PlayerStats : MonoBehaviour
     {
         private UIManager uIManager;
+        private GameManager gameManager;
+        private AudioManager audioManager;
+        private CameraManager cameraManager;
 
         private int PlayerLevel;
         private Dictionary<EnumCollections.PlayerStats, float> Stats;
         private Dictionary<string, float> statMultipliers;
         public PlayerLevelSettings playerLevelSettings;
+        private Dictionary<int, SkillNodeData> SkillTreeStats;
+        [SerializeField] private ParticleSystem LevelUpEffect;
 
         private void Awake()
         {
@@ -28,6 +33,7 @@ namespace AsteroidAnnihilation
                 //
                 //
                 Stats = ES3.Load<Dictionary<EnumCollections.PlayerStats, float>>("playerData");
+                SkillTreeStats = ES3.Load<Dictionary<int, SkillNodeData>>("skillTreeData");
                 PlayerLevel = ES3.Load<int>("playerLevel", defaultValue: 1);
             }
 
@@ -37,14 +43,18 @@ namespace AsteroidAnnihilation
         {
             playerLevelSettings = SettingsManager.Instance.playerLevelSettings;
             uIManager = UIManager.Instance;
-            GameManager.Instance.onEndGame += SavePlayerStats;
-            GameManager.Instance.onChangeScene += SavePlayerStats;
+            gameManager = GameManager.Instance;
+            cameraManager = gameManager.RCameraManager;
+            audioManager = AudioManager.Instance;
+            gameManager.onEndGame += SavePlayerStats;
+            gameManager.onChangeScene += SavePlayerStats;
 
         }
 
         private void NewSave()
         {
             Stats = new Dictionary<EnumCollections.PlayerStats, float>();
+            SkillTreeStats = new Dictionary<int, SkillNodeData>();
 
             //Player Stats
             PlayerLevel = 1;
@@ -59,7 +69,9 @@ namespace AsteroidAnnihilation
             Stats.Add(EnumCollections.PlayerStats.CurrentExperience, 0);
             Stats.Add(EnumCollections.PlayerStats.PowerUpChance, 0);
             Stats.Add(EnumCollections.PlayerStats.BaseEnergyCapacity, 0); //+50 BaseEnergyCore
-            Stats.Add(EnumCollections.PlayerStats.BaseEnergyRegen, 1);//+1 BaseEnergyCore
+            Stats.Add(EnumCollections.PlayerStats.BaseEnergyRegen, 0.3f);//+1 BaseEnergyCore
+            Stats.Add(EnumCollections.PlayerStats.SkillPointsSpent, 0);
+            Stats.Add(EnumCollections.PlayerStats.SkillPointsTotal, 0);
 
             //Save to file
             SavePlayerStats();
@@ -85,6 +97,7 @@ namespace AsteroidAnnihilation
             //Save file with data on computer
             //SaveLoad.Save(playerData, "PlayerData");
             ES3.Save("playerData", Stats);
+            ES3.Save("skillTreeData", SkillTreeStats);
             ES3.Save("playerLevel", PlayerLevel);
 
         }
@@ -98,6 +111,7 @@ namespace AsteroidAnnihilation
 
         public void AddToExperience(float value)
         {
+            Debug.Log(value);
             Stats[EnumCollections.PlayerStats.CurrentExperience] += Mathf.Clamp(value, 0, Mathf.Infinity);
             CheckLevelUp(value);
             uIManager.UpdateExperience();
@@ -108,8 +122,17 @@ namespace AsteroidAnnihilation
             float overLevelExp = Mathf.Clamp(Stats[EnumCollections.PlayerStats.CurrentExperience] - GetTotalExpNeeded(), 0, Mathf.Infinity);
             if (Stats[EnumCollections.PlayerStats.CurrentExperience] > GetTotalExpNeeded())
             {
+                if (PlayerLevel == 1) {
+                    GameManager.Instance.PauseGame(false);
+                    uIManager.EnableLevelTutorial();                    
+                }
+                cameraManager.StartCoroutine(cameraManager.Shake(1, 5));
+                LevelUpEffect.Play();
+                audioManager.PlayAudio("LevelUp");
                 PlayerLevel++;
+                Stats[EnumCollections.PlayerStats.SkillPointsTotal] += 2;
                 uIManager.UpdateLevel();
+                uIManager.OnLevelUp();
             }
             if(overLevelExp > 0) { AddToExperience(overLevelExp); }
         }
@@ -127,9 +150,10 @@ namespace AsteroidAnnihilation
         {
             if(GetPlayerLevel() <= 1)
             {
-                return playerLevelSettings.PlayerLevels[GetPlayerLevel()].TotalExp;
+                return GetTotalExpNeeded();
             }
-            return playerLevelSettings.PlayerLevels[GetPlayerLevel()].TotalExp - playerLevelSettings.PlayerLevels[GetPlayerLevel() - 1].TotalExp;
+
+            return GetTotalExpNeeded() - playerLevelSettings.PlayerLevels[GetPlayerLevel() - 2].TotalExp;
         }
         
         /// <summary>
@@ -139,7 +163,7 @@ namespace AsteroidAnnihilation
         public float GetExperienceLevelProgress()
         {
             if(GetPlayerLevel() <= 1) { return Stats[EnumCollections.PlayerStats.CurrentExperience]; }
-            else { return Stats[EnumCollections.PlayerStats.CurrentExperience] - playerLevelSettings.PlayerLevels[GetPlayerLevel() - 1].TotalExp; }
+            else { return Stats[EnumCollections.PlayerStats.CurrentExperience] - playerLevelSettings.PlayerLevels[GetPlayerLevel() - 2].TotalExp; }
             
         }
 
@@ -158,7 +182,7 @@ namespace AsteroidAnnihilation
         /// <returns></returns>
         public float GetTotalExpNeeded()
         {
-            return playerLevelSettings.PlayerLevels[GetPlayerLevel()].TotalExp;
+            return playerLevelSettings.PlayerLevels[GetPlayerLevel() - 1].TotalExp;
         }
 
         public bool TryPlayerBuy(float cost)
@@ -167,6 +191,20 @@ namespace AsteroidAnnihilation
             {
                 Stats[EnumCollections.PlayerStats.CurrentUnits] -= cost;
                 uIManager.UpdateUnits();
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public bool TryUnlockSkill(float cost)
+        {
+            if (GetCurrentSkillPoints() >= cost)
+            {
+                Stats[EnumCollections.PlayerStats.SkillPointsSpent] += cost;
+                uIManager.UpdateSkillPoints();
                 return true;
             }
             else
@@ -211,5 +249,39 @@ namespace AsteroidAnnihilation
             if (!Stats.ContainsKey(stat)) { Stats.Add(stat, startValue); }
             else { Debug.LogWarning("Stat not found"); }
         }
+
+        public int GetCurrentSkillPoints()
+        {
+            return (int)Stats[EnumCollections.PlayerStats.SkillPointsTotal] - (int)Stats[EnumCollections.PlayerStats.SkillPointsSpent];
+        }
+
+        public void AddSkillUnlocked(int id, EnumCollections.Stats stat, float value)
+        {
+            SkillNodeData skillData = new SkillNodeData();
+            skillData.Stat = stat;
+            skillData.Value = value;
+            SkillTreeStats.Add(id, skillData);
+        }
+
+        public bool HasSkillNode(int id)
+        {
+            return SkillTreeStats.ContainsKey(id);
+        }
+
+        public float GetSkillsValue(EnumCollections.Stats stat)
+        {
+            float value = 0;
+            foreach(SkillNodeData data in SkillTreeStats.Values)
+            {
+                if(data.Stat == stat) { value += data.Value;}
+            }
+            return value;
+        }
+    }
+
+    public struct SkillNodeData
+    {
+        public EnumCollections.Stats Stat;
+        public float Value;
     }
 }

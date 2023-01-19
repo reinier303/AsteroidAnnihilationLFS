@@ -99,7 +99,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 55e136502a8bd864a87826d2698bad6b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxHealth: 1750
+  Sprites: []
+  MaxHealth: 1350
   currentHealth: 0
   ShakeMagnitude: 9
   ShakeDuration: 1.5
@@ -119,6 +120,7 @@ MonoBehaviour:
   KilledByIndex: 0
   Aggro: 0
   Player: {fileID: 0}
+  DamageType: 0
   ContactDamage: 10
   RotationSpeed: 1.5
   DroppedUnits: 0

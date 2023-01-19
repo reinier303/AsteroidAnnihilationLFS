@@ -18,6 +18,7 @@ namespace AsteroidAnnihilation
         public float ForceModifier = 100;
         public float MaxVelocityCoeficient;
         public float MaxVelocity;
+        public float RotationOffsetMultiplier = 0.35f;
 
         [Header("Movement Skill Variables")]
         public float DashVelocityMultiplier = 3;
@@ -90,6 +91,14 @@ namespace AsteroidAnnihilation
             screenRatio = (float)Screen.height / (float)Screen.width;
         }
 
+        public void ResetMovementVariables()
+        {
+            dashing = false;
+            canDash = true;
+            GetMovementVariables();
+            GetBoostVariables();
+        }
+
         // called second
         void OnSceneLoaded(Scene scene, LoadSceneMode mode)
         {
@@ -110,7 +119,7 @@ namespace AsteroidAnnihilation
             if (playerStats.HasStat(EnumCollections.PlayerStats.BaseMovementSpeed))
             {
                 float baseSpeed = playerStats.GetStatValue(EnumCollections.PlayerStats.BaseMovementSpeed);
-                float engineSpeed = equipmentManager.GetGearStatValue(EnumCollections.ItemType.Engine, EnumCollections.EquipmentStats.MovementSpeed);
+                float engineSpeed = equipmentManager.GetGearStatValue(EnumCollections.ItemType.Engine, EnumCollections.Stats.MovementSpeed);
                 float accesorySpeed = 0; //TODO::Get from accessories once implemented.
                 currentSpeed = baseSpeed + engineSpeed + accesorySpeed;
                 Acceleration = currentSpeed * AccelerationMultiplier;
@@ -272,9 +281,9 @@ namespace AsteroidAnnihilation
                     lastInputs.Add(MovementInput);
                 }*/
 
-            target = transform.position + (((Vector3)rb.velocity) * 0.35f) + (Vector3)CameraOffset.Instance.Offset * offsetMultiplier; 
+            target = transform.position + (((Vector3)rb.velocity) * RotationOffsetMultiplier) + (Vector3)CameraOffset.Instance.Offset * offsetMultiplier; 
             //}
-
+            Debug.DrawLine(transform.position, target, Color.red);
             var dir = target - transform.position;
             var angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
             transform.rotation = Quaternion.AngleAxis(angle - 90, Vector3.forward);

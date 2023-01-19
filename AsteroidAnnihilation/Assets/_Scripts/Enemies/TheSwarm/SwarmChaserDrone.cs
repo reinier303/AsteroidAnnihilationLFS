@@ -24,6 +24,13 @@ namespace AsteroidAnnihilation
 
         protected virtual void Update()
         {
+            if (spawnManager.BossActive)
+            {
+                //TODO::Fix this
+                //MoveAwayFromBoss();
+                //return;
+            }
+
             CheckAggroDistance();
 
             if (Aggro)

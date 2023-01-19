@@ -380,10 +380,10 @@ MonoBehaviour:
       Data: UnityEngine.Vector2Int, UnityEngine.CoreModule
     - Name: 
       Entry: 3
-      Data: 40
+      Data: 30
     - Name: 
       Entry: 3
-      Data: 50
+      Data: 40
     - Name: 
       Entry: 8
       Data: 

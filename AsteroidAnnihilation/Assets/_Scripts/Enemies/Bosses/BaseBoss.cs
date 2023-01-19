@@ -85,6 +85,7 @@ namespace AsteroidAnnihilation
 
         protected virtual void Update()
         {
+            if (isDead) { return; }
             if(moveCollectionBeingExecuted != null && moveCollectionBeingExecuted.PreFire != 0)
             {
                 Rotate(playerScript.GetPlayerPositionAfterSeconds(moveCollectionBeingExecuted.PreFire));
@@ -146,9 +147,12 @@ namespace AsteroidAnnihilation
 
         protected override void Die()
         {
+            StopAllMoves();
+            spawnManager.BossActive = false;
+            isDead = true;
             uiManager.DisableBossHealthBar();
             missionManager.MissionCompleted();
-            base.Die();
+            SpawnParticleEffect();
         }
 
         public override void TakeDamage(float damage, bool isCrit)
@@ -205,6 +209,36 @@ namespace AsteroidAnnihilation
             }
             yield return new WaitForSeconds(time / 2);
             StartCoroutine(CheckDistanceToPlayer(time));
+        }
+
+        protected override void SpawnParticleEffect()
+        {
+            StartCoroutine(SpawnDeathEffect());
+        }
+
+        private IEnumerator SpawnDeathEffect()
+        {
+            for (int i = 0; i < 15; i++)
+            {
+                objectPooler.SpawnFromPool("BossExplosion",
+                (Vector2)transform.position + new Vector2(Random.Range(-0.7f, 0.7f), Random.Range(-0.7f, 0.7f)),
+                Quaternion.identity);
+                cameraManager.StartCoroutine(cameraManager.Shake(ShakeDuration, ShakeMagnitude));
+                yield return new WaitForSeconds(0.2f + Random.Range(-0.05f, 0.15f));
+            }
+            cameraManager.StartCoroutine(cameraManager.Shake(ShakeDuration, ShakeMagnitude * 1.5f));
+            objectPooler.SpawnFromPool("BossEndExplosion", (Vector2)transform.position + new Vector2(Random.Range(-0.2f, 0.2f), Random.Range(-0.2f, 0.2f)), Quaternion.identity);
+
+            DropUnits(DroppedUnits);
+            gameManager.RPlayer.RPlayerStats.AddToExperience(ExperienceGained);
+            ExpPopUp expPopUp = objectPooler.SpawnFromPool("ExpPopUp", Vector2.zero, Quaternion.identity).GetComponent<ExpPopUp>();
+            expPopUp.Initialize(ExperienceGained);
+            spawnManager.RemoveEnemyType(enemyType);
+            SpawnSegments();
+            DropPickUps();
+            missionManager.AddObjectiveProgress(MissionObjectiveType.Elimination);
+            cameraManager.StartCoroutine(cameraManager.Shake(ShakeDuration, ShakeMagnitude));
+            gameObject.SetActive(false);
         }
     }
 

@@ -71,7 +71,7 @@ namespace AsteroidAnnihilation
             EnergyMines,
         }
 
-        public enum EquipmentStats
+        public enum Stats
         {
             Damage = 0,
             LifeTime = 1,
@@ -96,7 +96,37 @@ namespace AsteroidAnnihilation
             ExperienceMultiplier= 19,
             UnitsMultiplier= 20,
             MagnetRadius= 21,
-            Resistance= 22,
+            //Resistances
+            PhysicalResistance= 22,
+            HeatResistance = 23,
+            ColdResistance = 24,
+            EnergyResistance = 25,
+            BioResistance = 26,
+            EldritchResistance = 27,
+            CelestialResistance = 28,
+            ChaosResistance = 29,
+            //Damage
+            AllDamage = 30,
+            PhysicalDamage = 31,
+            HeatDamage = 32,
+            ColdDamage = 33,
+            EnergyAllDamage = 34,
+            BioAllDamage = 35,
+            EldritchAllDamage = 36,
+            CelestialDamage = 37,
+            ChaosDamage = 38,
+        }
+
+        public enum DamageType
+        {
+            Physical = 1,
+            Heat = 2,
+            Cold = 3,
+            Energy = 4,
+            Bio = 5,
+            Eldritch = 6,
+            Celestial = 7,
+            Chaos = 8,
         }
 
         public enum PlayerStats
@@ -117,6 +147,8 @@ namespace AsteroidAnnihilation
             BaseEnergyCapacity,
             BaseEnergyRegen,
             BaseHealthRegen,
+            SkillPointsTotal,
+            SkillPointsSpent,
         }
 
         public enum Unlocks

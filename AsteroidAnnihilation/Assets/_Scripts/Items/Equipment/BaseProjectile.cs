@@ -50,10 +50,18 @@ namespace AsteroidAnnihilation
 
         protected virtual void Move()
         {
-            Vector3 extraUp = transform.up * new Vector2(Mathf.Abs(PlayerVelocity.x), Mathf.Abs(PlayerVelocity.y));
-            Vector3 finalUp = extraUp + transform.up;
+            //Vector3 extraUp = transform.up * new Vector2(Mathf.Abs(PlayerVelocity.x), Mathf.Abs(PlayerVelocity.y));
+            //Vector3 finalUp = extraUp + transform.up;
+            Vector2 direction = Vector2.up * ProjectileSpeed;
+            Vector2 heritedVelocity = new Vector2(PlayerVelocity.x, PlayerVelocity.y);
+            Vector2 heritedMove = transform.InverseTransformDirection(heritedVelocity);
+            Vector3 move = direction + heritedMove /** ProjectileSpeed*/;
 
-            transform.position += (finalUp * Time.deltaTime * ProjectileSpeed);
+            move *= Time.deltaTime;
+            move = transform.TransformDirection(move);
+            //transform.position += (finalUp * Time.deltaTime * ProjectileSpeed);
+            transform.position += move;
+
         }
 
         protected virtual void OnTriggerEnter2D(Collider2D collider)

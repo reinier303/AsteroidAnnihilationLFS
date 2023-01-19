@@ -10,6 +10,7 @@ namespace AsteroidAnnihilation
     {
         public static EquipmentManager Instance { get; private set; }
 
+        private StatManager statManager;
         private SettingsManager settingsManager;
         private PlayerAttack playerAttack;
         private InventoryManager inventoryManager;
@@ -26,6 +27,7 @@ namespace AsteroidAnnihilation
         private PlayerShipSettings playerShipSettings;
 
         private int weaponAmount;
+        public bool TutorialDone;
 
         private void Awake()
         {
@@ -42,6 +44,7 @@ namespace AsteroidAnnihilation
         public void InitializeEquipment()
         {
             Player player = Player.Instance;
+            statManager = StatManager.Instance;
             playerAttack = player.RPlayerAttack;
             playerEntity = player.RPlayerEntity;
             settingsManager = SettingsManager.Instance;
@@ -56,8 +59,8 @@ namespace AsteroidAnnihilation
 
         public void SetEquipmentStats()
         {
-            playerAttack.GetEquipmentVariables();
-            playerEntity.GetHealthVariables();
+            statManager.OnOffensiveStatsChanged();
+            statManager.OnDefensiveStatsChanged();
         }
 
         private void InitializeEquipmentGeneration()
@@ -90,15 +93,15 @@ namespace AsteroidAnnihilation
         private void LoadEquipment()
         {
             weaponAmount = playerShipSettings.GetWeaponPositions(EnumCollections.ShipType.Fighter).Count;
-
             if (!ES3.KeyExists("equipedWeapons"))
             {
                 equipedWeapons = new Dictionary<int, WeaponData>();
-                equipedWeapons.Add(0, generalItemSettings.startWeapon);
-                for (int i = 1; i < weaponAmount; i++)
+                for (int i = 0; i < weaponAmount; i++)
                 {
                     equipedWeapons.Add(i, default);
                 }
+                equipedWeapons[0] = generalItemSettings.startWeapon;
+
                 equipedGear = new Dictionary<EnumCollections.ItemType, EquipmentData>();
                 foreach(EquipmentData equipData in generalItemSettings.startGear.Values)
                 {
@@ -135,14 +138,14 @@ namespace AsteroidAnnihilation
             weaponData.EquipmentData.ItemData.Icon = weapon.GetIcon();
 
             //EquipmentData
-            weaponData.EquipmentData.EquipmentStats = new Dictionary<EnumCollections.EquipmentStats, float>();
+            weaponData.EquipmentData.EquipmentStats = new Dictionary<EnumCollections.Stats, float>();
             weaponData.EquipmentData.RarityStats = weapon.GetRarityStats(rarity, generalItemSettings);
 
             //WeaponData
             weaponData.WeaponType = weapon.WeaponType;
             weaponData.ProjectileType = weapon.ProjectileType;
 
-            foreach (EnumCollections.EquipmentStats stat in weapon.EquipmentStatRanges.Keys)
+            foreach (EnumCollections.Stats stat in weapon.EquipmentStatRanges.Keys)
             {
                 float value = Random.Range(weapon.EquipmentStatRanges[stat].x, weapon.EquipmentStatRanges[stat].y);
                 value = MathHelpers.RoundToDecimal(value, 2);
@@ -172,11 +175,11 @@ namespace AsteroidAnnihilation
             equipmentData.ItemData.Icon = equipment.GetIcon();
 
             //EquipmentData
-            equipmentData.EquipmentStats = new Dictionary<EnumCollections.EquipmentStats, float>();
+            equipmentData.EquipmentStats = new Dictionary<EnumCollections.Stats, float>();
             equipmentData.RarityStats = equipment.GetRarityStats(rarity, generalItemSettings);
             equipmentData.ItemData.ItemType = equipment.ItemType;
 
-            foreach (EnumCollections.EquipmentStats stat in equipment.EquipmentStatRanges.Keys)
+            foreach (EnumCollections.Stats stat in equipment.EquipmentStatRanges.Keys)
             {
                 float value = Random.Range(equipment.EquipmentStatRanges[stat].x, equipment.EquipmentStatRanges[stat].y);
                 value = MathHelpers.RoundToDecimal(value, 3);
@@ -202,10 +205,14 @@ namespace AsteroidAnnihilation
 
         public EquipmentData GetGear(EnumCollections.ItemType gearType)
         {
-            return equipedGear[gearType];
+            if(equipedGear[gearType].ItemData.ItemName != null)
+            {
+                return equipedGear[gearType];
+            }
+            else { return default(EquipmentData); }
         }
 
-        public float GetGearStatValue(EnumCollections.ItemType gearType, EnumCollections.EquipmentStats statType)
+        public float GetGearStatValue(EnumCollections.ItemType gearType, EnumCollections.Stats statType)
         {
             if (equipedGear[gearType].EquipmentStats == null)
             {
@@ -265,8 +272,9 @@ namespace AsteroidAnnihilation
             */
             if (succes)
             {
-                playerAttack.GetEquipmentVariables();
-                playerEntity.GetHealthVariables();
+                CheckTutorialCompleted();
+                statManager.OnOffensiveStatsChanged();
+                statManager.OnDefensiveStatsChanged();
                 playerMovement.GetMovementVariables();
 
                 inventoryManager.InitializeGear();
@@ -316,8 +324,10 @@ namespace AsteroidAnnihilation
 
             if (succes)
             {
+                Debug.Log("asd");
                 playerAttack.WeaponChanged();
                 inventoryManager.InitializeWeapons();
+                CheckTutorialCompleted();
                 return (succes, data);
             } else { return (succes, default); }
         }
@@ -344,8 +354,8 @@ namespace AsteroidAnnihilation
         public void RemoveGear(EquipmentData data)
         {
             equipedGear[data.ItemData.ItemType] = default;
-            playerAttack.GetEquipmentVariables();
-            playerEntity.GetHealthVariables();
+            statManager.OnOffensiveStatsChanged();
+            statManager.OnDefensiveStatsChanged();
             playerMovement.GetMovementVariables();
         }
 
@@ -368,17 +378,28 @@ namespace AsteroidAnnihilation
         {
             if (equipedGear.ContainsKey(equipType))
             {
+                CheckTutorialCompleted();
                 equipedGear[equipType] = equipment;
             }
             inventoryManager.InitializeGear();
+        }
+
+        private void CheckTutorialCompleted()
+        {
+            if (ES3.KeyExists("tutorialDone")) { return; }
+                if (!TutorialDone) 
+            {
+                TutorialDone = true;
+                TutorialManager.Instance.ShowNextTutorialMessage();
+            }
         }
     }
 
     public struct EquipmentData
     {
         public ItemData ItemData;
-        public Dictionary<EnumCollections.EquipmentStats, float> EquipmentStats;
-        public Dictionary<EnumCollections.EquipmentStats, float> RarityStats;
+        public Dictionary<EnumCollections.Stats, float> EquipmentStats;
+        public Dictionary<EnumCollections.Stats, float> RarityStats;
 
     }
 

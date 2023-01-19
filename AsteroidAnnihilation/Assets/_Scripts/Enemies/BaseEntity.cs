@@ -7,6 +7,8 @@ namespace AsteroidAnnihilation
 {
     public class BaseEntity : MonoBehaviour
     {
+        public List<Sprite> Sprites;
+
         [Header("Stats")]
         public float MaxHealth;
         public float currentHealth;
@@ -64,6 +66,10 @@ namespace AsteroidAnnihilation
 
             onHitMaterial = (Material)Resources.Load("Materials/FlashWhite", typeof(Material));
             spriteRenderer = GetComponentInChildren<SpriteRenderer>();
+            if(Sprites.Count > 0)
+            {
+                spriteRenderer.sprite = Sprites[Random.Range(0, Sprites.Count)];
+            }
             baseMaterial = spriteRenderer.material;
 
             InitializeDropPool();

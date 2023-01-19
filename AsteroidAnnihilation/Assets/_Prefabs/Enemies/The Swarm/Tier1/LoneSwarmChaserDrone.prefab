@@ -137,6 +137,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6f3db687988b974f868e7f9eb59b4cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Sprites: []
   MaxHealth: 125
   currentHealth: 125
   ShakeMagnitude: 6.5
@@ -144,7 +145,7 @@ MonoBehaviour:
   HitSound: 
   DeathSound: 
   ParticleEffect: 0
-  ParticleEffectScale: 1
+  ParticleEffectScale: 2.5
   PermanenceSprites: 0
   PermanencePartMinMaxAmount: {x: 6, y: 8}
   PermanencePartOutwardsPower: 700
@@ -157,16 +158,18 @@ MonoBehaviour:
   KilledByIndex: 0
   Aggro: 0
   Player: {fileID: 0}
+  DamageType: 0
   ContactDamage: 10
   RotationSpeed: 2.25
   DroppedUnits: 25
-  ExperienceGained: 3
+  ExperienceGained: 40
   AggroDistance: 16
   DeAggroDistance: 45
   sizeRange: {x: 2, y: 2.25}
   grouped: 0
   StopDistance: 0.75
   DeathOnImpact: 0
+  enemyType: 
   idleWaitTime: 6
   idleMove: 2
   aggroMove: 8.5

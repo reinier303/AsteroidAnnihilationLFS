@@ -77,7 +77,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 436b72cab7ab30542a5056a355805347, type: 3}
+  m_Sprite: {fileID: 21300000, guid: c2593f97cb9a1a943b0cd92faebf4fdd, type: 3}
   m_Color: {r: 0.59607846, g: 0.6509804, b: 0.48235294, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -137,14 +137,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d9ee45ed52401364ebbb05f339558250, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxHealth: 100
+  Sprites:
+  - {fileID: 21300000, guid: c2593f97cb9a1a943b0cd92faebf4fdd, type: 3}
+  - {fileID: 21300000, guid: c8e39e719e8d65b449c153f4221d5bde, type: 3}
+  - {fileID: 21300000, guid: bbf488812edfea743b3d5d8e2d249a0f, type: 3}
+  MaxHealth: 220
   currentHealth: 100
   ShakeMagnitude: 6.5
   ShakeDuration: 0.6
   HitSound: 
   DeathSound: 
   ParticleEffect: 0
-  ParticleEffectScale: 1
+  ParticleEffectScale: 2.5
   PermanenceSprites: 0
   PermanencePartMinMaxAmount: {x: 8, y: 10}
   PermanencePartOutwardsPower: 850
@@ -157,16 +161,18 @@ MonoBehaviour:
   KilledByIndex: 0
   Aggro: 0
   Player: {fileID: 0}
+  DamageType: 0
   ContactDamage: 20
   RotationSpeed: 0.025
   DroppedUnits: 50
-  ExperienceGained: 3
+  ExperienceGained: 30
   AggroDistance: 10
   DeAggroDistance: 45
   sizeRange: {x: 1.9, y: 2.1}
   grouped: 0
   StopDistance: 0.75
   DeathOnImpact: 0
+  enemyType: 
   moveSpeed: 1.25
   aggroMove: 3
   randomRotation: 1

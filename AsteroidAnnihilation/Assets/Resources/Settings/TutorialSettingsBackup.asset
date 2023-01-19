@@ -1,0 +1,363 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 35db095477c6ebb4b9326c75a5bcba42, type: 3}
+  m_Name: TutorialSettingsBackup
+  m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes:
+    - Name: Messages
+      Entry: 7
+      Data: 0|System.Collections.Generic.List`1[[AsteroidAnnihilation.Message, Assembly-CSharp]],
+        mscorlib
+    - Name: 
+      Entry: 12
+      Data: 26
+    - Name: 
+      Entry: 7
+      Data: AsteroidAnnihilation.Message, Assembly-CSharp
+    - Name: MessageText
+      Entry: 1
+      Data: Hello and welcome to the Intergalactic Bounty Hunter Training Facility.
+    - Name: timeOnScreen
+      Entry: 4
+      Data: 7
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: AsteroidAnnihilation.Message, Assembly-CSharp
+    - Name: MessageText
+      Entry: 1
+      Data: You have just awoken from Cryo Sleep and must be quite confused about
+        what is happening.
+    - Name: timeOnScreen
+      Entry: 4
+      Data: 7
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: AsteroidAnnihilation.Message, Assembly-CSharp
+    - Name: MessageText
+      Entry: 1
+      Data: You have been serving your sentence frozen for approximately 102.68 years...
+    - Name: timeOnScreen
+      Entry: 4
+      Data: 1
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: AsteroidAnnihilation.Message, Assembly-CSharp
+    - Name: MessageText
+      Entry: 1
+      Data: The Grand Rulers of our Galaxy have found there to be an increasing threat
+        from hostile enemy factions, and thus have given you a choice.
+    - Name: timeOnScreen
+      Entry: 4
+      Data: 9
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: AsteroidAnnihilation.Message, Assembly-CSharp
+    - Name: MessageText
+      Entry: 1
+      Data: 'You may serve the remaining 235.49 Years of your sentence in Cryo Sleep
+        or serve as a Bounty Hunter and reduce your sentence to 143.333333333333333333333333333. '
+    - Name: timeOnScreen
+      Entry: 4
+      Data: 9
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: AsteroidAnnihilation.Message, Assembly-CSharp
+    - Name: MessageText
+      Entry: 1
+      Data: 3.3..3...
+    - Name: timeOnScreen
+      Entry: 4
+      Data: 3
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: AsteroidAnnihilation.Message, Assembly-CSharp
+    - Name: MessageText
+      Entry: 1
+      Data: 3...
+    - Name: timeOnScreen
+      Entry: 4
+      Data: 2
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: AsteroidAnnihilation.Message, Assembly-CSharp
+    - Name: MessageText
+      Entry: 1
+      Data: Restarting Systems...
+    - Name: timeOnScreen
+      Entry: 4
+      Data: 3.5
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: AsteroidAnnihilation.Message, Assembly-CSharp
+    - Name: MessageText
+      Entry: 1
+      Data: "....\r"
+    - Name: timeOnScreen
+      Entry: 4
+      Data: 2
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: AsteroidAnnihilation.Message, Assembly-CSharp
+    - Name: MessageText
+      Entry: 1
+      Data: "....\r"
+    - Name: timeOnScreen
+      Entry: 4
+      Data: 2
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: AsteroidAnnihilation.Message, Assembly-CSharp
+    - Name: MessageText
+      Entry: 1
+      Data: Years. Do you agree to become a Bounty Hunter?
+    - Name: timeOnScreen
+      Entry: 4
+      Data: -1
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: AsteroidAnnihilation.Message, Assembly-CSharp
+    - Name: MessageText
+      Entry: 1
+      Data: Great, We have uploaded your consciousness to the ships Energy Core.
+    - Name: timeOnScreen
+      Entry: 4
+      Data: -3
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: AsteroidAnnihilation.Message, Assembly-CSharp
+    - Name: MessageText
+      Entry: 1
+      Data: Too bad, We have already uploaded your consciousness to the ships Energy
+        Core.
+    - Name: timeOnScreen
+      Entry: 4
+      Data: 7
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: AsteroidAnnihilation.Message, Assembly-CSharp
+    - Name: MessageText
+      Entry: 1
+      Data: Let's start your training.
+    - Name: timeOnScreen
+      Entry: 4
+      Data: 4
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: AsteroidAnnihilation.Message, Assembly-CSharp
+    - Name: MessageText
+      Entry: 1
+      Data: Use <color=#0f91f5>ASWD or Arrow Keys</color> to move to the Blue Areas.
+    - Name: timeOnScreen
+      Entry: 4
+      Data: -2
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: AsteroidAnnihilation.Message, Assembly-CSharp
+    - Name: MessageText
+      Entry: 1
+      Data: Press or Hold <color=#0f91f5>Left Mouse Button</color> to shoot at the
+        Targets.
+    - Name: timeOnScreen
+      Entry: 4
+      Data: 0
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: AsteroidAnnihilation.Message, Assembly-CSharp
+    - Name: MessageText
+      Entry: 1
+      Data: Well done.
+    - Name: timeOnScreen
+      Entry: 4
+      Data: 1
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: AsteroidAnnihilation.Message, Assembly-CSharp
+    - Name: MessageText
+      Entry: 1
+      Data: We captured a specimen from the Swarm for you to practice on as well.
+        You can use <color=#0f91f5>Space</color> to Dash and Evade it's projectiles.
+    - Name: timeOnScreen
+      Entry: 4
+      Data: -4
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: AsteroidAnnihilation.Message, Assembly-CSharp
+    - Name: MessageText
+      Entry: 1
+      Data: Here's a few more, make sure to use your Dash to evade enemy attacks
+    - Name: timeOnScreen
+      Entry: 4
+      Data: 0
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: AsteroidAnnihilation.Message, Assembly-CSharp
+    - Name: MessageText
+      Entry: 1
+      Data: This enemy dropped something,  move over it to pick it up. Then <color=#0f91f5>press
+        "I"</color> to open your Inventory and drag the piece of equipment you got
+        to the corresponding slot.
+    - Name: timeOnScreen
+      Entry: 4
+      Data: 0
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: AsteroidAnnihilation.Message, Assembly-CSharp
+    - Name: MessageText
+      Entry: 1
+      Data: Alright, I shall move you to the mission hub now.
+    - Name: timeOnScreen
+      Entry: 4
+      Data: -5
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: AsteroidAnnihilation.Message, Assembly-CSharp
+    - Name: MessageText
+      Entry: 1
+      Data: This is the Mission Hub. Our Mission Assignment AI will have a selection
+        of missions suitable for you. Move to the Green ship and press <color=#0f91f5>press
+        "F"</color> to open the Mission Menu and select a mission.
+    - Name: timeOnScreen
+      Entry: 4
+      Data: 0
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: AsteroidAnnihilation.Message, Assembly-CSharp
+    - Name: MessageText
+      Entry: 1
+      Data: Great, you have selected an Elimination mission. Eliminate the amount
+        of enemies required to lure out the boss.
+    - Name: timeOnScreen
+      Entry: 4
+      Data: 1
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: AsteroidAnnihilation.Message, Assembly-CSharp
+    - Name: MessageText
+      Entry: 1
+      Data: Now that you are in a Mission area I will explain your secondary firing
+        method.
+    - Name: timeOnScreen
+      Entry: 4
+      Data: 1
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: AsteroidAnnihilation.Message, Assembly-CSharp
+    - Name: MessageText
+      Entry: 1
+      Data: Every weapon has a secondary method of firing. It costs a lot more energy
+        but is much more powerful. Be careful not to completely drain your energy.
+    - Name: timeOnScreen
+      Entry: 4
+      Data: 1
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: AsteroidAnnihilation.Message, Assembly-CSharp
+    - Name: MessageText
+      Entry: 1
+      Data: Your training is now complete. If you have any more questions I would
+        refer you to the bounty hunter training guide we have implemented in your
+        ships user interface(not yet implemented).
+    - Name: timeOnScreen
+      Entry: 4
+      Data: -6
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 

@@ -6,6 +6,8 @@ namespace AsteroidAnnihilation
 {
     public class PlayerEntity : BaseEntity
     {
+        private Player player;
+        private StatManager statManager;
         private SpawnManager spawnManager;
         [SerializeField] private GameObject PlayerHitEffect;
         public bool canHit = true;
@@ -13,8 +15,10 @@ namespace AsteroidAnnihilation
         private UIManager uIManager;
         private EquipmentManager equipmentManager;
         private float healthRegen;
+        private float resistance;
 
         public bool RecentlyHit;
+        private Collider2D collider;
 
         protected override void Awake()
         {
@@ -30,32 +34,33 @@ namespace AsteroidAnnihilation
             RecentlyHit = false;
         }
 
-        public void GetHealthVariables()
+        public void GetDefensiveVariables()
         {
-            PlayerStats pStats = GetComponent<PlayerStats>();
-            float baseHealth = pStats.GetStatValue(EnumCollections.PlayerStats.BaseHealth);
-            float hullHealth = equipmentManager.GetGearStatValue(EnumCollections.ItemType.HullPlating, EnumCollections.EquipmentStats.Health);
-            float baseRegen = pStats.GetStatValue(EnumCollections.PlayerStats.BaseHealthRegen);
-            float hullRegen = equipmentManager.GetGearStatValue(EnumCollections.ItemType.HullPlating, EnumCollections.EquipmentStats.HealthRegen);
-            healthRegen = baseRegen + hullRegen;
-            float accessoriesHealth = 0;//TODO::Get from accessories
+            healthRegen = statManager.GetStat(EnumCollections.Stats.HealthRegen);
+            MaxHealth = statManager.GetStat(EnumCollections.Stats.Health);
+            resistance = statManager.GetStat(EnumCollections.Stats.PhysicalResistance);
 
-            MaxHealth = baseHealth + hullHealth + accessoriesHealth;
             uIManager.UpdateHealth(currentHealth, MaxHealth);
         }
 
         public void SetHealthToMax()
         {
             currentHealth = MaxHealth;
+            uIManager.UpdateHealth(currentHealth, MaxHealth);
+            StartCoroutine(RegenerateHealth());
         }
 
         protected override void Start()
         {
             base.Start();
+            player = GetComponent<Player>();
             uIManager = UIManager.Instance;
             equipmentManager = EquipmentManager.Instance;
             spawnManager = SpawnManager.Instance;
-            StartCoroutine(RegenerateHealth());
+            statManager = StatManager.Instance;
+            playerStats = GetComponent<PlayerStats>();
+            collider = GetComponent<Collider2D>();
+            statManager.OnDefensiveStatsChanged += GetDefensiveVariables;
         }
 
         public override void TakeDamage(float damage, bool isCrit)
@@ -71,7 +76,8 @@ namespace AsteroidAnnihilation
                 return;
             }
             StartCoroutine(HitCooldown());
-            base.TakeDamage(damage, isCrit);
+            float finalDamage = Mathf.Clamp(damage - resistance, 1, 99999f);
+            base.TakeDamage(finalDamage, isCrit);
             RecentlyHit = true;
             uIManager.UpdateHealth(currentHealth, MaxHealth);
         }
@@ -130,7 +136,27 @@ namespace AsteroidAnnihilation
         protected override void Die()
         {
             uIManager.StartCoroutine(uIManager.ShowDeathScreen());
-            base.Die();
+            SpawnParticleEffect();
+            cameraManager.StartCoroutine(cameraManager.Shake(ShakeDuration, ShakeMagnitude));
+            gameObject.SetActive(false);
+        }
+
+        public void OnRespawn()
+        {
+            gameManager.StartCoroutine(ResetPlayerValues());
+        }
+
+        private IEnumerator ResetPlayerValues()
+        {
+            yield return new WaitForSeconds(0.2f);
+            isDead = false;
+            canHit = true;
+            player.RPlayerAttack.canFire = true;
+            gameObject.SetActive(true);
+            spriteRenderer.color = new Color(1, 1, 1, 1f);
+            player.RPlayerAttack.ResetEnergy();
+            player.RPlayerMovement.ResetMovementVariables();
+            SetHealthToMax();
         }
     }
 }

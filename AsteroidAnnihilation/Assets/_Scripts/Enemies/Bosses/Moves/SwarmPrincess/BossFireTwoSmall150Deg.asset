@@ -30,6 +30,6 @@ MonoBehaviour:
   FireRate: 2
   Amount: 2
   Spread: 150
-  BulletSpeed: 7
+  BulletSpeed: 10.5
   ProjectileLifeTime: 4
   Projectile: 0

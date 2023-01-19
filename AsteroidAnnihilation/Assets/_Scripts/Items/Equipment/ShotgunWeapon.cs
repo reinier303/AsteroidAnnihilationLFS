@@ -15,8 +15,8 @@ namespace AsteroidAnnihilation
 
         public override void Fire(ObjectPooler objectPooler, Transform player, Vector2 velocity, Vector2 weaponPosition, int weaponIndex)
         {
-            float spread = GetEquipmentStat(EnumCollections.EquipmentStats.ProjectileSpread, weaponIndex);
-            float count = (int)GetEquipmentStat(EnumCollections.EquipmentStats.ProjectileCount, weaponIndex);
+            float spread = GetEquipmentStat(EnumCollections.Stats.ProjectileSpread, weaponIndex);
+            float count = (int)GetEquipmentStat(EnumCollections.Stats.ProjectileCount, weaponIndex);
 
             float angleIncrease;
 
@@ -45,10 +45,10 @@ namespace AsteroidAnnihilation
                 projectile.WeaponIndex = WeaponIndex;
 
                 //Set projectile stat values
-                float damage = GetEquipmentStat(EnumCollections.EquipmentStats.Damage, weaponIndex);
+                float damage = GetEquipmentStat(EnumCollections.Stats.Damage, weaponIndex);
 
                 projectile.PlayerVelocity = velocity;
-                float projectileSpeed = GetEquipmentStat(EnumCollections.EquipmentStats.ProjectileSpeed, weaponIndex) * Random.Range(0.75f, 1.25f);
+                float projectileSpeed = GetEquipmentStat(EnumCollections.Stats.ProjectileSpeed, weaponIndex) * Random.Range(0.75f, 1.25f);
 
                 //Random lifetime calculations
                 float lifeTimeMultiplier = Random.Range(0.1f, 2);
@@ -66,8 +66,8 @@ namespace AsteroidAnnihilation
                         }
                     }
                 }
-                float lifeTime = GetEquipmentStat(EnumCollections.EquipmentStats.LifeTime, weaponIndex) * lifeTimeMultiplier;
-                projectile.Initialize(GetEquipmentStat(EnumCollections.EquipmentStats.Size, weaponIndex), damage, projectileSpeed, lifeTime, IsCrit());
+                float lifeTime = GetEquipmentStat(EnumCollections.Stats.LifeTime, weaponIndex) * lifeTimeMultiplier;
+                projectile.Initialize(GetEquipmentStat(EnumCollections.Stats.Size, weaponIndex), damage, projectileSpeed, lifeTime, IsCrit());
 
                 projectile.StartCoroutine(projectile.DisableAfterTime());
             }

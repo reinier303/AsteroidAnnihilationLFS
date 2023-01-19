@@ -137,6 +137,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6f3db687988b974f868e7f9eb59b4cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Sprites: []
   MaxHealth: 20
   currentHealth: 20
   ShakeMagnitude: 5.5
@@ -160,13 +161,14 @@ MonoBehaviour:
   ContactDamage: 10
   RotationSpeed: 2.25
   DroppedUnits: 25
-  ExperienceGained: 3
+  ExperienceGained: 10
   AggroDistance: 16
   DeAggroDistance: 45
   sizeRange: {x: 0.9, y: 1.25}
   grouped: 0
   StopDistance: 0.75
   DeathOnImpact: 0
+  enemyType: 
   idleWaitTime: 6
   idleMove: 2
   aggroMove: 8.5

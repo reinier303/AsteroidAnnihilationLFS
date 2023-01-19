@@ -20,6 +20,11 @@ namespace AsteroidAnnihilation
             //This method is meant to be overridden.
         }
 
+        public virtual void Fire2nd(ObjectPooler objectPooler, Transform player, Vector2 velocity, Vector2 weaponPosition, int weaponIndex)
+        {
+            //This method is meant to be overridden.
+        }
+
         protected bool IsCrit()
         {
             if (Random.Range(0f, 100) < playerStats.GetStatValue(EnumCollections.PlayerStats.CritRate))

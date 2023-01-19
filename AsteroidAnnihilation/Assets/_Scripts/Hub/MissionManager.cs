@@ -27,19 +27,19 @@ namespace AsteroidAnnihilation
         private float bountyHunterExp = 0;
 
         public int maxMissions = 3;
+        public int missionsCompleted;
+
 
         [SerializeField] private Transform missionCardHolder;
         [SerializeField] private GameObject missionCard;
 
         [SerializeField] private GameObject gameElements, hubElements;
 
-        private bool newMissionGenerated, canGainProgress, bossActive;
-
+        private bool newMissionGenerated, canGainProgress, bossActive, tutorialDone;
 
         private void Awake()
         {
-            if(Instance != null) { Destroy(gameObject);} else { Instance = this; }
-            DontDestroyOnLoad(gameObject);
+            Instance = this;
         }
 
         private void Start()
@@ -89,6 +89,7 @@ namespace AsteroidAnnihilation
             yield return new WaitForSecondsRealtime(1f);
             gameElements.SetActive(true);
             hubElements.SetActive(false);
+            SetupMissionObjective();
             yield return new WaitForSecondsRealtime(3f);
             spawnManager.gameObject.SetActive(true);
             parallaxBackground.SetMissionBackgrounds();
@@ -98,6 +99,7 @@ namespace AsteroidAnnihilation
             yield return new WaitForSecondsRealtime(1f);
             StartCoroutine(uiManager.LoadingScreen.GetComponent<LoadingScreen>().FadeOutLoadingScreen());
             inputManager.InputEnabled = true;
+            CheckTutorial();
         }
 
         public void ToHub()
@@ -132,6 +134,40 @@ namespace AsteroidAnnihilation
             return currentMissions[currentMissionIndex];
         }
 
+        private void SetupMissionObjective()
+        {
+            foreach(AreaObjective objective in currentMissions[currentMissionIndex].Objectives)
+            {
+                switch(objective.ObjectiveType)
+                {
+                    case MissionObjectiveType.Elimination:
+                        SetupElimination();
+                        break;
+                    case MissionObjectiveType.Survival:
+                        SetupElimination();
+                        break;
+                    case MissionObjectiveType.Defense:
+                        SetupDefense();
+                        break;
+                }
+            }
+        }
+
+        private void SetupElimination()
+        {
+
+        }
+
+        private void SetupSurvival()
+        {
+
+        }
+
+        private void SetupDefense()
+        {
+
+        }
+
         private void LoadMissions()
         {
             if (!ES3.KeyExists("currentMissions"))
@@ -145,6 +181,7 @@ namespace AsteroidAnnihilation
                 ES3.Save("maxMissions", maxMissions);
                 ES3.Save("bountyHunterRank", bountyHunterRank);
                 ES3.Save("bountyHunterExp", bountyHunterExp);
+                ES3.Save("missionsCompleted", 0);
             }
             else
             {
@@ -152,7 +189,7 @@ namespace AsteroidAnnihilation
                 maxMissions = ES3.Load<int>("maxMissions", defaultValue: 3);
                 bountyHunterRank = ES3.Load<int>("bountyHunterRank", defaultValue: 0);
                 bountyHunterExp = ES3.Load<float>("bountyHunterExp", defaultValue: 0);
-
+                missionsCompleted = ES3.Load<int>("missionsCompleted", defaultValue: 0);
             }
         }
 
@@ -162,6 +199,7 @@ namespace AsteroidAnnihilation
             ES3.Save("maxMissions", maxMissions);
             ES3.Save("bountyHunterRank", bountyHunterRank);
             ES3.Save("bountyHunterExp", bountyHunterExp);
+            ES3.Save("missionsCompleted", missionsCompleted);
         }
 
         private void GenerateMissions(int amount)
@@ -230,6 +268,19 @@ namespace AsteroidAnnihilation
             return backgrounds;
         }
 
+        private void CheckTutorial()
+        {
+            if (ES3.KeyExists("tutorialDone")) { return; }
+
+            if (!tutorialDone)
+            {
+                tutorialDone = true;
+                uiManager.LmbPromptSwitch(true);
+                spawnManager.Spawning = false;
+                TutorialManager.Instance.ShowNextTutorialMessage();
+            }
+        }
+
         #region Objectives
 
         public void AddObjectiveProgress(MissionObjectiveType type)
@@ -295,6 +346,9 @@ namespace AsteroidAnnihilation
             currentMissions.Insert(currentMissionIndex, GenerateMission());
             newMissionGenerated = true;
             canGainProgress = false;
+            if(missionsCompleted == 0){ uiManager.EnableHubIndicator(); }
+            missionsCompleted++;
+
         }
 
         private void GainRankProgress()

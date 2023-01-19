@@ -137,6 +137,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a6e2cb73ff2d4e7439a700f5c492d32f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Sprites: []
   MaxHealth: 35
   currentHealth: 35
   ShakeMagnitude: 5.5
@@ -160,7 +161,7 @@ MonoBehaviour:
   ContactDamage: 20
   RotationSpeed: 0.025
   DroppedUnits: 20
-  ExperienceGained: 3
+  ExperienceGained: 10
   AggroDistance: 19
   DeAggroDistance: 45
   sizeRange: {x: 0.9, y: 1.1}

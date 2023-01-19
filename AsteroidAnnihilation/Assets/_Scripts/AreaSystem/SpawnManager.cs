@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using System.Linq;
 using Sirenix.OdinInspector;
 
 namespace AsteroidAnnihilation
@@ -23,6 +22,7 @@ namespace AsteroidAnnihilation
 
         //General Data
         public bool Spawning;
+        public bool BossActive;
 
         //Background Renderer: info for spawn location
         public SpriteRenderer MapRenderer;
@@ -47,8 +47,6 @@ namespace AsteroidAnnihilation
         //Time measurement = 0-2ms
         public void Initialize()
         {
-            System.Diagnostics.Stopwatch stopWatch = new System.Diagnostics.Stopwatch();
-            stopWatch.Start();
             RObjectPooler = ObjectPooler.Instance;
             gameManager = GameManager.Instance;
             missionManager = MissionManager.Instance;
@@ -64,8 +62,6 @@ namespace AsteroidAnnihilation
             StartCoroutine(StartSpawning());
             StartCoroutine(RampSpawnRate());
             StartCoroutine(CheckRecentlyHit());
-            stopWatch.Stop();
-            Debug.Log("Elapsed time is: " + stopWatch.ElapsedMilliseconds);
         }
 
         private void OnDisable()
@@ -76,8 +72,8 @@ namespace AsteroidAnnihilation
 
         public void SetMission()
         {
-            currentMission = missionManager.GetCurrentMission(); 
-
+            currentMission = missionManager.GetCurrentMission();
+            enemyTypeCount.Clear();
             GenerateRandomEnemyList();
             GenerateRandomSeekerEnemyList();
         }
@@ -142,6 +138,7 @@ namespace AsteroidAnnihilation
         {
             //O(1)
             Spawning = false;
+            BossActive = true;
             Vector2 spawnPosition = GenerateSpawnPosition();
             enemiesAlive.Add(RObjectPooler.SpawnFromPool(mission.Boss, spawnPosition, Quaternion.identity));
         }
@@ -149,8 +146,6 @@ namespace AsteroidAnnihilation
         private bool CheckEnemyType(string enemy)
         {
             //O(1)
-            Debug.Log(enemy);
-
             if (!enemyTypeCount.ContainsKey(enemy)) 
             {
                 enemyTypeCount.Add(enemy, 1);
@@ -215,7 +210,6 @@ namespace AsteroidAnnihilation
                     enemyNames.Add(enemy);
                 }
             }
-
         }
 
         private void GenerateRandomSeekerEnemyList()

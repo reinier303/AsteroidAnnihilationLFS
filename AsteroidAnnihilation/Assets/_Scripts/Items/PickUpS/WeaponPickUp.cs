@@ -57,7 +57,8 @@ namespace AsteroidAnnihilation
             {
                 type = EnumCollections.ItemType.HullPlating;//This is meant to be all equipment
             }
-            if (random <= 5)
+            //TODO::Implement this and turn it back to a normal number
+            if (random <= 0)
             {
                 type = EnumCollections.ItemType.ShipComponent; //Component once implemented
             }
