@@ -9887,6 +9887,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f0c2ad6d7cbeec4e8ebb6269c8d2196, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Sprites: []
   MaxHealth: 100
   currentHealth: 100
   ShakeMagnitude: 6.5
@@ -9909,6 +9910,7 @@ MonoBehaviour:
   KilledByIndex: 0
   Aggro: 0
   Player: {fileID: 0}
+  DamageType: 0
   ContactDamage: 10
   RotationSpeed: 0
   DroppedUnits: 200
@@ -9918,8 +9920,10 @@ MonoBehaviour:
   sizeRange: {x: 0.9, y: 1.25}
   grouped: 0
   StopDistance: 0.75
+  DeathOnImpact: 0
+  enemyType: 
   MaxRotationSpeed: 850
   MinForce: 500
-  MaxForce: 1800
+  MaxForce: 1500
   MinMaxSize: {x: 0.3, y: 0.5}
   TrailEffects: {fileID: 4340239557127637048}
