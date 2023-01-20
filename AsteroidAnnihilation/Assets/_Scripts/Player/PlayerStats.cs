@@ -60,7 +60,7 @@ namespace AsteroidAnnihilation
             PlayerLevel = 1;
 
             Stats.Add(EnumCollections.PlayerStats.BaseHealth, 20); //+30 BaseHull
-            Stats.Add(EnumCollections.PlayerStats.BaseHealthRegen, 0.1f);
+            Stats.Add(EnumCollections.PlayerStats.BaseHealthRegen, 0.15f);
             Stats.Add(EnumCollections.PlayerStats.BaseMovementSpeed, 1.0f); //+3 BaseEngine
             Stats.Add(EnumCollections.PlayerStats.BaseMagnetRadius, 3); // Magnet Accesories
             Stats.Add(EnumCollections.PlayerStats.CritRate, 5.0f); // Weapons
@@ -69,7 +69,7 @@ namespace AsteroidAnnihilation
             Stats.Add(EnumCollections.PlayerStats.CurrentExperience, 0);
             Stats.Add(EnumCollections.PlayerStats.PowerUpChance, 0);
             Stats.Add(EnumCollections.PlayerStats.BaseEnergyCapacity, 0); //+50 BaseEnergyCore
-            Stats.Add(EnumCollections.PlayerStats.BaseEnergyRegen, 0.3f);//+1 BaseEnergyCore
+            Stats.Add(EnumCollections.PlayerStats.BaseEnergyRegen, 0.35f);//+1 BaseEnergyCore
             Stats.Add(EnumCollections.PlayerStats.SkillPointsSpent, 0);
             Stats.Add(EnumCollections.PlayerStats.SkillPointsTotal, 0);
 

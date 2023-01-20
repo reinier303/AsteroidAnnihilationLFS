@@ -122,7 +122,8 @@ namespace AsteroidAnnihilation
             parallaxBackground.SetBackgroundsStart();
             player.RPlayerEntity.SetHealthToMax();
             player.RPlayerAttack.ResetEnergy();
-            uiManager.DisableBossHealthBar();
+            uiManager.DisableBossHealthBar();         
+            uiManager.ObjectiveMenu.SetActive(false);
             bossActive = false;
             Time.timeScale = 1;
             yield return new WaitForSecondsRealtime(2.25f);

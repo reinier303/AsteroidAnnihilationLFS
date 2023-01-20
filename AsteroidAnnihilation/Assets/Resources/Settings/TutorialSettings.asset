@@ -27,7 +27,7 @@ MonoBehaviour:
         mscorlib
     - Name: 
       Entry: 12
-      Data: 27
+      Data: 28
     - Name: 
       Entry: 7
       Data: AsteroidAnnihilation.Message, Assembly-CSharp
@@ -244,6 +244,18 @@ MonoBehaviour:
       Entry: 1
       Data: We captured a specimen from the Swarm for you to practice on as well.
         You can use <color=#0f91f5>Space</color> to Dash and Evade it's projectiles.
+    - Name: timeOnScreen
+      Entry: 4
+      Data: 1
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: AsteroidAnnihilation.Message, Assembly-CSharp
+    - Name: MessageText
+      Entry: 1
+      Data: Get em!
     - Name: timeOnScreen
       Entry: 4
       Data: -4

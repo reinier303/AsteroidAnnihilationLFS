@@ -255,5 +255,7 @@ MonoBehaviour:
   BaseEquipmentName: Standard Hull Plating
   Tier: 1
   Icons:
-  - {fileID: 21300000, guid: ad99e8a9cb963334685b18d7fda45e9e, type: 3}
+  - {fileID: 21300000, guid: ba6588674de33c34393816f0385b2d95, type: 3}
+  - {fileID: 21300000, guid: ef71c50c940f856418685f8ae5d89b1f, type: 3}
+  - {fileID: 21300000, guid: e2c311086e241f14ea2e0e5202a037a8, type: 3}
   ItemType: 1

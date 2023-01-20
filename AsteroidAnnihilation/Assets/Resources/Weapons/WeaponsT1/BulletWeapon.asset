@@ -465,7 +465,7 @@ MonoBehaviour:
   BaseEquipmentName: Plasma Gun
   Tier: 1
   Icons:
-  - {fileID: 21300000, guid: cf5a1866f085f0d4baf1cc773e74d130, type: 3}
+  - {fileID: 21300000, guid: 6b5a3d4e1a53c1b4a9b8260dc6abf89d, type: 3}
   - {fileID: 21300000, guid: 476a3920779d3af4899d29786ae3de47, type: 3}
   - {fileID: 21300000, guid: d18601fa773b39f4493c3fcef97da9ee, type: 3}
   ItemType: 4

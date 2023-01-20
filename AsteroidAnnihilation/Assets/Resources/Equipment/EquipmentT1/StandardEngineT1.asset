@@ -171,5 +171,7 @@ MonoBehaviour:
   BaseEquipmentName: Standard Engine
   Tier: 1
   Icons:
-  - {fileID: 21300000, guid: 651de9400fe86bd419091292d70018a3, type: 3}
+  - {fileID: 21300000, guid: 894aeed211c167f47b932ceb374576f7, type: 3}
+  - {fileID: 21300000, guid: 5d554868da0e1a8439b4de8312a0ec47, type: 3}
+  - {fileID: 21300000, guid: 7cbac517ab50cdf488240433563a10fc, type: 3}
   ItemType: 3

@@ -368,6 +368,7 @@ namespace AsteroidAnnihilation
 
         public void InitializeObjectiveMenu()
         {
+            ObjectiveMenu.SetActive(true);
             for(int i = 0; i < ObjectivesPanel.childCount; i++)
             {
                 Destroy(ObjectivesPanel.GetChild(i).gameObject);
