@@ -85,7 +85,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f5b75cac7fff594584c3f8afd7adb93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Sprites: []
+  Sprites:
+  - {fileID: 21300000, guid: 6c8677ece16f72649a2c51f7605ae10a, type: 3}
+  - {fileID: 21300000, guid: 1b8b45084c41c13479f6bf0cc9f25785, type: 3}
   MaxHealth: 30
   currentHealth: 30
   ShakeMagnitude: 6.5

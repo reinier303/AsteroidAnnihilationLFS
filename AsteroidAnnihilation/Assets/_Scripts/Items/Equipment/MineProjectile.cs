@@ -6,7 +6,7 @@ namespace AsteroidAnnihilation
 {
     public class MineProjectile : BaseProjectile
     {
-        public override void Initialize(float size, float damage, float speed, float lifeTime, bool isCrit)
+        public override void Initialize(float size, float damage, float speed, float lifeTime, bool isCrit, bool seconday = false)
         {
             base.Initialize(size, damage, speed, lifeTime, isCrit);
         }

@@ -11,7 +11,7 @@ namespace AsteroidAnnihilation
             base.Awake();
         }
 
-        public override void Initialize(float size, float damage, float speed, float lifeTime, bool isCrit)
+        public override void Initialize(float size, float damage, float speed, float lifeTime, bool isCrit, bool secondary = false)
         {
             base.Initialize(size, damage, speed, lifeTime, isCrit);
             float sizeMultiplier = Random.Range(0.6f, 1.15f);

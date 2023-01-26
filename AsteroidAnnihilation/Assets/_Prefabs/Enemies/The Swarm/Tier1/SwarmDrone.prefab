@@ -77,7 +77,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: ad999d535f8eac748993d281ed78cf95, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 3761228c6ee940f4a9e6b7f6fded9dfc, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -137,7 +137,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a6e2cb73ff2d4e7439a700f5c492d32f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Sprites: []
+  Sprites:
+  - {fileID: 21300000, guid: 3761228c6ee940f4a9e6b7f6fded9dfc, type: 3}
+  - {fileID: 21300000, guid: 893a7d38c74d570408bafa0711acdb10, type: 3}
   MaxHealth: 35
   currentHealth: 35
   ShakeMagnitude: 5.5
@@ -158,6 +160,7 @@ MonoBehaviour:
   KilledByIndex: 0
   Aggro: 0
   Player: {fileID: 0}
+  DamageType: 0
   ContactDamage: 20
   RotationSpeed: 0.025
   DroppedUnits: 20
@@ -179,6 +182,7 @@ MonoBehaviour:
   projectileSpeed: 14
   randomRotation: 1
   fireTimer: 0
+  randomSizeEnabled: 1
 --- !u!1 &5249170621695936568
 GameObject:
   m_ObjectHideFlags: 0

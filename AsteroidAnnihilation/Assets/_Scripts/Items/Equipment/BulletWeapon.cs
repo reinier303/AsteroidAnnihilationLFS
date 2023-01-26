@@ -101,7 +101,7 @@ namespace AsteroidAnnihilation
                 projectile.PlayerVelocity = velocity;
                 float projectileSpeed = GetEquipmentStat(EnumCollections.Stats.ProjectileSpeed, weaponIndex) * 1.25f;
                 float lifeTime = GetEquipmentStat(EnumCollections.Stats.LifeTime, weaponIndex);
-                projectile.Initialize(GetEquipmentStat(EnumCollections.Stats.Size, weaponIndex) * 1.35f, damage, projectileSpeed, lifeTime, IsCrit());
+                projectile.Initialize(GetEquipmentStat(EnumCollections.Stats.Size, weaponIndex) * 1.35f, damage, projectileSpeed, lifeTime, IsCrit(), true);
 
                 projectile.StartCoroutine(projectile.DisableAfterTime());
             }

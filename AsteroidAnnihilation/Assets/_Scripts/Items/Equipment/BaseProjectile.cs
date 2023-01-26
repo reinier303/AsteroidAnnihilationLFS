@@ -29,7 +29,7 @@ namespace AsteroidAnnihilation
             baseScale = transform.localScale;
         }
 
-        public virtual void Initialize(float size, float damage, float speed, float lifeTime, bool isCrit)
+        public virtual void Initialize(float size, float damage, float speed, float lifeTime, bool isCrit, bool secondary = false)
         {
             canDamage = true;
             Size = size;

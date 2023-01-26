@@ -81,7 +81,6 @@ namespace AsteroidAnnihilation
             currentWeaponDatas = equipmentManager.GetAllEquipedWeapons();
             foreach (int index in currentWeaponDatas.Keys)
             {
-                Debug.Log(index);
                 if (currentWeaponDatas[index].WeaponType == EnumCollections.Weapons.None)
                 {
                     currentWeapons.Add(index, (Weapon)ScriptableObject.CreateInstance("Weapon"));

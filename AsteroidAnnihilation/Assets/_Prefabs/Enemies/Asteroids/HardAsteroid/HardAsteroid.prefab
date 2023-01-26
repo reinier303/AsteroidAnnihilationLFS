@@ -131,7 +131,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f0c2ad6d7cbeec4e8ebb6269c8d2196, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Sprites: []
+  Sprites:
+  - {fileID: 21300000, guid: db083d5803775bb439a9cad8616db819, type: 3}
   MaxHealth: 500
   currentHealth: 500
   ShakeMagnitude: 7.5
@@ -196,7 +197,7 @@ Transform:
   m_GameObject: {fileID: 5614952447757407503}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
+  m_LocalScale: {x: 0.45, y: 0.45, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5570736408572782833}
@@ -243,8 +244,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: 84926054ca8a2e0429ad589ecf4d953c, type: 3}
-  m_Color: {r: 0.5283019, g: 0.47671285, b: 0.43609828, a: 1}
+  m_Sprite: {fileID: 21300000, guid: db083d5803775bb439a9cad8616db819, type: 3}
+  m_Color: {r: 0.38381097, g: 0.56927663, b: 0.6509434, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

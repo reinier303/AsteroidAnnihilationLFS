@@ -238,7 +238,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 63e139600b7f09b43a7d52657f60950f, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 207ae53e17953f14380abeb402fb7e95, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -298,7 +298,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c9fe5de4611e0440ac1eb92ab778b9c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Sprites: []
+  Sprites:
+  - {fileID: 21300000, guid: 207ae53e17953f14380abeb402fb7e95, type: 3}
+  - {fileID: 21300000, guid: 1153bedf472155f418b8b7410bef72f8, type: 3}
   MaxHealth: 35
   currentHealth: 35
   ShakeMagnitude: 5.5
