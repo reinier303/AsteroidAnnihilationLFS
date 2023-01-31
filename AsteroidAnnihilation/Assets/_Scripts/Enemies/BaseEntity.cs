@@ -34,8 +34,7 @@ namespace AsteroidAnnihilation
         public float PermanenceScaleFactor;
 
         [Header("Drops")]
-        public List<DropTableEntry> Drops;
-        public float DropChance;
+        public DropTable DropTable;
 
         public System.Action<float, bool> OnTakeDamage;
 
@@ -71,13 +70,6 @@ namespace AsteroidAnnihilation
                 spriteRenderer.sprite = Sprites[Random.Range(0, Sprites.Count)];
             }
             baseMaterial = spriteRenderer.material;
-
-            InitializeDropPool();
-        }
-
-        protected void InitializeDropPool()
-        {
-            //Get drops from resource database
         }
 
         protected virtual void Start()
@@ -180,9 +172,11 @@ namespace AsteroidAnnihilation
 
         protected virtual void DropPickUps()
         {
-            if(Random.Range(0,100f) <= DropChance)
+            if(DropTable == null) { return; }
+            int dropAmount = Random.Range(DropTable.DropRange.x, DropTable.DropRange.y);
+            for(int i = 0; i < dropAmount; i++)
             {
-                objectPooler.SpawnFromPool("WeaponPickUp", transform.position, Quaternion.identity);
+
             }
         }
         //Old DropPowerUps() method, might use/recycle later

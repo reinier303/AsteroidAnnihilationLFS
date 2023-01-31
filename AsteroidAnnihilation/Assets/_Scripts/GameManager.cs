@@ -47,6 +47,8 @@ namespace AsteroidAnnihilation
         [SerializeField] private ParticleSystem TeleportEffect;
         [SerializeField] public Transform EjectedTrailEffects;
 
+        public int targetFramerate = -1;
+
         private void Awake()
         {
             Instance = this;
@@ -55,7 +57,7 @@ namespace AsteroidAnnihilation
             PlayerAlive = true;
             isPaused = false;
             player = RPlayer.transform;
-
+            Application.targetFrameRate = targetFramerate;
             CheckVersion();
         }
 

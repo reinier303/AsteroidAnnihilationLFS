@@ -5,11 +5,12 @@ using Sirenix.OdinInspector;
 
 namespace AsteroidAnnihilation
 {
+    [CreateAssetMenu(menuName = "Item", order = 992)]
     public class Item : SerializedScriptableObject
     {
         public int ID;
-        public string BaseEquipmentName;
         public int Tier;
+        public string ItemName;
         public List<Sprite> Icons;
         public Dictionary<EnumCollections.Rarities, float> WeightedRarity;
         public EnumCollections.ItemType ItemType;

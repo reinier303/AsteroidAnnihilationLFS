@@ -29,7 +29,6 @@ namespace AsteroidAnnihilation
             onHitMaterial = (Material)Resources.Load("Materials/FlashWhite", typeof(Material));
             baseMaterial = spriteRenderer.material;
 
-            InitializeDropPool();
             currentHealth = MaxHealth;
             RecentlyHit = false;
         }

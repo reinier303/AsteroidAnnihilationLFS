@@ -55,7 +55,7 @@ namespace AsteroidAnnihilation
             Vector2 direction = Vector2.up * ProjectileSpeed;
             Vector2 heritedVelocity = new Vector2(PlayerVelocity.x, PlayerVelocity.y);
             Vector2 heritedMove = transform.InverseTransformDirection(heritedVelocity);
-            Vector3 move = direction + heritedMove /** ProjectileSpeed*/;
+            Vector3 move = direction + (heritedMove * 0.1f) /** ProjectileSpeed*/;
 
             move *= Time.deltaTime;
             move = transform.TransformDirection(move);

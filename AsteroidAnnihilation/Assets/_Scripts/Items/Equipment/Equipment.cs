@@ -14,6 +14,7 @@ namespace AsteroidAnnihilation
 
         protected PlayerStats playerStats;
         protected EquipmentManager equipmentManager;
+        public string BaseEquipmentName;
 
         public virtual void Initialize(PlayerStats pStats, EquipmentManager equipmentManager)
         {

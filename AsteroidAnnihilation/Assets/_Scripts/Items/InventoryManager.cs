@@ -187,8 +187,14 @@ namespace AsteroidAnnihilation
                     index = GetAvailableSlotIndex();
                     if (index == -1) { return (false, default); }
                 }
-                if (InventoryEquipment.ContainsKey(index)) { data = InventoryEquipment[index]; }
-                InventoryEquipment.Add(index, equipment);
+                if (!InventoryEquipment.ContainsKey(index)) 
+                {
+                    InventoryEquipment.Add(index, equipment);           
+                }
+                else { 
+                    data = InventoryEquipment[index];
+                    InventoryEquipment[index] = equipment;
+                }
                 ItemSlots[index].SetItem(equipment);
                 InitializeInventoryItems();
                 InitializeGear();

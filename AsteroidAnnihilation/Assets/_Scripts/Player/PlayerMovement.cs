@@ -174,13 +174,13 @@ namespace AsteroidAnnihilation
             for (int i = 0; i < 5; i++)
             {
                 objectPooler.SpawnFromPool("DashParticle", transform.position, transform.rotation);      
-                currentSpeed = baseSpeed + (baseSpeed * DashVelocityMultiplier / 3);
+                currentSpeed = (baseSpeed + (baseSpeed * DashVelocityMultiplier / 3));
                 yield return new WaitForSeconds(DashDuration / 15);
             }
             for (int i = 0; i < 10; i++)
             {
                 objectPooler.SpawnFromPool("DashParticle", transform.position, transform.rotation);
-                currentSpeed = baseSpeed - (baseSpeed * DashVelocityMultiplier / 12);
+                currentSpeed = (baseSpeed - (baseSpeed * DashVelocityMultiplier / 12));
                 yield return new WaitForSeconds(DashDuration / 15);
             }
             currentSpeed = baseSpeed;
@@ -207,7 +207,7 @@ namespace AsteroidAnnihilation
             Vector2 axisses = inputManager.GetAxisNormalizedCoef();
 
             //Debug.Log("Regular: " + new Vector2(axisX,axisY) + "Normalized: " + new Vector2(axisX, axisY).normalized);
-            MovementInput = axisses * currentSpeed * Time.fixedDeltaTime;
+            MovementInput = axisses * currentSpeed;
 
             //MovementInput = new Vector2(axisX, axisY) * currentSpeed * Time.deltaTime;
             ApplyForce();
@@ -218,11 +218,11 @@ namespace AsteroidAnnihilation
         {
             if (MovementInput.x != 0)
             {
-                rb.AddForce(new Vector2(MovementInput.x * ForceModifier, 0));
+                rb.AddForce(new Vector2(MovementInput.x * ForceModifier, 0) * Time.fixedDeltaTime);
             }
             if (MovementInput.y != 0)
             {
-                rb.AddForce(new Vector2(0, MovementInput.y * ForceModifier));
+                rb.AddForce(new Vector2(0, MovementInput.y * ForceModifier) * Time.fixedDeltaTime);
             }
             float x = rb.velocity.x;
             float y = rb.velocity.y;
