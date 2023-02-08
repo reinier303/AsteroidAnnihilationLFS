@@ -62,6 +62,14 @@ namespace AsteroidAnnihilation
             CheckVersion();
         }
 
+        private void Update()
+        {
+            if(Input.GetKey(KeyCode.LeftControl) && Input.GetKey(KeyCode.F9))
+            {
+                Application.targetFrameRate = targetFramerate;
+            }
+        }
+
         //TODO EXTREMELY IMPORTANT!!!::Remove this when releasing game. This is testing only to make sure people don't use weird save files
         private void CheckVersion()
         {

@@ -45,7 +45,6 @@ namespace AsteroidAnnihilation
             RandomSize();
             transform.localScale = RandomSize();
             freezing = false;
-
         }
 
         protected override IEnumerator CheckDistanceToPlayer(float time)
@@ -99,7 +98,7 @@ namespace AsteroidAnnihilation
         {
             Vector2 force = CalculateForce();
 
-            rb.AddForce(force);
+            rb.AddForce(force, ForceMode2D.Impulse);
             rotator.SetRotationSpeed(CalculateTorque());
         }
 
