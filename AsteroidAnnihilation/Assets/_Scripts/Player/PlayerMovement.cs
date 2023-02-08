@@ -166,27 +166,61 @@ namespace AsteroidAnnihilation
             Move();
         }
 
-        private IEnumerator Dash()
+        private IEnumerator DashOld()
         {
             canDash = false;
             float baseSpeed = currentSpeed;
             dashing = true;
+            Vector2 oldPos = transform.position;
             for (int i = 0; i < 5; i++)
             {
                 objectPooler.SpawnFromPool("DashParticle", transform.position, transform.rotation);      
-                currentSpeed = (baseSpeed + (baseSpeed * DashVelocityMultiplier / 3));
+                currentSpeed = (baseSpeed + (baseSpeed * DashVelocityMultiplier / 3)) * Time.deltaTime;
                 yield return new WaitForSeconds(DashDuration / 15);
             }
             for (int i = 0; i < 10; i++)
             {
                 objectPooler.SpawnFromPool("DashParticle", transform.position, transform.rotation);
-                currentSpeed = (baseSpeed - (baseSpeed * DashVelocityMultiplier / 12));
+                currentSpeed = (baseSpeed - (baseSpeed * DashVelocityMultiplier / 12)) * Time.deltaTime;
                 yield return new WaitForSeconds(DashDuration / 15);
             }
+            Debug.Log(Vector2.Distance(oldPos, transform.position));
+
             currentSpeed = baseSpeed;
             dashing = false;
             yield return new WaitForSeconds(DashCooldown);
             canDash = true;
+        }
+
+        private IEnumerator Dash()
+        {
+            Debug.Log("");
+            canDash = false;
+            dashing = true;
+            StartCoroutine(DashParticles());
+
+            Vector2 oldPos = transform.position;
+
+            float curveMultiplier = 1.5f;
+                   
+            rb.AddForce((((MovementInput * currentSpeed * DashVelocityMultiplier) * ForceModifier)), ForceMode2D.Impulse);
+
+            yield return new WaitForSeconds(DashDuration);
+
+            Debug.Log(Vector2.Distance(oldPos, transform.position));
+
+            dashing = false;
+            yield return new WaitForSeconds(DashCooldown);
+            canDash = true;
+        }
+
+        private IEnumerator DashParticles()
+        {
+            for (int i = 0; i < 15; i++)
+            {
+                objectPooler.SpawnFromPool("DashParticle", transform.position, transform.rotation);
+                yield return new WaitForSeconds(DashDuration / 15f);
+            }
         }
 
         private void MoveOld()
@@ -218,20 +252,22 @@ namespace AsteroidAnnihilation
         {
             if (MovementInput.x != 0)
             {
-                rb.AddForce(new Vector2(MovementInput.x * ForceModifier, 0) * Time.fixedDeltaTime);
+                rb.AddForce(new Vector2(MovementInput.x * ForceModifier, 0));
             }
             if (MovementInput.y != 0)
             {
-                rb.AddForce(new Vector2(0, MovementInput.y * ForceModifier) * Time.fixedDeltaTime);
-            }
-            float x = rb.velocity.x;
-            float y = rb.velocity.y;
+                rb.AddForce(new Vector2(0, MovementInput.y * ForceModifier));
+            }       
+            
             if (!dashing)
             {
+                float x = rb.velocity.x;
+                float y = rb.velocity.y;
                 x = Mathf.Clamp(rb.velocity.x, -MaxVelocity, MaxVelocity);
                 y = Mathf.Clamp(rb.velocity.y, -MaxVelocity, MaxVelocity);
+                rb.velocity = new Vector2(x, y);
             }
-            rb.velocity = new Vector2(x,y);
+            
         }
 
         private void CheckEnginePS(bool input)
