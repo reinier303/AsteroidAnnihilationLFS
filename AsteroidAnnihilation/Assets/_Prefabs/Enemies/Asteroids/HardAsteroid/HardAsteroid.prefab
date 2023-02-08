@@ -145,8 +145,7 @@ MonoBehaviour:
   PermanencePartMinMaxAmount: {x: 6, y: 8}
   PermanencePartOutwardsPower: 400
   PermanenceScaleFactor: 0.07
-  Drops: []
-  DropChance: 0
+  DropTable: {fileID: 0}
   spriteRenderer: {fileID: 0}
   isDead: 0
   isInitialized: 0
@@ -154,7 +153,7 @@ MonoBehaviour:
   Aggro: 0
   Player: {fileID: 0}
   DamageType: 0
-  ContactDamage: 35
+  ContactDamage: 25
   RotationSpeed: 0
   DroppedUnits: 50
   ExperienceGained: 5
@@ -166,8 +165,8 @@ MonoBehaviour:
   DeathOnImpact: 0
   enemyType: 
   MaxRotationSpeed: 750
-  MinForce: 1350
-  MaxForce: 1950
+  MinForce: 8
+  MaxForce: 17.5
   MinMaxSize: {x: 1.25, y: 1.25}
   TrailEffects: {fileID: 719657419996570255}
 --- !u!1 &5614952447757407503
@@ -245,7 +244,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: db083d5803775bb439a9cad8616db819, type: 3}
-  m_Color: {r: 0.38381097, g: 0.56927663, b: 0.6509434, a: 1}
+  m_Color: {r: 0.6376379, g: 0.77938163, b: 0.8396226, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

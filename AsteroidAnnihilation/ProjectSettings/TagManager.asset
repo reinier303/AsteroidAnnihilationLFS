@@ -24,8 +24,8 @@ TagManager:
   - EnemyProjectiles
   - PlayerCollectionCollider
   - TutorialElement
-  - 
-  - 
+  - Environment
+  - PlayerContactCollider
   - 
   - 
   - 

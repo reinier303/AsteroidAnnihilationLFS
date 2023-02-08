@@ -9814,10 +9814,7 @@ MonoBehaviour:
   PermanencePartMinMaxAmount: {x: 12, y: 20}
   PermanencePartOutwardsPower: 600
   PermanenceScaleFactor: 0.05
-  Drops:
-  - PickUp: {fileID: 11400000, guid: a0954e990f2f507438d603dbb83927fb, type: 2}
-    DropChance: 1
-  DropChance: 0
+  DropTable: {fileID: 0}
   spriteRenderer: {fileID: 0}
   isDead: 0
   isInitialized: 0
@@ -9825,7 +9822,7 @@ MonoBehaviour:
   Aggro: 0
   Player: {fileID: 0}
   DamageType: 0
-  ContactDamage: 25
+  ContactDamage: 15
   RotationSpeed: 0
   DroppedUnits: 35
   ExperienceGained: 3
@@ -9837,7 +9834,7 @@ MonoBehaviour:
   DeathOnImpact: 0
   enemyType: 
   MaxRotationSpeed: 750
-  MinForce: 1350
-  MaxForce: 1950
+  MinForce: 8
+  MaxForce: 17.5
   MinMaxSize: {x: 1.2, y: 1.6}
   TrailEffects: {fileID: 3919056589315201910}

@@ -159,53 +159,28 @@ namespace AsteroidAnnihilation
             {
                 MovementInput = Vector2.zero;
             }
-            if(canDash && inputManager.GetMovementSkillButtonDown())
+            if(canDash && MovementInput != Vector2.zero && inputManager.GetMovementSkillButtonDown())
             {
                 StartCoroutine(Dash());
             }
             Move();
         }
 
-        private IEnumerator DashOld()
-        {
-            canDash = false;
-            float baseSpeed = currentSpeed;
-            dashing = true;
-            Vector2 oldPos = transform.position;
-            for (int i = 0; i < 5; i++)
-            {
-                objectPooler.SpawnFromPool("DashParticle", transform.position, transform.rotation);      
-                currentSpeed = (baseSpeed + (baseSpeed * DashVelocityMultiplier / 3)) * Time.deltaTime;
-                yield return new WaitForSeconds(DashDuration / 15);
-            }
-            for (int i = 0; i < 10; i++)
-            {
-                objectPooler.SpawnFromPool("DashParticle", transform.position, transform.rotation);
-                currentSpeed = (baseSpeed - (baseSpeed * DashVelocityMultiplier / 12)) * Time.deltaTime;
-                yield return new WaitForSeconds(DashDuration / 15);
-            }
-            Debug.Log(Vector2.Distance(oldPos, transform.position));
-
-            currentSpeed = baseSpeed;
-            dashing = false;
-            yield return new WaitForSeconds(DashCooldown);
-            canDash = true;
-        }
-
         private IEnumerator Dash()
         {
-            Debug.Log("");
             canDash = false;
             dashing = true;
             StartCoroutine(DashParticles());
 
             Vector2 oldPos = transform.position;
-
-            float curveMultiplier = 1.5f;
                    
             rb.AddForce((((MovementInput * currentSpeed * DashVelocityMultiplier) * ForceModifier)), ForceMode2D.Impulse);
 
-            yield return new WaitForSeconds(DashDuration);
+            yield return new WaitForSeconds(DashDuration * 0.65f);
+
+            rb.AddForce((((MovementInput * currentSpeed * DashVelocityMultiplier) * -ForceModifier * 0.5f)), ForceMode2D.Impulse);
+
+            yield return new WaitForSeconds(DashDuration * 0.35f);
 
             Debug.Log(Vector2.Distance(oldPos, transform.position));
 

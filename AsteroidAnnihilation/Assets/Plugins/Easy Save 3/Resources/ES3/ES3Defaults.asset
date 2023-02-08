@@ -31,11 +31,19 @@ MonoBehaviour:
     assemblyNames:
     - Assembly-CSharp
     - Assembly-CSharp-firstpass
+    - AK.Wwise.Unity.API
+    - AK.Wwise.Unity.MonoBehaviour
     - Cinemachine
     - Sirenix.OdinInspector.CompatibilityLayer
+    - AK.Wwise.Unity.API.WwiseTypes
+    - AK.Wwise.Unity.Timeline
+    - Ak.Wwise.Api.WAAPI
+    - AK.Wwise.Unity.API.Editor
     - PsdPlugin
     - Sirenix.OdinInspector.CompatibilityLayer.Editor
+    - AK.Wwise.Unity.MonoBehaviour.Editor
     - PPv2URPConverters
+    - AK.Wwise.Unity.Timeline.Editor
     - Sirenix.OdinInspector.Modules.UnityMathematics
     showAdvancedSettings: 0
   addMgrToSceneAutomatically: 0

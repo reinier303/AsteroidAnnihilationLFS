@@ -176,7 +176,24 @@ namespace AsteroidAnnihilation
             int dropAmount = Random.Range(DropTable.DropRange.x, DropTable.DropRange.y);
             for(int i = 0; i < dropAmount; i++)
             {
+                PickUp pickUp = objectPooler.SpawnFromPool("PickUp", transform.position, Quaternion.identity).GetComponent<PickUp>();
 
+                Drop drop = DropTable.GetDrop();
+                pickUp.Initialize(drop);
+                /*
+                switch (drop.ItemType)
+                {
+                    case EnumCollections.ItemType.Weapon:
+                        pickUp.Initialize();
+                        break;
+                    case EnumCollections.ItemType.ShipComponent:
+                        pickUp.Initialize();
+                        break;
+                    case EnumCollections.ItemType.Material:
+                        pickUp.Initialize();
+                        break;
+                }
+                */
             }
         }
         //Old DropPowerUps() method, might use/recycle later

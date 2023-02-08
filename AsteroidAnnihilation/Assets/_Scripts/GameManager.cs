@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
 using UnityEngine.SceneManagement;
+using UnityEditor;
 
 namespace AsteroidAnnihilation
 {
@@ -59,6 +60,14 @@ namespace AsteroidAnnihilation
             player = RPlayer.transform;
             Application.targetFrameRate = targetFramerate;
             CheckVersion();
+        }
+
+        private void Update()
+        {
+            if(Input.GetKey(KeyCode.LeftControl) && Input.GetKey(KeyCode.F9))
+            {
+                Application.targetFrameRate = targetFramerate;
+            }
         }
 
         //TODO EXTREMELY IMPORTANT!!!::Remove this when releasing game. This is testing only to make sure people don't use weird save files

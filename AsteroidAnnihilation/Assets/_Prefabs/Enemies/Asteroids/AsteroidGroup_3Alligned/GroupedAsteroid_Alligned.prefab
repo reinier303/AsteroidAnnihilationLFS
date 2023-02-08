@@ -100,8 +100,7 @@ MonoBehaviour:
   PermanencePartMinMaxAmount: {x: 6, y: 8}
   PermanencePartOutwardsPower: 400
   PermanenceScaleFactor: 0.07
-  Drops: []
-  DropChance: 0
+  DropTable: {fileID: 0}
   spriteRenderer: {fileID: 0}
   isDead: 0
   isInitialized: 0
@@ -121,8 +120,8 @@ MonoBehaviour:
   DeathOnImpact: 0
   enemyType: 
   MaxRotationSpeed: 750
-  MinForce: 1350
-  MaxForce: 1850
+  MinForce: 8
+  MaxForce: 17.5
   MinMaxSize: {x: 0.45, y: 0.75}
   TrailEffects: {fileID: 8430963216233635928}
   groupScript: {fileID: 0}

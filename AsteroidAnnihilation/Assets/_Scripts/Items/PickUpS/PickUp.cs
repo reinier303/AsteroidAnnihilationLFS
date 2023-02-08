@@ -12,6 +12,7 @@ namespace AsteroidAnnihilation
         private AudioManager audioManager;
         private ObjectPooler objectPooler;
 
+        private ItemData itemData;
         private EquipmentData equipmentData; 
         private WeaponData weaponData;
 
@@ -21,13 +22,7 @@ namespace AsteroidAnnihilation
         private GeneralItemSettings generalItemSettings;
         private EnumCollections.ItemType itemType;
 
-        //TEMP FOR TESTING
-        private void Start()
-        {
-            Initialize();
-        }
-
-        public void Initialize()
+        public void Initialize(Drop drop)
         {
             settingsManager = SettingsManager.Instance;
             equipmentManager = EquipmentManager.Instance;
@@ -42,7 +37,22 @@ namespace AsteroidAnnihilation
             icon.sprite = weaponData.EquipmentData.ItemData.Icon;
             //TODO:: Fix this with ObjectPooler and make it return itself to poolparent after disabling
             Instantiate(generalItemSettings.GetRarityMaterial(weaponData.EquipmentData.ItemData.Rarity), transform.position, transform.rotation, transform);
+
+            switch (drop.ItemType)
+            {
+                case EnumCollections.ItemType.Weapon:
+                    //weaponData = drop.Item;
+                    break;
+                case EnumCollections.ItemType.ShipComponent:
+
+                    break;
+                case EnumCollections.ItemType.Material:
+
+                    break;
+            }
         }
+
+
         /*
         private EnumCollections.ItemType GetItemType()
         {

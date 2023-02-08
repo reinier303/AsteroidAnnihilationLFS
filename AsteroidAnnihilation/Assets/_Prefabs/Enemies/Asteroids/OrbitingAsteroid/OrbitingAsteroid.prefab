@@ -9598,7 +9598,7 @@ Transform:
   m_GameObject: {fileID: 2351926512016840094}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2306073959328442464}
@@ -9645,7 +9645,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: 63480c4918f5a134f8cd19ad26e49a9b, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 39ba0c3d537b1ea44a27a5d9a52d4f3d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -9768,8 +9768,7 @@ MonoBehaviour:
   PermanencePartMinMaxAmount: {x: 4, y: 6}
   PermanencePartOutwardsPower: 300
   PermanenceScaleFactor: 0.07
-  Drops: []
-  DropChance: 0
+  DropTable: {fileID: 0}
   spriteRenderer: {fileID: 0}
   isDead: 0
   isInitialized: 0
@@ -9789,8 +9788,8 @@ MonoBehaviour:
   DeathOnImpact: 0
   enemyType: 
   MaxRotationSpeed: 750
-  MinForce: 1350
-  MaxForce: 1950
+  MinForce: 8
+  MaxForce: 17.5
   MinMaxSize: {x: 0.3, y: 0.45}
   TrailEffects: {fileID: 7256237637667824158}
   orbitDistance: 4
