@@ -1,0 +1,6 @@
+Event	ID	Name			Wwise Object Path	Notes
+	3050945240	New_Event			\Default Work Unit\New_Event	
+
+In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
+	399169460	Glass_SlideLoop	D:\Github\AsteroidAnnihilation\AsteroidAnnihilation\AsteroidAnnihilation_WwiseProject\.cache\Mac\SFX\Glass_SlideLoop_D79FB2B7.wem		\Actor-Mixer Hierarchy\Default Work Unit\SpatialSounds\SpatialSounds\Glass_SlideLoop		508236
+
