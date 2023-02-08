@@ -41,10 +41,10 @@ namespace AsteroidAnnihilation
             switch (drop.ItemType)
             {
                 case EnumCollections.ItemType.Weapon:
-                    //weaponData = drop.Item;
+                    weaponData = drop.Weapon.weaponData;
                     break;
                 case EnumCollections.ItemType.ShipComponent:
-
+                    //
                     break;
                 case EnumCollections.ItemType.Material:
 

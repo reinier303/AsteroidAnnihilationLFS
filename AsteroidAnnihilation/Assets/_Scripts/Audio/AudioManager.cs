@@ -86,7 +86,10 @@ namespace AsteroidAnnihilation
 
         public void PlayAudio(string tag)
         {
+
             ScriptableAudio sa = Audios[tag];
+            //sa.Sound.Post(gameObject);
+            /*
             AudioSource audio = objectPooler.SpawnFromPool("AudioSource", transform.position, Quaternion.identity).GetComponent<AudioSource>();
             audio.clip = sa.Clips[Random.Range(0, sa.Clips.Length)];
             audio.volume = Random.Range(sa.VolumeMinMax.x, sa.VolumeMinMax.y) * (MasterVolumePercentage /100) * (SFXVolumePercentage / 100);
@@ -94,6 +97,7 @@ namespace AsteroidAnnihilation
             audio.outputAudioMixerGroup = sa.MixerGroup;
             audio.Play();
             audio.GetComponent<DisableAfterTime>().Disable(audio.clip.length + 1f);
+            */
         }
 
         public virtual void MoveToNextSongRoundRobin()

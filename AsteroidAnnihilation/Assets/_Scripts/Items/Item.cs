@@ -11,6 +11,7 @@ namespace AsteroidAnnihilation
         public int ID;
         public int Tier;
         public string ItemName;
+        public ItemData item;
         public List<Sprite> Icons;
         public Dictionary<EnumCollections.Rarities, float> WeightedRarity;
         public EnumCollections.ItemType ItemType;
