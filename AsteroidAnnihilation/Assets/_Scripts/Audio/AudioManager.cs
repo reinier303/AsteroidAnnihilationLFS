@@ -88,7 +88,7 @@ namespace AsteroidAnnihilation
         {
 
             ScriptableAudio sa = Audios[tag];
-            //sa.Sound.Post(gameObject);
+            sa.Sound.Post(gameObject);
             /*
             AudioSource audio = objectPooler.SpawnFromPool("AudioSource", transform.position, Quaternion.identity).GetComponent<AudioSource>();
             audio.clip = sa.Clips[Random.Range(0, sa.Clips.Length)];

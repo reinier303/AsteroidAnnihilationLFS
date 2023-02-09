@@ -22,23 +22,6 @@
 				<Bus Id="3803692087" Name="Master Audio Bus"/>
 			</Busses>
 		</SoundBank>
-		<SoundBank Id="2228651116" Type="User" Language="SFX" Hash="{5B0083CD-7303-EC67-19B7-C7803F658EDF}">
-			<ShortName>Main_SoundBank</ShortName>
-			<Path>Main_SoundBank.bnk</Path>
-			<Media>
-				<File Id="399169460" Language="SFX" Streaming="false" Location="Memory">
-					<ShortName>Glass_SlideLoop.wav</ShortName>
-					<CachePath>SFX/Glass_SlideLoop_D79FB2B7.wem</CachePath>
-				</File>
-			</Media>
-			<Events>
-				<Event Id="3050945240" Name="New_Event" DurationType="Infinite">
-					<MediaRefs>
-						<MediaRef Id="399169460"/>
-					</MediaRefs>
-				</Event>
-			</Events>
-		</SoundBank>
 	</SoundBanks>
-	<FileHash>{F4D85436-3CA3-E784-B7D2-2AADC0AF4789}</FileHash>
+	<FileHash>{85FB997E-979E-429B-B6F1-CF88BB808457}</FileHash>
 </SoundBanksInfo>
