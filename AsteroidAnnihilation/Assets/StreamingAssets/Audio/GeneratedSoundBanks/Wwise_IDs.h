@@ -25,7 +25,7 @@ namespace AK
     namespace BANKS
     {
         static const AkUniqueID INIT = 1355168291U;
-        static const AkUniqueID MAIN_SOUNDBANK = 2228651116U;
+        static const AkUniqueID BASE_SOUNDBANK = 3149804152U;
     } // namespace BANKS
 
     namespace BUSSES
