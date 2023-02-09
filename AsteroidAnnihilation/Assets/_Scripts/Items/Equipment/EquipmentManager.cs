@@ -187,6 +187,18 @@ namespace AsteroidAnnihilation
             }
             return equipmentData;
         }
+
+        public ItemData GenerateItemData(Item item)
+        {
+            ItemData itemData = new ItemData();
+            itemData.ItemName = item.ItemName;
+            itemData.Tier = item.Tier;
+            itemData.Rarity = item.GetRarity();
+            itemData.ItemType = item.ItemType;
+            itemData.Icon = item.GetIcon();
+            itemData.Amount = 0;
+            return itemData;
+        }
         
         public Weapon GetWeapon(EnumCollections.Weapons weaponType)
         {

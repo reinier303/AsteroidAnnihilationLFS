@@ -290,5 +290,6 @@ namespace AsteroidAnnihilation
         public EnumCollections.Rarities Rarity;
         public EnumCollections.ItemType ItemType;
         public Sprite Icon;
+        public int Amount;
     }
 }

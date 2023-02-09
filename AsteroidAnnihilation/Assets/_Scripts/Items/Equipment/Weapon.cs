@@ -10,7 +10,6 @@ namespace AsteroidAnnihilation
     {
         public EnumCollections.Weapons WeaponType;
         public EnumCollections.PlayerProjectiles ProjectileType;
-        public WeaponData weaponData;
         public int WeaponIndex;
 
         private UIManager uIManager;

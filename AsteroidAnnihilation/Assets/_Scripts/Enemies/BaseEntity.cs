@@ -179,21 +179,8 @@ namespace AsteroidAnnihilation
                 PickUp pickUp = objectPooler.SpawnFromPool("PickUp", transform.position, Quaternion.identity).GetComponent<PickUp>();
 
                 Drop drop = DropTable.GetDrop();
+                if (drop.Equals(default(Drop))) { return; };
                 pickUp.Initialize(drop);
-                /*
-                switch (drop.ItemType)
-                {
-                    case EnumCollections.ItemType.Weapon:
-                        pickUp.Initialize();
-                        break;
-                    case EnumCollections.ItemType.ShipComponent:
-                        pickUp.Initialize();
-                        break;
-                    case EnumCollections.ItemType.Material:
-                        pickUp.Initialize();
-                        break;
-                }
-                */
             }
         }
         //Old DropPowerUps() method, might use/recycle later

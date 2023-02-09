@@ -85,7 +85,6 @@ MonoBehaviour:
       Data: 
   ID: 0
   Tier: 0
-  ItemName: Swarm Claw
-  Icons:
-  - {fileID: 21300000, guid: 7f1b2ba3a6f6ff94f885d6dc7d375d15, type: 3}
-  ItemType: 4
+  ItemName: 
+  Icons: []
+  ItemType: 0

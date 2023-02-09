@@ -11,7 +11,6 @@ namespace AsteroidAnnihilation
     { 
         [SerializeField] public Dictionary<EnumCollections.Stats, Vector2> EquipmentStatRanges;
         [SerializeField] protected Dictionary<EnumCollections.Stats, Vector2> RarityStatRanges;
-        EquipmentData equipmentData;
         protected PlayerStats playerStats;
         protected EquipmentManager equipmentManager;
         public string BaseEquipmentName;

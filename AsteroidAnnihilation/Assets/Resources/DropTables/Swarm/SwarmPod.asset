@@ -15,13 +15,150 @@ MonoBehaviour:
   serializationData:
     SerializedFormat: 2
     SerializedBytes: 
-    ReferencedUnityObjects: []
+    ReferencedUnityObjects:
+    - {fileID: 11400000, guid: 84fd4c5273b4f4d418e8f0c9fa3be5ca, type: 2}
+    - {fileID: 11400000, guid: a9228c047412cdf48815333686656bd3, type: 2}
+    - {fileID: 11400000, guid: 9d3c35bc261f46745b29cb196806b873, type: 2}
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
     SerializationNodes:
     - Name: Drops
+      Entry: 7
+      Data: 0|System.Collections.Generic.Dictionary`2[[AsteroidAnnihilation.Drop,
+        Assembly-CSharp],[System.Single, mscorlib]], mscorlib
+    - Name: comparer
+      Entry: 7
+      Data: 1|System.Collections.Generic.ObjectEqualityComparer`1[[AsteroidAnnihilation.Drop,
+        Assembly-CSharp]], mscorlib
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 12
+      Data: 3
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 7
+      Data: AsteroidAnnihilation.Drop, Assembly-CSharp
+    - Name: AmountRange
+      Entry: 7
+      Data: UnityEngine.Vector2Int, UnityEngine.CoreModule
+    - Name: 
+      Entry: 3
+      Data: 1
+    - Name: 
+      Entry: 3
+      Data: 1
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: ItemType
+      Entry: 3
+      Data: 4
+    - Name: Item
       Entry: 6
       Data: 
-  DropRange: {x: 0, y: 0}
+    - Name: Equipment
+      Entry: 6
+      Data: 
+    - Name: Weapon
+      Entry: 10
+      Data: 0
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: $v
+      Entry: 4
+      Data: 0.5
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 7
+      Data: AsteroidAnnihilation.Drop, Assembly-CSharp
+    - Name: AmountRange
+      Entry: 7
+      Data: UnityEngine.Vector2Int, UnityEngine.CoreModule
+    - Name: 
+      Entry: 3
+      Data: 0
+    - Name: 
+      Entry: 3
+      Data: 0
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: ItemType
+      Entry: 3
+      Data: 0
+    - Name: Item
+      Entry: 10
+      Data: 1
+    - Name: Equipment
+      Entry: 6
+      Data: 
+    - Name: Weapon
+      Entry: 6
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: $v
+      Entry: 4
+      Data: 25
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 7
+      Data: AsteroidAnnihilation.Drop, Assembly-CSharp
+    - Name: AmountRange
+      Entry: 7
+      Data: UnityEngine.Vector2Int, UnityEngine.CoreModule
+    - Name: 
+      Entry: 3
+      Data: 0
+    - Name: 
+      Entry: 3
+      Data: 0
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: ItemType
+      Entry: 3
+      Data: 0
+    - Name: Item
+      Entry: 10
+      Data: 2
+    - Name: Equipment
+      Entry: 6
+      Data: 
+    - Name: Weapon
+      Entry: 6
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: $v
+      Entry: 4
+      Data: 60
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+  DropRange: {x: 0, y: 2}
