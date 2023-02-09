@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<WwiseDocument Type="WorkUnit" ID="{FB58E548-1755-4E4F-BAAD-5A3C2CFA73F4}" SchemaVersion="110">
+	<Events>
+		<WorkUnit Name="TestSounds" ID="{FB58E548-1755-4E4F-BAAD-5A3C2CFA73F4}" PersistMode="Standalone">
+			<ChildrenList>
+				<Event Name="Temp_Play_PlasmaGunShot1" ID="{1AB8F534-1047-4C9D-8E63-D0F6919E76FC}">
+					<ChildrenList>
+						<Action Name="" ID="{55FD8E9C-DB61-42CB-83F7-A1B9CE368C53}" ShortID="999096081">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="PlasmaGunShot1" ID="{7742F14C-636C-4BBE-9282-7C079FA5F15E}" WorkUnitID="{0EF3220C-CDB5-4CE9-BC74-7110775D2EE4}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Temp_Play_Levelup" ID="{8AA32631-3D9F-4765-B67A-B1CE3AAD4E07}">
+					<ChildrenList>
+						<Action Name="" ID="{B6084DFC-92F9-4A7B-AFA2-A3F427C8208E}" ShortID="805677834">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="Levelup" ID="{3884B3DE-B29E-480D-8D89-118D327E76CE}" WorkUnitID="{0EF3220C-CDB5-4CE9-BC74-7110775D2EE4}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Temp_Play_etfx_shoot_laser" ID="{D3F05A7B-116C-4DE5-9766-0763B8008B07}">
+					<ChildrenList>
+						<Action Name="" ID="{765A37A6-ED5D-4203-AA35-998840FD71AB}" ShortID="405959183">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="etfx_shoot_laser" ID="{93FF0CE2-7DB5-420A-BD71-B8A1C8212DAB}" WorkUnitID="{0EF3220C-CDB5-4CE9-BC74-7110775D2EE4}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Temp_Play_SwarmExplosion" ID="{4A96B882-AAE9-4388-A0CF-FA4DE877F8EA}">
+					<ChildrenList>
+						<Action Name="" ID="{C73116EB-7E53-4CB1-8EE2-11EBED1D1D01}" ShortID="793670887">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="SwarmExplosion" ID="{6486D236-FBA9-4E27-9424-07BBE3EC1176}" WorkUnitID="{0EF3220C-CDB5-4CE9-BC74-7110775D2EE4}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Temp_Play_PlasmaGunShot2" ID="{7315599C-C82F-4067-A0F0-C0B4BB594926}">
+					<ChildrenList>
+						<Action Name="" ID="{186EE27A-EF39-4339-808A-F422F2EB9C10}" ShortID="107108684">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="PlasmaGunShot2" ID="{D1E1AF97-601E-46A7-848E-BE073C575058}" WorkUnitID="{0EF3220C-CDB5-4CE9-BC74-7110775D2EE4}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Temp_Play_PlasmaGunShot4" ID="{1695487B-E8BF-4DD8-9539-7C9E63BC0E94}">
+					<ChildrenList>
+						<Action Name="" ID="{E5FDF9A0-9F7E-4123-8C08-A94809071248}" ShortID="316864850">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="PlasmaGunShot4" ID="{B2F53C72-C071-45B2-8652-72FF26108FDA}" WorkUnitID="{0EF3220C-CDB5-4CE9-BC74-7110775D2EE4}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Temp_Play_PlasmaGunShot3" ID="{9C071490-97CF-4FE3-AD74-3E74C6412B64}">
+					<ChildrenList>
+						<Action Name="" ID="{8E645DCD-E59C-4A37-9484-9CB1E2C7AE72}" ShortID="706859510">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="PlasmaGunShot3" ID="{7B25D556-93E5-4425-BC7B-CDB7288DE4CE}" WorkUnitID="{0EF3220C-CDB5-4CE9-BC74-7110775D2EE4}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+			</ChildrenList>
+		</WorkUnit>
+	</Events>
+</WwiseDocument>

@@ -66,8 +66,22 @@ MonoBehaviour:
     ParentPath: SoundBanks\Default Work Unit
     guid: c41b77c2168a854c8da7ed3209b64741
     GuidInternal: 
-    m_lastTime: -8585257352578623259
-    List: []
+    m_lastTime: -8585256601411648330
+    List:
+    - name: Base_SoundBank
+      guid: 488dedfda64bd14ba76e280a55573b02
+      id: 3149804152
+      PathAndIcons:
+      - ElementName: SoundBanks
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: c41b77c2168a854c8da7ed3209b64741
+      - ElementName: Base_SoundBank
+        ObjectType: 7
+        guid: 488dedfda64bd14ba76e280a55573b02
+      Path: SoundBanks\Default Work Unit\Base_SoundBank
   EventWwu:
   - PhysicalPath: Events\Default Work Unit.wwu
     PathAndIcons:
@@ -80,8 +94,166 @@ MonoBehaviour:
     ParentPath: Events\Default Work Unit
     guid: d00ab9fa6d1ffe4bb3dfa6c68ccf2739
     GuidInternal: 
-    m_lastTime: -8585257352578623259
+    m_lastTime: -8585256601411708181
     List: []
+  - PhysicalPath: Events\Enemies.wwu
+    PathAndIcons:
+    - ElementName: Events
+      ObjectType: 5
+      guid: 00000000000000000000000000000000
+    - ElementName: Enemies
+      ObjectType: 12
+      guid: a095558296356f40ba6397908977d23b
+    ParentPath: Events\Enemies
+    guid: a095558296356f40ba6397908977d23b
+    GuidInternal: 
+    m_lastTime: -8585256601579872673
+    List: []
+  - PhysicalPath: Events\PlayerShip.wwu
+    PathAndIcons:
+    - ElementName: Events
+      ObjectType: 5
+      guid: 00000000000000000000000000000000
+    - ElementName: PlayerShip
+      ObjectType: 12
+      guid: 57f35acf701a1948bd901d61fd34ac0a
+    ParentPath: Events\PlayerShip
+    guid: 57f35acf701a1948bd901d61fd34ac0a
+    GuidInternal: 
+    m_lastTime: -8585256601652197327
+    List: []
+  - PhysicalPath: Events\TestSounds.wwu
+    PathAndIcons:
+    - ElementName: Events
+      ObjectType: 5
+      guid: 00000000000000000000000000000000
+    - ElementName: TestSounds
+      ObjectType: 12
+      guid: 48e558fb55174f4ebaad5a3c2cfa73f4
+    ParentPath: Events\TestSounds
+    guid: 48e558fb55174f4ebaad5a3c2cfa73f4
+    GuidInternal: 
+    m_lastTime: -8585256601411558590
+    List:
+    - name: Temp_Play_etfx_shoot_laser
+      guid: 7b5af0d36c11e54d97660763b8008b07
+      id: 3201422434
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: TestSounds
+        ObjectType: 12
+        guid: 48e558fb55174f4ebaad5a3c2cfa73f4
+      - ElementName: Temp_Play_etfx_shoot_laser
+        ObjectType: 3
+        guid: 7b5af0d36c11e54d97660763b8008b07
+      Path: Events\TestSounds\Temp_Play_etfx_shoot_laser
+      maxAttenuation: 0
+      maxDuration: -1
+      minDuration: -1
+    - name: Temp_Play_Levelup
+      guid: 3126a38a9f3d6547b67ab1ce3aad4e07
+      id: 1450272620
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: TestSounds
+        ObjectType: 12
+        guid: 48e558fb55174f4ebaad5a3c2cfa73f4
+      - ElementName: Temp_Play_Levelup
+        ObjectType: 3
+        guid: 3126a38a9f3d6547b67ab1ce3aad4e07
+      Path: Events\TestSounds\Temp_Play_Levelup
+      maxAttenuation: 0
+      maxDuration: -1
+      minDuration: -1
+    - name: Temp_Play_PlasmaGunShot1
+      guid: 34f5b81a47109d4c8e63d0f6919e76fc
+      id: 3965960414
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: TestSounds
+        ObjectType: 12
+        guid: 48e558fb55174f4ebaad5a3c2cfa73f4
+      - ElementName: Temp_Play_PlasmaGunShot1
+        ObjectType: 3
+        guid: 34f5b81a47109d4c8e63d0f6919e76fc
+      Path: Events\TestSounds\Temp_Play_PlasmaGunShot1
+      maxAttenuation: 0
+      maxDuration: -1
+      minDuration: -1
+    - name: Temp_Play_PlasmaGunShot2
+      guid: 9c5915732fc86740a0f0c0b4bb594926
+      id: 3965960413
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: TestSounds
+        ObjectType: 12
+        guid: 48e558fb55174f4ebaad5a3c2cfa73f4
+      - ElementName: Temp_Play_PlasmaGunShot2
+        ObjectType: 3
+        guid: 9c5915732fc86740a0f0c0b4bb594926
+      Path: Events\TestSounds\Temp_Play_PlasmaGunShot2
+      maxAttenuation: 0
+      maxDuration: -1
+      minDuration: -1
+    - name: Temp_Play_PlasmaGunShot3
+      guid: 9014079ccf97e34fad743e74c6412b64
+      id: 3965960412
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: TestSounds
+        ObjectType: 12
+        guid: 48e558fb55174f4ebaad5a3c2cfa73f4
+      - ElementName: Temp_Play_PlasmaGunShot3
+        ObjectType: 3
+        guid: 9014079ccf97e34fad743e74c6412b64
+      Path: Events\TestSounds\Temp_Play_PlasmaGunShot3
+      maxAttenuation: 0
+      maxDuration: -1
+      minDuration: -1
+    - name: Temp_Play_PlasmaGunShot4
+      guid: 7b489516bfe8d84d95397c9e63bc0e94
+      id: 3965960411
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: TestSounds
+        ObjectType: 12
+        guid: 48e558fb55174f4ebaad5a3c2cfa73f4
+      - ElementName: Temp_Play_PlasmaGunShot4
+        ObjectType: 3
+        guid: 7b489516bfe8d84d95397c9e63bc0e94
+      Path: Events\TestSounds\Temp_Play_PlasmaGunShot4
+      maxAttenuation: 0
+      maxDuration: -1
+      minDuration: -1
+    - name: Temp_Play_SwarmExplosion
+      guid: 82b8964ae9aa8843a0cffa4de877f8ea
+      id: 2360230854
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: TestSounds
+        ObjectType: 12
+        guid: 48e558fb55174f4ebaad5a3c2cfa73f4
+      - ElementName: Temp_Play_SwarmExplosion
+        ObjectType: 3
+        guid: 82b8964ae9aa8843a0cffa4de877f8ea
+      Path: Events\TestSounds\Temp_Play_SwarmExplosion
+      maxAttenuation: 0
+      maxDuration: -1
+      minDuration: -1
   RtpcWwu:
   - PhysicalPath: Game Parameters\Default Work Unit.wwu
     PathAndIcons:
@@ -139,7 +311,7 @@ MonoBehaviour:
     m_lastTime: -8585257520608314453
     List: []
   ExpandedFileSystemItemIds: 
-  ExpandedWaapiItemIds: 03000000060000000a000000100000009300000094000000
+  ExpandedWaapiItemIds: 03000000060000000a00000010000000930000009400000007d30a00
   AutoSyncSelection: 0
   autoPopulateEnabled: 1
   currentDataSource: 0

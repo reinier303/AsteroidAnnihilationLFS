@@ -1,6 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <WwiseDocument Type="WorkUnit" ID="{C2771BC4-8A16-4C85-8DA7-ED3209B64741}" SchemaVersion="110">
 	<SoundBanks>
-		<WorkUnit Name="Default Work Unit" ID="{C2771BC4-8A16-4C85-8DA7-ED3209B64741}" PersistMode="Standalone"/>
+		<WorkUnit Name="Default Work Unit" ID="{C2771BC4-8A16-4C85-8DA7-ED3209B64741}" PersistMode="Standalone">
+			<ChildrenList>
+				<SoundBank Name="Base_SoundBank" ID="{FDED8D48-4BA6-4BD1-A76E-280A55573B02}">
+					<ObjectInclusionList>
+						<ObjectRef Name="Temp_Play_PlasmaGunShot2" ID="{7315599C-C82F-4067-A0F0-C0B4BB594926}" WorkUnitID="{FB58E548-1755-4E4F-BAAD-5A3C2CFA73F4}" Origin="Manual" Filter="7"/>
+						<ObjectRef Name="Temp_Play_SwarmExplosion" ID="{4A96B882-AAE9-4388-A0CF-FA4DE877F8EA}" WorkUnitID="{FB58E548-1755-4E4F-BAAD-5A3C2CFA73F4}" Origin="Manual" Filter="7"/>
+						<ObjectRef Name="Temp_Play_Levelup" ID="{8AA32631-3D9F-4765-B67A-B1CE3AAD4E07}" WorkUnitID="{FB58E548-1755-4E4F-BAAD-5A3C2CFA73F4}" Origin="Manual" Filter="7"/>
+						<ObjectRef Name="Events" ID="{A69BF0FC-D84A-487C-ABDD-56F71CB2A126}" WorkUnitID="{A69BF0FC-D84A-487C-ABDD-56F71CB2A126}" Origin="Manual" Filter="7"/>
+						<ObjectRef Name="Temp_Play_PlasmaGunShot1" ID="{1AB8F534-1047-4C9D-8E63-D0F6919E76FC}" WorkUnitID="{FB58E548-1755-4E4F-BAAD-5A3C2CFA73F4}" Origin="Manual" Filter="7"/>
+						<ObjectRef Name="Temp_Play_PlasmaGunShot4" ID="{1695487B-E8BF-4DD8-9539-7C9E63BC0E94}" WorkUnitID="{FB58E548-1755-4E4F-BAAD-5A3C2CFA73F4}" Origin="Manual" Filter="7"/>
+						<ObjectRef Name="Temp_Play_etfx_shoot_laser" ID="{D3F05A7B-116C-4DE5-9766-0763B8008B07}" WorkUnitID="{FB58E548-1755-4E4F-BAAD-5A3C2CFA73F4}" Origin="Manual" Filter="7"/>
+						<ObjectRef Name="Temp_Play_PlasmaGunShot3" ID="{9C071490-97CF-4FE3-AD74-3E74C6412B64}" WorkUnitID="{FB58E548-1755-4E4F-BAAD-5A3C2CFA73F4}" Origin="Manual" Filter="7"/>
+					</ObjectInclusionList>
+					<ObjectExclusionList/>
+					<GameSyncExclusionList/>
+				</SoundBank>
+			</ChildrenList>
+		</WorkUnit>
 	</SoundBanks>
 </WwiseDocument>

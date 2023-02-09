@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<WwiseDocument Type="WorkUnit" ID="{7ADE7C66-E2C3-4730-B377-D68E9204C3E4}" SchemaVersion="110">
+	<AudioObjects>
+		<WorkUnit Name="Enemies" ID="{7ADE7C66-E2C3-4730-B377-D68E9204C3E4}" PersistMode="Standalone">
+			<ChildrenList>
+				<ActorMixer Name="EnemiesSpatial2D" ID="{D41BE755-4698-4DFB-9B94-DD7E2F4ED381}" ShortID="108583862">
+					<PropertyList>
+						<Property Name="3DSpatialization" Type="int16" Value="1"/>
+					</PropertyList>
+					<ReferenceList>
+						<Reference Name="Conversion">
+							<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{48B64D56-5878-4F5F-B835-6B67C639CEB5}"/>
+						</Reference>
+						<Reference Name="OutputBus">
+							<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{1060F7F7-C771-4C58-A5D5-65E67559C019}"/>
+						</Reference>
+					</ReferenceList>
+					<ChildrenList>
+						<ActorMixer Name="EnemyWeapons" ID="{CABCC160-59D2-4A59-85C2-935A8EFA472B}" ShortID="642791636">
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{48B64D56-5878-4F5F-B835-6B67C639CEB5}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{1060F7F7-C771-4C58-A5D5-65E67559C019}"/>
+								</Reference>
+							</ReferenceList>
+						</ActorMixer>
+					</ChildrenList>
+				</ActorMixer>
+			</ChildrenList>
+		</WorkUnit>
+	</AudioObjects>
+</WwiseDocument>

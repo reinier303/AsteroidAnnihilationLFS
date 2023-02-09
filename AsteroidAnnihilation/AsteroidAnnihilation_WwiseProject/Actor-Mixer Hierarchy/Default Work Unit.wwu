@@ -1,6 +1,167 @@
 <?xml version="1.0" encoding="utf-8"?>
 <WwiseDocument Type="WorkUnit" ID="{0EF3220C-CDB5-4CE9-BC74-7110775D2EE4}" SchemaVersion="110">
 	<AudioObjects>
-		<WorkUnit Name="Default Work Unit" ID="{0EF3220C-CDB5-4CE9-BC74-7110775D2EE4}" PersistMode="Standalone"/>
+		<WorkUnit Name="Default Work Unit" ID="{0EF3220C-CDB5-4CE9-BC74-7110775D2EE4}" PersistMode="Standalone">
+			<ChildrenList>
+				<Folder Name="SFX_Temp" ID="{21980EC5-096D-458F-B937-998606CAB556}" ShortID="1057611768">
+					<ChildrenList>
+						<Sound Name="etfx_shoot_laser" ID="{93FF0CE2-7DB5-420A-BD71-B8A1C8212DAB}" ShortID="1054434825">
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{48B64D56-5878-4F5F-B835-6B67C639CEB5}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{1060F7F7-C771-4C58-A5D5-65E67559C019}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<AudioFileSource Name="etfx_shoot_laser" ID="{B90779E4-1A3E-4D7E-8821-B7ECD2DF619D}">
+									<Language>SFX</Language>
+									<AudioFile>SFX_Temp\etfx_shoot_laser.wav</AudioFile>
+									<MediaIDList>
+										<MediaID ID="788860315"/>
+									</MediaIDList>
+								</AudioFileSource>
+							</ChildrenList>
+							<ActiveSourceList>
+								<ActiveSource Name="etfx_shoot_laser" ID="{B90779E4-1A3E-4D7E-8821-B7ECD2DF619D}" Platform="Linked"/>
+							</ActiveSourceList>
+						</Sound>
+						<Sound Name="Levelup" ID="{3884B3DE-B29E-480D-8D89-118D327E76CE}" ShortID="685870416">
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{48B64D56-5878-4F5F-B835-6B67C639CEB5}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{1060F7F7-C771-4C58-A5D5-65E67559C019}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<AudioFileSource Name="Levelup" ID="{652E9625-CA13-4877-A963-35C1CA08C9E6}">
+									<Language>SFX</Language>
+									<AudioFile>SFX_Temp\Levelup.wav</AudioFile>
+									<MediaIDList>
+										<MediaID ID="723541179"/>
+									</MediaIDList>
+								</AudioFileSource>
+							</ChildrenList>
+							<ActiveSourceList>
+								<ActiveSource Name="Levelup" ID="{652E9625-CA13-4877-A963-35C1CA08C9E6}" Platform="Linked"/>
+							</ActiveSourceList>
+						</Sound>
+						<Sound Name="PlasmaGunShot1" ID="{7742F14C-636C-4BBE-9282-7C079FA5F15E}" ShortID="929241264">
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{48B64D56-5878-4F5F-B835-6B67C639CEB5}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{1060F7F7-C771-4C58-A5D5-65E67559C019}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<AudioFileSource Name="PlasmaGunShot1" ID="{53CF4F02-EAE4-4D17-9F22-04E6DE787D7F}">
+									<Language>SFX</Language>
+									<AudioFile>SFX_Temp\PlasmaGunShot1.wav</AudioFile>
+									<MediaIDList>
+										<MediaID ID="276439328"/>
+									</MediaIDList>
+								</AudioFileSource>
+							</ChildrenList>
+							<ActiveSourceList>
+								<ActiveSource Name="PlasmaGunShot1" ID="{53CF4F02-EAE4-4D17-9F22-04E6DE787D7F}" Platform="Linked"/>
+							</ActiveSourceList>
+						</Sound>
+						<Sound Name="PlasmaGunShot2" ID="{D1E1AF97-601E-46A7-848E-BE073C575058}" ShortID="1062037104">
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{48B64D56-5878-4F5F-B835-6B67C639CEB5}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{1060F7F7-C771-4C58-A5D5-65E67559C019}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<AudioFileSource Name="PlasmaGunShot2" ID="{428BBA35-2CD8-45A4-ACD3-061CDD69E308}">
+									<Language>SFX</Language>
+									<AudioFile>SFX_Temp\PlasmaGunShot2.wav</AudioFile>
+									<MediaIDList>
+										<MediaID ID="375205690"/>
+									</MediaIDList>
+								</AudioFileSource>
+							</ChildrenList>
+							<ActiveSourceList>
+								<ActiveSource Name="PlasmaGunShot2" ID="{428BBA35-2CD8-45A4-ACD3-061CDD69E308}" Platform="Linked"/>
+							</ActiveSourceList>
+						</Sound>
+						<Sound Name="PlasmaGunShot3" ID="{7B25D556-93E5-4425-BC7B-CDB7288DE4CE}" ShortID="226758501">
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{48B64D56-5878-4F5F-B835-6B67C639CEB5}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{1060F7F7-C771-4C58-A5D5-65E67559C019}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<AudioFileSource Name="PlasmaGunShot3" ID="{807B130E-F586-4226-B186-FA4D3410F437}">
+									<Language>SFX</Language>
+									<AudioFile>SFX_Temp\PlasmaGunShot3.wav</AudioFile>
+									<MediaIDList>
+										<MediaID ID="1060657738"/>
+									</MediaIDList>
+								</AudioFileSource>
+							</ChildrenList>
+							<ActiveSourceList>
+								<ActiveSource Name="PlasmaGunShot3" ID="{807B130E-F586-4226-B186-FA4D3410F437}" Platform="Linked"/>
+							</ActiveSourceList>
+						</Sound>
+						<Sound Name="PlasmaGunShot4" ID="{B2F53C72-C071-45B2-8652-72FF26108FDA}" ShortID="209264132">
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{48B64D56-5878-4F5F-B835-6B67C639CEB5}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{1060F7F7-C771-4C58-A5D5-65E67559C019}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<AudioFileSource Name="PlasmaGunShot4" ID="{382DD424-B2D3-4CB3-B546-2D48288B75BF}">
+									<Language>SFX</Language>
+									<AudioFile>SFX_Temp\PlasmaGunShot4.wav</AudioFile>
+									<MediaIDList>
+										<MediaID ID="215372480"/>
+									</MediaIDList>
+								</AudioFileSource>
+							</ChildrenList>
+							<ActiveSourceList>
+								<ActiveSource Name="PlasmaGunShot4" ID="{382DD424-B2D3-4CB3-B546-2D48288B75BF}" Platform="Linked"/>
+							</ActiveSourceList>
+						</Sound>
+						<Sound Name="SwarmExplosion" ID="{6486D236-FBA9-4E27-9424-07BBE3EC1176}" ShortID="1063708838">
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{48B64D56-5878-4F5F-B835-6B67C639CEB5}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{1060F7F7-C771-4C58-A5D5-65E67559C019}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<AudioFileSource Name="SwarmExplosion" ID="{D0A2C962-60CD-407A-B34F-15ABCC8BB0ED}">
+									<Language>SFX</Language>
+									<AudioFile>SFX_Temp\SwarmExplosion.wav</AudioFile>
+									<MediaIDList>
+										<MediaID ID="809888030"/>
+									</MediaIDList>
+								</AudioFileSource>
+							</ChildrenList>
+							<ActiveSourceList>
+								<ActiveSource Name="SwarmExplosion" ID="{D0A2C962-60CD-407A-B34F-15ABCC8BB0ED}" Platform="Linked"/>
+							</ActiveSourceList>
+						</Sound>
+					</ChildrenList>
+				</Folder>
+			</ChildrenList>
+		</WorkUnit>
 	</AudioObjects>
 </WwiseDocument>

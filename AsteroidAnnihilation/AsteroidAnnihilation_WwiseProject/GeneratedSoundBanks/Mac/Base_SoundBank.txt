@@ -1,0 +1,18 @@
+Event	ID	Name			Wwise Object Path	Notes
+	1202337555	Play_Levelup			\Default Work Unit\Play_Levelup	
+	1317655472	Play_PlasmaGunShot2			\Default Work Unit\Play_PlasmaGunShot2	
+	1317655473	Play_PlasmaGunShot3			\Default Work Unit\Play_PlasmaGunShot3	
+	1317655475	Play_PlasmaGunShot1			\Default Work Unit\Play_PlasmaGunShot1	
+	1317655478	Play_PlasmaGunShot4			\Default Work Unit\Play_PlasmaGunShot4	
+	2574519627	Play_etfx_shoot_laser			\Default Work Unit\Play_etfx_shoot_laser	
+	4211333239	Play_SwarmExplosion			\Default Work Unit\Play_SwarmExplosion	
+
+In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
+	215372480	PlasmaGunShot4	D:\Github\AsteroidAnnihilation\AsteroidAnnihilation\AsteroidAnnihilation_WwiseProject\.cache\Mac\SFX\SFX_Temp\PlasmaGunShot4_10C4C929.wem		\Actor-Mixer Hierarchy\Default Work Unit\SFX_Temp\PlasmaGunShot4		254112
+	276439328	PlasmaGunShot1	D:\Github\AsteroidAnnihilation\AsteroidAnnihilation\AsteroidAnnihilation_WwiseProject\.cache\Mac\SFX\SFX_Temp\PlasmaGunShot1_10C4C929.wem		\Actor-Mixer Hierarchy\Default Work Unit\SFX_Temp\PlasmaGunShot1		254112
+	375205690	PlasmaGunShot2	D:\Github\AsteroidAnnihilation\AsteroidAnnihilation\AsteroidAnnihilation_WwiseProject\.cache\Mac\SFX\SFX_Temp\PlasmaGunShot2_10C4C929.wem		\Actor-Mixer Hierarchy\Default Work Unit\SFX_Temp\PlasmaGunShot2		254112
+	723541179	Levelup	D:\Github\AsteroidAnnihilation\AsteroidAnnihilation\AsteroidAnnihilation_WwiseProject\.cache\Mac\SFX\SFX_Temp\Levelup_10C4C929.wem		\Actor-Mixer Hierarchy\Default Work Unit\SFX_Temp\Levelup		591620
+	788860315	etfx_shoot_laser	D:\Github\AsteroidAnnihilation\AsteroidAnnihilation\AsteroidAnnihilation_WwiseProject\.cache\Mac\SFX\SFX_Temp\etfx_shoot_laser_10C4C929.wem		\Actor-Mixer Hierarchy\Default Work Unit\SFX_Temp\etfx_shoot_laser		84576
+	809888030	SwarmExplosion	D:\Github\AsteroidAnnihilation\AsteroidAnnihilation\AsteroidAnnihilation_WwiseProject\.cache\Mac\SFX\SFX_Temp\SwarmExplosion_10C4C929.wem		\Actor-Mixer Hierarchy\Default Work Unit\SFX_Temp\SwarmExplosion		176496
+	1060657738	PlasmaGunShot3	D:\Github\AsteroidAnnihilation\AsteroidAnnihilation\AsteroidAnnihilation_WwiseProject\.cache\Mac\SFX\SFX_Temp\PlasmaGunShot3_10C4C929.wem		\Actor-Mixer Hierarchy\Default Work Unit\SFX_Temp\PlasmaGunShot3		254112
+
