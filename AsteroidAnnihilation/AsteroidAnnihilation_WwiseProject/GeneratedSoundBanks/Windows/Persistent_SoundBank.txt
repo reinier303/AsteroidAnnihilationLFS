@@ -1,11 +1,29 @@
 Event	ID	Name			Wwise Object Path	Notes
-	1202337555	Play_Levelup			\Default Work Unit\Play_Levelup	
-	1317655472	Play_PlasmaGunShot2			\Default Work Unit\Play_PlasmaGunShot2	
-	1317655473	Play_PlasmaGunShot3			\Default Work Unit\Play_PlasmaGunShot3	
-	1317655475	Play_PlasmaGunShot1			\Default Work Unit\Play_PlasmaGunShot1	
-	1317655478	Play_PlasmaGunShot4			\Default Work Unit\Play_PlasmaGunShot4	
-	2574519627	Play_etfx_shoot_laser			\Default Work Unit\Play_etfx_shoot_laser	
-	4211333239	Play_SwarmExplosion			\Default Work Unit\Play_SwarmExplosion	
+	1450272620	Temp_Play_Levelup			\TestSounds\Temp_Play_Levelup	
+	2360230854	Temp_Play_SwarmExplosion			\TestSounds\Temp_Play_SwarmExplosion	
+	3201422434	Temp_Play_etfx_shoot_laser			\TestSounds\Temp_Play_etfx_shoot_laser	
+	3965960411	Temp_Play_PlasmaGunShot4			\TestSounds\Temp_Play_PlasmaGunShot4	
+	3965960412	Temp_Play_PlasmaGunShot3			\TestSounds\Temp_Play_PlasmaGunShot3	
+	3965960413	Temp_Play_PlasmaGunShot2			\TestSounds\Temp_Play_PlasmaGunShot2	
+	3965960414	Temp_Play_PlasmaGunShot1			\TestSounds\Temp_Play_PlasmaGunShot1	
+
+Switch Group	ID	Name			Wwise Object Path	Notes
+	2663975140	PlayerShipGunLevel			\Default Work Unit\PlayerShipSwitches\PlayerShipGunLevel	
+	2792155054	PlayerShipHealthSwitch			\Default Work Unit\PlayerShipSwitches\PlayerShipHealthSwitch	
+
+Switch	ID	Name	Switch Group			Notes
+	545371365	Low	PlayerShipGunLevel			
+	981339021	Med	PlayerShipGunLevel			
+	3550808449	High	PlayerShipGunLevel			
+	545371365	Low	PlayerShipHealthSwitch			
+	777824873	AlmostDead	PlayerShipHealthSwitch			
+	2044049779	Dead	PlayerShipHealthSwitch			
+	2510516222	Full	PlayerShipHealthSwitch			
+	2849147824	Medium	PlayerShipHealthSwitch			
+
+Game Parameter	ID	Name			Wwise Object Path	Notes
+	1438366550	PlayerShipHealth			\Default Work Unit\PlayerShipParameters\PlayerShipHealth	
+	2663975140	PlayerShipGunLevel			\Default Work Unit\PlayerShipParameters\PlayerShipGunLevel	
 
 In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
 	215372480	PlasmaGunShot4	D:\Github\AsteroidAnnihilation\AsteroidAnnihilation\AsteroidAnnihilation_WwiseProject\.cache\Windows\SFX\SFX_Temp\PlasmaGunShot4_10C4C929.wem		\Actor-Mixer Hierarchy\Default Work Unit\SFX_Temp\PlasmaGunShot4		254112

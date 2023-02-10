@@ -1,3 +1,17 @@
+Switch Group	ID	Name			Wwise Object Path	Notes
+	2663975140	PlayerShipGunLevel			\Default Work Unit\PlayerShipSwitches\PlayerShipGunLevel	
+	2792155054	PlayerShipHealthSwitch			\Default Work Unit\PlayerShipSwitches\PlayerShipHealthSwitch	
+
+Switch	ID	Name	Switch Group			Notes
+	545371365	Low	PlayerShipGunLevel			
+	981339021	Med	PlayerShipGunLevel			
+	3550808449	High	PlayerShipGunLevel			
+	545371365	Low	PlayerShipHealthSwitch			
+	777824873	AlmostDead	PlayerShipHealthSwitch			
+	2044049779	Dead	PlayerShipHealthSwitch			
+	2510516222	Full	PlayerShipHealthSwitch			
+	2849147824	Medium	PlayerShipHealthSwitch			
+
 Audio Bus	ID	Name			Wwise Object Path	Notes
 	3803692087	Master Audio Bus			\Default Work Unit\Master Audio Bus	
 

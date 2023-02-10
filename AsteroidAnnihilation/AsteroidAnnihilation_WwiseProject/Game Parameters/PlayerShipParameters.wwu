@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<WwiseDocument Type="WorkUnit" ID="{E8903925-F938-4228-911D-377EAC5B4A21}" SchemaVersion="110" RootDocumentID="{681545FD-D25A-4582-BE1E-C28387E0BA23}" ParentDocumentID="{681545FD-D25A-4582-BE1E-C28387E0BA23}">
+	<GameParameters>
+		<WorkUnit Name="PlayerShipParameters" ID="{E8903925-F938-4228-911D-377EAC5B4A21}" OwnerID="{681545FD-D25A-4582-BE1E-C28387E0BA23}" PersistMode="Nested">
+			<ChildrenList>
+				<GameParameter Name="PlayerShipVelocity" ID="{2A14C57A-F4DE-4E5F-BC70-F1B461610050}">
+					<PropertyList>
+						<Property Name="InitialValue" Type="Real64" Value="0"/>
+					</PropertyList>
+				</GameParameter>
+				<GameParameter Name="PlayerShipTurnRate" ID="{A626C1B2-6678-49FB-A724-3586DD2A1561}">
+					<PropertyList>
+						<Property Name="InitialValue" Type="Real64" Value="1"/>
+						<Property Name="Max" Type="Real64" Value="1"/>
+					</PropertyList>
+				</GameParameter>
+				<GameParameter Name="PlayerShipHealth" ID="{499C37B6-31B1-4565-8FB5-2CBA012AFD8D}">
+					<PropertyList>
+						<Property Name="InitialValue" Type="Real64" Value="1"/>
+						<Property Name="Max" Type="Real64" Value="1"/>
+					</PropertyList>
+				</GameParameter>
+				<GameParameter Name="PlayerShipEnergy" ID="{BBE0B478-3E21-42EF-AEC6-0F6AF7A6C6B7}">
+					<PropertyList>
+						<Property Name="InitialValue" Type="Real64" Value="1"/>
+						<Property Name="Max" Type="Real64" Value="1"/>
+					</PropertyList>
+				</GameParameter>
+				<GameParameter Name="PlayerShipGunLevel" ID="{3BE68EC3-0F04-4E91-809D-54C8C9A98F46}">
+					<PropertyList>
+						<Property Name="InitialValue" Type="Real64" Value="0"/>
+					</PropertyList>
+				</GameParameter>
+			</ChildrenList>
+		</WorkUnit>
+	</GameParameters>
+</WwiseDocument>

@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <WwiseDocument Type="WorkUnit" ID="{681545FD-D25A-4582-BE1E-C28387E0BA23}" SchemaVersion="110">
 	<GameParameters>
-		<WorkUnit Name="Default Work Unit" ID="{681545FD-D25A-4582-BE1E-C28387E0BA23}" PersistMode="Standalone"/>
+		<WorkUnit Name="Default Work Unit" ID="{681545FD-D25A-4582-BE1E-C28387E0BA23}" PersistMode="Standalone">
+			<ChildrenList>
+				<WorkUnit Name="PlayerShipParameters" ID="{E8903925-F938-4228-911D-377EAC5B4A21}" PersistMode="Reference"/>
+			</ChildrenList>
+		</WorkUnit>
 	</GameParameters>
 </WwiseDocument>

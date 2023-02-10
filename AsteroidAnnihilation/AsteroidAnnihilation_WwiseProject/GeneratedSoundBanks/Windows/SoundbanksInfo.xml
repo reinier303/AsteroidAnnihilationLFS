@@ -9,22 +9,9 @@
 	</RootPaths>
 	<DialogueEvents/>
 	<SoundBanks>
-		<SoundBank Id="1355168291" Type="User" Language="SFX" Hash="{986487A9-2683-E47A-8688-3D0FE6FDB954}">
-			<ShortName>Init</ShortName>
-			<Path>Init.bnk</Path>
-			<Plugins>
-				<AudioDevices>
-					<Plugin Id="2317455096" Name="No_Output" LibName="No Output" LibId="11862023"/>
-					<Plugin Id="3859886410" Name="System" LibName="System" LibId="11403271"/>
-				</AudioDevices>
-			</Plugins>
-			<Busses>
-				<Bus Id="3803692087" Name="Master Audio Bus"/>
-			</Busses>
-		</SoundBank>
-		<SoundBank Id="3149804152" Type="User" Language="SFX" Hash="{5E032EFC-769B-D717-2410-1FA81E662D9C}">
-			<ShortName>Base_SoundBank</ShortName>
-			<Path>Base_SoundBank.bnk</Path>
+		<SoundBank Id="1299072232" Type="User" Language="SFX" Hash="{15466C10-9142-6447-2A28-74CD530C0F90}">
+			<ShortName>Persistent_SoundBank</ShortName>
+			<Path>Persistent_SoundBank.bnk</Path>
 			<Media>
 				<File Id="215372480" Language="SFX" Streaming="false" Location="Memory">
 					<ShortName>SFX_Temp\PlasmaGunShot4.wav</ShortName>
@@ -56,43 +43,107 @@
 				</File>
 			</Media>
 			<Events>
-				<Event Id="2574519627" Name="Play_etfx_shoot_laser" DurationType="OneShot" DurationMin="0.44" DurationMax="0.44">
+				<Event Id="3201422434" Name="Temp_Play_etfx_shoot_laser" DurationType="OneShot" DurationMin="0.44" DurationMax="0.44">
 					<MediaRefs>
 						<MediaRef Id="788860315"/>
 					</MediaRefs>
 				</Event>
-				<Event Id="1202337555" Name="Play_Levelup" DurationType="OneShot" DurationMin="3.3533106" DurationMax="3.3533106">
+				<Event Id="1450272620" Name="Temp_Play_Levelup" DurationType="OneShot" DurationMin="3.3533106" DurationMax="3.3533106">
 					<MediaRefs>
 						<MediaRef Id="723541179"/>
 					</MediaRefs>
 				</Event>
-				<Event Id="1317655475" Name="Play_PlasmaGunShot1" DurationType="OneShot" DurationMin="1.44" DurationMax="1.44">
+				<Event Id="3965960414" Name="Temp_Play_PlasmaGunShot1" DurationType="OneShot" DurationMin="1.44" DurationMax="1.44">
 					<MediaRefs>
 						<MediaRef Id="276439328"/>
 					</MediaRefs>
 				</Event>
-				<Event Id="1317655472" Name="Play_PlasmaGunShot2" DurationType="OneShot" DurationMin="1.44" DurationMax="1.44">
+				<Event Id="3965960413" Name="Temp_Play_PlasmaGunShot2" DurationType="OneShot" DurationMin="1.44" DurationMax="1.44">
 					<MediaRefs>
 						<MediaRef Id="375205690"/>
 					</MediaRefs>
 				</Event>
-				<Event Id="1317655473" Name="Play_PlasmaGunShot3" DurationType="OneShot" DurationMin="1.44" DurationMax="1.44">
+				<Event Id="3965960412" Name="Temp_Play_PlasmaGunShot3" DurationType="OneShot" DurationMin="1.44" DurationMax="1.44">
 					<MediaRefs>
 						<MediaRef Id="1060657738"/>
 					</MediaRefs>
 				</Event>
-				<Event Id="1317655478" Name="Play_PlasmaGunShot4" DurationType="OneShot" DurationMin="1.44" DurationMax="1.44">
+				<Event Id="3965960411" Name="Temp_Play_PlasmaGunShot4" DurationType="OneShot" DurationMin="1.44" DurationMax="1.44">
 					<MediaRefs>
 						<MediaRef Id="215372480"/>
 					</MediaRefs>
 				</Event>
-				<Event Id="4211333239" Name="Play_SwarmExplosion" DurationType="OneShot" DurationMin="1" DurationMax="1">
+				<Event Id="2360230854" Name="Temp_Play_SwarmExplosion" DurationType="OneShot" DurationMin="1" DurationMax="1">
 					<MediaRefs>
 						<MediaRef Id="809888030"/>
 					</MediaRefs>
 				</Event>
 			</Events>
+			<GameParameters>
+				<GameParameter Id="1438366550" Name="PlayerShipHealth"/>
+				<GameParameter Id="2663975140" Name="PlayerShipGunLevel"/>
+			</GameParameters>
+			<SwitchGroups>
+				<SwitchGroup Id="2663975140" Name="PlayerShipGunLevel">
+					<GameParameterRef Id="2663975140"/>
+					<Switches>
+						<Switch Id="545371365" Name="Low"/>
+						<Switch Id="981339021" Name="Med"/>
+						<Switch Id="3550808449" Name="High"/>
+					</Switches>
+				</SwitchGroup>
+				<SwitchGroup Id="2792155054" Name="PlayerShipHealthSwitch">
+					<GameParameterRef Id="1438366550"/>
+					<Switches>
+						<Switch Id="545371365" Name="Low"/>
+						<Switch Id="777824873" Name="AlmostDead"/>
+						<Switch Id="2044049779" Name="Dead"/>
+						<Switch Id="2510516222" Name="Full"/>
+						<Switch Id="2849147824" Name="Medium"/>
+					</Switches>
+				</SwitchGroup>
+			</SwitchGroups>
+		</SoundBank>
+		<SoundBank Id="1355168291" Type="User" Language="SFX" Hash="{76C5557F-09EE-9B93-D4FE-AFB8F44FC058}">
+			<ShortName>Init</ShortName>
+			<Path>Init.bnk</Path>
+			<Plugins>
+				<AudioDevices>
+					<Plugin Id="2317455096" Name="No_Output" LibName="No Output" LibId="11862023"/>
+					<Plugin Id="3859886410" Name="System" LibName="System" LibId="11403271"/>
+				</AudioDevices>
+			</Plugins>
+			<Busses>
+				<Bus Id="3803692087" Name="Master Audio Bus"/>
+			</Busses>
+			<GameParameters>
+				<GameParameter Id="1347618923" Name="PlayerShipTurnRate"/>
+				<GameParameter Id="1438366550" Name="PlayerShipHealth"/>
+				<GameParameter Id="2508725640" Name="PlayerShipEnergy"/>
+				<GameParameter Id="2663975140" Name="PlayerShipGunLevel"/>
+				<GameParameter Id="3228488565" Name="PlayerShipVelocity"/>
+			</GameParameters>
+			<SwitchGroups>
+				<SwitchGroup Id="2663975140" Name="PlayerShipGunLevel">
+					<GameParameterRef Id="2663975140"/>
+					<Switches>
+						<Switch Id="545371365" Name="Low"/>
+						<Switch Id="981339021" Name="Med"/>
+						<Switch Id="3550808449" Name="High"/>
+					</Switches>
+				</SwitchGroup>
+				<SwitchGroup Id="2792155054" Name="PlayerShipHealthSwitch">
+					<GameParameterRef Id="1438366550"/>
+					<Switches>
+						<Switch Id="545371365" Name="Low"/>
+						<Switch Id="777824873" Name="AlmostDead"/>
+						<Switch Id="2044049779" Name="Dead"/>
+						<Switch Id="2510516222" Name="Full"/>
+						<Switch Id="2849147824" Name="Medium"/>
+					</Switches>
+				</SwitchGroup>
+			</SwitchGroups>
 		</SoundBank>
 	</SoundBanks>
-	<FileHash>{BF3BC39A-669E-E326-6123-932E8406F65D}</FileHash>
+	<FileHash>{335493FB-6D04-0EED-188D-A9208B5AF7F6}</FileHash>
 </SoundBanksInfo>

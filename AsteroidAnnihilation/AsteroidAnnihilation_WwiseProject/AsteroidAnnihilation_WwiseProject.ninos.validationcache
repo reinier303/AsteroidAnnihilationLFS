@@ -72,10 +72,12 @@
 	<ValidationCacheItem File="D:\Github\AsteroidAnnihilation\AsteroidAnnihilation_WwiseProject\Actor-Mixer Hierarchy\Ambience.wwu" DateLow="1675946186" DateHigh="0"/>
 	<ValidationCacheItem File="D:\Github\AsteroidAnnihilation\AsteroidAnnihilation\AsteroidAnnihilation_WwiseProject\Virtual Acoustics\Default Work Unit.wwu" DateLow="1675854824" DateHigh="0"/>
 	<ValidationCacheItem File="D:\Github\AsteroidAnnihilation\AsteroidAnnihilation\AsteroidAnnihilation_WwiseProject\Triggers\Default Work Unit.wwu" DateLow="1675854824" DateHigh="0"/>
-	<ValidationCacheItem File="D:\Github\AsteroidAnnihilation\AsteroidAnnihilation\AsteroidAnnihilation_WwiseProject\Switches\Default Work Unit.wwu" DateLow="1675854824" DateHigh="0"/>
-	<ValidationCacheItem File="D:\Github\AsteroidAnnihilation\AsteroidAnnihilation\AsteroidAnnihilation_WwiseProject\States\Default Work Unit.wwu" DateLow="1675854824" DateHigh="0"/>
+	<ValidationCacheItem File="D:\Github\AsteroidAnnihilation\AsteroidAnnihilation\AsteroidAnnihilation_WwiseProject\Switches\PlayerShipSwitches.wwu" DateLow="1675982696" DateHigh="0"/>
+	<ValidationCacheItem File="D:\Github\AsteroidAnnihilation\AsteroidAnnihilation\AsteroidAnnihilation_WwiseProject\Switches\Default Work Unit.wwu" DateLow="1675982477" DateHigh="0"/>
+	<ValidationCacheItem File="D:\Github\AsteroidAnnihilation\AsteroidAnnihilation\AsteroidAnnihilation_WwiseProject\States\PlayerShipStates.wwu" DateLow="1675950688" DateHigh="0"/>
+	<ValidationCacheItem File="D:\Github\AsteroidAnnihilation\AsteroidAnnihilation\AsteroidAnnihilation_WwiseProject\States\Default Work Unit.wwu" DateLow="1675982477" DateHigh="0"/>
 	<ValidationCacheItem File="D:\Github\AsteroidAnnihilation\AsteroidAnnihilation\AsteroidAnnihilation_WwiseProject\Soundcaster Sessions\Default Work Unit.wwu" DateLow="1675854824" DateHigh="0"/>
-	<ValidationCacheItem File="D:\Github\AsteroidAnnihilation\AsteroidAnnihilation\AsteroidAnnihilation_WwiseProject\SoundBanks\Default Work Unit.wwu" DateLow="1675946744" DateHigh="0"/>
+	<ValidationCacheItem File="D:\Github\AsteroidAnnihilation\AsteroidAnnihilation\AsteroidAnnihilation_WwiseProject\SoundBanks\Default Work Unit.wwu" DateLow="1675949099" DateHigh="0"/>
 	<ValidationCacheItem File="D:\Github\AsteroidAnnihilation\AsteroidAnnihilation\AsteroidAnnihilation_WwiseProject\Queries\Factory Queries.wwu" DateLow="1675854824" DateHigh="0"/>
 	<ValidationCacheItem File="D:\Github\AsteroidAnnihilation\AsteroidAnnihilation\AsteroidAnnihilation_WwiseProject\Queries\Default Work Unit.wwu" DateLow="1675854824" DateHigh="0"/>
 	<ValidationCacheItem File="D:\Github\AsteroidAnnihilation\AsteroidAnnihilation\AsteroidAnnihilation_WwiseProject\Presets\Factory Spatial Audio.wwu" DateLow="1675854824" DateHigh="0"/>
@@ -85,8 +87,9 @@
 	<ValidationCacheItem File="D:\Github\AsteroidAnnihilation\AsteroidAnnihilation\AsteroidAnnihilation_WwiseProject\Metadata\Default Work Unit.wwu" DateLow="1675854824" DateHigh="0"/>
 	<ValidationCacheItem File="D:\Github\AsteroidAnnihilation\AsteroidAnnihilation\AsteroidAnnihilation_WwiseProject\Master-Mixer Hierarchy\Default Work Unit.wwu" DateLow="1675854824" DateHigh="0"/>
 	<ValidationCacheItem File="D:\Github\AsteroidAnnihilation\AsteroidAnnihilation\AsteroidAnnihilation_WwiseProject\Interactive Music Hierarchy\Default Work Unit.wwu" DateLow="1675854824" DateHigh="0"/>
-	<ValidationCacheItem File="D:\Github\AsteroidAnnihilation\AsteroidAnnihilation\AsteroidAnnihilation_WwiseProject\Game Parameters\Default Work Unit.wwu" DateLow="1675854824" DateHigh="0"/>
-	<ValidationCacheItem File="D:\Github\AsteroidAnnihilation\AsteroidAnnihilation\AsteroidAnnihilation_WwiseProject\Events\TestSounds.wwu" DateLow="1675946744" DateHigh="0"/>
+	<ValidationCacheItem File="D:\Github\AsteroidAnnihilation\AsteroidAnnihilation\AsteroidAnnihilation_WwiseProject\Game Parameters\PlayerShipParameters.wwu" DateLow="1675982696" DateHigh="0"/>
+	<ValidationCacheItem File="D:\Github\AsteroidAnnihilation\AsteroidAnnihilation\AsteroidAnnihilation_WwiseProject\Game Parameters\Default Work Unit.wwu" DateLow="1675949099" DateHigh="0"/>
+	<ValidationCacheItem File="D:\Github\AsteroidAnnihilation\AsteroidAnnihilation\AsteroidAnnihilation_WwiseProject\Events\TestSounds.wwu" DateLow="1675950325" DateHigh="0"/>
 	<ValidationCacheItem File="D:\Github\AsteroidAnnihilation\AsteroidAnnihilation\AsteroidAnnihilation_WwiseProject\Events\PlayerShip.wwu" DateLow="1675946720" DateHigh="0"/>
 	<ValidationCacheItem File="D:\Github\AsteroidAnnihilation\AsteroidAnnihilation\AsteroidAnnihilation_WwiseProject\Events\Enemies.wwu" DateLow="1675946727" DateHigh="0"/>
 	<ValidationCacheItem File="D:\Github\AsteroidAnnihilation\AsteroidAnnihilation\AsteroidAnnihilation_WwiseProject\Events\Default Work Unit.wwu" DateLow="1675946744" DateHigh="0"/>
@@ -100,9 +103,9 @@
 	<ValidationCacheItem File="D:\Github\AsteroidAnnihilation\AsteroidAnnihilation\AsteroidAnnihilation_WwiseProject\Attenuations\Default Work Unit.wwu" DateLow="1675946468" DateHigh="0"/>
 	<ValidationCacheItem File="D:\Github\AsteroidAnnihilation\AsteroidAnnihilation\AsteroidAnnihilation_WwiseProject\Attenuations\AttenuationOutside.wwu" DateLow="1675946744" DateHigh="0"/>
 	<ValidationCacheItem File="D:\Github\AsteroidAnnihilation\AsteroidAnnihilation\AsteroidAnnihilation_WwiseProject\AsteroidAnnihilation_WwiseProject.wproj" DateLow="1675889074" DateHigh="0"/>
-	<ValidationCacheItem File="D:\Github\AsteroidAnnihilation\AsteroidAnnihilation\AsteroidAnnihilation_WwiseProject\AsteroidAnnihilation_WwiseProject.ninos.wsettings" DateLow="1675947248" DateHigh="0"/>
-	<ValidationCacheItem File="D:\Github\AsteroidAnnihilation\AsteroidAnnihilation\AsteroidAnnihilation_WwiseProject\Actor-Mixer Hierarchy\PlayerShip.wwu" DateLow="1675946186" DateHigh="0"/>
+	<ValidationCacheItem File="D:\Github\AsteroidAnnihilation\AsteroidAnnihilation\AsteroidAnnihilation_WwiseProject\AsteroidAnnihilation_WwiseProject.ninos.wsettings" DateLow="1675982696" DateHigh="0"/>
+	<ValidationCacheItem File="D:\Github\AsteroidAnnihilation\AsteroidAnnihilation\AsteroidAnnihilation_WwiseProject\Actor-Mixer Hierarchy\PlayerShip.wwu" DateLow="1675982696" DateHigh="0"/>
 	<ValidationCacheItem File="D:\Github\AsteroidAnnihilation\AsteroidAnnihilation\AsteroidAnnihilation_WwiseProject\Actor-Mixer Hierarchy\Enemies.wwu" DateLow="1675947247" DateHigh="0"/>
 	<ValidationCacheItem File="D:\Github\AsteroidAnnihilation\AsteroidAnnihilation\AsteroidAnnihilation_WwiseProject\Actor-Mixer Hierarchy\Default Work Unit.wwu" DateLow="1675888569" DateHigh="0"/>
-	<ValidationCacheItem File="D:\Github\AsteroidAnnihilation\AsteroidAnnihilation\AsteroidAnnihilation_WwiseProject\Actor-Mixer Hierarchy\Ambience.wwu" DateLow="1675946186" DateHigh="0"/>
+	<ValidationCacheItem File="D:\Github\AsteroidAnnihilation\AsteroidAnnihilation\AsteroidAnnihilation_WwiseProject\Actor-Mixer Hierarchy\Ambience.wwu" DateLow="1675950325" DateHigh="0"/>
 </ValidationCache>

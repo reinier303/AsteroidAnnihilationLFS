@@ -80,6 +80,7 @@
 						</Action>
 					</ChildrenList>
 				</Event>
+				<Event Name="Temp_Play_Loop_Test" ID="{D1A774A7-AB8D-4F74-9DB0-00863C721A29}"/>
 			</ChildrenList>
 		</WorkUnit>
 	</Events>
